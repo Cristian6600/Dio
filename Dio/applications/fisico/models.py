@@ -4,7 +4,7 @@ from applications.base_cliente.models import bd_clie
 class Fisico (models.Model):
 
     Bolsa = models.IntegerField()
-    Seudo = models.ForeignKey(bd_clie, on_delete=models.CASCADE)
+    Seudo = models.CharField(max_length=35)
     Fecha = models.DateTimeField(auto_now=True)
     Estado = models.BooleanField(default=True)
 

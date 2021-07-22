@@ -8,12 +8,15 @@ class guiaAdmin(admin.ModelAdmin):
     list_per_page = 12
 
     list_display = ('Guia', 'Bolsa', 'id_serv', 'id_clie', 'Contiene', 'Orden', 'Domicilio', 'Fecha')
-    
 
+class TipoAdmin(admin.ModelAdmin):
+
+    list_display = ('id_tip', 'Tipo')
+    
 admin.site.register(guia, guiaAdmin)
 admin.site.register(Estado)
 admin.site.register(Motivo)
 admin.site.register(Servicio)
-admin.site.register(tipo)
+admin.site.register(tipo, TipoAdmin)
 
 

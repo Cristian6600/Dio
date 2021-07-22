@@ -1,10 +1,15 @@
 from django.db import models
 from applications.fisico.models import Fisico
 from applications.cliente.models import Cliente
+# from .managers import ProductManager
 
 class tipo(models.Model):
     id_tip = models.IntegerField(
         primary_key=True
+    )
+
+    Tipo = models.CharField(
+        max_length=20
     )
 
     class Meta:
@@ -12,7 +17,7 @@ class tipo(models.Model):
         verbose_name_plural = "Tipo"
 
     def __str__(self):
-        return str(self.id_tip)
+        return str(self.Tipo)
 
 class Estado (models.Model):
     id_est = models.IntegerField(
@@ -36,8 +41,6 @@ class Motivo(models.Model):
     Motivo = models.CharField(
         max_length=50
     )
-
-    fin = models.BigIntegerField()
 
     id_tip = models.ForeignKey(
         tipo, 
@@ -137,6 +140,8 @@ class guia (models.Model):
         Estado,
          on_delete=models.CASCADE
     )
+
+    # objects = ProductManager()
 
     class Meta:
         verbose_name = "guia"

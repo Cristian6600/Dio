@@ -1,15 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Registar nuevo usuario</h1>
-    <form method="post">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Registrar</button>
-    </form>
-</body>
-</html>
+{% extends "users/base_users.html" %} {% load static %} {% block panel-content %}
+
+
+<div class="grid-x grid-margin-x align-center">
+    <h3 class="cell" style="margin-bottom: 1em; text-align: center;">Datos Nuevo Usuario</h3>
+    <form class="cell medium-9 grid-x grid-margin-x" method="POST">{% csrf_token %} {{ form.as_p }}
+        <div class="cell medium-12">
+
+            <div class="cell medium-8">
+                <button type="submit" class="cell success button" style="width: 200px;">Guardar</button> {% if object %}
+                <a href="#" class="cell alert button clear">Eliminar</a> {% endif %}
+            </div>
+            {% endblock panel-content %}
+
+
+            <form method="post">{% csrf_token %} {{ form.as_p }}
+                <button type="submit">Registrar</button>
+            </form>
+        </div>

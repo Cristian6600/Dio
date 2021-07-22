@@ -1,20 +1,7 @@
 from django.db import models
 
 from applications.cliente.models import Ciudad
-
-class Motivo(models.Model):
-    id_mot = models.IntegerField()
-
-    motivo = models.CharField(
-        max_length=50
-    )
-
-    class Meta:
-        verbose_name = "Datos de gestion"
-        verbose_name_plural = "Datos de gestion"   
-
-    def __str__(self):
-        return self.id_mot
+from applications.guia.models import Motivo
 
 class datos_g (models.Model):
     Seudo = models.CharField(
@@ -28,7 +15,8 @@ class datos_g (models.Model):
     )
     id_ciu = models.ForeignKey(
         Ciudad, 
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        verbose_name = 'Id ciudad'
     )
     barrio = models.CharField(
         max_length = 70,
@@ -40,6 +28,7 @@ class datos_g (models.Model):
         on_delete=models.CASCADE,
         null=True,
         blank=True,
+        verbose_name = 'Id motivo',
     )
 
     gx = models.BigIntegerField(

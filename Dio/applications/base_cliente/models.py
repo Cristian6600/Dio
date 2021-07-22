@@ -6,10 +6,14 @@ class Producto (models.Model):
     id_pro = models.CharField(  
         primary_key = True,     
         unique = True,
-        max_length = 5
+        max_length = 5,
+        verbose_name = 'Id producto'
     )
-    id_clie = models.IntegerField()
-
+    id_clie = models.ForeignKey(
+        Cliente,
+        on_delete=models.CASCADE,
+        verbose_name = 'Id cliente'
+    )
     producto = models.CharField(
         max_length = 50
     )
@@ -17,7 +21,8 @@ class Producto (models.Model):
         max_length = 50
     )
     Tipo = models.CharField(
-        max_length = 5
+        max_length = 5,
+        verbose_name = 'Tipos distribucion'
     )
     Homologacion = models.CharField(
         max_length=50
@@ -65,6 +70,7 @@ class Emision(models.Model):
         return self.emision
 
 class bd_clie (models.Model):
+
     id_clie = models.ForeignKey(
         Cliente, 
         on_delete=models.CASCADE,

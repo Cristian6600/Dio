@@ -23,5 +23,6 @@ urlpatterns = [
     re_path('', include('applications.users.urls')),
     re_path('', include('applications.home.urls')),
     re_path('', include('applications.guia.urls')),
+    re_path('', include('applications.fisico.urls')),
     
 ]

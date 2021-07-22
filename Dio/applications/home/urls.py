@@ -8,6 +8,11 @@ app_name = "home_app"
 urlpatterns = [
     path(
         'panel/', 
+        views.PanelHomeView.as_view(),
+        name='index',
+    ),
+    path(
+        'panel/', 
         views.HomePage.as_view(),
         name='panel',
     ),

@@ -1,24 +1,31 @@
 from django.db import models
 
 class Ciudad (models.Model):
-    id_ciu = models.CharField(
-        max_length= 8, 
+    id = models.IntegerField(
         primary_key = True,
-        null=False,
         unique = True, 
+        verbose_name = 'Dane'
     )
     Ciudad = models.CharField(
         max_length= 80
     )
     dep = models.CharField(
-        max_length = 50
+        max_length = 50,
+        verbose_name = 'Departamento'
     )
+
+    Cubrimiento = models.CharField(
+        max_length=15,
+        null = True,
+        blank = True
+    )
+
     class Meta:
         verbose_name = "Ciudad"
         verbose_name_plural = "Ciudad"
 
     def __str__(self):
-        return str (self.Ciudad)
+        return str (self.id)
 
 class Cliente (models.Model):
     id_clie = models.IntegerField(

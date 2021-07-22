@@ -12,7 +12,15 @@ class bd_clieAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_filter = ('id_clie', 'fecha' )
     search_fields = ('Archivo', 'Seudo', 'fecha', 'D_i', 'Cliente')
 
+class emisionAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+
+    list_display = ('t_emi', 'emision')
+
+class productoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+
+    list_display = ('id_pro', 'id_clie', 'producto', 'Proceso', 'Tipo', 'Homologacion')
+
 admin.site.register(bd_clie, bd_clieAdmin)
-admin.site.register(Producto)
+admin.site.register(Producto, productoAdmin)
 admin.site.register(est_clie)
-admin.site.register(Emision)
+admin.site.register(Emision, emisionAdmin)
