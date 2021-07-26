@@ -3,47 +3,30 @@
 {% load static %}
 
 {% block panel-content %}
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pistoleo</title>
-</head>
-
-<body>
-    
+ 
     <form method="post"> {%csrf_token%}
-        <!-- <center>  {{form.as_p }} -->
-
-        <center>
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
-            <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
-
-
+<div class="medium-6 cell">
+    <div class="grid-x grid-padding-x"></div>
+    <div class="medium-6 cell"></div>
+               
             <h1>Pistoleo</h1>
-            <p>
                 <label for="id_Bolsa">Bolsa:</label>
-                <input type="number" name="Bolsa" required="" id="id_Bolsa" autofocus="autofocus">
-            </p>
-            <p>
-                <label for="id_Seudo">Seudo:</label>
-                <input type="text" name="Seudo" maxlength="35" required="" id="id_Seudo">
-            </p>
+                <input type="number" placeholder="Código Barras" name="Bolsa" required="" id="id_Bolsa" autofocus="autofocus">
+
+                <label for="id_Seudo">Seudo:
+                <input type="text" placeholder=".medium-6.cell" name="Seudo" maxlength="35" required="" id="id_Seudo">
+                </label>
 
             <!-- <button type="submit" style="background-color:#78b785" >Agregar</button> -->
 
             <button type="submit" class="success button">Agregar</button>
-
-        </center>
-
+    </div>  
+        </div>  
+</div>         
+        </form>
         
         {% endblock panel-content %}
-    </form>
-
-
-</body>
-
-</html>
+    
+        

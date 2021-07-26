@@ -1,7 +1,11 @@
 from django.db import models
 from applications.fisico.models import Fisico
 from applications.cliente.models import Cliente
+from applications.base_cliente.models import bd_clie
+from django.db.models.signals import post_save
+from PIL import Image
 # from .managers import ProductManager
+
 
 class tipo(models.Model):
     id_tip = models.IntegerField(
@@ -87,6 +91,11 @@ class guia (models.Model):
         Cliente, 
         on_delete=models.CASCADE
     )
+    d_i = models.ForeignKey(
+        bd_clie, 
+        on_delete=models.CASCADE 
+    ) 
+
     m = models.IntegerField(
         default=1
     )
@@ -131,10 +140,9 @@ class guia (models.Model):
     )
 
     Imagen = models.ImageField(
-        upload_to=None,
-        height_field=None,
-        width_field=None,
-        max_length=100, blank= True)
+        upload_to=  'Imagen',
+        blank= True
+    )
 
     id_est = models.ForeignKey(
         Estado,
@@ -142,12 +150,20 @@ class guia (models.Model):
     )
 
     # objects = ProductManager()
-
     class Meta:
         verbose_name = "guia"
         verbose_name_plural = "guia"
         
     def __str__(self):
         return str(self.Guia)
+    
+def optimize_image(sender, instance, **kwargs):
+    print("==========")
+    print(instance)
+    if instance.Imagen:
+        Imagen = Image.open(instance.Imagen.path)
+        Imagen.save(instance.Imagen.path, quality=20, optimize = True)
+
+post_save.connect(optimize_image, sender = guia)
 
     

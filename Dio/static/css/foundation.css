@@ -2529,7 +2529,7 @@ ul.no-bullet, ol.no-bullet {
     background-color: #17b3ba;
     color: #0a0a0a; }
   .button.warning:hover, .button.warning:focus {
-    background-color: #cc8b00;
+    background-color: #3adb76;
     color: #0a0a0a; }
   .button.alert, .button.alert.disabled, .button.alert[disabled], .button.alert.disabled:hover, .button.alert[disabled]:hover, .button.alert.disabled:focus, .button.alert[disabled]:focus {
     background-color: #cc4b37;

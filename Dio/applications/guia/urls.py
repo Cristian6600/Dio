@@ -10,4 +10,10 @@ urlpatterns = [
          name='lista-cliente',
     ),
 
+    path(
+        'producto/detalle/<pk>/', 
+        views.ProductDetailView.as_view(),
+        name='producto-detail',
+    ),
+
     ]

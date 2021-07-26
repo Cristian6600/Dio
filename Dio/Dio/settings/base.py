@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'applications.courrier', 
     'applications.users',
     'applications.home',
+    'applications.call',
 ]
 
 GRAPPELLI_ADMIN_TITLE = 'Firstsource'

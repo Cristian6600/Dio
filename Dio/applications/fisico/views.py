@@ -1,6 +1,10 @@
+from django.http import HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import render
 from . models import Fisico
 from django.views.generic import TemplateView, CreateView, ListView, DetailView
+from django.views.generic.detail import SingleObjectMixin
+from django.views import View
+from django.urls import reverse
 
 
 

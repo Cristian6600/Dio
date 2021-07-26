@@ -41,9 +41,10 @@ class est_clie (models.Model):
     id_est_clie = models.IntegerField(
         primary_key = True
     )
-    est_clie = models.CharField(
-        max_length= 50
-    )
+    Estado = models.CharField(max_length = 35)
+    Descripcion = models.CharField(max_length = 35)
+    Proceso = models.CharField(max_length = 20)
+    
 
     verbose_name = "Estado Cliente"
     verbose_name_plural = "Estado del cliente"
@@ -196,4 +197,4 @@ class bd_clie (models.Model):
         verbose_name_plural = "Base Cliente"
 
     def __str__(self):
-        return str(self.Seudo)
+        return str(self.D_i)
