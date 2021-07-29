@@ -1,4 +1,4 @@
-{% extends "base_cliente/base_producto.html" %} 
+{% extends "producto/base_producto.html" %} 
 
 {% load  static %}
 
@@ -18,8 +18,13 @@
                     <p><span style="font-weight: bold;">Fecha:</span> {{ object.Fecha }}</p>
                     <p><span style="font-weight: bold;">Motivo:</span> {{ object.id_mot }}</p>
                     <p><span style="font-weight: bold;">Documento de identidad:</span> {{ object.d_i }}</p>
-                    <p><span style="font-weight: bold;">Imagen:</span> {{ object.Imagen }}</p>
                     <p><span style="font-weight: bold;">Estado cliente:</span> {{ object.id_est }}</p>
-                    <p><span style="font-weight: bold;">Imagen:</span> {{ object.Imagen }}</p>
+                    <p><span style="font-weight: bold;">Imagen:</span>{{MEDIA_URL}} {{ object.Imagen.url }} </p>
+                    <a href="{'producto_app:producto-detail' object.Imagen}"></a>
+                    <img class="orbit-image"src="{object.Imagen.url}}">
+                </div>
+            </div>
+        </div>
+
 
 {% endblock panel-content %}

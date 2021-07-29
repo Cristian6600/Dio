@@ -34,7 +34,7 @@ class Producto (models.Model):
         unique_together = ('id_pro', 'id_clie')
 
     def __str__(self):
-        return self.id_pro
+        return self.producto
 
 class est_clie (models.Model):
 
@@ -72,6 +72,11 @@ class Emision(models.Model):
 
 class bd_clie (models.Model):
 
+    Seudo = models.CharField(
+        max_length=35,
+        primary_key=True
+    )
+
     id_clie = models.ForeignKey(
         Cliente, 
         on_delete=models.CASCADE,
@@ -107,9 +112,7 @@ class bd_clie (models.Model):
         null=True, 
         blank = True
     )
-    Seudo = models.CharField(
-        max_length=35
-    )
+    
     Id_Proc = models.IntegerField(
         null=True, 
         blank = True
@@ -197,4 +200,4 @@ class bd_clie (models.Model):
         verbose_name_plural = "Base Cliente"
 
     def __str__(self):
-        return str(self.D_i)
+        return str(self.Seudo)

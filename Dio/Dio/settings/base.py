@@ -20,6 +20,7 @@ SECRET_KEY = 'u5h4i@k8zl$24!dhx)=22c)ue@5y%$pg)hpr&@#*wt6rcjx0)f'
 # Application definition
 
 INSTALLED_APPS = [
+    'simple_history',
     'import_export',
     'grappelli',
     'django.contrib.admin',
@@ -49,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'simple_history.middleware.HistoryRequestMiddleware',
 ]
 
 ROOT_URLCONF = 'Dio.urls'

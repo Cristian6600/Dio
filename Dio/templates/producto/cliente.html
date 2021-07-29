@@ -1,4 +1,4 @@
-{% extends "base_cliente/base_producto.html" %} 
+{% extends "producto/base_producto.html" %} 
 
 {% load static %} 
 
@@ -38,7 +38,7 @@
                     <td>{{e.Fecha}}</td>
                     <td>{{e.id_mot}}</td>
                     <td>
-                        <a href="" class="button"><i class="fi-eye"></i></a>
+                        <a href="{% url 'producto_app:producto-detail' e.id %}" class="button warning"><i class="fi-eye"></i></a>
                     </td>
                 </tr>
                 {% endfor %}

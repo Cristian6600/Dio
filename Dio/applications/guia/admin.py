@@ -4,15 +4,21 @@ from import_export import resources
 from . models import guia, Estado, Motivo, Servicio, tipo
 from django.utils.html import format_html
 
+class guiaResource(resources.ModelResource):
+
+    class Meta:
+        model = guia
+        exclude = ('id', 'Bolsa', 'id_serv')
+
 class guiaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 
     model = guia
     list_per_page = 12
 
-    list_display = ('Guia', 'Bolsa', 'id_serv', 'id_clie', 'Contiene', 'Orden', 'Domicilio', 'Fecha', 'Imagen')
+    list_display = ('id', 'Bolsa', 'id_serv', 'id_clie', 'Contiene', 'Orden', 'Domicilio', 'Fecha', 'Imagen', 'producto')
+    list_filter = ('Fecha', 'producto')
 
-    def foto(self, obj):
-        return format_html('<img src={} />', obj.Imagen)
+    date_hierarchy = 'Fecha'
 
 class TipoAdmin(admin.ModelAdmin):
 

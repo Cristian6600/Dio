@@ -10,7 +10,7 @@ from django.views.generic import (
 )
 
 
-class PanelHomeView(TemplateView):
+class PanelHomeView(LoginRequiredMixin, TemplateView):
     template_name = "home/index.html"
 
 class FechaMixin(object):

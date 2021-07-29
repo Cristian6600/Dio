@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.core.mail import send_mail
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -26,7 +27,7 @@ from .models import User
 from .functions import code_generator
 
 
-class UserRegisterView(FormView):
+class UserRegisterView(LoginRequiredMixin, FormView):
     template_name = 'users/register.html'
     form_class = UserRegisterForm
     success_url = '/'

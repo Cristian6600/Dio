@@ -1,9 +1,21 @@
 from django.contrib import admin
+from django.db.models.query_utils import FilteredRelation
+from import_export.admin import ImportExportModelAdmin
+from import_export import resources
+from . models import Fisico, paquete
 
-from . models import Fisico
+class fisicoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 
-class fisicoAdmin(admin.ModelAdmin):
+    list_display = ('Bolsa', 'Seudo', 'Fecha', 'Estado', )
 
-    list_display = ('Bolsa', 'Seudo', 'Fecha', 'Estado')
+    # filter_horizontal = ('Bolsa2',)
+
+    search_fields = ('Bolsa', 'Seudo',)
+
+    list_filter = ('Bolsa', 'Seudo', 'Fecha', 'Estado', )
 
 admin.site.register(Fisico, fisicoAdmin)
+admin.site.register(paquete)
+
+
+

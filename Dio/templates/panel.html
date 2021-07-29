@@ -12,14 +12,21 @@
                 <h3 style="text-align: center; padding: 0.3em; color: #008cff;">Firstsource</h3>
                 <ul class="vertical menu">
                     <li>
-                        <a href="#"><span class="label warning">Administracion</span></a>
+                        <a href="#"><span class="label warning">Consultar</span></a>
                         <ul class="nested vertical menu">
                             <li class="{% if request.resolver_match.url_name == 'lista-cliente' %}activeli{% endif %}">
                                 <a href="{% url 'producto_app:lista-cliente' %}" style="color: white;">Productos</a>
                             </li>
                         </ul>
                 </ul>
+                <ul class="vertical menu">
+                    <li>
+                      <a href="#"><span class="label warning">Custodia</span></a> 
+                      <ul class="nested vertical menu"></ul>
+                      <li class="{% if request.resolver_match.url_name == 'lista-cliente' %}activeli{% endif %}">
+                        <a href="{% url 'fisico_app:fisico-ingreso' %}" style="color: white;">Scaneo</a>
                     </li>
+                    
             </div>
         </div>
                 <div class="off-canvas-content" data-off-canvas-content>

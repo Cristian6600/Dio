@@ -2,8 +2,13 @@ from django.db import models
 from applications.guia.models import Motivo, guia
 
 class indicativo(models.Model):
-    ind = models.IntegerField(verbose_name = 'Indicativo')
-    Region = models.CharField(max_length = 50)
+    
+    ind = models.IntegerField(
+        verbose_name = 'Indicativo'
+    )
+    Region = models.CharField(
+        max_length = 50
+    )
 
     def __str__(self):
         return self.ind
@@ -36,5 +41,3 @@ class datos_t(models.Model):
 
     
     
-
-

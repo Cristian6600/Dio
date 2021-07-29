@@ -25,7 +25,7 @@ class Ciudad (models.Model):
         verbose_name_plural = "Ciudad"
 
     def __str__(self):
-        return str (self.id)
+        return str (self.Ciudad)
 
 class Cliente (models.Model):
     id_clie = models.IntegerField(

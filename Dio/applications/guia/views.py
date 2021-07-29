@@ -2,13 +2,14 @@
 
 from django.shortcuts import render
 from . models import guia
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, CreateView, ListView, DetailView
 from django.views.generic.detail import SingleObjectMixin
 
-class ProductListView(ListView):
-    template_name = "base_cliente/cliente.html"
+class ProductListView(LoginRequiredMixin, ListView):
+    template_name = "producto/cliente.html"
     model = guia
     
    
@@ -18,6 +19,6 @@ class ProductListView(ListView):
     #     queryset = guia.objects.buscar_producto(kword, order)
     #     return queryset
 
-class ProductDetailView(DetailView):
-    template_name = "base_cliente/detail.html"
+class ProductDetailView(LoginRequiredMixin, DetailView):
+    template_name = "producto/detail.html"
     model = guia

@@ -1,7 +1,8 @@
 from django.db import models
 from applications.fisico.models import Fisico
 from applications.cliente.models import Cliente
-from applications.base_cliente.models import bd_clie
+from applications.base_cliente.models import bd_clie, Producto
+from applications.users.models import User
 from django.db.models.signals import post_save
 from PIL import Image
 # from .managers import ProductManager
@@ -36,7 +37,7 @@ class Estado (models.Model):
         verbose_name_plural = "Estado"
 
     def __str__(self):
-        return str(self.id_est)
+        return str(self.Estado)
 
 class Motivo(models.Model):
 
@@ -75,9 +76,10 @@ class Servicio(models.Model):
     
 class guia (models.Model):
 
-    Guia = models.IntegerField(
+    id = models.IntegerField(
         primary_key = True, 
-        unique=True
+        unique=True,
+        verbose_name = 'Guia'
     )
     Bolsa = models.ForeignKey(
         Fisico, 
@@ -140,7 +142,7 @@ class guia (models.Model):
     )
 
     Imagen = models.ImageField(
-        upload_to=  'Imagen',
+        upload_to = 'guia',
         blank= True
     )
 
@@ -149,13 +151,18 @@ class guia (models.Model):
          on_delete=models.CASCADE
     )
 
+    producto = models.ForeignKey(
+        Producto, 
+        on_delete=models.CASCADE
+    )
+
     # objects = ProductManager()
     class Meta:
         verbose_name = "guia"
         verbose_name_plural = "guia"
         
     def __str__(self):
-        return str(self.Guia)
+        return str(self.id)
     
 def optimize_image(sender, instance, **kwargs):
     print("==========")
@@ -166,4 +173,4 @@ def optimize_image(sender, instance, **kwargs):
 
 post_save.connect(optimize_image, sender = guia)
 
-    
+   

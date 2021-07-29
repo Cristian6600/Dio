@@ -2,7 +2,7 @@ from django.db import models
 
 from applications.cliente.models import Ciudad
 
-from django.contrib.auth.models import AbstractBaseUser,PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 #
 from .managers import UserManager
 
