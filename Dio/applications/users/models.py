@@ -70,8 +70,11 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name = "Permisos de usuarios"
         verbose_name_plural = "Permisos de usuario"
 
+    def __str__(self):
+        return str(self.ciudad) + ' ' +self.nombres
+
     def get_short_name(self):
-        return self.username
+         return str(self.nombres + ' ' + self.apellidos + ' ' +'te queremos' )
     
-    def get_full_name (self):
-        return str(self.nombres + ' ' + self.apellidos)
+    # def get_full_name (self):
+    #     return str(self.nombres + ' ' + self.apellidos + 'te queremos')

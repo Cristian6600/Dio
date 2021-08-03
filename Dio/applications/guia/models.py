@@ -1,11 +1,14 @@
 from django.db import models
-from applications.fisico.models import Fisico
 from applications.cliente.models import Cliente
+
 from applications.base_cliente.models import bd_clie, Producto
 from applications.users.models import User
 from django.db.models.signals import post_save
 from PIL import Image
-# from .managers import ProductManager
+from .managers import ProductManager
+
+
+
 
 
 class tipo(models.Model):
@@ -76,93 +79,143 @@ class Servicio(models.Model):
     
 class guia (models.Model):
 
-    id = models.IntegerField(
+    id = models.AutoField(
         primary_key = True, 
         unique=True,
         verbose_name = 'Guia'
     )
-    Bolsa = models.ForeignKey(
-        Fisico, 
-        on_delete=models.CASCADE 
+    Bolsa = models.IntegerField(
+        unique = True
     )
+
+    Seudo = models.CharField(
+        max_length=35,
+        unique = True
+    )
+
     id_serv = models.ForeignKey(
         Servicio, 
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE, 
+        null=True, 
+        blank = True
     )
     id_clie = models.ForeignKey(
         Cliente, 
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE, 
+        null=True, 
+        blank = True,
+        
     )
     d_i = models.ForeignKey(
         bd_clie, 
-        on_delete=models.CASCADE 
+        on_delete=models.CASCADE,
+        null=True, 
+        blank = True
     ) 
 
+    
+
     m = models.IntegerField(
-        default=1
+        default=1, 
+        null=True, 
+        blank = True
     )
     Ancho = models.IntegerField(
-        default=1
+        default=1,
+        null=True, 
+        blank = True
     )
     Alto = models.IntegerField(
-        default=1
+        default=1,
+        null=True, 
+        blank = True
     )
     Largo = models.IntegerField(
-        default=1
+        default=1,
+        null=True, 
+        blank = True
     )
     Copia = models.IntegerField(
-        default=1
+        default=1,
+        null=True, 
+        blank = True
     )
     Unidad = models.IntegerField(
-        default=1
+        default=1, 
+        null=True, 
+        blank = True
     )
     Contiene = models.CharField(
-        max_length = 50
+        max_length = 50, 
+        null=True, 
+        blank = True
     )
-    Orden = models.IntegerField()
+    Orden = models.IntegerField(
+        null=True, 
+        blank = True
+    )
 
     Domicilio = models.IntegerField(
-        default=0
+        default=0,
+        null=True, 
+        blank = True
     )
     Acarreo = models.IntegerField(
-        default=0
+        default=0,
+        null=True, 
+        blank = True
     )
     Flete = models.IntegerField(
-        default=0
+        default=0,
+        null=True, 
+        blank = True
     )
     Declarado = models.IntegerField(
-        default=0
+        default=0,
+        null=True, 
+        blank = True
     )
-    Fecha = models.DateTimeField()
+    Fecha = models.DateTimeField(
+        null=True, 
+        blank = True
+    )
     
     id_mot = models.ForeignKey(
         Motivo, 
         on_delete=models.CASCADE, 
-        verbose_name= 'id Motivo'
+        verbose_name= 'id Motivo', 
+        null=True, 
+        blank = True
     )
 
     Imagen = models.ImageField(
         upload_to = 'guia',
-        blank= True
+        null=True, 
+        blank = True
     )
 
     id_est = models.ForeignKey(
         Estado,
-         on_delete=models.CASCADE
+        on_delete=models.CASCADE, 
+        null=True, 
+        blank = True
     )
 
     producto = models.ForeignKey(
         Producto, 
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE, 
+        null=True, 
+        blank = True
     )
 
-    # objects = ProductManager()
+    objects = ProductManager()
+
     class Meta:
         verbose_name = "guia"
         verbose_name_plural = "guia"
         
     def __str__(self):
-        return str(self.id)
+        return str(self.Bolsa)
     
 def optimize_image(sender, instance, **kwargs):
     print("==========")

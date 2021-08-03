@@ -1,12 +1,12 @@
 from django import forms
-from .models import paquete
+from .models import guia
 
-class ProductForm(forms.ModelForm):
+class guiafisicoForm(forms.ModelForm):
 
     class Meta:
-        model = paquete
+        model = guia
         fields = (
-            'bolsa',
+            'Bolsa',
             'Seudo'            
         )
 
@@ -17,3 +17,9 @@ class ProductForm(forms.ModelForm):
 
         return Seudo
 
+    def clean_Bolsa(self):
+        Bolsa = self.cleaned_data['Bolsa']
+        if len(Bolsa) < 5:
+            raise forms.ValidationError('Ingrese codigo de barras correcto')
+
+        return Bolsa
