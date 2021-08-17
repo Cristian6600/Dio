@@ -8,14 +8,14 @@ class guiaResource(resources.ModelResource):
 
     class Meta:
         model = guia
-        exclude = ('id', 'Bolsa', 'id_serv')
+        exclude = ('id_serv')
 
 class guiaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 
     model = guia
     list_per_page = 12
 
-    list_display = ('id', 'Bolsa', 'id_serv', 'id_clie', 'Contiene', 'Orden', 'Domicilio', 'Fecha', 'Imagen', 'producto')
+    list_display = ('id', 'g', 'Fecha', 'Estados', 'id_clie', 'Contiene', 'Orden', 'Domicilio', 'Imagen', 'producto')
     list_filter = ('Fecha', 'producto')
 
     date_hierarchy = 'Fecha'

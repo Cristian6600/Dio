@@ -1,0 +1,28 @@
+{% extends "fisico/base_fisico.html" %} 
+
+{% load static %} 
+
+{% block panel-content %}
+
+
+
+    <div class="cell grid-x grid-margin-x" style="margin-top: 2em;">
+    <table class="hover">
+        <thead>
+            <th>Bolsa Seudo-Guia</th>
+            <th>Seudo</th>
+        </thead>
+        <tbody>
+            {% for e in object_list %}  
+            <tr>
+                <td>{{e}}</td>
+                <td>{{e.Seudo}}</td>
+                
+            </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock panel-content %}

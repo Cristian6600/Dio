@@ -6,5 +6,6 @@ app_name = "fisico_app"
 urlpatterns = [
     
     path('add-fisico-d/', views.bolsaCreateView.as_view()),
+    path('lista-fisico/', views.FisicoListView.as_view()),
 
 ]

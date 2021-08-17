@@ -10,10 +10,10 @@ class ProductForm(forms.ModelForm):
             'Seudo'            
         )
 
-    def clean_Seudo(self):
-        Seudo = self.cleaned_data['Seudo']
-        if len(Seudo) < 22:
-            raise forms.ValidationError('Ingrese un codigo de barras correcto')
+    # def clean_Seudo(self):
+    #     Seudo = self.cleaned_data['Seudo']
+    #     if len(Seudo) < 22:
+    #         raise forms.ValidationError('Ingrese un codigo de barras correcto')
 
-        return Seudo
+    #     return Seudo
 

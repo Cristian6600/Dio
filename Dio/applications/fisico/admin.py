@@ -6,7 +6,7 @@ from . models import paquete
 
 class paqueteAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 
-    list_display = ('bolsa', 'Seudo', 'Fecha', 'Estado', )
+    list_display = ('id', 'bolsa', 'Seudo', 'Fecha', 'Estado', )
 
     search_fields = ('bolsa', 'Seudo',)
 

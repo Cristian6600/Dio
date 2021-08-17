@@ -6,20 +6,24 @@ class guiafisicoForm(forms.ModelForm):
     class Meta:
         model = guia
         fields = (
-            'Bolsa',
+            'bolsa',
             'Seudo'            
         )
 
-    def clean_Seudo(self):
-        Seudo = self.cleaned_data['Seudo']
-        if len(Seudo) < 22:
-            raise forms.ValidationError('Ingrese un codigo de barras correcto')
-
-        return Seudo
-
     def clean_Bolsa(self):
-        Bolsa = self.cleaned_data['Bolsa']
-        if len(Bolsa) < 5:
+        bolsa = self.cleaned_data['bolsa']
+        if len(bolsa) < 5:
             raise forms.ValidationError('Ingrese codigo de barras correcto')
 
-        return Bolsa
+        return bolsa
+
+        
+
+#     def clean_Seudo(self):
+#         Seudo = self.cleaned_data['Seudo']
+#         if len(Seudo) < 22:
+#             raise forms.ValidationError('Ingrese un codigo de barras correcto')
+
+#         return Seudo
+
+    

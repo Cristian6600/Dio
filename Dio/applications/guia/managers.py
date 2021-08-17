@@ -8,8 +8,10 @@ class ProductManager(models.Manager):
 
     def buscar_producto(self, kword, order):
         consulta = self.filter(
-            Q(Seudo__icontains=kword) | Q(Contiene=kword)
+            Q(g__icontains=kword) | Q(Contiene=kword)
         )
+
+        return consulta
 
         
         

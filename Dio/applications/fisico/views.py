@@ -15,3 +15,10 @@ class bolsaCreateView(LoginRequiredMixin, CreateView):
     model = paquete
     form_class = ProductForm
     success_url = '.'
+
+class FisicoListView(LoginRequiredMixin, ListView):
+    template_name = "fisico/ver-fisico.html"
+    model = paquete
+    paginate_by = 10
+    success_url = '.'
+

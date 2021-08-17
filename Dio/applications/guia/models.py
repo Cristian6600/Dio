@@ -1,15 +1,11 @@
 from django.db import models
 from applications.cliente.models import Cliente
-
+from applications.fisico.models import paquete
 from applications.base_cliente.models import bd_clie, Producto
 from applications.users.models import User
 from django.db.models.signals import post_save
 from PIL import Image
 from .managers import ProductManager
-
-
-
-
 
 class tipo(models.Model):
     id_tip = models.IntegerField(
@@ -75,46 +71,49 @@ class Servicio(models.Model):
         verbose_name_plural = "Servicio"
 
     def __str__(self):
-        return str(self.id_serv)
+        return str(self.id_serv) + '-' + self.Servicio
     
-class guia (models.Model):
+class guia(paquete):
 
-    id = models.AutoField(
-        primary_key = True, 
+    g = models.AutoField(
+        primary_key = True,
+        null=False,
         unique=True,
         verbose_name = 'Guia'
     )
-    Bolsa = models.IntegerField(
-        unique = True
+
+    Direccion = models.CharField(
+        max_length=255,
+        blank = True,
+        null = True
     )
 
-    Seudo = models.CharField(
-        max_length=35,
-        unique = True
+    Estados = models.BooleanField(
+        default=True
     )
 
-    id_serv = models.ForeignKey(
+    id_ser = models.ForeignKey(
         Servicio, 
         on_delete=models.CASCADE, 
         null=True, 
-        blank = True
+        blank = True,
+        verbose_name = 'Servicio'
+        
     )
     id_clie = models.ForeignKey(
         Cliente, 
         on_delete=models.CASCADE, 
         null=True, 
         blank = True,
+        verbose_name = 'Cliente'
         
     )
-    d_i = models.ForeignKey(
-        bd_clie, 
-        on_delete=models.CASCADE,
-        null=True, 
-        blank = True
-    ) 
-
-    
-
+    d_i = models.BigIntegerField(
+        blank=True, 
+        null=True,
+        verbose_name = 'Documento de identidad'
+    )
+        
     m = models.IntegerField(
         default=1, 
         null=True, 
@@ -175,15 +174,11 @@ class guia (models.Model):
         null=True, 
         blank = True
     )
-    Fecha = models.DateTimeField(
-        null=True, 
-        blank = True
-    )
-    
+     
     id_mot = models.ForeignKey(
         Motivo, 
         on_delete=models.CASCADE, 
-        verbose_name= 'id Motivo', 
+        verbose_name= 'Motivo', 
         null=True, 
         blank = True
     )
@@ -191,14 +186,16 @@ class guia (models.Model):
     Imagen = models.ImageField(
         upload_to = 'guia',
         null=True, 
-        blank = True
+        blank = True,
+        
     )
 
     id_est = models.ForeignKey(
         Estado,
         on_delete=models.CASCADE, 
         null=True, 
-        blank = True
+        blank = True,
+        verbose_name = 'Estado'
     )
 
     producto = models.ForeignKey(
@@ -208,22 +205,58 @@ class guia (models.Model):
         blank = True
     )
 
+    marca = models.CharField(
+        max_length= 15,
+        null=True, 
+        blank = True
+    )
+
     objects = ProductManager()
 
+    @property
+    def varg(self):
+      return 'guia/' + str(self.g) + '.jpg'
+
+    def save(self, *args, **kwargs):
+        self.Imagen  = self.varg
+        super (guia, self).save()
+     
     class Meta:
         verbose_name = "guia"
         verbose_name_plural = "guia"
-        
+        order_with_respect_to = 'id_mot'
+   
     def __str__(self):
-        return str(self.Bolsa)
-    
-def optimize_image(sender, instance, **kwargs):
-    print("==========")
-    print(instance)
-    if instance.Imagen:
-        Imagen = Image.open(instance.Imagen.path)
-        Imagen.save(instance.Imagen.path, quality=20, optimize = True)
+        return str(self.g  )    
 
-post_save.connect(optimize_image, sender = guia)
+    # @property
+    # def varg(self):
+    #   return (self.g)
+
+    # def save(self, *args, **kwargs):
+    #     self.Seudo.guia  = self.varg
+    #     print('========Holas=============')
+    #     self.Seudo.save()
+
+    #     super(guia, self).save(*args, **kwargs)
+
+    
+    # def optimize_image(sender, instance, **kwargs):
+    #     print("==========")
+    #     print(instance)
+    #     if instance.Imagen:
+    #         Imagen = Image.open(instance.Imagen.path)
+    #         Imagen.save(instance.Imagen.path, quality=20, optimize = True)
+        
+    #     post_save.connect(optimize_image, sender = guia)
+
+  
+    
+
+    
+    
+
+
+
 
    

@@ -74,7 +74,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         return str(self.ciudad) + ' ' +self.nombres
 
     def get_short_name(self):
-         return str(self.nombres + ' ' + self.apellidos + ' ' +'te queremos' )
+         return str(self.nombres + ' ' + self.apellidos )
     
     # def get_full_name (self):
-    #     return str(self.nombres + ' ' + self.apellidos + 'te queremos')
+    #     return str(self.nombres + ' ' + self.apellidos + '')

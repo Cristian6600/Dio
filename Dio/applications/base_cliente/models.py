@@ -34,7 +34,7 @@ class Producto (models.Model):
         unique_together = ('id_pro', 'id_clie')
 
     def __str__(self):
-        return self.producto
+        return str(self.id_pro)+ '-' + self.producto
 
 class est_clie (models.Model):
 
@@ -185,6 +185,11 @@ class bd_clie (models.Model):
         null = True, 
         blank = True
     )
+    guia = models.IntegerField(
+        blank = True, 
+        null = True, 
+    )
+
     fecha = models.DateTimeField(
         auto_now=True
     )
