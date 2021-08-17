@@ -17,7 +17,8 @@ class paquete(models.Model):
     Seudo = models.ForeignKey(
         bd_clie,
         on_delete=models.CASCADE, 
-        help_text = 'Codigo de barras'
+        help_text = 'Codigo de barras',
+        unique = True
     )
 
     

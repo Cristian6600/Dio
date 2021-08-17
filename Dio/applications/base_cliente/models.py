@@ -74,7 +74,8 @@ class bd_clie (models.Model):
 
     Seudo = models.CharField(
         max_length=35,
-        primary_key=True
+        primary_key=True,
+        unique = True
     )
 
     id_clie = models.ForeignKey(
