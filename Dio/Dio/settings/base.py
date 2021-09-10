@@ -17,18 +17,22 @@ BASE_DIR = Path(__file__).ancestor(3)
 SECRET_KEY = 'u5h4i@k8zl$24!dhx)=22c)ue@5y%$pg)hpr&@#*wt6rcjx0)f'
 
 
+
 # Application definition
 
 INSTALLED_APPS = [
-    'simple_history',
+    # 'simple_history',
     'import_export',
     'grappelli',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    #apps
     'applications.base_cliente',
     'applications.cliente',
     'applications.datos_g',
@@ -38,6 +42,9 @@ INSTALLED_APPS = [
     'applications.users',
     'applications.home',
     'applications.call',
+    'applications.ruta',
+
+    
 ]
 
 GRAPPELLI_ADMIN_TITLE = 'Firstsource'
@@ -50,7 +57,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'simple_history.middleware.HistoryRequestMiddleware',
+    # 'simple_history.middleware.HistoryRequestMiddleware',
+   
 ]
 
 ROOT_URLCONF = 'Dio.urls'
@@ -106,4 +114,14 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+#Historial
+
+SIMPLE_HISTORY_REVERT_DISABLED=True
+
+MULTI_CAPTCHA_ADMIN  = {
+     'motor' : 'recaptcha2' , 
+}
+
+
 

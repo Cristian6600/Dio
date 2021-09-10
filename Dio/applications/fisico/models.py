@@ -4,37 +4,39 @@ from applications.base_cliente.models import bd_clie
 
 from simple_history.models import HistoricalRecords
 from django.core.exceptions import ValidationError
-
-
        
 class paquete(models.Model):
 
-    bolsa = models.IntegerField(
-        unique = True,
-        help_text = 'Codigo de barras'
-    )
-
-    Seudo = models.ForeignKey(
+    seudo = models.OneToOneField(
         bd_clie,
-        on_delete=models.CASCADE, 
+        primary_key = True,
+        on_delete=models.CASCADE,
         help_text = 'Codigo de barras',
         unique = True
     )
 
-    
-    Fecha = models.DateTimeField(auto_now=True)
-    Estado = models.BooleanField(default=True)
+    bolsa = models.IntegerField(
+        
+        help_text = 'Codigo de barras'
+    )
 
-    unique_together = ('bolsa', 'Seudo')
+    fecha = models.DateTimeField(
+        auto_now=True
+    )
+    estado = models.BooleanField(
+        default=True
+    )
+
+    unique_together = ('bolsa', 'seudo')
 
     @property
     def var(self):
       return (self.bolsa)
 
     def save(self, *args, **kwargs):
-        self.Seudo.Bolsa  = self.var
+        self.seudo.bolsa  = self.var
         
-        self.Seudo.save()
+        self.seudo.save()
 
         super(paquete, self).save(*args, **kwargs)
 

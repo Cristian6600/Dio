@@ -7,15 +7,15 @@ class guiafisicoForm(forms.ModelForm):
         model = guia
         fields = (
             'bolsa',
-            'Seudo'            
+            'id'            
         )
 
-    def clean_Bolsa(self):
-        bolsa = self.cleaned_data['bolsa']
-        if len(bolsa) < 5:
-            raise forms.ValidationError('Ingrese codigo de barras correcto')
+#     def clean_Bolsa(self):
+#         bolsa = self.cleaned_data['bolsa']
+#         if len(bolsa) < 5:
+#             raise forms.ValidationError('Ingrese codigo de barras correcto')
 
-        return bolsa
+#         return bolsa
 
         
 

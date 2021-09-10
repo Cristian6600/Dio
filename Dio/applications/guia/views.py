@@ -24,7 +24,7 @@ class ProductListView(LoginRequiredMixin, ListView):
             g__icontains=palabra_clave,
         )
         return lista
-            
+           
    
 class ProductDetailView(LoginRequiredMixin, DetailView):
     template_name = "producto/detail.html"

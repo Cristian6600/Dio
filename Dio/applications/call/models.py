@@ -1,5 +1,7 @@
 from django.db import models
-from applications.guia.models import Motivo, guia
+from applications.guia.models import Motivo
+from applications.datos_g.models import datos_g
+from simple_history.models import HistoricalRecords
 
 class indicativo(models.Model):
     
@@ -11,11 +13,14 @@ class indicativo(models.Model):
     )
 
     def __str__(self):
-        return self.ind
+        return str(self.ind)
 
 class datos_t(models.Model):
+    
 
-    d_i = models.ForeignKey(guia, on_delete=models.CASCADE)
+    d_i = models.ForeignKey(datos_g,
+        on_delete=models.CASCADE, 
+        )
 
     telefono = models.IntegerField()
 
@@ -32,9 +37,11 @@ class datos_t(models.Model):
     Activo = models.BooleanField(
         default=True
     )
+    history = HistoricalRecords()
+    
 
     def __str__(self):
-        return self.telefono
+        return str(self.telefono)
     
 
     

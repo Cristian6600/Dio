@@ -1,6 +1,13 @@
 from django.db import models
-
+from django.conf import settings 
 from applications.cliente.models import Cliente
+
+
+from django.contrib.auth.models import User    
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+from django.utils import timezone
 
 class Producto (models.Model):
     id_pro = models.CharField(  
@@ -72,10 +79,11 @@ class Emision(models.Model):
 
 class bd_clie (models.Model):
 
-    Seudo = models.CharField(
+    id = models.CharField(
         max_length=35,
         primary_key=True,
-        unique = True
+        
+        verbose_name="Seudo"
     )
 
     id_clie = models.ForeignKey(
@@ -143,7 +151,7 @@ class bd_clie (models.Model):
     D_i_a = models.IntegerField(
         null=True, 
         blank = True,
-        verbose_name = 'Documento identidad autorizado'
+        verbose_name = 'CC autorizado'
     )
     Autor = models.CharField(
         max_length=100, 
@@ -182,7 +190,7 @@ class bd_clie (models.Model):
     id_serv = models.IntegerField(
         verbose_name = 'Id Servicio'
     )
-    Bolsa = models.IntegerField(
+    bolsa = models.IntegerField(
         null = True, 
         blank = True
     )
@@ -200,10 +208,21 @@ class bd_clie (models.Model):
         max_length = 4, 
         verbose_name = 'Tipo Emision'
     )
-    
+
+    fe_fisico = models.DateTimeField(
+        auto_now=None,
+        blank=True,
+        null=True,
+        
+        verbose_name = 'Fecha fisico')
+
     class Meta:
         verbose_name = "Base Cliente"
         verbose_name_plural = "Base Cliente"
 
     def __str__(self):
-        return str(self.Seudo)
+        return str(self.id)
+
+    def was_published_recently(self):
+        return self.pub_date >= timezone.now() 
+

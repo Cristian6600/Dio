@@ -1,11 +1,31 @@
 from django.db import models
 from applications.cliente.models import Cliente
-from applications.fisico.models import paquete
+from applications.datos_g.models import datos_g
+from django.conf import settings 
 from applications.base_cliente.models import bd_clie, Producto
-from applications.users.models import User
+from applications.courrier.models import courrier
+from django.contrib.auth.models import User 
+
+
+
+
+from django.utils.encoding import smart_text
+
 from django.db.models.signals import post_save
 from PIL import Image
-from .managers import ProductManager
+# from .managers import ProductManager
+# from simple_history.models import HistoricalRecords
+# from simple_history import register
+
+class LogEntryManager(models.Manager):
+        use_in_migrations = True
+
+        def log_action(self, user_id, content_type_id, object_id, object_repr, action_flag, change_message=''):
+            e = self.model(
+            None, None, user_id, content_type_id, smart_text(object_id),
+            object_repr[:200], action_flag, change_message
+        )
+            e.save()
 
 class tipo(models.Model):
     id_tip = models.IntegerField(
@@ -31,12 +51,14 @@ class Estado (models.Model):
         max_length=35
     )
 
+
     class Meta:
         verbose_name = "Estado"
         verbose_name_plural = "Estado"
 
     def __str__(self):
         return str(self.Estado)
+    
 
 class Motivo(models.Model):
 
@@ -73,21 +95,12 @@ class Servicio(models.Model):
     def __str__(self):
         return str(self.id_serv) + '-' + self.Servicio
     
-class guia(paquete):
+class guia(datos_g):
 
-    g = models.AutoField(
-        primary_key = True,
-        null=False,
-        unique=True,
-        verbose_name = 'Guia'
+    gui = models.BigAutoField(
+        primary_key=True,     
+
     )
-
-    Direccion = models.CharField(
-        max_length=255,
-        blank = True,
-        null = True
-    )
-
     Estados = models.BooleanField(
         default=True
     )
@@ -106,70 +119,64 @@ class guia(paquete):
         null=True, 
         blank = True,
         verbose_name = 'Cliente'
-        
-    )
-    d_i = models.BigIntegerField(
-        blank=True, 
-        null=True,
-        verbose_name = 'Documento de identidad'
-    )
+        )
         
     m = models.IntegerField(
         default=1, 
         null=True, 
         blank = True
     )
-    Ancho = models.IntegerField(
+    ancho = models.IntegerField(
         default=1,
         null=True, 
         blank = True
     )
-    Alto = models.IntegerField(
+    alto = models.IntegerField(
         default=1,
         null=True, 
         blank = True
     )
-    Largo = models.IntegerField(
+    largo = models.IntegerField(
         default=1,
         null=True, 
         blank = True
     )
-    Copia = models.IntegerField(
+    copia = models.IntegerField(
         default=1,
         null=True, 
         blank = True
     )
-    Unidad = models.IntegerField(
+    unidad = models.IntegerField(
         default=1, 
         null=True, 
         blank = True
     )
-    Contiene = models.CharField(
+    contiene = models.CharField(
         max_length = 50, 
         null=True, 
         blank = True
     )
-    Orden = models.IntegerField(
+    orden = models.IntegerField(
         null=True, 
         blank = True
     )
 
-    Domicilio = models.IntegerField(
+    domicilio = models.IntegerField(
         default=0,
         null=True, 
         blank = True
     )
-    Acarreo = models.IntegerField(
+    acarreo = models.IntegerField(
         default=0,
         null=True, 
         blank = True
     )
-    Flete = models.IntegerField(
+    flete = models.IntegerField(
         default=0,
         null=True, 
         blank = True
     )
-    Declarado = models.IntegerField(
+    declarado = models.IntegerField(
         default=0,
         null=True, 
         blank = True
@@ -205,42 +212,58 @@ class guia(paquete):
         blank = True
     )
 
-    marca = models.CharField(
-        max_length= 15,
-        null=True, 
-        blank = True
+    cantidad = models.PositiveIntegerField(
+        default=0 ,
+        verbose_name = 'Cantidad recepcion '
     )
 
-    objects = ProductManager()
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE, 
+        blank=True, null=True, 
+        editable=True,
+        verbose_name= 'Usuario')
+    
+    objects = LogEntryManager()
 
+    
+    # history = HistoricalRecords()    
+
+    # objects = ProductManager()
+    
+    # Decorador para imagen
     @property
     def varg(self):
-      return 'guia/' + str(self.g) + '.jpg'
+      return 'gui/' + str(self.id) + '.jpg'
 
     def save(self, *args, **kwargs):
         self.Imagen  = self.varg
         super (guia, self).save()
      
     class Meta:
-        verbose_name = "guia"
-        verbose_name_plural = "guia"
-        order_with_respect_to = 'id_mot'
+        verbose_name = "Guia"
+        verbose_name_plural = "Guia"
    
     def __str__(self):
-        return str(self.g  )    
+        return str(self.gui) + ' ' + str(self.id_est)
+    
+    #Decorador Guardado
+    @property
+    def bolsas(self):
+      return str(self.bolsa)
 
-    # @property
-    # def varg(self):
-    #   return (self.g)
-
-    # def save(self, *args, **kwargs):
-    #     self.Seudo.guia  = self.varg
-    #     print('========Holas=============')
-    #     self.Seudo.save()
-
-    #     super(guia, self).save(*args, **kwargs)
+    def save(self, *args, **kwargs,):
+        self.id.bolsa  = self.bolsa
+        self.id.save()
+        super(guia, self).save(*args, **kwargs)
 
     
+
+    # candidate = form.save(commit=False)
+    # candidate.user = request.user
+    # candidate.save()
+
+
     # def optimize_image(sender, instance, **kwargs):
     #     print("==========")
     #     print(instance)
@@ -250,10 +273,9 @@ class guia(paquete):
         
     #     post_save.connect(optimize_image, sender = guia)
 
-  
-    
 
-    
+
+
     
 
 

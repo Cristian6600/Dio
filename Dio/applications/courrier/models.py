@@ -69,6 +69,6 @@ class courrier(models.Model):
         verbose_name_plural = "Courrier"
 
     def __str__(self):
-        return str(self.id_courrier)
+        return self.Courrier
 
 

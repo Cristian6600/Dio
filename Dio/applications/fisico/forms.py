@@ -7,7 +7,7 @@ class ProductForm(forms.ModelForm):
         model = paquete
         fields = (
             'bolsa',
-            'Seudo'            
+            'seudo'            
         )
 
     # def clean_Seudo(self):

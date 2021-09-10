@@ -8,9 +8,9 @@ class bd_clieAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     model = bd_clie
     list_per_page = 12
 
-    list_display = ('id_clie', 'Archivo', 'Jornada', 'Id_pro', 'D_i', 'Cliente', 'Seudo', 'Id_Proc', 'ofi', 'Canal', 'Realz', 'Tipo', 'D_i_a', 'Codigo', 'id_est_clie', 'orden', 'Bolsa', 'fecha',  'Autor')
-    list_filter = ('id_clie', 'fecha' )
-    search_fields = ('Archivo', 'Seudo', 'fecha', 'D_i', 'Cliente')
+    list_display = ('Jornada', 'D_i', 'Cliente', 'id', 'bolsa', 'fe_fisico', 'Id_Proc', 'ofi','Tipo', 'D_i_a', 'Codigo', 'id_est_clie', 'orden', 'fecha',  'Autor')
+    list_filter = ('id_clie', 'fecha')
+    search_fields = ('Archivo', 'id', 'fecha', 'D_i', 'Cliente')
 
 class emisionAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 

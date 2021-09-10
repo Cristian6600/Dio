@@ -6,12 +6,15 @@ from . models import paquete
 
 class paqueteAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 
-    list_display = ('id', 'bolsa', 'Seudo', 'Fecha', 'Estado', )
+    raw_id_fields = ("seudo",)
+
+    list_display = ('bolsa', 'seudo', 'fecha', 'estado', )
 
     search_fields = ('bolsa', 'Seudo',)
 
-    list_filter = ('bolsa', 'Seudo', 'Fecha', 'Estado', )
+    list_filter = ('bolsa', 'seudo', 'fecha', 'estado', )
 
+    
 admin.site.register(paquete, paqueteAdmin)
 
 

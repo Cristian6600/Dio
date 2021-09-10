@@ -15,7 +15,7 @@
 </form>
 
     <div class="cell grid-x grid-margin-x" style="margin-top: 2em;">
-        <table class="hover">
+        <table class="hover"  >
             <thead>
                 <th>Guia</th>
                 <th>Bolsa</th>
@@ -24,6 +24,7 @@
                 <th>Domicilio</th>
                 <th>Fecha</th>
                 <th>id_mot</th>
+                <th>Ver</th>
             </thead>
             <tbody>
                 {% for e in object_list %}
@@ -35,7 +36,7 @@
                     <td>{{e.Domicilio}}</td>
                     <td>{{e.Fecha}}</td>
                     <td>{{e.id_mot}}</td>
-                    <td>
+                    <td> 
                         <a href="{% url 'producto_app:producto-detail' e.id %}" class="button warning"><i class="fi-eye"></i></a>
                     </td>
                 </tr>

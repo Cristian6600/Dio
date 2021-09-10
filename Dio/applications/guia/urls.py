@@ -17,7 +17,7 @@ urlpatterns = [
     ),
 
     path(
-        'add-fisico-g/',
+        'add-fisico-guia/',
         views.bolsaCreateView.as_view()),
 
     ]
