@@ -1,20 +1,29 @@
 from django.db import models
 
+
+class Departamento(models.Model):
+    departamento = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.departamento
+
 class Ciudad (models.Model):
-    id = models.IntegerField(
+    id = models.CharField(
+        max_length=10,
         primary_key = True,
         unique = True, 
         verbose_name = 'Dane'
     )
-    Ciudad = models.CharField(
+    ciudad = models.CharField(
         max_length= 80
     )
-    dep = models.CharField(
-        max_length = 50,
+    departamento = models.ForeignKey(
+        Departamento,
+        on_delete=models.CASCADE,
         verbose_name = 'Departamento'
     )
 
-    Cubrimiento = models.CharField(
+    cubrimiento = models.CharField(
         max_length=15,
         null = True,
         blank = True
@@ -25,7 +34,7 @@ class Ciudad (models.Model):
         verbose_name_plural = "Ciudad"
 
     def __str__(self):
-        return str (self.Ciudad)
+        return str (self.ciudad) 
 
 class Cliente (models.Model):
     id_clie = models.IntegerField(
@@ -35,11 +44,11 @@ class Cliente (models.Model):
     nit = models.CharField(
         max_length = 20
     )
-    R_s = models.CharField(
+    r_s = models.CharField(
         max_length = 70,
         verbose_name = 'Razon social'
     )
-    Contact = models.CharField(
+    contact = models.CharField(
         max_length = 50,
         verbose_name = 'Contacto'
     )
@@ -55,15 +64,15 @@ class Cliente (models.Model):
     tel = models.IntegerField(
         verbose_name = 'Tel fijo'
     )
-    Cel = models.IntegerField(
+    cel = models.IntegerField(
         verbose_name = 'Celular'
     )
     ind = models.IntegerField(
         verbose_name = 'Indicativo'
     )
-    Radicacion = models.IntegerField()
+    radicacion = models.IntegerField()
 
-    Fact = models.CharField(
+    fact = models.CharField(
         max_length = 4,
         verbose_name = 'Factura'
     )
@@ -75,3 +84,9 @@ class Cliente (models.Model):
     def __str__(self):
         return self.nit
 
+
+
+
+
+
+    

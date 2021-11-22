@@ -4,8 +4,15 @@ from . import views
 app_name = "fisico_app"
 
 urlpatterns = [
-    
-    path('add-fisico-paquete/', views.bolsaCreateView.as_view()),
+    path(
+        'add-fisico-paquete/',
+         views.BolsaCreateView.as_view(),
+         name = 'fisico-paquete',
+         ),
+
     path('lista-fisico/', views.FisicoListView.as_view()),
+
+
+    
 
 ]

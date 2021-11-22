@@ -1,13 +1,11 @@
 from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
+from related_admin import RelatedFieldAdmin
 from import_export import resources
-from . models import guia, Estado, Motivo, Servicio, tipo
+
+from . models import Estado, Servicio, Cod_vis, Proceso, Guia
 from django.utils.html import format_html
-
-
 from django.contrib.admin.models import LogEntry, ADDITION, CHANGE
-
-
 from django.contrib.admin import AdminSite
 # from simple_history.admin import SimpleHistoryAdmin
 
@@ -16,53 +14,41 @@ admin.site.site_title = 'My site admin'
 class guiaResource(resources.ModelResource):
     
     class Meta:
-        model = guia
-#         import_id_fields = ('id',)
-#         fields = ('id', 'bolsa', 'Direccion', 'd_i',)
-
-@admin.register(guia)
-class guiaAdmin(ImportExportModelAdmin):
-    
-    change_list_template = 'admin/guia/guia_change_list.html'
+        model = Guia
+        import_id_fields = ('seudo',) 
+        fields = ('fecha', 'proceso__proceso', 'seudo__cliente', 'seudo__d_i', 'seudo__id_pro__producto', 'id_ciu__ciudad', 'direccion', 'bolsa', 'id_guia', 'seudo' )
+        export_order = ('seudo__id_pro__producto', 'seudo__d_i', 'seudo__cliente', 'direccion', 'bolsa', 'id_guia', 'proceso__proceso', 'id_ciu__ciudad', 'fecha', 'seudo' )
+@admin.register(Guia)
+class guiaAdmin(ImportExportModelAdmin, RelatedFieldAdmin):
+    list_per_page = 5
+    raw_id_fields = ["seudo", "mot", "id_est", "cod_vis"]
+#     # change_list_template = 'admin/guia/guia_change_list.html'
     resource_class = guiaResource
-    model = guia
-    list_per_page = 12
-    fields = (
-        
-        ('id', 'bolsa'), 
-        ('direccion', 'barrio'),
-        ('postal', 'id_ciu' ),
-        ('id_mot', 'id_pro'),
-        ('id_ser','id_clie'),
-        ('id_est','producto'),
-        ('marca', 'Imagen'),
-        ('cantidad', 'fecha') ,
-        'user' 
-    )
+    fieldsets = [
+        (None,  {'fields':[('seudo'), ('bolsa', 'estado', 'id_ciu'), ('direccion', 'barrio', 'postal', ), ]}),
+        ('Estados', {'fields':[('id_est', 'mot', 'id_ser',), ('cod_vis', 'id_clie', 'proceso'),
+        ('cantidad_vi', 'cantidad', 'codigo', ), 'suma', 'imagen' ]}) 
+    ]
+#     # raw_id_fields = ("mot",)
+    search_fields = ('id_guia', 'seudo__seudo_bd')
+    list_display = ('id_guia', 'seudo', 'direccion', 'id_ciu', 'fecha', 'user', 'destinatario', 'imagen',)
 
-    search_fields = ('id',)
-    list_display = ('id', 'bolsa', 'direccion', 'barrio', 'postal', 'id_ciu', 'marca')
-    list_filter = ('producto', 'id_ciu',)
-    readonly_fields = ('fecha', 'cantidad', 'user')
-    actions = None
+    list_filter = ('user', 'id_ciu__departamento','fecha')
+#     # readonly_fields = ('fecha', 'cantidad', 'user')
+#     actions = None
+#     # raw_id_fields = ("id",)
 
+#     icon_name  =  'next_week's
     def save_model(self, request, obj, form, change):
         if getattr(obj, 'author', None) is None:
-            obj.user = request.user
+            obj.user = request.user 
         obj.save()
     
     # def save_model(self, request, obj, form, change):
     #     if getattr(obj, 'user', None) is None:
     #         obj.user = request.user
     #         obj.save()
-
     # date_hierarchy = 'published'
-
-@admin.register(tipo)
-class TipoAdmin(admin.ModelAdmin):
-
-    list_display = ('id_tip', 'Tipo')
-
 class MoniterLog(admin.ModelAdmin):
     #dt_utc = datetime.datetime.strptime('action_time', '%Y-%m-%d %H:%M:%S')
     #str_utc = 'action_time'
@@ -73,10 +59,23 @@ class MoniterLog(admin.ModelAdmin):
     list_filter = ['action_time','user','content_type']
     ordering = ('-action_time',)
 
-admin.site.register(Estado)
-admin.site.register(Motivo)
+class Cod_visAdmin(ImportExportModelAdmin):
+    list_display = ('id', 'visita', 'tipo')
+
+class EstadoAdmin(ImportExportModelAdmin):
+    pass
+
+admin.site.register(Estado, EstadoAdmin)
 admin.site.register(Servicio)
 admin.site.register(LogEntry, MoniterLog)
+admin.site.register(Cod_vis, Cod_visAdmin)
+admin.site.register(Proceso)
+
+
+
+
+
+
 
 
 

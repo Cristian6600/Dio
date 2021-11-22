@@ -19,13 +19,14 @@ from django.urls import include, path, re_path
 from django.conf import settings
 from django.conf.urls.static import static 
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('grappelli/', include('grappelli.urls')),
     re_path('', include('applications.users.urls')),
     re_path('', include('applications.home.urls')),
     re_path('', include('applications.guia.urls')),
     re_path('', include('applications.fisico.urls')),
     re_path('', include('applications.ruta.urls')),
+    
     
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

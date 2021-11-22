@@ -9,24 +9,25 @@
     <form class="cell medium-9 grid-x grid-margin-x" method="POST">{% csrf_token %}
 
         <label for="id_planilla">Planilla:</label>    
-            <input type="text" placeholder="Código Barras" name="planilla" required="" id="id_planilla" autofocus="autofocus">
+            {{form.planilla}}
 
-            
             <label for="id_motivo">Motivo:</label> 
-            <select name="motivo" required="" id="id_motivo">
-                <option value="" selected=""></option>
-              
-              </select>
+            {{form.motivo}}
 
             <label for="id_guia">Guia:</label> 
-            <input type="text" placeholder="Código Barras" name="guia" required="" id="id_guia">
+    
+            <table>
+                <td> <input type="number" placeholder="Código Barras" name="guia" required="" id="id_guia"  ></td>
+                <td><input type="number" placeholder="Código Barras" name="guia" required="" id="id_guia" ></td>
+                <td><input type="number" placeholder="Código Barras" name="guia" required="" id="id_guia" ></td>
+                <td><input type="number" placeholder="Código Barras" name="guia" required="" id="id_guia" ></td>
+                <td><input type="number" placeholder="Código Barras" name="guia" required="" id="id_guia" ></td>
+                <td> <input type="number" placeholder="Código Barras" name="guia" required="" id="id_guia" ></td>
+                    
+            </table>
 
-            <label for="id_bolsa">Bolsa:</label> 
-            <input type="text" placeholder="Código Barras" name="bolsa" required="" id="id_bolsa">
-            <input type="reset">
+           
             <center>   <button type="submit" class="success button" style="width: 200px;">Guardar</button></center>
     
-
-
 
 {% endblock panel-content %}

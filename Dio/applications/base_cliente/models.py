@@ -1,12 +1,9 @@
 from django.db import models
 from django.conf import settings 
 from applications.cliente.models import Cliente
-
-
 from django.contrib.auth.models import User    
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-
 from django.utils import timezone
 
 class Producto (models.Model):
@@ -25,14 +22,14 @@ class Producto (models.Model):
         max_length = 50
     )
     Proceso = models.CharField(
-        max_length = 50
+        max_length = 50, blank = True, null = True,
     )
-    Tipo = models.CharField(
+    tipo = models.CharField(
         max_length = 5,
-        verbose_name = 'Tipos distribucion'
+        verbose_name = 'Tipos distribucion', blank = True, null = True,
     )
-    Homologacion = models.CharField(
-        max_length=50
+    homologacion = models.CharField(
+        max_length=50, blank = True, null = True,
     )
 
     class Meta:
@@ -43,21 +40,22 @@ class Producto (models.Model):
     def __str__(self):
         return str(self.id_pro)+ '-' + self.producto
 
-class est_clie (models.Model):
+class Est_clie (models.Model):
 
-    id_est_clie = models.IntegerField(
-        primary_key = True
+    id = models.CharField(
+        primary_key = True,
+        max_length = 10
     )
-    Estado = models.CharField(max_length = 35)
-    Descripcion = models.CharField(max_length = 35)
-    Proceso = models.CharField(max_length = 20)
+    cod_est = models.IntegerField()
+    estado = models.CharField(max_length = 55)
+    descripcion = models.CharField(max_length = 55)
+    proceso = models.CharField(max_length = 20)
     
-
     verbose_name = "Estado Cliente"
     verbose_name_plural = "Estado del cliente"
 
     def __str__(self):
-        return str (self.id_est_clie)
+        return str (self.id)
 
 class Emision(models.Model):
     t_emi = models.CharField(
@@ -77,13 +75,11 @@ class Emision(models.Model):
     def __str__(self):
         return self.emision
 
-class bd_clie (models.Model):
+class Bd_clie (models.Model):
 
-    id = models.CharField(
+    seudo_bd = models.CharField(
         max_length=35,
-        primary_key=True,
-        
-        verbose_name="Seudo"
+        primary_key=True,       
     )
 
     id_clie = models.ForeignKey(
@@ -91,7 +87,15 @@ class bd_clie (models.Model):
         on_delete=models.CASCADE,
         verbose_name = 'Id cliente'
     )
-    Archivo = models.CharField(
+    
+    t_emi = models.ForeignKey(
+        Emision, 
+        on_delete=models.CASCADE, 
+        max_length = 4, 
+        verbose_name = 'Tipo Emision'
+    )
+
+    archivo = models.CharField(
         max_length= 15,
         null=True,
         blank = True)
@@ -100,29 +104,30 @@ class bd_clie (models.Model):
     ("AM", "AM"),
     ("PM", "PM"),
     ]
-    Jornada = models.CharField(
+    jornada = models.CharField(
         max_length=3, 
         choices=MONTH_CHOICES, 
         null=True, 
         blank = True
     )
-    Id_pro = models.ForeignKey(
+    id_pro = models.ForeignKey(
         Producto,
         on_delete=models.CASCADE,
         verbose_name = 'Id producto'
     )
-    D_i = models.IntegerField(
+    d_i = models.CharField(
+        max_length = 13,
         null=True, 
         blank = True, 
         verbose_name = 'Documento de identidad'
     )
-    Cliente = models.CharField(
+    cliente = models.CharField(
         max_length = 150, 
         null=True, 
         blank = True
     )
     
-    Id_Proc = models.IntegerField(
+    id_proc = models.IntegerField(
         null=True, 
         blank = True
     )
@@ -132,52 +137,51 @@ class bd_clie (models.Model):
         blank = True,
         verbose_name= 'Oficina'
     )
-    Canal = models.CharField(
+    canal = models.CharField(
         max_length=8, 
         null=True, 
         blank = True
     )
-    Realz = models.CharField(
+    realz = models.CharField(
         max_length = 30, 
         null=True, 
         blank = True,
         verbose_name = 'Realzador'
     )
-    Tipo = models.CharField(
+    tipo = models.CharField(
         max_length = 30, 
         null=True, 
         blank = True
     )
-    D_i_a = models.IntegerField(
+    d_i_a = models.IntegerField(
         null=True, 
         blank = True,
         verbose_name = 'CC autorizado'
     )
-    Autor = models.CharField(
+    autor = models.CharField(
         max_length=100, 
         null=True, 
         blank = True, 
         verbose_name = 'Autorizado'
     )
-    Tarjeta = models.CharField(
+    tarjeta = models.CharField(
         max_length = 30, 
         null=True, 
         blank = True
     )
-    Codigo = models.IntegerField(
-        null=True, 
-        blank = True
-    )
     id_est_clie = models.ForeignKey(
-        est_clie, 
+        Est_clie, 
         on_delete=models.CASCADE,
-        verbose_name = 'Id estado cliente '
+        verbose_name = 'Id estado cliente ',
+        blank = True,
+        null = True,
+
     )
     orden = models.IntegerField(
         null = True, 
         blank = True
     )
-    Referencia = models.CharField(
+    referencia = models.CharField(
         max_length= 50, 
         null=True, 
         blank = True
@@ -202,26 +206,25 @@ class bd_clie (models.Model):
     fecha = models.DateTimeField(
         auto_now=True
     )
-    T_emi = models.ForeignKey(
-        Emision, 
-        on_delete=models.CASCADE, 
-        max_length = 4, 
-        verbose_name = 'Tipo Emision'
-    )
 
     fe_fisico = models.DateTimeField(
         auto_now=None,
         blank=True,
         null=True,
-        
         verbose_name = 'Fecha fisico')
 
+    sucursal = models.CharField(
+        max_length=50,
+        blank=True,  null =True,
+    )   
+    
+        
     class Meta:
         verbose_name = "Base Cliente"
         verbose_name_plural = "Base Cliente"
 
     def __str__(self):
-        return str(self.id)
+        return str(self.seudo_bd)
 
     def was_published_recently(self):
         return self.pub_date >= timezone.now() 

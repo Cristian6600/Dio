@@ -1,9 +1,9 @@
 from django.db import models
-from applications.guia.models import Motivo
-from applications.datos_g.models import datos_g
+from applications.datos_g.models import Motivo
+from applications.users.models import User
 from simple_history.models import HistoricalRecords
 
-class indicativo(models.Model):
+class Indicativo(models.Model):
     
     ind = models.IntegerField(
         verbose_name = 'Indicativo'
@@ -15,26 +15,32 @@ class indicativo(models.Model):
     def __str__(self):
         return str(self.ind)
 
-class datos_t(models.Model):
+class Datos_t(models.Model):
     
+    # d_i = models.ForeignKey(datos_g,
+    #     on_delete=models.CASCADE, 
+    #     )
 
-    d_i = models.ForeignKey(datos_g,
-        on_delete=models.CASCADE, 
-        )
-
-    telefono = models.IntegerField()
+    telefono = models.IntegerField(blank=True, null=True)
 
     indicativo = models.ForeignKey(
-        indicativo, 
+        Indicativo, 
         on_delete=models.CASCADE,
     )
 
-    id_mot = models.ForeignKey(
-        Motivo, 
-        on_delete=models.CASCADE
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        blank=True, null=True, 
+        editable=True,
+        verbose_name= 'Usuario'
         )
+    # id_mot = models.ForeignKey(
+    #     Motivo, 
+    #     on_delete=models.CASCADE
+    #     )
 
-    Activo = models.BooleanField(
+    activo = models.BooleanField(
         default=True
     )
     history = HistoricalRecords()
@@ -42,9 +48,4 @@ class datos_t(models.Model):
 
     def __str__(self):
         return str(self.telefono)
-    
-
-    
-
-    
     

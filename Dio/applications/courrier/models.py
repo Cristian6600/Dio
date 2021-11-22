@@ -8,7 +8,7 @@ class vehiculo(models.Model):
 
     vehiculo = models.CharField(max_length=35)
 
-    Marca = models.CharField(max_length=20)
+    marca = models.CharField(max_length=20)
 
     cilindraje = models.IntegerField()
 
@@ -28,17 +28,17 @@ class courrier(models.Model):
     )
     d_i = models.BigIntegerField()
 
-    Courrier = models.CharField(
+    courrier = models.CharField(
         max_length=70, 
         verbose_name = 'Nombre courrier'
     )
-    Cel = models.IntegerField(
+    cel = models.PositiveBigIntegerField(
         verbose_name = 'Celular'
     )
     dir = models.CharField(
         max_length=120
     )
-    id_ciu = models.OneToOneField(
+    id_ciu = models.ForeignKey(
         Ciudad, 
         on_delete=models.CASCADE,
         verbose_name = 'Id ciudad'
@@ -48,7 +48,9 @@ class courrier(models.Model):
         verbose_name = 'Id vehiculo'
     )
 
-    placa = models.IntegerField()
+    placa = models.CharField(
+        max_length = 6
+    )
 
     soat = models.CharField(
         max_length = 25
@@ -69,6 +71,6 @@ class courrier(models.Model):
         verbose_name_plural = "Courrier"
 
     def __str__(self):
-        return self.Courrier
+        return self.courrier
 
 

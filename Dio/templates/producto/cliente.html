@@ -31,11 +31,11 @@
                 <tr>
                     <td>{{e}}</td>
                     <td>{{e.bolsa}}</td>
-                    <td>{{e.Seudo}}</td>
-                    <td>{{e.id_clie}}</td>
-                    <td>{{e.Domicilio}}</td>
-                    <td>{{e.Fecha}}</td>
-                    <td>{{e.id_mot}}</td>
+                    <td>{{e.seudo}}</td>
+                    <td>{{e.id_ciu}}</td>
+                    <td>{{e.direccion}}</td>
+                    <td>{{e.postal}}</td>
+                    <td>{{e.cantidad}}</td>
                     <td> 
                         <a href="{% url 'producto_app:producto-detail' e.id %}" class="button warning"><i class="fi-eye"></i></a>
                     </td>
@@ -74,7 +74,5 @@
             </nav>
             {% endif %}
 </div>
-
-
 
 {% endblock panel-content %}

@@ -2,12 +2,12 @@ from .base import *
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.0.190',]
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dios1',
+        'NAME': 'dio',
         'USER': 'postgres',
         'PASSWORD': '123.abcd',
         'HOST': 'localhost',

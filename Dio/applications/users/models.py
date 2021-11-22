@@ -11,9 +11,6 @@ from .managers import UserManager
 
 from django.db.models.signals import post_save
 
-from django.dispatch import receiver
-
-
 
 
 class Areas(models.Model):
@@ -50,7 +47,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         blank=True
     )
     
-    ciudad = models.OneToOneField(
+    ciudad = models.ForeignKey(
         Ciudad,
         on_delete=models.CASCADE,
         null=True,
@@ -74,25 +71,28 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name = "Permisos de usuarios"
         verbose_name_plural = "Permisos de usuario"
 
-    def get_short_name(self):
-         return str(self.nombres + ' ' + self.apellidos )
+    # def get_short_name(self):
+    #      return str(self.nombres + ' ' + self.apellidos )
+
+    def __str__(self):
+        return str(self.username) + ' ' +str(self.ciudad)
 
     
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    id = models.OneToOneField(User, primary_key=True, on_delete=models.CASCADE)
     bio = models.TextField(max_length=500, blank=True)
     location = models.CharField(max_length=30, blank=True)
     birth_date = models.DateField(null=True, blank=True)
 
     def __str__(self):
-        return str(self.user)
+        return str(self.id)
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
-        Profile.objects.create(user=instance)
+        Profile.objects.create(id=instance)
 
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    instance.profile.save()   
+# @receiver(post_save, sender=User)
+# def save_user_profile(sender, instance, **kwargs):
+#     instance.profile.save()   
 

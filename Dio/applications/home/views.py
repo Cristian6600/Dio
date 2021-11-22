@@ -25,7 +25,6 @@ class HomePage(LoginRequiredMixin, TemplateView):
     template_name = "home/index.html"
     login_url = reverse_lazy('users_app:user-login')
 
-    
 
 class TemplatePruebaMixin(FechaMixin, TemplateView):
     template_name = "home/mixin.html"

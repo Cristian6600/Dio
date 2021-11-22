@@ -4,6 +4,7 @@
 
 {% block content %}
 
+
 <div class="off-canvas-wrapper">
     <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
 
@@ -19,10 +20,37 @@
                             </li>
                         </ul>
                 </ul>
-               
-                    
+                <ul class="vertical menu">
+                    <li>
+                      <a href="#"><span class="label warning">Custodia</span></a>
+                      <ul class="nested vertical menu">
+                        <li class="{% if request.resolver_match.url_name == 'venta-index' %}activeli{% endif %}">
+                          <a href="{% url 'producto_app:producto-crear' %}" style="color: white;">Agregar fisico</a>
+                        </li>
+                        <li class="{% if request.resolver_match.url_name == 'caja-index' %}activeli{% endif %}">
+                          <a href="{% url 'fisico_app:fisico-paquete' %} " style="color: white;">Agregar fisico paquete</a>
+                        </li>
+                      </ul>
+                    </li>
+                </ul> 
+                <ul class="vertical menu">
+                    <li>
+                      <a href="#"><span class="label warning">Ruta</span></a>
+                      <ul class="nested vertical menu">
+                        <li class="{% if request.resolver_match.url_name == 'venta-index' %}activeli{% endif %}">
+                          <a href="{% url 'ruta_apps:cargue-ruta' %}" style="color: white;">Ruta</a>
+                        </li>
+                        <li class="{% if request.resolver_match.url_name == 'venta-index' %}activeli{% endif %}">
+                            <a href="{% url 'ruta_apps:cargue-recepcion' %}" style="color: white;">Recepcion</a>
+                          </li>
+                        
+                        </li>
+                      </ul>
+                    </li>
+                </ul> 
             </div>
         </div>
+    
                 <div class="off-canvas-content" data-off-canvas-content>
                     <!-- declaramos un nuevo bloque para contenidod e panel -->
                     <div class="grid-x">
