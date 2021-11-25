@@ -1,7 +1,6 @@
 from django import forms
 from .models import Guia
-
-
+from .models import img
 
 class guiafisicoForm(forms.ModelForm):
 
@@ -26,5 +25,13 @@ class guiafisicoForm(forms.ModelForm):
             raise forms.ValidationError('Ingrese un codigo de barras correcto')
 
         return Seudo
+
+class ImgForm(forms.ModelForm):
+
+    class Meta:
+        model = img
+        fields = (
+            'image',
+        )
 
     

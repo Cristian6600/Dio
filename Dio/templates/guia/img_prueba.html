@@ -1,0 +1,13 @@
+{% extends "guia/base_fisico.html" %} 
+
+{% load static %}
+
+{% block panel-content %}
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+  <input type="file" name="images" multiple>
+  <button type="submit">Cargar</button>
+</form>
+
+{% endblock panel-content %}

@@ -11,8 +11,6 @@ from applications.fisico.models import Fisico
 from django.utils.encoding import smart_text
 from django.conf import settings 
 
-
-
 # from .managers import ProductManager
 # from simple_history.models import HistoricalRecords
 # from simple_history import register
@@ -175,11 +173,6 @@ class Guia(Fisico):
         null=True, 
         blank = True
     )
-    imagen = models.ImageField(
-        upload_to = 'guia',
-        null=True, 
-        blank = True,   
-    )
     
     producto = models.ForeignKey(
         Producto, 
@@ -207,6 +200,7 @@ class Guia(Fisico):
         blank=True, 
         null=True
         )
+
     class Meta:
         verbose_name = "Guia"
         verbose_name_plural = "Guia"
@@ -217,6 +211,7 @@ class Guia(Fisico):
 
     objects = LogEntryManager()
 
+    var_g = ("guia")
     # history = HistoricalRecords()    
     # objects = ProductManager()
 
@@ -232,15 +227,14 @@ class Guia(Fisico):
     # def estado_cli(self):
     #     return self.codigo
 
-
-    #Decorador concatenar ruta imagen
+    # Decorador concatenar ruta imagen
     @property
     def img(self):
-      return 'guia/' + str(self.id_guia) + '.jpg'
+      return self.var_g  + str(self.id_guia) + '.jpg'
 
-    """ def save(self, *args, **kwargs):
-        self.imagen  = self.img
-        super (Guia, self).save() """
+    # """ def save(self, *args, **kwargs):
+    #     self.imagen  = self.img
+    #     super (Guia, self).save() """
       
     @property
     def userbd(self):
@@ -276,7 +270,9 @@ class Guia(Fisico):
     def decha_fi(self):
         return self.fecha
 
+
     def save(self, *args, **kwargs):
+
         self.seudo.fe_fisico = self.fecha
         self.imagen  = self.img
         # self.seudo.id_est_clie_id = self.codigo
@@ -351,7 +347,18 @@ class img(models.Model):
         editable=True,
         verbose_name= 'Usuario'
     )
-   
+    numero = models.CharField(max_length=30, blank=True, null=True)
+
+    @property
+    def fe(self):
+        return str(self.image)
+
+    def save(self, *args, **kwargs):
+        self.id_guia_id = (self.fe[-14:-4])
+        # self.id_guia.imagen =  str(self.fe)
+        self.id_guia.save()     
+        super (img, self).save(*args, **kwargs)
+
 
 
 

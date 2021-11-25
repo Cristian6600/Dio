@@ -2,6 +2,7 @@ from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
 from related_admin import RelatedFieldAdmin
 from import_export import resources
+from django.contrib.admin.models import ADDITION, LogEntry
 
 from . models import Estado, Servicio, Cod_vis, Proceso, Guia, img
 from django.utils.html import format_html
@@ -22,7 +23,7 @@ class guiaResource(resources.ModelResource):
 class guiaAdmin(ImportExportModelAdmin, RelatedFieldAdmin):
     list_per_page = 5
     raw_id_fields = ["seudo", "mot", "id_est", "cod_vis"]
-#     # change_list_template = 'admin/guia/guia_change_list.html'
+    # change_list_template = 'admin/guia/guia_change_list.html'
     resource_class = guiaResource
     fieldsets = [
         (None,  {'fields':[('seudo'), ('bolsa', 'estado', 'id_ciu'), ('direccion', 'barrio', 'postal', ), ]}),
@@ -65,13 +66,17 @@ class Cod_visAdmin(ImportExportModelAdmin):
 class EstadoAdmin(ImportExportModelAdmin):
     list_display = ('Estado',)
 
-class ImgAdmin(admin.ModelAdmin):
+class ImgAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    # change_list_template = 'img_change_list.html'
     list_display = ('id_guia', 'image', 'fecha')
-
-    def save_model(self, request, obj, form, change):
-        if getattr(obj, 'author', None) is None:
-            obj.user = request.user 
-        obj.save()
+    LogEntry.objects.filter(action_flag=ADDITION)
+    list_filter = ('fecha',)
+    date_hierarchy = ('fecha')
+    
+    # def save_model(self, request, obj, form, change):
+    #     if getattr(obj, 'author', None) is None:
+    #         obj.user = request.user 
+    #     obj.save()
 
 admin.site.register(Estado, EstadoAdmin)
 admin.site.register(Servicio)

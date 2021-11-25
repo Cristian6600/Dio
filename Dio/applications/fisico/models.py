@@ -85,6 +85,12 @@ class Fisico(Fisi_pa, Bolsa):
     destinatario = models.CharField(max_length=100, blank=True, null=True)
 
     d_i = models.CharField(max_length=15, blank = True, null=True)
+
+    imagen = models.ImageField(
+        upload_to = 'guia',
+        null=True, 
+        blank = True,   
+    )
     
     
     unique_together = ('bolsa', 'seudo')

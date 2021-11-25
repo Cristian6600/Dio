@@ -8,7 +8,7 @@ from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, CreateView, ListView, DetailView
 from django.views.generic.detail import SingleObjectMixin
-from .forms import guiafisicoForm
+from .forms import guiafisicoForm, ImgForm
 from . models import Guia, img
 
 
@@ -34,11 +34,12 @@ class bolsaCreateView(CreateView):
         self.object.save()
         return super(bolsaCreateView, self).form_valid(form)
 
-class imaCreateView(CreateView):
-    template_name = "guia/add-img.html"
-    
+class ImgCreateView(CreateView):
+    template_name = "guia/img_prueba.html"  
+    form_class = ImgForm
+    success_url = '.'
 
-    def handleMultipleImagesUpload(request):
+def handleMultipleImagesUpload(request):
         if request.method == "POST":
             images = request.FILES.getlist('images')
 
@@ -50,6 +51,3 @@ class imaCreateView(CreateView):
         return render(request, "index.html")    
     
 
-    
-
-    
