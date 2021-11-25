@@ -3,7 +3,7 @@ from import_export.admin import ImportExportModelAdmin
 from related_admin import RelatedFieldAdmin
 from import_export import resources
 
-from . models import Estado, Servicio, Cod_vis, Proceso, Guia
+from . models import Estado, Servicio, Cod_vis, Proceso, Guia, img
 from django.utils.html import format_html
 from django.contrib.admin.models import LogEntry, ADDITION, CHANGE
 from django.contrib.admin import AdminSite
@@ -63,13 +63,25 @@ class Cod_visAdmin(ImportExportModelAdmin):
     list_display = ('id', 'visita', 'tipo')
 
 class EstadoAdmin(ImportExportModelAdmin):
-    pass
+    list_display = ('Estado',)
+
+class ImgAdmin(admin.ModelAdmin):
+    list_display = ('id_guia', 'image', 'fecha')
+
+    def save_model(self, request, obj, form, change):
+        if getattr(obj, 'author', None) is None:
+            obj.user = request.user 
+        obj.save()
 
 admin.site.register(Estado, EstadoAdmin)
 admin.site.register(Servicio)
 admin.site.register(LogEntry, MoniterLog)
 admin.site.register(Cod_vis, Cod_visAdmin)
 admin.site.register(Proceso)
+admin.site.register(img, ImgAdmin)
+
+
+
 
 
 

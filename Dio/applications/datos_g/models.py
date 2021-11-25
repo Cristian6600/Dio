@@ -47,11 +47,11 @@ class Motivo(models.Model):
         verbose_name_plural = "Motivo"
 
 class datos_g (models.Model):
+    id_datos_g = models.AutoField(primary_key=True,)
 
     seudo_dg = models.OneToOneField(
         Guia,
         on_delete=models.CASCADE,
-        primary_key=True,       
     )
 
     fecha = models.DateTimeField(auto_now_add=True,

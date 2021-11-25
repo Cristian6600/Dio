@@ -3,7 +3,7 @@ from django.db.models.query_utils import FilteredRelation
 
 from import_export.admin import ImportExportModelAdmin
 from import_export import resources
-from . models import Paquete, Fisico, Bolsa, Mesa
+from . models import Paquete, Fisico, Bolsa, Mesa, Motivo_mesa
 from django.db import models
 from django.forms import ModelForm
 from django import forms
@@ -46,12 +46,19 @@ class BolsaAdmin(admin.ModelAdmin):
 
 class MesaAdmin(admin.ModelAdmin):
     raw_id_fields = ["guia"]
-    list_display = ('guia', 'observacion')
+    list_display = ('guia', 'id_motivo_m', 'observacion', )
+    search_fields = ('guia__id_guia',)
+    list_filter = ("id_motivo_m",)
+
+class ImgAdmin(admin.ModelAdmin):
+    list_display = ('id_guia','image')
 
 admin.site.register(Paquete, PaqueteAdmin)
 admin.site.register(Fisico, FisicoAdmin)
 admin.site.register(Bolsa, BolsaAdmin)
 admin.site.register(Mesa, MesaAdmin)
+admin.site.register(Motivo_mesa)
+
 
 
 

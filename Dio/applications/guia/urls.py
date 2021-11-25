@@ -22,4 +22,10 @@ urlpatterns = [
         name='producto-crear',
     ),
 
+    path(
+        'add-img/', 
+        views.imaCreateView.as_view(),
+        name='producto-crears',
+    ),
+
     ]

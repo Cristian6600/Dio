@@ -1,6 +1,5 @@
 from django.db import models
 # from applications.base_cliente.models import Bd_clie
-
 # from applications.guia.models import Servicio, Cod_vis, Estado
 from django.conf import settings 
 
@@ -83,9 +82,9 @@ class Fisico(Fisi_pa, Bolsa):
         on_delete=models.CASCADE, 
         blank=True, null=True
         )
-    destinatario = models.CharField(max_length=100)
+    destinatario = models.CharField(max_length=100, blank=True, null=True)
 
-    d_i = models.CharField(max_length=15)
+    d_i = models.CharField(max_length=15, blank = True, null=True)
     
     
     unique_together = ('bolsa', 'seudo')
@@ -96,6 +95,7 @@ class Fisico(Fisi_pa, Bolsa):
     @property
     def cant_vi(self):
         return str(self.cantidad_vi)
+
 
 class Paquete(Fisi_pa):
     
@@ -126,9 +126,18 @@ class Paquete(Fisi_pa):
     def __str__(self):
         return str(self.seudo) 
     
+
+class Motivo_mesa(models.Model):
+    motivo = models.CharField(max_length=100)
+
+    def __str__(self):
+        return str(self.motivo)
+
 class Mesa(models.Model):
     guia = models.ForeignKey(Fisico, on_delete=models.CASCADE)
+    id_motivo_m = models.ForeignKey(Motivo_mesa, on_delete=models.CASCADE, verbose_name= 'motivo')
     observacion = models.CharField(max_length=200)
+    
 
     class Meta:
         verbose_name = 'inconsistencias'
@@ -136,7 +145,9 @@ class Mesa(models.Model):
 
     def __str__(self):
         return str(self.guia)
-    
+
+
+
 
 
 

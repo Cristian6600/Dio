@@ -1,7 +1,7 @@
 from django.db import models
 from django.dispatch import receiver
 from django.db.models.signals import post_save
-
+from PIL import Image
 from applications.base_cliente.models import Bd_clie, Producto, Est_clie
 
 from applications.cliente.models import Ciudad, Cliente
@@ -11,7 +11,7 @@ from applications.fisico.models import Fisico
 from django.utils.encoding import smart_text
 from django.conf import settings 
 
-from PIL import Image
+
 
 # from .managers import ProductManager
 # from simple_history.models import HistoricalRecords
@@ -232,13 +232,15 @@ class Guia(Fisico):
     # def estado_cli(self):
     #     return self.codigo
 
+
+    #Decorador concatenar ruta imagen
     @property
     def img(self):
       return 'guia/' + str(self.id_guia) + '.jpg'
 
-    # """ def save(self, *args, **kwargs):
-    #     self.imagen  = self.img
-    #     super (Guia, self).save() """
+    """ def save(self, *args, **kwargs):
+        self.imagen  = self.img
+        super (Guia, self).save() """
       
     @property
     def userbd(self):
@@ -320,9 +322,37 @@ class Guia(Fisico):
         
     #     post_save.connect(optimize_image, sender = guia)
 
+# def optimize_image(sender, instance, **kwargs):
+#     print("==========")
+#     print(instance)
+#     if instance.image:
+#         image = Image.open(instance.image.path)
+#         image.save(instance.image.path, quality=20, optimize = True)
+        
+# post_save.connect(optimize_image, sender = img)
+    
+    
+class img(models.Model):
+    
+    id_guia = models.OneToOneField('fisico.Fisico', on_delete=models.CASCADE, blank = True, null = True)
 
-class Mesa (models.Model):
-    pass
+    image = models.ImageField(
+        upload_to = 'guia',
+        null=True, 
+        blank = True,   
+    )
+    fecha = models.DateTimeField(
+        auto_now=True
+    )
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE, 
+        blank=True, null=True, 
+        editable=True,
+        verbose_name= 'Usuario'
+    )
+   
+
 
 
 

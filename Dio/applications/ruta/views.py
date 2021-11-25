@@ -51,8 +51,6 @@ class ListEmpleadosPdf(View):
         pdf = render_to_pdf('ruta/empleados.html', data)
         return HttpResponse(pdf, content_type='application/pdf')
 
-
-
 """  aqui empiezan los servicios """
 
 class LenguajeListApiView(ListAPIView):

@@ -2,6 +2,7 @@ from django.db import models
 from django.core.signals import request_finished
 from django.conf import settings
 from django.dispatch import receiver
+from django.conf import settings
 
 from applications.cliente.models import Ciudad
 
@@ -10,7 +11,6 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from .managers import UserManager
 
 from django.db.models.signals import post_save
-
 
 
 class Areas(models.Model):
@@ -87,10 +87,10 @@ class Profile(models.Model):
     def __str__(self):
         return str(self.id)
 
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(id=instance)
+# @receiver(post_save, sender=User)
+# def create_user_profile(sender, instance, created, **kwargs):
+#     if created:
+#         Profile.objects.create(id=instance)
 
 # @receiver(post_save, sender=User)
 # def save_user_profile(sender, instance, **kwargs):
