@@ -5,7 +5,8 @@ from applications.courrier.models import courrier
 from applications.datos_g.models import Motivo
 from applications.fisico.models import Fisico, Bolsa
 from applications.guia.models import Guia
-
+from django import forms
+from django.contrib.admin.widgets import FilteredSelectMultiple
 
 class Cargue(models.Model):
 
@@ -26,8 +27,6 @@ class Cargue(models.Model):
         )
 
     fecha = models.DateTimeField(auto_now=True, verbose_name = 'Fecha de entrega')
-
-    prueba = models.CharField(max_length= 30, blank = True, null=True)
     
     class Meta: 
         verbose_name = "Cargue"

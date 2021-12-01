@@ -4,29 +4,34 @@ from .models import Cargue, Recepcion
 from applications.guia.models import Guia
 from django.core.exceptions import NON_FIELD_ERRORS
 from django.utils.translation import gettext_lazy as _
+from django.contrib.admin.widgets import FilteredSelectMultiple
 
 from .models import Programador, Lenguaje
 
 class CargueForm(forms.ModelForm):
 
     class Meta:
-        error_messages = {
-            NON_FIELD_ERRORS: {
-                'unique_together': "%(model_name)s's %(field_labels)s are not unique.",
-            }
-        }
         model = Cargue
-        fields = [
-            'guia', 
-            'mensajero',
-        ]
+        fields = (
+            'mensajero', 
+            'guia',
+        )
+
         widgets = {
             'guia': forms.SelectMultiple(
                 attrs = {
-                    'placeholder': 'Codigo de barras',
+                    'placeholder': 'Codigo se barrras Seudo...',
                     'class': 'input-group-field',
+                    
                 }
-            ),}
+            ),
+            'mensajero': forms.Select(
+                attrs = {
+                'class': 'input-group-field',
+                }
+            ),
+            }
+        
               
 # form = CargueForm()
 # article = Cargue.objects.get(pk=1)

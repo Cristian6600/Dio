@@ -7,6 +7,8 @@ from .serializers import (
     ProgramadorSerializer
 )
 
+from applications.fisico.models import Fisico
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.http import HttpResponse
@@ -59,8 +61,8 @@ class LenguajeListApiView(ListAPIView):
     def get_queryset(self):
         kword = self.request.query_params.get('kword', '')
 
-        return Lenguaje.objects.filter(
-            languages__icontains=kword
+        return Fisico.objects.filter(
+            id_guia__icontains=kword
         )
 
 class RegistrarProgramador(CreateAPIView):

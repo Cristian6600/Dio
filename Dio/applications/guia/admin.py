@@ -4,7 +4,7 @@ from related_admin import RelatedFieldAdmin
 from import_export import resources
 from django.contrib.admin.models import ADDITION, LogEntry
 
-from . models import Estado, Servicio, Cod_vis, Proceso, Guia, img
+from . models import Estado, Servicio, Cod_vis, Proceso, Guia, img, Feed, FeedFile
 from django.utils.html import format_html
 from django.contrib.admin.models import LogEntry, ADDITION, CHANGE
 from django.contrib.admin import AdminSite
@@ -31,10 +31,10 @@ class guiaAdmin(ImportExportModelAdmin, RelatedFieldAdmin):
         ('cantidad_vi', 'cantidad', 'codigo', ), 'suma', 'imagen' ]}) 
     ]
 #     # raw_id_fields = ("mot",)
-    search_fields = ('id_guia', 'seudo__seudo_bd')
-    list_display = ('id_guia', 'seudo', 'direccion', 'id_ciu', 'fecha', 'user', 'destinatario', 'imagen',)
+    search_fields = ('id_guia', 'seudo__seudo_bd', 'mot__motivo',)
+    list_display = ('id_guia', 'mot__motivo', 'd_i', 'seudo', 'direccion', 'id_ciu', 'fecha', 'user', 'destinatario', 'imagen',)
 
-    list_filter = ('user', 'id_ciu__departamento','fecha')
+    list_filter = ('user', 'id_ciu__departamento','fecha', 'mot__motivo',)
 #     # readonly_fields = ('fecha', 'cantidad', 'user')
 #     actions = None
 #     # raw_id_fields = ("id",)
@@ -73,6 +73,7 @@ class ImgAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_filter = ('fecha',)
     date_hierarchy = ('fecha')
     
+    
     # def save_model(self, request, obj, form, change):
     #     if getattr(obj, 'author', None) is None:
     #         obj.user = request.user 
@@ -84,19 +85,6 @@ admin.site.register(LogEntry, MoniterLog)
 admin.site.register(Cod_vis, Cod_visAdmin)
 admin.site.register(Proceso)
 admin.site.register(img, ImgAdmin)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+admin.site.register(Feed)
+admin.site.register(FeedFile)
 

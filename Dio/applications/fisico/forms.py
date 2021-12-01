@@ -10,13 +10,38 @@ class ProductForm(forms.ModelForm):
             'seudo'            
         )
 
+        widgets = {
+            'bolsa': forms.TextInput(
+                attrs = {
+                    'placeholder': 'Codigo de barras Bolsa', 'autofocus': 'autofocus',
+                    'class': 'input-group-field',
+                }
+            ),
+
+            'seudo': forms.TextInput(
+                attrs = {
+                    'placeholder': 'Codigo se barrras Seudo...',
+                    'class': 'input-group-field',
+                    
+                }
+            ),
+
+        }
+
+    def clean_Bolsa(self):
+        bolsa = self.cleaned_data['bolsa']
+        if len(bolsa) < 5:
+            raise forms.ValidationError('Ingrese codigo de barras correcto')
+
+        return bolsa
+
+        
     def clean_Seudo(self):
         Seudo = self.cleaned_data['Seudo']
         if len(Seudo) < 22:
             raise forms.ValidationError('Ingrese un codigo de barras correcto')
 
         return Seudo
-
 # class FisicoForm(forms.ModelForm):
 
 #     class Meta:

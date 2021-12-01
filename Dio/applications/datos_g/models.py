@@ -47,9 +47,9 @@ class Motivo(models.Model):
         verbose_name_plural = "Motivo"
 
 class datos_g (models.Model):
-    id_datos_g = models.AutoField(primary_key=True,)
+    id_datos_g = models.CharField(primary_key=True, max_length=30)
 
-    seudo_dg = models.OneToOneField(
+    seudo_dg = models.ForeignKey(
         Guia,
         on_delete=models.CASCADE,
     )

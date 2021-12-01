@@ -1,18 +1,18 @@
 #
 from rest_framework import serializers
 #
-from .models import Lenguaje, Programador
+from .models import Cargue, Fisico
 
 class LenguajeSerializer(serializers.ModelSerializer):
 
   class Meta:
-    model = Lenguaje
+    model = Fisico
     fields = ('__all__')
 
 
 
 class ProgramadorSerializer(serializers.ModelSerializer):
-  
+  guia = LenguajeSerializer(many=False)
   class Meta:
-    model = Programador
-    fields = ('__all__')
+    model = Cargue
+    fields = ('mensajero', 'guia')

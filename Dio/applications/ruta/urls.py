@@ -25,5 +25,17 @@ urlpatterns = [
         views.LenguajeListApiView.as_view(),
         name='lenguaje-buscar',
     ),
+
+    path(
+        'api/programador/register/', 
+        views.RegistrarProgramador.as_view(),
+        name='programador-register',
+    ),
+
+    path(
+        'api/programador/register/', 
+        views.RegistrarProgramador.as_view(),
+        name='programador-register',
+    ),
     
     ]

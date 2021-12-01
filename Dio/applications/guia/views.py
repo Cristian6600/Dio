@@ -3,6 +3,8 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.shortcuts import render
 
+from django.contrib.auth.decorators import login_required, permission_required
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.urls import reverse_lazy
@@ -28,17 +30,18 @@ class bolsaCreateView(CreateView):
     form_class = guiafisicoForm
     success_url = '.'
 
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
-        return super(bolsaCreateView, self).form_valid(form)
+    # def form_valid(self, form):
+    #     self.object = form.save(commit=False)
+    #     self.object.user = self.request.user
+    #     self.object.save()
+    #     return super(bolsaCreateView, self).form_valid(form)
 
 class ImgCreateView(CreateView):
     template_name = "guia/img_prueba.html"  
     form_class = ImgForm
     success_url = '.'
 
+@login_required
 def handleMultipleImagesUpload(request):
         if request.method == "POST":
             images = request.FILES.getlist('images')
@@ -49,5 +52,7 @@ def handleMultipleImagesUpload(request):
             uploaded_images = img.objects.all()
             return JsonResponse({"images": [{"url": image.image.url} for image in uploaded_images]})
         return render(request, "index.html")    
+
+
     
 

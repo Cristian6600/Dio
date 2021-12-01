@@ -15,6 +15,7 @@ class datos_gAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = datos_gResource
     list_per_page = 8
     list_per_page = 12
+    search_fields = ("id_datos_g",)
     # fields =  (
     #     ('id',),
     #     ('d_i', 'id_ciu'),
@@ -22,7 +23,7 @@ class datos_gAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     #     ('barrio', 'marca'),
     #     ('id_pro', 'mot')
     #     )
-    list_display = ('direccion', 'd_i', 'id_ciu', 'barrio', 'fecha', )
+    list_display = ('id_datos_g', 'direccion', 'd_i', 'id_ciu', 'barrio', 'fecha', )
 
     icon_name  =  'directions'
 

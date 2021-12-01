@@ -2,8 +2,11 @@ from django.db import models
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from PIL import Image
+
+
 from applications.base_cliente.models import Bd_clie, Producto, Est_clie
 
+from applications.users.models import User
 from applications.cliente.models import Ciudad, Cliente
 
 from applications.fisico.models import Fisico
@@ -345,28 +348,42 @@ class img(models.Model):
         on_delete=models.CASCADE, 
         blank=True, null=True, 
         editable=True,
-        verbose_name= 'Usuario'
+        verbose_name= 'Usuario',
+        related_name='edited_by'
+        
     )
+    
     numero = models.CharField(max_length=30, blank=True, null=True)
+
+    class Meta:
+        verbose_name = "Imagenes Guia"
+        verbose_name_plural = "Imagenes Guia"
 
     @property
     def fe(self):
         return str(self.image)
 
-    def save(self, *args, **kwargs):
+    # @receiver(post_save, sender=User)
+    def save(self, *args, **kwargs, ):
+        
         self.id_guia_id = (self.fe[-14:-4])
-        # self.id_guia.imagen =  str(self.fe)
+        self.id_guia.imagen =  str(self.fe)
+        
         self.id_guia.save()     
         super (img, self).save(*args, **kwargs)
+ 
+class Feed(models.Model):
+    user=models.ForeignKey(User, on_delete=models.CASCADE, related_name='feeds')
+    text=models.TextField(blank=False, max_length=500)
 
 
-
-
-
-
+class FeedFile(models.Model):
+    file = models.FileField(upload_to="files/%Y/%m/%d")
+    feed = models.ForeignKey(Feed, on_delete=models.CASCADE, related_name='files')
+ 
     
 
+    
+    
 
-
-
-   
+    

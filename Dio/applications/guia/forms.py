@@ -8,8 +8,26 @@ class guiafisicoForm(forms.ModelForm):
         model = Guia
         fields = (
             'bolsa',
-            'seudo'            
+            'seudo',        
         )
+
+        widgets = {
+            'bolsa': forms.TextInput(
+                attrs = {
+                    'placeholder': 'Codigo de barras Bolsa',
+                    'autofocus': 'autofocus',
+                    'class': 'input-group-field',
+                }
+            ),
+
+            'seudo': forms.TextInput(
+                attrs = {
+                    'placeholder': 'Codigo se barrras Seudo...',
+                    'class': 'input-group-field',
+                }
+            ),
+
+        }
 
     def clean_Bolsa(self):
         bolsa = self.cleaned_data['bolsa']
@@ -27,11 +45,13 @@ class guiafisicoForm(forms.ModelForm):
         return Seudo
 
 class ImgForm(forms.ModelForm):
-
+    
     class Meta:
         model = img
         fields = (
             'image',
         )
+
+    
 
     
