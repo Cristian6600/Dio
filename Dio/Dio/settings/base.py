@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'material.admin',
     # 'simple_history',
     'import_export',
+
     # 'grappelli',
     'rest_framework',
     'related_admin',

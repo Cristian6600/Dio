@@ -78,12 +78,11 @@ class Recepcion(models.Model):
     )
 
     guia = models.ManyToManyField(
-        Fisico, 
+        Fisico,
+        through= 'Recep_guia', 
+        blank = True, 
         
     )
-
-    # bolsa = models.ForeignKey(Bolsa, on_delete=models.CASCADE, related_name='Bolsas', blank = True, null = True
-    # )
 
     fecha = models.DateTimeField(
         auto_now=True 
@@ -109,30 +108,30 @@ class Recepcion(models.Model):
         
     # def save(self, *args, **kwargs):
 
-    #     # self.guia.mot = self.varu
+    #     self.guia.mot = self.varu
     
     #     self.guia.save()
 
     #     super(Recepcion, self).save(*args, **kwargs)
 
-# class Recep_guia(models.Model):
+class Recep_guia(models.Model):
 
-#     recepcions_id = models.AutoField(primary_key=True)
+    recepcions_id = models.AutoField(primary_key=True)
 
-#     recepcion= models.ForeignKey(
-#     'Recepcion',
-#     on_delete=models.CASCADE, 
+    recepcion= models.ForeignKey(
+    'Recepcion',
+    on_delete=models.CASCADE, 
     
-#     )
+    )
 
-#     guiad = models.ForeignKey(
-#     Fisico, 
-#     on_delete=models.CASCADE,
+    guiad = models.ForeignKey(
+    Fisico, 
+    on_delete=models.CASCADE,
     
-#     )
+    )
 
-#     def __str__(self):
-#         return str(self.id)
+    def __str__(self):
+        return str(self.recepcions_id)
 
     # @property
     # def estados(self):
@@ -158,7 +157,6 @@ class Recepcion(models.Model):
 
         # super(Recep_guia,  self).save(*args, **kwargs)
 
-from django.db import models
 
 
 class Lenguaje(models.Model):
@@ -171,7 +169,6 @@ class Lenguaje(models.Model):
 
     def __str__(self):
         return str(self.id) + ' ' + self.languages
-
 
 class Programador(models.Model):
 

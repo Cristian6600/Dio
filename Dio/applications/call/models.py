@@ -76,16 +76,30 @@ class Pregunta(models.Model):
         return self.pregunta
 
 class Auditoria(models.Model):
+    calificacionn_5 = [
+        (1, '1'),
+        (2, '2'),
+        (3, '3'),
+        (4, '4'),
+        (5, '5'),
+    ]
     entregas = models.ForeignKey(Guia, on_delete=models.CASCADE)
     telefono = models.ForeignKey(Telefono, on_delete=models.CASCADE)
-    pregunta_1= models.OneToOneField(Pregunta, on_delete=models.CASCADE, default = 1, blank = True, null = True)
+    pregunta_1= models.ForeignKey(Pregunta, on_delete=models.CASCADE, default = 1, blank = True, null = True)
     calificacion_1 = models.ForeignKey(calificacion, on_delete=models.CASCADE, related_name = 'calificacion_1')
-    pregunta_2= models.OneToOneField(Pregunta, on_delete=models.CASCADE, related_name="Pregunta_2", default= 2, blank = True, null = True)
+    pregunta_2= models.ForeignKey(Pregunta, on_delete=models.CASCADE, related_name="Pregunta_2", default= 2, blank = True, null = True)
     calificacion_2 = models.ForeignKey(calificacion, on_delete=models.CASCADE, related_name = 'calificacion_2')
-    pregunta_3= models.OneToOneField(Pregunta, on_delete=models.CASCADE, related_name="Pregunta_3", default = 3)
+    pregunta_3= models.ForeignKey(Pregunta, on_delete=models.CASCADE, related_name="Pregunta_3", default = 3)
     calificacion_3 = models.ForeignKey(calificacion, on_delete=models.CASCADE, related_name = 'calificacion_3')
-    pregunta_4= models.OneToOneField(Pregunta, on_delete=models.CASCADE, related_name="Pregunta_4", default = 4)
+    pregunta_4= models.ForeignKey(Pregunta, on_delete=models.CASCADE, related_name="Pregunta_4", default = 4)
     calificacion_4 = models.ForeignKey(calificacion, on_delete=models.CASCADE, related_name = 'calificacion_4')
+    
+    pregunta_5= models.ForeignKey(Pregunta, on_delete=models.CASCADE, related_name="Pregunta_5", default = 5)
+    
+    calificacion_5 = models.CharField(
+        max_length=2,
+        choices=calificacionn_5,
+    )
     observacion = models.CharField(max_length = 30)
     fecha = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(
@@ -95,7 +109,6 @@ class Auditoria(models.Model):
         editable=True,
         verbose_name= 'Usuario'
     )
-
 
     def __str__(self):
         return str(self.entregas)

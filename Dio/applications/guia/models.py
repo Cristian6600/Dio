@@ -204,13 +204,18 @@ class Guia(Fisico):
         null=True
         )
 
+    or_imp = models.IntegerField(
+        blank=True,
+        null=True
+        )
+
     class Meta:
         verbose_name = "Guia"
         verbose_name_plural = "Guia"
         ordering = ['-id_guia']
 
         def __str__(self):
-            return str(self.seudo)
+            return str(self.seudo) + self.destinatario
 
     objects = LogEntryManager()
 

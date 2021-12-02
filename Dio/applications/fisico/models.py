@@ -91,7 +91,9 @@ class Fisico(Fisi_pa, Bolsa):
         null=True, 
         blank = True,   
     )
-    
+    fe_entrega = models.DateTimeField(blank=True, null=True)
+
+
     
     unique_together = ('bolsa', 'seudo')
 

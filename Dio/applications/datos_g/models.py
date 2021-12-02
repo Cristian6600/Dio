@@ -136,11 +136,17 @@ class datos_g (models.Model):
         blank = True,
         verbose_name = 'Estado'
     )
-    lote = models.IntegerField(blank=True, null=True)
+    lote = models.IntegerField(
+        blank=True, 
+        null=True)
 
     cantidad = models.IntegerField(blank=True, null=True)
 
-    orimp = models.IntegerField(blank=True, null=True)
+    orimp = models.IntegerField(
+        blank=True,
+        null=True,
+        verbose_name = 'Orden impre '
+        )
 
     zona = models.CharField(max_length=30, blank=True, null=True)
         
@@ -187,6 +193,10 @@ class datos_g (models.Model):
     def documento(self):
         return (self.d_i)
 
+    @property
+    def or_imp(self):
+        return self.orimp
+
     def save(self, *args, **kwargs):
         # self.seudo.bolsa  = self.vars
         self.seudo_dg.destinatario = self.desti
@@ -198,6 +208,7 @@ class datos_g (models.Model):
         self.seudo_dg.mot = self.motivo
         self.seudo_dg.id_est = self.id_est
         self.seudo_dg.d_i = self.documento
+        self.seudo_dg.or_imp = self.or_imp
         
         self.seudo_dg.save()
 
