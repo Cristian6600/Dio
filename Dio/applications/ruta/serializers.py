@@ -10,7 +10,6 @@ class LenguajeSerializer(serializers.ModelSerializer):
     fields = ('__all__')
 
 
-
 class ProgramadorSerializer(serializers.ModelSerializer):
   guia = LenguajeSerializer(many=False)
   class Meta:

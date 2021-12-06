@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.postgres.fields import ArrayField
 from applications.guia.models import  Estado
 from applications.courrier.models import courrier
 from applications.datos_g.models import Motivo
@@ -78,11 +78,12 @@ class Recepcion(models.Model):
     )
 
     guia = models.ManyToManyField(
-        Fisico,
-        through= 'Recep_guia', 
-        blank = True, 
+        Fisico, through='Recep_guia'
         
     )
+
+    # bolsa = models.ForeignKey(Bolsa, on_delete=models.CASCADE, related_name='Bolsas', blank = True, null = True
+    # )
 
     fecha = models.DateTimeField(
         auto_now=True 
@@ -108,7 +109,7 @@ class Recepcion(models.Model):
         
     # def save(self, *args, **kwargs):
 
-    #     self.guia.mot = self.varu
+    #     # self.guia.mot = self.varu
     
     #     self.guia.save()
 
@@ -157,6 +158,7 @@ class Recep_guia(models.Model):
 
         # super(Recep_guia,  self).save(*args, **kwargs)
 
+from django.db import models
 
 
 class Lenguaje(models.Model):
@@ -169,6 +171,7 @@ class Lenguaje(models.Model):
 
     def __str__(self):
         return str(self.id) + ' ' + self.languages
+
 
 class Programador(models.Model):
 

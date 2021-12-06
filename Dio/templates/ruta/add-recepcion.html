@@ -16,18 +16,65 @@
 
             <label for="id_guia">Guia:</label> 
     
-            <table>
-                <td> <input type="number" placeholder="Código Barras" name="guia" required="" id="id_guia"  ></td>
-                <td><input type="number" placeholder="Código Barras" name="guia" required="" id="id_guia" ></td>
-                <td><input type="number" placeholder="Código Barras" name="guia" required="" id="id_guia" ></td>
-                <td><input type="number" placeholder="Código Barras" name="guia" required="" id="id_guia" ></td>
-                <td><input type="number" placeholder="Código Barras" name="guia" required="" id="id_guia" ></td>
-                <td> <input type="number" placeholder="Código Barras" name="guia" required="" id="id_guia" ></td>
-                    
-            </table>
-
            
             <center>   <button type="submit" class="success button" style="width: 200px;">Guardar</button></center>
+
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<div class="container1">
+    <button class="add_form_field">Add New Field &nbsp; 
+      <span style="font-size:16px; font-weight:bold;">+ </span>
+    </button>
+    <div><input type="text" maxlength="10" placeholder="Código Barras" name="guia" id="idGuia_0" autofocus onkeypress="nextFocus(event)"></div>
+</div>
+
+<script>
+    $(document).ready(function() {
+    var max_fields = 100;
+    var wrapper = $(".container1");
+    var add_button = $(".add_form_field");
+
+    var x = 1;
+    $(add_button).click(function(e) {
+        e.preventDefault();
+        if (x < max_fields) {
+            id_element =  "idGuia_"+x;
+            x++;
+
+            $(wrapper).append('<div><input type="text" maxlength="10" placeholder="Código Barras" name="guia" id="'+ id_element+'" onkeypress="nextFocus(event)" /><a href="#" class="delete">Delete</a></div>'); //add input box
+        } else {
+            alert('You Reached the limits')
+        }
+    });
+
+    $(wrapper).on("click", ".delete", function(e) {
+        e.preventDefault();
+        $(this).parent('div').remove();
+        x--;
+    })
+
+
+    
+});
+
+document.querySelector('form').onkeypress = ()=> {
+    if (event.keyCode == 13) {
+        event.preventDefault();
+    }
+
+};
+
+function nextFocus(eventParameter) {
+    console.log("Event KeyCode",event.keyCode);
+    guiaStr = "idGuia_"
+    id = + event.srcElement.id.replace(guiaStr,'');
+    nexId = id+1;
+    nextInput = document.getElementById(guiaStr + nexId);
+    if (event.keyCode == 13 && nextInput ) {
+        event.preventDefault();
+        nextInput.focus();
+    }
+}
+</script>
     
 
 {% endblock panel-content %}

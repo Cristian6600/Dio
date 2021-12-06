@@ -21,7 +21,7 @@ class guiaResource(resources.ModelResource):
         export_order = ('seudo__id_pro__producto', 'seudo__d_i', 'seudo__cliente', 'direccion', 'bolsa', 'id_guia', 'proceso__proceso', 'id_ciu__ciudad', 'fecha', 'seudo' )
 @admin.register(Guia)
 class guiaAdmin(ImportExportModelAdmin, RelatedFieldAdmin):
-    date_hierarchy = ('fe_entrega')
+    # date_hierarchy = ('fe_entrega')
     list_per_page = 5
     raw_id_fields = ["seudo", "mot", "id_est", "cod_vis"]
     # change_list_template = 'admin/guia/guia_change_list.html'
@@ -33,7 +33,7 @@ class guiaAdmin(ImportExportModelAdmin, RelatedFieldAdmin):
     ]
 #     # raw_id_fields = ("mot",)
     search_fields = ('id_guia', 'seudo__seudo_bd', 'mot__motivo',)
-    list_display = ('id_guia', 'mot__motivo', 'd_i', 'seudo', 'direccion', 'id_ciu', 'fecha', 'fe_entrega', 'user', 'destinatario', 'imagen')
+    list_display = ('id_guia', 'mot__motivo', 'd_i', 'seudo', 'direccion', 'id_ciu', 'fecha', 'user', 'destinatario', 'imagen')
 
     list_filter = ('user', 'id_ciu__departamento','fecha', 'mot__motivo', 'estado')
 #     # readonly_fields = ('fecha', 'cantidad', 'user')
