@@ -3,23 +3,21 @@ from related_admin import RelatedFieldAdmin
 from import_export.admin import ImportExportModelAdmin
 from import_export import resources
 from import_export.fields import Field
-from . models import Cargue, Recepcion, Planilla, Lenguaje, Programador, Recep_guia
+from . models import Cargue, Recepcion, Planilla, Recep_guia
 from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.utils.text import format_lazy
+from applications.fisico.models import Fisico
 
 from django import forms
 
 # class MyForm(forms.ModelForm):
 #     pass
 
-class Recep_Guiainline(admin.TabularInline):
-    '''Tabular Inline View for '''
-
-    model = Recep_guia
-    raw_id_fields = ["guiad"]
-
+class Recepinline (admin.StackedInline):
+    model = Fisico
+    fields = ('recepcion',)
+    raw_id_fields = ["recepcion"]
     
-
 class Planillainline (admin.StackedInline):
     model = Planilla
     extra = 4
@@ -77,24 +75,23 @@ class PlanillaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 
 @admin.register(Recepcion)
 class RecepcionAdmin(RelatedFieldAdmin):
-    pass
-    inlines = [Recep_Guiainline,]
+    fields = (('planilla', 'motivo'), 'estado', 'guia')
+    # inlines = [Recepinline ,]
     raw_id_fields = ["motivo"]
-    filter_vertical = ('guia',) 
+    # filter_vertical = ('guia',) 
     list_display = (
-        'id','planilla', 'motivo', 'fecha', 'motivo__id', )
+        'guia','planilla', 'motivo', 'fecha', 'motivo__id', )
 
-    
-        
-    
     # readonly_fields = ('estado',)
-    # search_fields = ['planilla__id',]
+    # search_fields = ['Recepinline',]
     # list_editable = ('motivo',)
     # list_filter = ('fecha',)
     # raw_id_fields = ("motivo",)
 
-admin.site.register(Lenguaje)
-admin.site.register(Programador)
+@admin.register(Recep_guia)
+class Recep_guiaAdmin(admin.ModelAdmin):
+    pass
+
 
 
     

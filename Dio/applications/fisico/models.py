@@ -92,7 +92,6 @@ class Fisico(Fisi_pa, Bolsa):
         blank = True,   
     )
     
-    
     unique_together = ('bolsa', 'seudo')
 
     def __str__(self):
@@ -101,7 +100,6 @@ class Fisico(Fisi_pa, Bolsa):
     @property
     def cant_vi(self):
         return str(self.cantidad_vi)
-
 
 class Paquete(Fisi_pa):
     
@@ -117,7 +115,6 @@ class Paquete(Fisi_pa):
     
     unique_together = ('bolsa', 'seudo')
 
-    
     @property
     def var(self):
       return (self.bolsa)
@@ -144,7 +141,6 @@ class Mesa(models.Model):
     id_motivo_m = models.ForeignKey(Motivo_mesa, on_delete=models.CASCADE, verbose_name= 'motivo')
     observacion = models.CharField(max_length=200)
     
-
     class Meta:
         verbose_name = 'inconsistencias'
         verbose_name_plural = 'inconsistencias'

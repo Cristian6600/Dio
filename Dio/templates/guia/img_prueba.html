@@ -4,10 +4,19 @@
 
 {% block panel-content %}
 
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-  <input type="file" name="images" multiple>
-  <button type="submit">Cargar</button>
-</form>
+<div class="grid-x grid-margin-x align-center">
+  <h3 class="cell" style="margin-bottom: 2em; text-align: center;">Cargue de imagenes</h3>  
+<body>
+  
+  <div>
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %} 
+    <input type="file" class="hidden-input" name="images" multiple>
+  
+    <button type="submit" class="success button" style="width: 200px;">Guardar</button>
+  
+  </form>
+</div>
+
 
 {% endblock panel-content %}

@@ -1,0 +1,94 @@
+{% extends "programador/base_programador.html" %}
+
+{% load  static %}
+
+{% block content %}
+
+<div class="container" style="padding: 4em;">
+  <h3 class="text-center text-success">Registrar Planilla</h3>
+  <div id="app" class="row justify-content-md-center">
+    <div class="col-lg-7">
+      <div class="row">
+        <div class=" col-lg-6 form-group">
+          <label>Mensajero</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            placeholder="nombres"
+            v-model="full_name">
+        </div>
+        <div class=" col-lg-6 form-group">
+          <label>Ocupacion</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            placeholder="ocupation"
+            v-model="ocupation">
+        </div>
+        <div class=" col-lg-6 form-group">
+          <label>Edad</label>
+          <input 
+            type="number" 
+            class="form-control" 
+            value="10"
+            v-model="age">
+        </div>
+        
+        <p class="col-lg-12 text-success">
+          Agregar Lenguajes y Framework Favoritos:
+        </p>
+        <div class="col-md-12 col-lg-12 form-group">
+          <input 
+            type="text" 
+            class="form-control" 
+            placeholder="busca.."
+            id="txtSearch"
+            v-model="kword" onkeypress="return searchKeyPress(event);">
+            <script>
+              function searchKeyPress(e)
+              {
+                  // look for window.event in case event isn't passed in
+                  e = e || window.event;
+                  if (e.keyCode == 13)
+                  {
+                      document.getElementById('btnSearch').click();
+                      return false;
+                  }
+                  return true;
+              }
+              </script>
+        </div>
+        <button class="col btn btn-success" v-for="lenguaje in lista_lenguajes" id="btnSearch" onclick="doSomething();"
+             @click="AgregarLenguaje(lenguaje)"> </button>
+
+
+        <!-- aqui comienza la lista de resultados seleccioandos -->
+        <div class="col-lg-6">
+          <span 
+            class="badge badge-primary"
+            v-for="lenguaje in lista_agregados">
+            {$ lenguaje.languages $}
+          </span>
+        </div>
+
+        <!-- aqui comienza la lista de frameworks -->
+        <ul class="col-lg-12 list-group">
+          <li 
+            v-for="lenguaje in lista_lenguajes"
+            :key="lenguaje.id"
+            class="list-group-item"
+            @click="AgregarLenguaje(lenguaje)" >{$  lenguaje.languages $}</li>
+        </ul>
+
+        <div class="col">
+          <button 
+            class="col btn btn-success"
+            @click="RegistrarProgramador()">Registrar</button>
+        </div>
+
+        
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

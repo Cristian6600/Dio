@@ -1,80 +1,82 @@
-{% extends "fisico/base_fisico.html" %} 
+{% extends "ruta/base_cargue.html" %} 
 
 {% load static %}
 
 {% block panel-content %}
 
 <div class="grid-x grid-margin-x align-center">
-    <h3 class="cell" style="margin-bottom: 2em; text-align: center;">Ingreso de paquete</h3>  
+    <h3 class="cell" style="margin-bottom: 2em; text-align: center;">Recepcion</h3>  
     <form class="cell medium-9 grid-x grid-margin-x" method="POST">{% csrf_token %}
 
-        <label for="id_planilla">Planilla:</label>    
-            {{form.planilla}}
+            <div class="cell medium-6">
+                <label>Planilla:</label>
+                <div class="input-group">
+                    <span class="input-group-label"><i class="fi-archive"></i></span>
+                    {{form.planilla}}
+                </div>
+            </div>
+        
+            <div class="cell medium-6">
+                <label>Motivo:</label>
+                <div class="input-group">
+                  <span class="input-group-label"><i class="fi-archive"></i></span>
+                  {{form.motivo}}
+                </div>
+            </div>
 
-            <label for="id_motivo">Motivo:</label> 
-            {{form.motivo}}
+            <div class="cell medium-6">
+                <label>Estado:</label>
+                <div class="input-group">
+                  <span class="input-group-label"><i class="fi-archive"></i></span>
+                      {{form.estado}}
+                </div>
+            </div>
+        
+            <div class="cell medium-6">
+                <label>Guia:</label>
+                <div class="input-group">
+                   
+                    <input type="text" maxlength="10" placeholder="Barcode Guia" name="guia" id="idGuia_0" autofocus >
+            </div>
+                </div>
 
-            <label for="id_guia">Guia:</label> 
-    
-           
-            <center>   <button type="submit" class="success button" style="width: 200px;">Guardar</button></center>
+            
+            <div class="cell medium-6"></div>
+                <button type="submit" class="success button" style="width: 200px;">Guardar</button>
+    </div>
+    </form>   
+</div>   
 
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<div class="container1">
-    <button class="add_form_field">Add New Field &nbsp; 
-      <span style="font-size:16px; font-weight:bold;">+ </span>
-    </button>
-    <div><input type="text" maxlength="10" placeholder="Código Barras" name="guia" id="idGuia_0" autofocus onkeypress="nextFocus(event)"></div>
-</div>
+    <div class="grid-x grid-margin-x">
+        <div class="cell grid-x grid-margin-x">
+        <div class="cell grid-x grid-margin-x" style="margin-top: 2em;">
+            <table class="hover"  >
+                <thead>
+                    <th>planilla</th>
+                    <th>motivo</th>
+                    <th>estado</th>
+                    <th>guia</th>
+                    
+                </thead>
+                <tbody>
+                    {% for e in object_list %}
+                    <tr>
+                        <td>{{e}}</td>
+                        <td>{{e.planilla}}</td>
+                        <td>{{e.motivo}}</td>
+                        <td>{{e.estado}}</td>
+                        <td>{{e.guia}}</td>
+                        
+                        
+                    </tr>
+                    
+                    {% endfor %}
+                </tbody>
+            </table>
 
-<script>
-    $(document).ready(function() {
-    var max_fields = 100;
-    var wrapper = $(".container1");
-    var add_button = $(".add_form_field");
+        
 
-    var x = 1;
-    $(add_button).click(function(e) {
-        e.preventDefault();
-        if (x < max_fields) {
-            id_element =  "idGuia_"+x;
-            x++;
-
-            $(wrapper).append('<div><input type="text" maxlength="10" placeholder="Código Barras" name="guia" id="'+ id_element+'" onkeypress="nextFocus(event)" /><a href="#" class="delete">Delete</a></div>'); //add input box
-        } else {
-            alert('You Reached the limits')
-        }
-    });
-
-    $(wrapper).on("click", ".delete", function(e) {
-        e.preventDefault();
-        $(this).parent('div').remove();
-        x--;
-    })
-
-
-    
-});
-
-document.querySelector('form').onkeypress = ()=> {
-    if (event.keyCode == 13) {
-        event.preventDefault();
-    }
-
-};
-
-function nextFocus(eventParameter) {
-    console.log("Event KeyCode",event.keyCode);
-    guiaStr = "idGuia_"
-    id = + event.srcElement.id.replace(guiaStr,'');
-    nexId = id+1;
-    nextInput = document.getElementById(guiaStr + nexId);
-    if (event.keyCode == 13 && nextInput ) {
-        event.preventDefault();
-        nextInput.focus();
-    }
-}
-</script>
-    
 
 {% endblock panel-content %}
+
+

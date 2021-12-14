@@ -23,13 +23,8 @@ urlpatterns = [
     ),
 
 
-    # path(
-    #     'add-img/', 
-    #     views.handleMultipleImagesUpload.as_view(),
-    #     name='img-crear',
-    # ),
+    path('nam', views.handleMultipleImagesUpload, name = "upload-multiple")
 
 
-   
 
     ]

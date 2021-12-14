@@ -6,15 +6,16 @@
 
 
 <div class="grid-x grid-margin-x align-center">
-    <h3 class="cell" style="margin-bottom: 2em; text-align: center;">Ingreso de Fisico</h3>  
+    <h3 class="cell" style="margin-bottom: 2em; text-align: center;">Ingreso de Fisicos</h3>  
     <form class="cell medium-9 grid-x grid-margin-x" method="POST">{% csrf_token %}
 
         <div class="cell medium-6">
             <label>Bolsa:</label>
             <div class="input-group">
-              <span class="input-group-label"><i class="fi-archive"></i></span>
-              {{form.bolsa}}
+              
+              <input type="text" maxlength="10" placeholder="Barcode Bolsa" name="bolsa" id="bolsa" autofocus >
             </div>
+        
             {% for error in form.bolsa.errors %}
               <p class="cell" style="color: red;">
                 {{ error|escape }}
@@ -25,8 +26,8 @@
         <div class="cell medium-6">
             <label>Seudo:</label>
             <div class="input-group">
-              <span class="input-group-label"><i class="fi-filter"></i></span>
-              {{form.seudo}}
+              
+              <input type="text" placeholder="Barcode Guia" name="seudo" id="seudo" >
             </div>
             {% for error in form.seudo.errors %}
               <p class="cell" style="color: red;">
@@ -37,13 +38,38 @@
         <div class="cell medium-6">
             <button type="submit" class="success button" style="width: 200px;">Guardar</button>
     
-    
-        </div>
-    </form>                 
-    
-</div>
+          </div>
+        </form>                 
+        
+        </div>  
 
-            
+<div class="cell grid-x grid-margin-x">
+  <h5 class="cell" style="text-align: center;">Fisicos Registrados</h5>
+  <div class="cell">
+    <table>
+      <thead>
+          <th>Guia</th>
+          <th>Seudo</th>
+          <th>Bolsa</th>
+          <th>Usuario</th>
           
+      </thead>
+      <tbody>
+          {% for guia in stu %}
+          <tr>
+              <td>{{guia}}</td>
+              <td>{{guia.seudo}}</td>
+              <td>{{guia.bolsa}}</td>
+              <td>{{guia.user}}</td>
+              
+          </tr>
+          
+          {% endfor %}
+      </tbody>
+  </table>
+  </div>
+
+
+  
         
         {% endblock panel-content %}

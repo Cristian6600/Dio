@@ -199,7 +199,7 @@ class Guia(Fisico):
         )
     
     codigo = models.CharField(
-        max_length=10,
+        max_length=28,
         blank=True, 
         null=True
         )
@@ -261,6 +261,11 @@ class Guia(Fisico):
     @property
     def moti(self):
         return str(self.mot)
+
+    @property
+    def motis(self):
+        return str(self.mot)
+
     
     @property
     def estados(self):
@@ -272,7 +277,7 @@ class Guia(Fisico):
 
     @property
     def concatenar(self):
-        return  str(self.cantidad_vi) + str(self.mot) + str(self.estados) + str(self.cod_vis) 
+        return  str(self.cantidad_vi) + (self.motis) + str(self.estados) + str(self.cod_vis) 
 
     @property
     def decha_fi(self):
@@ -299,7 +304,9 @@ class Guia(Fisico):
         elif int(self.cantidad_vi) <=29: #si la condicion anterior no era verdadera retorne cantidad y sum 
             self.cantidad_vi = self.suma
 
-        self.cantidad_vi = int(self.moti)
+        self.cantidad_vi = int(self.moti) 
+        print(self.cantidad_vi)
+           #(self.fe[-14:-4])
         if self.cantidad_vi >= 16 and self.cantidad_vi >= 19:
             self.cantidad_vi = self.contador
             if self.suma >=3:

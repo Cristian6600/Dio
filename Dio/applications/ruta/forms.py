@@ -40,9 +40,37 @@ class CargueForm(forms.ModelForm):
 class RecepcionForm(forms.ModelForm):   
     class Meta:
         model = Recepcion
-        fields = ['planilla', 'motivo', 'guia']
+        fields = ['planilla', 'motivo', 'guia', 'estado']
 
-
+        widgets={
+            'planilla': forms.Select(
+                attrs={
+                    'class': 'input-group-field',
+                }
+            ),
+            'motivo': forms.Select(
+                attrs = {
+                'class': 'input-group-field',
+                }
+            ),
+            'estado': forms.Select(
+                attrs= {
+                    'class': 'input-group-field',
+                }
+            ),
+            'guia': forms.NumberInput(
+                attrs = {
+                    'placeholder': 'Barcode guia',
+                    'class': 'input-group-field',
+                    'autofocus': 'autofocus'  ,
+                    'class': 'input-group-field',
+                    'size': '10'
+                }
+            ),
+                
+            }
+        
+        
 
 class ProgramadorForm(forms.ModelForm):
     """  formulario para seleccionar autores """

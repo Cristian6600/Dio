@@ -1,6 +1,7 @@
 from django.urls import path
 
 from . import views
+from .views import RecepcionCreateView, RecepcionUpdateView, RecepcionDeleteView
 
 app_name = "ruta_apps"
 
@@ -15,27 +16,13 @@ urlpatterns = [
         views.RecepcionCreateView.as_view(),
         name = 'cargue-recepcion'),
 
+    path('student/edit/<int:pk>/',RecepcionUpdateView.as_view(),name="reUpdate"),
+    path('student/edit/<int:pk>/',RecepcionDeleteView.as_view(),name="reDelete"),
+
     path(
-        'listar-planillas/',
+        'listar-planillas/<id>/',
         views.ListEmpleadosPdf.as_view(),
         
-    ),
-    path(
-        'api/lenguaje/search/', 
-        views.LenguajeListApiView.as_view(),
-        name='lenguaje-buscar',
-    ),
-
-    path(
-        'api/programador/register/', 
-        views.RegistrarProgramador.as_view(),
-        name='programador-register',
-    ),
-
-    path(
-        'api/programador/register/', 
-        views.RegistrarProgramador.as_view(),
-        name='programador-register',
     ),
     
     ]

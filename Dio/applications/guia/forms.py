@@ -7,8 +7,10 @@ class guiafisicoForm(forms.ModelForm):
     class Meta:
         model = Guia
         fields = (
+            'id_guia',
             'bolsa',
-            'seudo',        
+            'seudo',   
+            'user',   
         )
 
         widgets = {
