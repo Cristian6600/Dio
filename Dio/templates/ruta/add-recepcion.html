@@ -40,40 +40,11 @@
             </div>
                 </div>
 
-            
             <div class="cell medium-6"></div>
                 <button type="submit" class="success button" style="width: 200px;">Guardar</button>
     </div>
     </form>   
 </div>   
-
-    <div class="grid-x grid-margin-x">
-        <div class="cell grid-x grid-margin-x">
-        <div class="cell grid-x grid-margin-x" style="margin-top: 2em;">
-            <table class="hover"  >
-                <thead>
-                    <th>planilla</th>
-                    <th>motivo</th>
-                    <th>estado</th>
-                    <th>guia</th>
-                    
-                </thead>
-                <tbody>
-                    {% for e in object_list %}
-                    <tr>
-                        <td>{{e}}</td>
-                        <td>{{e.planilla}}</td>
-                        <td>{{e.motivo}}</td>
-                        <td>{{e.estado}}</td>
-                        <td>{{e.guia}}</td>
-                        
-                        
-                    </tr>
-                    
-                    {% endfor %}
-                </tbody>
-            </table>
-
         
 
 

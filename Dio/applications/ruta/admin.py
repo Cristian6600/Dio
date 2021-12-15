@@ -3,7 +3,7 @@ from related_admin import RelatedFieldAdmin
 from import_export.admin import ImportExportModelAdmin
 from import_export import resources
 from import_export.fields import Field
-from . models import Cargue, Recepcion, Planilla, Recep_guia
+from . models import Cargue, Recepcion, Planilla
 from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.utils.text import format_lazy
 from applications.fisico.models import Fisico
@@ -88,9 +88,7 @@ class RecepcionAdmin(RelatedFieldAdmin):
     # list_filter = ('fecha',)
     # raw_id_fields = ("motivo",)
 
-@admin.register(Recep_guia)
-class Recep_guiaAdmin(admin.ModelAdmin):
-    pass
+
 
 
 

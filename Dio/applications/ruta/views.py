@@ -12,7 +12,7 @@ from django.http import HttpResponse
 
 from django.views.generic import CreateView, View, ListView, UpdateView, DeleteView
 
-from . models import Cargue, Planilla, Programador, Lenguaje, Recepcion
+from . models import Cargue, Planilla,  Recepcion
 
 from .utils import render_to_pdf
 
@@ -46,7 +46,6 @@ class RecepcionCreateView(CreateView, ListView ):
     success_url = '.'
     context_object_name = 'stu'
     
-
     def get(self, request, *args, **kwargs):
         form = self.form_class(initial=self.initial)
         return render(request, self.template_name,{'form':form})

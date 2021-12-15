@@ -23,9 +23,6 @@
         
         <label for="id_guia">Guia:</label> 
     
-           
-        
-
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <div class="container1">
 <button class="add_form_field"> &nbsp; 
@@ -33,8 +30,9 @@
 </button>
 <div><input type="text" class="add_form_field" maxlength="10" placeholder="Código Barras" name="guia" id="idGuia_0" autofocus onkeypress="nextFocus(event)"></div>
 </div>
-
-<script>
+<div class="cell medium-6"></div>
+                <button type="submit" class="success button" style="width: 200px;">Guardar</button>
+<!-- <script>
 $(document).ready(function() {
 var max_fields = 100;
 var wrapper = $(".container1");
@@ -90,6 +88,6 @@ if (event.keyCode == 13 && nextInput ) {
              
          </form>
              
-</div>
+</div> -->
         
 {% endblock panel-content %}

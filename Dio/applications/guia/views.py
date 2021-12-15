@@ -27,9 +27,9 @@ class ProductDetailView(LoginRequiredMixin, DetailView):
 class bolsaCreateView(LoginRequiredMixin, CreateView, ListView):
     template_name = "guia/guia-fisico.html"
     model = Guia
-    # fields = ['id_guia', 'seudo', 'bolsa', 'user']
-    form_class = guiafisicoForm
-    success_url = '/'
+    fields = ['id_guia', 'seudo', 'bolsa', 'user']
+    # form_class = guiafisicoForm
+    success_url = '.'
     paginate_by = '5'
     context_object_name = 'stu'
     
