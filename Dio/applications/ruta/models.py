@@ -16,15 +16,15 @@ class Cargue(models.Model):
         verbose_name ='Planilla',
     )
     guia = models.ManyToManyField(
-        Fisico,
+        Fisico, 
         through= 'Planilla', 
         blank = True, 
-        
+           
     )
 
-    mensajero = models.ForeignKey(
+    full_name = models.ForeignKey(
         courrier, 
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE, blank=True, null=True
         )
 
     fecha = models.DateTimeField(auto_now=True, verbose_name = 'Fecha de entrega')
@@ -50,21 +50,21 @@ class Planilla(models.Model) :
         blank=True, null=True,
         verbose_name="Planilla"
     )
-
+    
     class Meta:
         ordering = ['-id']
     
     def __str__(self):
         return str(self.id)
 
-    # def save(self, *args, **kwargs):
-    #     self.guia.id_est_id = self.guia.id_est_id = 4
+    def save(self, *args, **kwargs):
+        self.guia.id_est_id = self.guia.id_est_id = 4
 
-    #     self.guia.save()       
-    #     super(Planilla, self).save(*args, **kwargs)
+        self.guia.save()       
+        super(Planilla, self).save(*args, **kwargs)
 
-    # class Meta:
-    #     ordering = ('guia__fecha', 'id')
+    class Meta:
+        ordering = ('guia__fecha', 'id')
 
 class Recepcion(models.Model):
 

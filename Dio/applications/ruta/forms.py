@@ -12,7 +12,7 @@ class CargueForm(forms.ModelForm):
     class Meta:
         model = Cargue
         fields = (
-            'mensajero', 
+            'full_name', 
             'guia',
         )
 
@@ -24,7 +24,7 @@ class CargueForm(forms.ModelForm):
                     
                 }
             ),
-            'mensajero': forms.Select(
+            'full_name': forms.Select(
                 attrs = {
                 'class': 'input-group-field',
                 }

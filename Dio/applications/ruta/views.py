@@ -4,6 +4,16 @@ from django.shortcuts import render
 
 from django.contrib import messages
 
+from rest_framework.generics import (
+    ListAPIView,
+    CreateAPIView,
+)
+
+from .serializers import(
+    CargueSerializer,
+    FisicoSerializer
+)
+
 from applications.fisico.models import Fisico
 
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -12,7 +22,7 @@ from django.http import HttpResponse
 
 from django.views.generic import CreateView, View, ListView, UpdateView, DeleteView
 
-from . models import Cargue, Planilla,  Recepcion
+from . models import Cargue,   Recepcion, Planilla
 
 from .utils import render_to_pdf
 
@@ -22,8 +32,8 @@ from .forms import CargueForm
 from .forms import RecepcionForm
 
 #------------------Cargue----------------------------
-class CargueCreateView(LoginRequiredMixin, CreateView):
-    template_name = "ruta/add-ruta.html"
+class CargueCreateView( CreateView):
+    template_name = "programador/add_programador.html"
     model = Cargue
     form_class = CargueForm
     success_url = '.'
@@ -33,7 +43,6 @@ class CargueCreateView(LoginRequiredMixin, CreateView):
         self.object.user = self.request.user
         self.object.save()
         return super(CargueCreateView, self).form_valid(form)
-
 
 #----------------Recepcion------------------------
 
@@ -58,17 +67,7 @@ class RecepcionCreateView(CreateView, ListView ):
 
         return render(request, self.template_name, {'form': form})
 
-class RecepcionUpdateView(UpdateView):
-    model = Recepcion
-    fields = ['planilla', 'motivo', 'guia']
-    template_name = 'updateForm.html'
-    success_url = '.'
-
-class RecepcionDeleteView(DeleteView):
-    model = Recepcion
-    template_name = "deleteForm.html"
-    success_url = '.'
-
+#------------------Pdf Cargue----------------------
 class ListEmpleadosPdf(ListView):
 
     def get_queryset(self):
@@ -80,6 +79,19 @@ class ListEmpleadosPdf(ListView):
             'count': empleados.count(),
             'empleados': empleados
         }
-        pdf = render_to_pdf('ruta/empleados.html', data)
+        pdf = render_to_pdf('ruta/pdf_planillas.html', data)
         return HttpResponse(pdf, content_type='application/pdf')
 
+
+class FisicoListApiView(ListAPIView):
+    serializer_class = FisicoSerializer
+    
+    def get_queryset(self):
+        kword = self.request.query_params.get('kword', '')
+
+        return Fisico.objects.filter(
+            id_guia__icontains=kword
+        )
+
+class RegistrarCargue(CreateAPIView):
+    serializer_class = CargueSerializer

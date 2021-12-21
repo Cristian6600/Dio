@@ -1,0 +1,40 @@
+{% extends "programador/base_programador.html" %}
+
+{% load  static %}
+
+{% block content %}
+
+<div class="container" style="padding-top: 2em;">
+  <h2 class="text-center text-success">Lista de Programadores</h2>
+  <table class="table">
+    <thead class="thead-dark"">
+      <th scope="col">Nombres</th>
+      <th scope="col">Ocupacion</th>
+      <th scope="col">Edad</th>
+      <th scope="col">Lenguajes</th>
+    </thead>
+    <tbody>
+      {% for programador in programadores %}
+        <tr>
+          <td>{{ programador.full_name }}</td>
+          <td>{{ programador.ocupation }}</td>
+          <td>{{ programador.age }}</td>
+          <td>
+            <ul class="list-group">
+              {% for lenguaje in programador.languages.all %}
+                <li class="list-group-item list-group-item-success">
+                  {{ lenguaje.languages }}
+                </li>
+              {% endfor %}
+            </ul>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<a href="{% url 'persona_app:add' %}" class="btn-floating">
+  +
+</a>
+{% endblock content %}
