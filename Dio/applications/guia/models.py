@@ -2,7 +2,8 @@ from django.db import models
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from PIL import Image
-
+from model_utils.models import TimeStampedModel
+from .managers import ProductManager
 
 from applications.base_cliente.models import Bd_clie, Producto, Est_clie
 
@@ -83,7 +84,7 @@ class Servicio(models.Model):
     def __str__(self):
         return str(self.id_serv) + '-' + self.Servicio
 
-class Guia(Fisico):
+class Guia(Fisico, TimeStampedModel):
 
     seudo = models.OneToOneField(
         Bd_clie,
@@ -217,7 +218,9 @@ class Guia(Fisico):
         def __str__(self):
             return str(self.seudo) + self.destinatario
 
-    objects = LogEntryManager()
+    
+    objects = ProductManager()
+    # objects = LogEntryManager()
 
     var_g = ("guia")
     # history = HistoricalRecords()    
@@ -324,7 +327,7 @@ class Guia(Fisico):
     # candidate.user = request.user
     # candidate.save()
 
-    # def optimize_image(sender, instance, **kwargs):
+    # def optimize_image(sender, instance, **kwargs):.
     #     print("==========")
     #     print(instance)
     #     if instance.Imagen:

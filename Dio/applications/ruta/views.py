@@ -2,6 +2,8 @@
 from django.db.models import fields
 from django.shortcuts import render
 
+from django.views.decorators.csrf import csrf_exempt
+
 from django.contrib import messages
 
 from rest_framework.generics import (
@@ -33,7 +35,7 @@ from .forms import RecepcionForm
 
 #------------------Cargue----------------------------
 class CargueCreateView( CreateView):
-    template_name = "programador/add_programador.html"
+    template_name = "ruta_bootstrap/add_programador.html"
     model = Cargue
     form_class = CargueForm
     success_url = '.'
@@ -93,5 +95,8 @@ class FisicoListApiView(ListAPIView):
             id_guia__icontains=kword
         )
 
+
 class RegistrarCargue(CreateAPIView):
     serializer_class = CargueSerializer
+    
+    

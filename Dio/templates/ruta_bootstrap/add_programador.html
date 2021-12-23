@@ -1,0 +1,68 @@
+
+{% extends "ruta_bootstrap/base_programador.html" %}
+
+{% load  static %}
+
+{% block panel-content %}
+
+  <div class="grid-x grid-margin-x align-center">
+    <h3 class="cell" style="margin-bottom: 2em; text-align: center;">Registrar planillas</h3> 
+    <div id="app" >
+      
+          <div class=" col-lg-6 form-group">
+            <label>Mensajero</label>
+          {{form.full_name}}
+        </div>
+          
+        <div class="input-group">
+          
+          
+          <div class="input-group">
+            <form v-on:submit.prevent="AgregarLenguaje">
+          <label for="new-todo"></label>
+          <input class="input-group-field" type="number"
+          v-model="kword"
+          id="new-todo"
+          placeholder="Barcode..">
+        
+          <div class="input-group-button">
+          
+            <input type="submit" class="button" value="Agregar">
+          </form>
+          </div>
+        
+          </div>
+      </div>
+      <!-- ---maypon----- -->
+      <div class="cell medium-12">
+        <span 
+        class="secondary button hollow"
+          v-for="(id_guia , index) in lista_agregados"
+          is="todo-item"
+          v-bind:key="id_guia.guia"
+          v-bind:title="id_guia.title"
+          v-on:remove="lista_agregados.splice(index, 1)"
+        > {$ id_guia.id_guia $}
+      </pan> 
+    </div>
+
+    <!-- aqui comienza la lista de frameworks -->
+    <ul class="col-lg-12 list-group">
+      <li 
+        v-for="lenguaje in lista_lenguajes"
+        :key="lenguaje.id_guia"
+        class="list-group-item"
+        @click="AgregarLenguaje(lenguaje)" >{$  lenguaje.id_guia $}</li>
+    </ul>
+    
+    <div class="col">
+      <button 
+        class="cell warning button"
+        @click="RegistrarProgramador()">Registrar</button>
+        
+      </div>
+    </div>   
+    
+    
+
+{% endblock panel-content %}

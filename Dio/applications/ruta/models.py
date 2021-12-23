@@ -24,10 +24,15 @@ class Cargue(models.Model):
 
     full_name = models.ForeignKey(
         courrier, 
-        on_delete=models.CASCADE, blank=True, null=True
+        on_delete=models.CASCADE, 
+        blank=True, null=True, 
+        verbose_name= 'Mensajero'
         )
 
     fecha = models.DateTimeField(auto_now=True, verbose_name = 'Fecha de entrega')
+
+    def get_absolute_url(self):
+        return reverse('Cargue', args=[self.full_name])
     
     class Meta: 
         verbose_name = "Cargue"
@@ -85,7 +90,8 @@ class Recepcion(models.Model):
     )
 
     fecha = models.DateTimeField(
-        auto_now=True 
+        auto_now=True,
+        verbose_name = 'Fecha recepcion'
     )
 
     estado = models.ForeignKey(

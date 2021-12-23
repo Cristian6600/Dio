@@ -16,13 +16,12 @@ from . models import Guia, img
 class ProductListView(LoginRequiredMixin, ListView):
     template_name = "producto/cliente.html"
     model = Guia
-    paginate_by = 5
-    success_url = '.'
-    # page_kwarg = 'page'
+    paginate_by = 6
            
 class ProductDetailView(LoginRequiredMixin, DetailView):
     template_name = "producto/detail.html"
     model = Guia
+    
 
 class bolsaCreateView(LoginRequiredMixin, CreateView, ListView):
     template_name = "guia/guia-fisico.html"
@@ -61,6 +60,7 @@ def handleMultipleImagesUpload(request):
             uploaded_images = img.objects.all()
             return JsonResponse({"imagenes": [{"url": image.image.url} for image in uploaded_images]})
         return render(request, "index.html")    
+
 
 
 

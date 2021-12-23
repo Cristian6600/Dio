@@ -86,6 +86,8 @@ class Fisico(Fisi_pa, Bolsa):
 
     d_i = models.CharField(max_length=15, blank = True, null=True)
 
+    fecha_recepcion = models.DateTimeField(blank = True, null= True)
+
     imagen = models.ImageField(
         upload_to = 'guia',
         null=True, 
