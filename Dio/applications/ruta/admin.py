@@ -62,7 +62,7 @@ class CargueAdmin(admin.ModelAdmin):
 @admin.register(Planilla)
 class PlanillaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     # resource_class = PlanillaResource
-    list_display = ('guia', 'cargue',)
+    list_display = ('guia', 'cargue',  'fecha')
     search_fields = ('id',)
 
 # class  Recep_Guiainline (admin.StackedInline):

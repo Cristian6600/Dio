@@ -8,6 +8,7 @@ from applications.fisico.models import Fisico, Bolsa
 from applications.guia.models import Guia
 from django import forms
 from django.contrib.admin.widgets import FilteredSelectMultiple
+from model_utils.models import TimeStampedModel
 
 class Cargue(models.Model):
 
@@ -25,7 +26,6 @@ class Cargue(models.Model):
     full_name = models.ForeignKey(
         courrier, 
         on_delete=models.CASCADE, 
-        blank=True, null=True, 
         verbose_name= 'Mensajero'
         )
 
@@ -40,13 +40,11 @@ class Cargue(models.Model):
 
     def __str__(self):
         return str(self.id)
-
-    def myfunc(self):
-        print(self.id)
-
-class Planilla(models.Model) :
+  
+class Planilla(TimeStampedModel) :
     guia = models.ForeignKey(
         Fisico, 
+
         on_delete=models.CASCADE, blank = True, null = True
     )
     cargue = models.ForeignKey(
@@ -54,6 +52,10 @@ class Planilla(models.Model) :
         on_delete=models.CASCADE,
         blank=True, null=True,
         verbose_name="Planilla"
+    )
+
+    fecha = models.DateTimeField(
+        auto_now=True
     )
     
     class Meta:

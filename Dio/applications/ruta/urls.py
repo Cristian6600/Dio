@@ -18,9 +18,9 @@ urlpatterns = [
     ),
 
     path(
-        'listar-planillas/',
+        'listar-planillas/<full_name>/',
         views.ListEmpleadosPdf.as_view(),
-        
+        name = 'impresion',
     ),
     # urls de los servicios
     path(
@@ -32,6 +32,17 @@ urlpatterns = [
         'api/programador/register/', 
         views.RegistrarCargue.as_view(),
         name='programador-register',
+    ),
+    path(
+        'lista/planillas/<full_name>', 
+        views.PLanillaListView.as_view(),
+        name='listar-planillas',
+    ),
+
+    path(
+        'lista/planillas/buscar/', 
+        views.ListPlanillasBykword.as_view(),
+        name='listarr-planillas',
     ),
     
     ]

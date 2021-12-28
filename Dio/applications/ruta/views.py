@@ -1,8 +1,7 @@
 
 from django.db.models import fields
+from django.db.models.query import QuerySet
 from django.shortcuts import render
-
-from django.views.decorators.csrf import csrf_exempt
 
 from django.contrib import messages
 
@@ -36,8 +35,8 @@ from .forms import RecepcionForm
 #------------------Cargue----------------------------
 class CargueCreateView( CreateView):
     template_name = "ruta_bootstrap/add_programador.html"
-    model = Cargue
     form_class = CargueForm
+    
     success_url = '.'
 
     def form_valid(self, form):
@@ -71,20 +70,35 @@ class RecepcionCreateView(CreateView, ListView ):
 
 #------------------Pdf Cargue----------------------
 class ListEmpleadosPdf(ListView):
-
-    def get_queryset(self):
-        pass
         
     def get(self, request, *args, **kwargs):
-        empleados = Planilla.objects.all()
+        nombre = self.kwargs['full_name']
+        guia = Planilla.objects.filter(cargue__id = nombre)
         data = {
-            'count': empleados.count(),
-            'empleados': empleados
+            'count': guia.count(),
+            'empleados': guia
         }
         pdf = render_to_pdf('ruta/pdf_planillas.html', data)
         return HttpResponse(pdf, content_type='application/pdf')
 
+    def get_queryset(self):
+        return Planilla.objects.order_by('guia')
 
+#-------------lista filtro planilla----------------------
+
+class PLanillaListView(ListView): 
+    template_name ='ruta/lista_planillas.html'
+    context_object_name = 'lista'
+    
+    def get_queryset(self):
+
+        nombre = self.kwargs['full_name']
+        lista = Planilla.objects.filter(
+        cargue__full_name = nombre
+    )   
+        return  lista
+    
+#---------------appi----------------------------
 class FisicoListApiView(ListAPIView):
     serializer_class = FisicoSerializer
     
@@ -95,8 +109,27 @@ class FisicoListApiView(ListAPIView):
             id_guia__icontains=kword
         )
 
-
 class RegistrarCargue(CreateAPIView):
     serializer_class = CargueSerializer
+
+#-------------lista filtro planilla----------------------
+class PLanillaListView(ListView): 
+    template_name ='ruta/lista_planillas.html'
+    context_object_name = 'lista'
     
+    def get_queryset(self):
+
+        nombre = self.kwargs['id']
+        lista = Planilla.objects.filter(
+        cargue__id = nombre
+    )   
+        return  lista
+
+#--------------busqueda por palabra clave------------
+class ListPlanillasBykword(ListView):
+    template_name = 'ruta/kword.html'
+    model = Cargue
+    context_object_name = 'planillask'
+    paginate_by = 20
+
     
