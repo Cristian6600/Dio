@@ -9,8 +9,9 @@ from applications.guia.models import Guia
 from django import forms
 from django.contrib.admin.widgets import FilteredSelectMultiple
 from model_utils.models import TimeStampedModel
+from .managers import ProductManager
 
-class Cargue(models.Model):
+class Cargue(TimeStampedModel):
 
     id = models.AutoField(
         primary_key=True,
@@ -19,7 +20,6 @@ class Cargue(models.Model):
     guia = models.ManyToManyField(
         Fisico, 
         through= 'Planilla', 
-        blank = True, 
            
     )
 
@@ -30,6 +30,8 @@ class Cargue(models.Model):
         )
 
     fecha = models.DateTimeField(auto_now=True, verbose_name = 'Fecha de entrega')
+
+    objects = ProductManager()
 
     def get_absolute_url(self):
         return reverse('Cargue', args=[self.full_name])
@@ -115,7 +117,7 @@ class Recepcion(models.Model):
 
     @property
     def varu(self):
-      return self.motivo
+      return self.motivo.id
 
     @property
     def estados(self):
@@ -125,7 +127,7 @@ class Recepcion(models.Model):
 
         self.guia.mot_id = self.varu
         self.guia.id_est = self.estados
-    
+        print (self.varu)
         self.guia.save()
 
         super(Recepcion, self).save(*args, **kwargs)

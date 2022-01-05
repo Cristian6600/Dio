@@ -1,7 +1,7 @@
 from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
 from import_export import resources
-from . models import Tipo, Motivo, datos_g
+from . models import Tipo, Motivo, datos_g, Orden
 
 class datos_gResource(resources.ModelResource):
     
@@ -31,4 +31,8 @@ class datos_gAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 class MotivoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 
     list_display = ('id', 'motivo', 'id_tip')
+
+@admin.register(Orden)
+class ordenAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display = ('id', 'orden')
     

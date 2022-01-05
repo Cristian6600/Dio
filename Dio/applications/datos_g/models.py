@@ -5,6 +5,10 @@ from applications.base_cliente.models import Bd_clie, Producto
 from applications.cliente.models import Ciudad, Cliente
 # from applications.fisico.models import Fisico
 from applications.guia.models import Guia, Proceso
+import barcode                      
+from barcode.writer import ImageWriter
+from io import BytesIO
+from django.core.files import File
 
 from django.dispatch import receiver
 from django.db.models.signals import post_save
@@ -40,11 +44,17 @@ class Motivo(models.Model):
         null=True
     )
     def __str__(self):
-        return str(self.id) #+ "-" + self.motivo
+        return str(self.motivo) #+ "-" + self.motivo
     
     class Meta:
         verbose_name = "Motivo"
         verbose_name_plural = "Motivo"
+
+class Orden (models.Model):
+    orden = models.IntegerField()
+
+    def __str__(self):
+        return str(self.orden)
 
 class datos_g (models.Model):
     id_datos_g = models.CharField(primary_key=True, max_length=30)
@@ -142,13 +152,22 @@ class datos_g (models.Model):
 
     cantidad = models.IntegerField(blank=True, null=True)
 
-    orimp = models.IntegerField(
+    orimp = models.ForeignKey(
+        Orden, on_delete= models.CASCADE,
         blank=True,
         null=True,
-        verbose_name = 'Orden impre '
+        verbose_name = 'Orden impre'
         )
 
     zona = models.CharField(max_length=30, blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        EAN = barcode.get_barcode_class('ean13')
+        ean = EAN(f'{self.country_id}{self.manufacturer_id}{self.product_id}', writer=ImageWriter())
+        buffer = BytesIO()
+        ean.write(buffer)
+        self.barcode.save(f'{self.name}.png', File(buffer), save=False)
+        return super().save(*args, **kwargs)
         
     class Meta:
         verbose_name = "Datos de gestion"
@@ -195,7 +214,11 @@ class datos_g (models.Model):
 
     @property
     def or_imp(self):
-        return self.orimp
+        return self.orimp.orden
+    
+    # @property
+    # def orden(self):
+    #     return self.orimp
 
     def save(self, *args, **kwargs):
         # self.seudo.bolsa  = self.vars
@@ -208,7 +231,11 @@ class datos_g (models.Model):
         self.seudo_dg.mot = self.motivo
         self.seudo_dg.id_est = self.id_est
         self.seudo_dg.d_i = self.documento
-        self.seudo_dg.or_imp = self.or_imp
+        self.seudo_dg.orden = self.or_imp
+
+        #orden impresion
+        # self.orimp.orden = self.orden
+        
         
         self.seudo_dg.save()
 

@@ -5,15 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <img src="https://firstsource.net.co/wp-content/uploads/2020/06/Enmascarar-grupo-31.png"
-    width="320"
-    height="60">
+    width="90"
+    height="20">
     
 </head>
 <body>
+      
     <h2>Planilla</h2>
-    <h3>Cantidad a entregar: {{ count }} </h3>
+    
+    <h3>Cantidad a entregar: {{ count }}  </h3>
 
-    <table border="1px" >
+    <table BORDER="1px" >
         <thead>
             <th width="30">id</th>
             <th width="50">Guia</th>
@@ -22,6 +24,7 @@
             <th >Destinatario</th>
             <th>Ciudad</th>
             <th width="70">Cedula</th>
+            <th>Fecha</th>
             
         </thead>
         <tbody >
@@ -34,6 +37,7 @@
                     <td>{{ empleado.guia.destinatario }}</td>
                     <td>{{ empleado.guia.id_ciu }}</td>
                     <td>{{ empleado.guia.d_i }}</td>
+                    <td>{{ empleado.fecha|date }}</td>
                     
                 </tr>
             {% endfor %}
@@ -41,7 +45,21 @@
     </table>
 
 </body>
-<br><footer>
-    <hr  width="200" size=1>
-    Firma custodia </footer>
-</html>
+
+<p>
+    <hr width=50%  align="right" size=1>
+ <p>
+    
+    
+
+   
+
+
+
+
+
+
+
+
+
+

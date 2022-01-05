@@ -8,8 +8,9 @@
 <div class="off-canvas-wrapper">
     <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
 
-        <div class="off-canvas position-left reveal-for-large" id="my-info" data-off-canvas data-position="left" style="background-color: #1c1b22;">
+        <div class="off-canvas position-left reveal-for-large" id="my-info" data-off-canvas data-position="left" style="background-color: #000000;">
             <div class="row column">
+              
                 <h3 style="text-align: center; padding: 0.3em; color: #008cff;">Firstsource</h3>
                 <ul class="vertical menu">
                     <li>
@@ -30,6 +31,9 @@
                         <li class="{% if request.resolver_match.url_name == 'caja-index' %}activeli{% endif %}">
                           <a href="{% url 'fisico_app:fisico-paquete' %} " style="color: white;">Agregar fisico paquete</a>
                         </li>
+                        <li class="{% if request.resolver_match.url_name == 'caja-index' %}activeli{% endif %}">
+                          <a href="{% url 'gatos_g:datos-cliente' %} " style="color: white;">Impresion Guia</a>
+                        </li>
                       </ul>
                     </li>
                 </ul> 
@@ -44,7 +48,7 @@
                             <a href="{% url 'ruta_apps:cargue-recepcion' %}" style="color: white;">Recepcion</a>
                           </li>
                           <li class="{% if request.resolver_match.url_name == 'venta-index' %}activeli{% endif %}">
-                            <a href="{% url 'ruta_apps:listarr-planillas' %}" style="color: white;">Impresion</a>
+                            <a href="{% url 'ruta_apps:listarr-planillas' %}" style="color: white;">Impresion planilla</a>
                           </li>
                         
                         </li>
@@ -57,7 +61,7 @@
                 <div class="off-canvas-content" data-off-canvas-content>
                     <!-- declaramos un nuevo bloque para contenidod e panel -->
                     <div class="grid-x">
-                        <div class="cell top-bar" style="background-color: #1c1b22;">
+                        <div class="cell top-bar" style="background-color: #000000;">
                             <div class="top-bar-left">
                                 <h4 style="color: white;">Sesion de: {{ user.username }}</h4>
                             </div>

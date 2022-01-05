@@ -29,6 +29,7 @@ INSTALLED_APPS = [
 
     # 'grappelli',
     'rest_framework',
+    'rest_framework.authtoken',
     'related_admin',
     # 'django.contrib.admin',
     'django.contrib.auth',
@@ -36,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    
     #apps
     'applications.base_cliente',
     'applications.cliente',
@@ -49,8 +50,12 @@ INSTALLED_APPS = [
     'applications.call',
     'applications.ruta',
 
-  
 ]
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',  # <-- And here
+    ],
+}
 SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
 
 MATERIAL_ADMIN_SITE  = {

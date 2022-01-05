@@ -11,6 +11,7 @@ Vue.component('todo-item', {
 new Vue({
   el: '#app',
   data: {
+    show: true,
     kword: '',
     full_name: '',
     lista_agregados: [],
@@ -18,9 +19,9 @@ new Vue({
     nextTodoId: 1
   },
   methods: {
-    BuscarLenguajes: function (kword) {
+    BuscarLenguajes: function (full_name) {
       var self = this;
-      axios.get('/api/lenguaje/search/?kword=' + kword)
+      axios.get('/api/lenguaje/search/?full_name=' + full_name)
         .then(function (response) {
           self.lista_lenguajes = response.data
         })

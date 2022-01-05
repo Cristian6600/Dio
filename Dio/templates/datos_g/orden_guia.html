@@ -1,0 +1,28 @@
+{% extends "datos_g/base_datos_g.html" %} 
+% load static %}
+
+{% block panel-content %}
+
+<div class="grid-x grid-margin-x">
+<form method="post">{% csrf_token %}
+</div>
+
+<table>
+    <thead>
+        <th>Orden de impresion</th>
+    </thead>
+    <tbody>
+        {% for e in orden  %}
+        <tr>
+            <td>{{ e.orden }}</td>
+            <td>
+                <a href="{% url 'gatos_g:impresion-guia' e.id %}" class="button warning"><i class="fi-eye"></i></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
+{% endblock panel-content %}

@@ -1,0 +1,53 @@
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <img src="https://firstsource.net.co/wp-content/uploads/2020/06/Enmascarar-grupo-31.png"
+    width="320"
+    height="60">
+
+    <style>
+        @page {
+            size: letter landscape;
+            margin: 2cm;
+        }
+    </style>
+
+</head>
+
+<table BORDER="1px" >
+    <th width="40">Firstsource</th>
+    <th width="55">Nit:900861729</th>
+    <th width="210">RESOLUCION MINTIC NO. 3290 del 4 de diciembre de 2018</th>
+</table>
+
+<table >
+    <thead>
+        <th>Guia</th>
+        <th>Destinatario</th>
+        <th>Direccion</th>
+        <th>Fecha</th>
+        <th>Impresion</th>
+    </thead>
+    <tbody>
+        {% for e in empleados %}
+            <tr>
+                <td>{{ e.seudo_dg }}</td>
+                <td>{{ e.fecha }}</td>
+                <td>{{ e.direccion }}</td>
+                <td>{{ e.seudo_dg }}</td>
+                <td> 
+                    <a href="{% url 'ruta_apps:impresion' e.id_datos_g %}" class="button warning"><i class="fi-eye"></i></a>
+                </td>
+                
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
+</html>
+

@@ -53,7 +53,7 @@ class Estado (models.Model):
         verbose_name_plural = "Estado"
 
     def __str__(self):
-        return str(self.id)
+        return str(self.Estado)
     
 class Cod_vis(models.Model):    
 
@@ -263,16 +263,16 @@ class Guia(Fisico, TimeStampedModel):
 
     @property
     def moti(self):
-        return str(self.mot)
+        return str(self.mot.id)
 
     @property
     def motis(self):
-        return str(self.mot)
+        return str(self.mot.id)
 
     
     @property
     def estados(self):
-        return self.id_est
+        return self.id_est.id
 
     @property
     def cod(self):
@@ -285,7 +285,6 @@ class Guia(Fisico, TimeStampedModel):
     @property
     def decha_fi(self):
         return self.fecha
-
 
     def save(self, *args, **kwargs):
 

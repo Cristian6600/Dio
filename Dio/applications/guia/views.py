@@ -22,7 +22,6 @@ class ProductDetailView(LoginRequiredMixin, DetailView):
     template_name = "producto/detail.html"
     model = Guia
     
-
 class bolsaCreateView(LoginRequiredMixin, CreateView, ListView):
     template_name = "guia/guia-fisico.html"
     model = Guia

@@ -29,7 +29,7 @@ class guiaAdmin(ImportExportModelAdmin, RelatedFieldAdmin):
     fieldsets = [
         (None,  {'fields':[('seudo', 'bolsa', 'destinatario'), ('producto', 'estado', 'id_ciu'), ('direccion', 'barrio', 'postal', ), ]}),
         ('Estados', {'fields':[('id_est', 'mot', 'id_ser',), ('cod_vis', 'id_clie', 'proceso'),
-        ('cantidad_vi', 'cantidad', 'codigo', ), 'suma', 'imagen' ]}) 
+        ('cantidad_vi', 'cantidad', 'codigo', ), 'suma', 'imagen', 'orden' ]}) 
     ]
 #     # raw_id_fields = ("mot",)
     search_fields = ('id_guia', 'seudo__seudo_bd', 'mot__motivo',)

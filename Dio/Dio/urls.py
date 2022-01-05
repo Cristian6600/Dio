@@ -29,6 +29,7 @@ urlpatterns = [
     re_path('', include('applications.guia.urls')),
     re_path('', include('applications.fisico.urls')),
     re_path('', include('applications.ruta.urls')),
+    re_path('', include('applications.datos_g.urls')),
     
     
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

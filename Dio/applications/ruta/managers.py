@@ -10,15 +10,15 @@ class ProductManager(models.Manager):
 
     def buscar_producto(self, kword, order):
         consulta = self.filter(
-            Q(name__icontains=kword) | Q(barcode=kword)
+            Q(id__icontains=kword) | Q(full_name=kword)
         )
         # verificamos en que orden se solicita
         if order == 'date':
             # ordenar por fecha
             return consulta.order_by('created')
-        elif order == 'name':
+        elif order == 'full_name':
             # ordenar por nombre
-            return consulta.order_by('name')
+            return consulta.order_by('full_name')
         elif order == 'stok':
             return consulta.order_by('count')
         else:
@@ -50,9 +50,9 @@ class ProductManager(models.Manager):
         consulta = self.filter(
             due_date__range=(filters['date_start'], filters['date_end'])
         ).filter(
-            Q(name__icontains=filters['kword']) | Q(barcode=filters['kword'])
+            Q(id__icontains=filters['kword']) | Q(full_name=filters['kword'])
         ).filter(
-            marca__name__icontains=filters['marca'],
+            id__full_name__icontains=filters['marca'],
             provider__name__icontains=filters['provider'],
         )
 
