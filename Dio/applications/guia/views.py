@@ -1,4 +1,3 @@
-
 from django.db.models import fields
 from django.shortcuts import render
 from django.http import JsonResponse
@@ -24,18 +23,14 @@ class ProductDetailView(LoginRequiredMixin, DetailView):
     
 class bolsaCreateView(LoginRequiredMixin, CreateView, ListView):
     template_name = "guia/guia-fisico.html"
-    model = Guia
-    fields = ['id_guia', 'seudo', 'bolsa', 'user']
-    # form_class = guiafisicoForm
-    success_url = '.'
+    # model = Guia
+    # fields = ['id_guia', 'seudo', 'bolsa', 'user']
+    form_class = guiafisicoForm
     paginate_by = '5'
-    context_object_name = 'stu'
+    success_url = '.'   
     
     def get_queryset(self):
-        return Guia.objects.order_by('-fecha')
-    
-    def get_queryset(self):
-        return Guia.objects.filter(user=self.request.user)
+        return Guia.objects.filter(user=self.request.user).order_by('-fecha')
 
     def form_valid(self, form):
         self.object = form.save(commit=False)

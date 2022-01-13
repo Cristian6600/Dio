@@ -41,9 +41,9 @@
                     <li>
                       <a href="#"><span class="label warning">Ruta</span></a>
                       <ul class="nested vertical menu">
-                        <li class="{% if request.resolver_match.url_name == 'venta-index' %}activeli{% endif %}">
+                        <!-- <li class="{% if request.resolver_match.url_name == 'venta-index' %}activeli{% endif %}">
                           <a href="{% url 'ruta_apps:cargue-ruta' %}" style="color: white;">Ruta</a>
-                        </li>
+                        </li> -->
                         <li class="{% if request.resolver_match.url_name == 'venta-index' %}activeli{% endif %}">
                             <a href="{% url 'ruta_apps:cargue-recepcion' %}" style="color: white;">Recepcion</a>
                           </li>

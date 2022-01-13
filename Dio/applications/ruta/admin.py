@@ -48,8 +48,7 @@ class CargueAdmin(admin.ModelAdmin):
     save_on_top = False
     # fields = ('id', 'guia'),
     filter_horizontal = ('guia', )
-    list_display = ['id','full_name', 'fecha',]
-    list_editable = ['full_name']
+    list_display = ['id', 'fecha',]
     search_fields = ('id', 'full_name__courrier')
     list_filter = ['full_name__id', 'fecha']
     date_hierarchy = 'fecha'

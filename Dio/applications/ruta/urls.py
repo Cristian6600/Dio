@@ -2,7 +2,6 @@ from django.urls import path
 from . import views
 
 
-
 app_name = "ruta_apps"
 
 urlpatterns = [
@@ -23,7 +22,7 @@ urlpatterns = [
         views.ListEmpleadosPdf.as_view(),
         name = 'impresion',
     ),
-    # urls de los servicios
+    
     path(
         'api/lenguaje/search/', 
         views.FisicoListApiView.as_view(),

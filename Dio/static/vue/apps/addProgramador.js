@@ -10,18 +10,26 @@ Vue.component('todo-item', {
 // -----###-------------
 new Vue({
   el: '#app',
+  delimiters: ['{$', '$}'],
   data: {
-    show: true,
+    guia: '',
     kword: '',
-    full_name: '',
+    id_courrier: '',
     lista_agregados: [],
+    lista_nombres_agregados: [],
+    lista_nombres: [],
     lista_lenguajes: [],
     nextTodoId: 1
   },
+  watch: {
+    kword: function (val) {
+      this.BuscarLenguajes(val);
+    }
+  },
   methods: {
-    BuscarLenguajes: function (full_name) {
+    BuscarLenguajes: function (kword) {
       var self = this;
-      axios.get('/api/lenguaje/search/?full_name=' + full_name)
+      axios.get('/api/lenguaje/search/?kword=' + kword)
         .then(function (response) {
           self.lista_lenguajes = response.data
         })
@@ -29,26 +37,35 @@ new Vue({
           console.log(error);
         })
     },
-    
-    AgregarLenguaje: function () {
-      this.lista_agregados.push({
-        id_guia: this.kword,
-        title: this.kword
-      })
-      this.kword = ''
-    },
 
+    AgregarLenguaje: function (lenguaje) {
+      this.lista_nombres_agregados.push(lenguaje)
+    },
+    
+    AgregarGuia: function () {
+      this.lista_agregados.push({
+        id_guia: this.guia,
+        title: this.guia
+      })
+      this.guia = ''
+    },
     
     RegistrarProgramador: function () {
       //
-      var lista_id_lenguajes = []
+      var lista_id_guia = []
       for (let i = 0; i < this.lista_agregados.length; i++) {
-        lista_id_lenguajes.push(this.lista_agregados[i].id_guia)
+        lista_id_guia.push(this.lista_agregados[i].id_guia)
       }
+
+      var lista_id_nombres = []
+      for (let i = 0; i < this.lista_nombres_agregados.length; i++) {
+        lista_id_nombres.push(this.lista_nombres_agregados[i].id_courrier)
+      }
+      
       //
       var data_programador = {
-        'full_name': this.full_name,
-        'guia': lista_id_lenguajes
+        'full_name': lista_id_nombres,
+        'guia': lista_id_guia
       }
 
       axios.post('/api/programador/register/', data_programador)

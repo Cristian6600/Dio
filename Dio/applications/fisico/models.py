@@ -11,6 +11,18 @@ from django.db.models.signals import post_save
 from simple_history.models import HistoricalRecords
 from django.core.exceptions import ValidationError
 
+
+class Proceso(models.Model):
+    
+    id = models.IntegerField(primary_key=True)
+    proceso = models.CharField(
+        max_length=30
+        )
+    cod_dir = models.CharField(max_length=4)
+
+    def __str__(self):
+        return str(self.id)
+
 class Fisi_pa(models.Model):
 
     fecha = models.DateTimeField(
@@ -78,7 +90,7 @@ class Fisico(Fisi_pa, Bolsa):
         verbose_name = 'Estado',
         default= 0
     )
-    proceso = models.ForeignKey('guia.Proceso',
+    proceso = models.ForeignKey('Proceso',
         on_delete=models.CASCADE, 
         blank=True, null=True
         )
@@ -113,6 +125,13 @@ class Paquete(Fisi_pa):
         on_delete=models.CASCADE,
         help_text = 'Codigo de barras',
         unique = True
+    )
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE, 
+        blank=True, null=True, 
+        editable=True,
+        verbose_name= 'Usuario'
     )
     
     unique_together = ('bolsa', 'seudo')

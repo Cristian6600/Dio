@@ -34,15 +34,39 @@
             {% endfor %}
         </div>
         <div class="cell medium-6">
-            <button
-            class="col btn btn-success"
-            type="submit" class="success button" style="width: 200px;">Guardar</button>
+            <button type="submit" class="success button" style="width: 200px;">Guardar</button>
     
     
         </div>
     </form>                 
     
 </div>
+<div class="cell grid-x grid-margin-x">
+  <h5 class="cell" style="text-align: center;">Fisicos Registrados</h5>
+  <div class="cell">
+    <table>
+      <thead>
+          
+          <th>Seudo</th>
+          <th>Bolsa</th>
+          <th>Usuario</th>
+          
+      </thead>
+      <tbody>
+          {% for e in paquete %}
+          <tr>
+              <td>{{e.seudo}}</td>
+              <td>{{e.bolsa}}</td>
+              <td>{{e.user}}</td>
+              
+              
+          </tr>
+          
+          {% endfor %}
+      </tbody>
+  </table>
+  </div>
+
         {% endblock panel-content %}
     
         

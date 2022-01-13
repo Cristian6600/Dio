@@ -13,9 +13,13 @@
             size: letter landscape;
             margin: 2cm;
         }
+        
     </style>
 
 </head>
+<div>
+    <pdf:toc />
+ </div>
 
 <table BORDER="1px" >
     <th width="40">Firstsource</th>
@@ -34,7 +38,7 @@
     <tbody>
         {% for e in empleados %}
             <tr>
-                <td>{{ e.seudo_dg }}</td>
+                <td pdf:toc />{{ e.seudo_dg }}</td>
                 <td>{{ e.fecha }}</td>
                 <td>{{ e.direccion }}</td>
                 <td>{{ e.seudo_dg }}</td>

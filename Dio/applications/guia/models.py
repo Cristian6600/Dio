@@ -29,16 +29,6 @@ class LogEntryManager(models.Manager):
         )
             e.save()
 
-class Proceso(models.Model):
-
-    id = models.IntegerField(primary_key=True)
-    proceso = models.CharField(
-        max_length=30
-        )
-    cod_dir = models.CharField(max_length=4)
-
-    def __str__(self):
-        return str(self.id)
 
 class Estado (models.Model):
     id = models.IntegerField(
@@ -213,7 +203,6 @@ class Guia(Fisico, TimeStampedModel):
     class Meta:
         verbose_name = "Guia"
         verbose_name_plural = "Guia"
-        ordering = ['-id_guia']
 
         def __str__(self):
             return str(self.seudo) + self.destinatario

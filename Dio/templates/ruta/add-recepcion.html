@@ -46,6 +46,29 @@
     </div>
     </form>   
 </div>   
+    <table BORDER="1px" >
+        <thead>
+            
+            <th >Planilla</th>
+            <th>Motivo</th>
+            <th>Estado</th>
+            <th>Guia</th>
+            
+            
+        </thead>
+        <tbody >
+            {% for recepcion in object_list %}
+                <tr >
+                    <td>{{ recepcion }}</td>
+                    <td>{{ e.planilla }}</td>
+                    <td>{{ recepcion.fecha }}</td>
+                    
+                    
+                    
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
         
 
 

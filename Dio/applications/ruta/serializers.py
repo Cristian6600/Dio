@@ -1,9 +1,8 @@
 from rest_framework import serializers
 
 from .models import Cargue
+from applications.courrier.models import courrier
 from applications.fisico.models import Fisico
-
-
 
 
 class CargueSerializer(serializers.ModelSerializer):
@@ -13,11 +12,11 @@ class CargueSerializer(serializers.ModelSerializer):
         fields = ('guia', 'full_name', )
         
 class FisicoSerializer(serializers.ModelSerializer):
-    guia = CargueSerializer(many=True, read_only=True)
+    
     
     class Meta:
-        model = Fisico
-        fields = ('__all__')
+        model = courrier
+        fields = ('id_courrier', 'courrier', )
         
 
     

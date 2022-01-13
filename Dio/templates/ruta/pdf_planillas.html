@@ -12,32 +12,35 @@
 <body>
       
     <h2>Planilla</h2>
-    
+    <h3>Fecha: {{ mostrarpub.fecha|date }}</h3>
     <h3>Cantidad a entregar: {{ count }}  </h3>
+    <h3>Mensajero:   </h3>
+    
 
     <table BORDER="1px" >
         <thead>
             <th width="30">id</th>
             <th width="50">Guia</th>
-            <th width="40">Mensajero</th>
-            <th>direccion</th>
+            <th width="100">Mensajero</th>
+            <th width="100">direccion</th>
             <th >Destinatario</th>
             <th>Ciudad</th>
             <th width="70">Cedula</th>
-            <th>Fecha</th>
+            <th>Observacion</th>
+            
             
         </thead>
         <tbody >
-            {% for empleado in empleados %}
+            {% for empleado in empleados.all %}
                 <tr >
                     <td>{{ empleado.id }}</td>
                     <td>{{ empleado.guia }}</td>
-                    <td>{{ empleado.cargue.full_name }}</td>
+                    <td>{{ empleado.full_name }}</td>
                     <td>{{ empleado.guia.direccion }}</td>
                     <td>{{ empleado.guia.destinatario }}</td>
                     <td>{{ empleado.guia.id_ciu }}</td>
                     <td>{{ empleado.guia.d_i }}</td>
-                    <td>{{ empleado.fecha|date }}</td>
+                    
                     
                 </tr>
             {% endfor %}

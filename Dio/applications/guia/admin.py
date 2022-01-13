@@ -4,7 +4,7 @@ from related_admin import RelatedFieldAdmin
 from import_export import resources
 from django.contrib.admin.models import ADDITION, LogEntry
 
-from . models import Estado, Servicio, Cod_vis, Proceso, Guia, img, Feed, FeedFile
+from . models import Estado, Servicio, Cod_vis, Guia, img, Feed, FeedFile
 from django.utils.html import format_html
 from django.contrib.admin.models import LogEntry, ADDITION, CHANGE
 from django.contrib.admin import AdminSite
@@ -17,8 +17,8 @@ class guiaResource(resources.ModelResource):
     class Meta:
         model = Guia
         import_id_fields = ('seudo',) 
-        fields = ('fecha', 'proceso__proceso', 'seudo__cliente', 'seudo__d_i', 'seudo__id_pro__producto', 'id_ciu__ciudad', 'direccion', 'bolsa', 'id_guia', 'seudo' )
-        export_order = ('seudo__id_pro__producto', 'seudo__d_i', 'seudo__cliente', 'direccion', 'bolsa', 'id_guia', 'proceso__proceso', 'id_ciu__ciudad', 'fecha', 'seudo' )
+        fields = ('fecha',  'seudo__cliente', 'seudo__d_i', 'seudo__id_pro__producto', 'id_ciu__ciudad', 'direccion', 'bolsa', 'id_guia', 'postal', 'proceso__proceso', )
+        export_order = ('seudo__id_pro__producto', 'seudo__d_i', 'seudo__cliente', 'direccion', 'bolsa', 'id_guia', 'id_ciu__ciudad', 'fecha',  )
 @admin.register(Guia)
 class guiaAdmin(ImportExportModelAdmin, RelatedFieldAdmin):
     # date_hierarchy = ('fe_entrega')
@@ -34,7 +34,7 @@ class guiaAdmin(ImportExportModelAdmin, RelatedFieldAdmin):
 #     # raw_id_fields = ("mot",)
     search_fields = ('id_guia', 'seudo__seudo_bd', 'mot__motivo',)
     list_display = ('id_guia', 'mot__motivo', 'd_i', 'seudo', 'direccion', 'id_ciu', 'fecha', 'user', 'destinatario', 'imagen')
-
+    ordering = ('fecha',)
     list_filter = ('user', 'id_ciu__departamento','fecha', 'mot__motivo', 'estado')
 #     # readonly_fields = ('fecha', 'cantidad', 'user')
 #     actions = None
@@ -84,7 +84,7 @@ admin.site.register(Estado, EstadoAdmin)
 admin.site.register(Servicio)
 admin.site.register(LogEntry, MoniterLog)
 admin.site.register(Cod_vis, Cod_visAdmin)
-admin.site.register(Proceso)
+
 admin.site.register(img, ImgAdmin)
 admin.site.register(Feed)
 admin.site.register(FeedFile)

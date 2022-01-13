@@ -1,8 +1,10 @@
 
+from typing import ContextManager
 from django.db.models import fields
 from django.db.models.query import QuerySet
 from django.shortcuts import render
 from applications.users.models import User
+from applications.courrier.models import courrier
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import permissions
@@ -26,8 +28,6 @@ from .serializers import(
     FisicoSerializer
 )
 
-from applications.fisico.models import Fisico
-
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.http import HttpResponse
@@ -47,7 +47,6 @@ from .forms import RecepcionForm
 class CargueCreateView( CreateView):
     template_name = "ruta_bootstrap/add_programador.html"
     form_class = CargueForm
-    
     success_url = '.'
     context_object_name = 'coin_lst'
 
@@ -66,7 +65,7 @@ class RecepcionCreateView(CreateView, ListView ):
     form_class =  RecepcionForm
     initial = {'key':'value'}
     success_url = '.'
-    context_object_name = 'stu'
+    paginate_by = '5'
     
     def get(self, request, *args, **kwargs):
         form = self.form_class(initial=self.initial)
@@ -86,15 +85,23 @@ class ListEmpleadosPdf(ListView):
     def get(self, request, *args, **kwargs):
         
         nombre = self.kwargs['full_name']
-        guia = Planilla.objects.filter(cargue__id = nombre)
+        # mostrarpub = Planilla.objects.latest('fecha')
+        
+        mostrarpub = Planilla.objects.latest('fecha')
+        guia = Planilla.objects.filter(cargue__id = nombre).order_by('id')
         data = {
             'count': guia.count(),
             'empleados': guia,
+            'mostrarpub': mostrarpub,
             
         }
         pdf = render_to_pdf('ruta/pdf_planillas.html', data)
         return HttpResponse(pdf, content_type='application/pdf')
 
+    def get_queryset(self):
+            return ListEmpleadosPdf.objects.order_by('id')   
+    
+    
 #-------------lista filtro planilla----------------------
 
 class PLanillaListView(ListView): 
@@ -110,17 +117,14 @@ class PLanillaListView(ListView):
         return  lista
     
 #---------------appi----------------------------
-class FisicoListApiView(LoginRequiredMixin, ListAPIView, ListView):
-    template_name = "ruta_bootstrap/add_programador.html"
+class FisicoListApiView(LoginRequiredMixin, ListAPIView):
     serializer_class = FisicoSerializer
-    model = Cargue
-    fields = ['id', 'guia', 'full_name']
-    
-    def get_queryset(self):
-        full_name = self.request.query_params.get('full_name', '')
 
-        return Fisico.objects.filter(
-            id_guia__icontains=full_name
+    def get_queryset(self):
+        kword = self.request.query_params.get('kword', '')
+
+        return courrier.objects.filter(
+            courrier__icontains =kword
         )
 
 class RegistrarCargue(CreateAPIView):
@@ -158,4 +162,6 @@ class ListPlanillasBykword(ListView):
     # )  
         
     #     return lista
+    
+
     

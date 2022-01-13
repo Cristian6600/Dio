@@ -13,7 +13,6 @@ class datos_gResource(resources.ModelResource):
 @admin.register(datos_g)
 class datos_gAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = datos_gResource
-    list_per_page = 8
     list_per_page = 12
     search_fields = ("id_datos_g",)
     # fields =  (

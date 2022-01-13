@@ -3,8 +3,10 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 from applications.base_cliente.models import Bd_clie, Producto
 from applications.cliente.models import Ciudad, Cliente
+
 # from applications.fisico.models import Fisico
-from applications.guia.models import Guia, Proceso
+from applications.guia.models import Guia
+from applications.fisico.models import Proceso
 import barcode                      
 from barcode.writer import ImageWriter
 from io import BytesIO
@@ -62,6 +64,8 @@ class datos_g (models.Model):
     seudo_dg = models.ForeignKey(
         Guia,
         on_delete=models.CASCADE,
+        blank=True,
+        null = True
     )
 
     fecha = models.DateTimeField(auto_now_add=True,
@@ -80,6 +84,18 @@ class datos_g (models.Model):
     )
     dest = models.CharField(
         max_length=100, blank=True, null = True
+    )
+
+    d_i_a = models.IntegerField(
+        null=True, 
+        blank = True,
+        verbose_name = 'CC autorizado'
+    )
+    autor = models.CharField(
+        max_length=100, 
+        null=True, 
+        blank = True, 
+        verbose_name = 'Autorizado'
     )
 
     postal = models.CharField(
@@ -111,8 +127,8 @@ class datos_g (models.Model):
         null=True,
         blank=True,
     )
-    proceso = models.ForeignKey(Proceso,
-        on_delete=models.CASCADE, blank = True, null = True
+    proc = models.ForeignKey(Proceso,
+        on_delete=models.CASCADE, blank = True, null = True, verbose_name='Proceso'
         )
 
     cod_vis = models.ForeignKey(
@@ -215,6 +231,10 @@ class datos_g (models.Model):
     @property
     def or_imp(self):
         return self.orimp.orden
+
+    @property
+    def proceso(self):
+        return self.proc
     
     # @property
     # def orden(self):
@@ -232,6 +252,7 @@ class datos_g (models.Model):
         self.seudo_dg.id_est = self.id_est
         self.seudo_dg.d_i = self.documento
         self.seudo_dg.orden = self.or_imp
+        self.seudo_dg.proceso = self.proceso
 
         #orden impresion
         # self.orimp.orden = self.orden

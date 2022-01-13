@@ -20,12 +20,13 @@ class Cargue(TimeStampedModel):
     guia = models.ManyToManyField(
         Fisico, 
         through= 'Planilla', 
+
            
     )
 
-    full_name = models.ForeignKey(
+    full_name = models.ManyToManyField(
         courrier, 
-        on_delete=models.CASCADE, 
+        # on_delete=models.CASCADE, 
         verbose_name= 'Mensajero'
         )
 
