@@ -20,13 +20,12 @@ class Cargue(TimeStampedModel):
     guia = models.ManyToManyField(
         Fisico, 
         through= 'Planilla', 
-
-           
+  
     )
 
-    full_name = models.ManyToManyField(
+    full_name = models.ForeignKey(
         courrier, 
-        # on_delete=models.CASCADE, 
+        on_delete=models.CASCADE, 
         verbose_name= 'Mensajero'
         )
 
@@ -34,9 +33,7 @@ class Cargue(TimeStampedModel):
 
     objects = ProductManager()
 
-    def get_absolute_url(self):
-        return reverse('Cargue', args=[self.full_name])
-    
+     
     class Meta: 
         verbose_name = "Cargue"
         verbose_name_plural = "Cargue"
@@ -48,7 +45,7 @@ class Planilla(TimeStampedModel) :
     guia = models.ForeignKey(
         Fisico, 
 
-        on_delete=models.CASCADE, blank = True, null = True
+        on_delete=models.CASCADE
     )
     cargue = models.ForeignKey(
         Cargue, 
@@ -61,20 +58,20 @@ class Planilla(TimeStampedModel) :
         auto_now=True
     )
     
-    class Meta:
-        ordering = ['-id']
-    
     def __str__(self):
         return str(self.id)
 
+    @property
+    def cargues(self):
+        return str(self.cargue)
+
     def save(self, *args, **kwargs):
         self.guia.id_est_id = self.guia.id_est_id = 4
+        self.guia.direccion = (self.cargues)
 
         self.guia.save()       
         super(Planilla, self).save(*args, **kwargs)
 
-    class Meta:
-        ordering = ('guia__fecha', 'id')
 
 class Recepcion(models.Model):
 

@@ -41,7 +41,7 @@ class Planillainline (admin.TabularInline):
 #         fields = ('mensajero',)
 
 @admin.register(Cargue)
-class CargueAdmin(admin.ModelAdmin):
+class CargueAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     
     # change_list_template = 'admin/ruta/Cargue/ruta_change_form.html'
     inlines = [Planillainline,]
@@ -61,7 +61,7 @@ class CargueAdmin(admin.ModelAdmin):
 @admin.register(Planilla)
 class PlanillaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     # resource_class = PlanillaResource
-    list_display = ('guia', 'cargue',  'fecha')
+    list_display = ('id','guia', 'cargue',  'fecha')
     search_fields = ('id',)
 
 # class  Recep_Guiainline (admin.StackedInline):

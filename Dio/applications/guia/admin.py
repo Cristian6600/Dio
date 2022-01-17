@@ -34,7 +34,7 @@ class guiaAdmin(ImportExportModelAdmin, RelatedFieldAdmin):
 #     # raw_id_fields = ("mot",)
     search_fields = ('id_guia', 'seudo__seudo_bd', 'mot__motivo',)
     list_display = ('id_guia', 'mot__motivo', 'd_i', 'seudo', 'direccion', 'id_ciu', 'fecha', 'user', 'destinatario', 'imagen')
-    ordering = ('fecha',)
+    ordering = ('id_guia',)
     list_filter = ('user', 'id_ciu__departamento','fecha', 'mot__motivo', 'estado')
 #     # readonly_fields = ('fecha', 'cantidad', 'user')
 #     actions = None

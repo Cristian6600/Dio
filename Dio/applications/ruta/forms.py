@@ -50,6 +50,7 @@ class RecepcionForm(forms.ModelForm):
             'motivo': forms.Select(
                 attrs = {
                 'class': 'input-group-field',
+                'value': '5',
                 }
             ),
             'estado': forms.Select(

@@ -15,35 +15,16 @@
       <div class="grid-x grid-padding-x">
         <div class="medium-6 cell">
             
-          <div class="col-md-12 col-lg-12 form-group">
-            <input 
-              type="text" 
-              class="form-control" 
-              placeholder="busca.."
-              v-model="kword">
-          </div>
+              <select         
+              v-model="full_name">
+              <option disabled value="">Seleccione mensajero</option>
+              <option value="4">Emilio nieves </option>
+              <option value="5">Cristian </option>
               
+            </select>
             
           </div>
 
-          <div class="col-lg-6">
-            <span 
-              class="badge badge-primary"
-              v-for="lenguaje in lista_nombres_agregados">
-              {$ lenguaje.courrier $}
-            </span>
-          </div>
-
-
-          <ul class="col-lg-12 list-group">
-            <li 
-              v-for="lenguaje in lista_lenguajes"
-              :key="lenguaje.id_courrier"
-              class="list-group-item"
-              @click="AgregarLenguaje(lenguaje)" >{$  lenguaje.courrier$}</li>
-          </ul>
-          
-     
           <form v-on:submit.prevent="AgregarGuia"> 
             <div class="input-group">
               <span class="input-group-label">🔎</span>  
@@ -79,8 +60,8 @@
       <div class="col">
         <button 
         class="cell warning button"
-        @click="RegistrarProgramador()" onclick="location.reload()">Registrar</button>
-        <a href="javascript:location.reload()">Actualizar página</a>
+        @click="RegistrarProgramador()">Registrar</button>
+        <a href="javascript:location.reload()" >Actualizar página</a>
         
       </div>
     </div>  
@@ -91,16 +72,16 @@
   <table >
     <thead>
         <th>Planilla</th>
-        <th>Mensajeros</th>
+        <th>Mensajero</th>
         <th>Fecha</th>
         <th>Impresion</th>
         
     </thead>
     <tbody>
-        {% for e in planillask.all  %}
+        {% for e in planillask  %}
             <tr>
                 <td>{{ e.id }}</td>
-                <td>{{ e.full_name  }}</td>
+                <td>{{ e.full_name }}</td>
                 <td>{{ e.fecha }}</td>
                 <td> 
                     <a href="{% url 'ruta_apps:impresion' e.id %}" class="button warning"><i class="fi-eye"></i></a>

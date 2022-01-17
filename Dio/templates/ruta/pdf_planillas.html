@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,38 +9,52 @@
     width="90"
     height="20">
     
-</head>
-<body>
-      
-    <h2>Planilla</h2>
-    <h3>Fecha: {{ mostrarpub.fecha|date }}</h3>
-    <h3>Cantidad a entregar: {{ count }}  </h3>
-    <h3>Mensajero:   </h3>
+    <style>
+        @page {
+        
+            @frame content_frame {          /* Content Frame */
+            left: 50pt; width: 512pt; top: 90pt; height: 632pt;
+            }
+            @frame footer_frame {           /* Another static Frame */
+                -pdf-frame-content: footer_content;
+                left: 50pt; width: 512pt; top: 772pt; height: 20pt;
+            }
+            
+        
     
+        }
+</style>
 
+<body>
+    
+      
+    <h2>Planilla: {{mostrar_pla.cargue.id}}</h2>
+    <h3>Fecha: {{ mostrarpub.fecha|date }}</h3>
+    <h3>Mensajero:  {{mostrar_nom.cargue.full_name}} </h3>
+    <h3>Cantidad a entregar: {{ count }}  </h3>
+    
     <table BORDER="1px" >
         <thead>
-            <th width="30">id</th>
+            <th width="15">id</th>
             <th width="50">Guia</th>
-            <th width="100">Mensajero</th>
+            
             <th width="100">direccion</th>
             <th >Destinatario</th>
             <th>Ciudad</th>
-            <th width="70">Cedula</th>
-            <th>Observacion</th>
-            
-            
+            <th width="50">Cedula</th>
+            <th width = "200">Observacion</th>
+                 
         </thead>
         <tbody >
             {% for empleado in empleados.all %}
                 <tr >
                     <td>{{ empleado.id }}</td>
                     <td>{{ empleado.guia }}</td>
-                    <td>{{ empleado.full_name }}</td>
                     <td>{{ empleado.guia.direccion }}</td>
                     <td>{{ empleado.guia.destinatario }}</td>
                     <td>{{ empleado.guia.id_ciu }}</td>
                     <td>{{ empleado.guia.d_i }}</td>
+                    
                     
                     
                 </tr>
@@ -47,13 +62,19 @@
         </tbody>
     </table>
 
-</body>
+    <p>Recibe:</p>
+    <p>Entrega</p>
+    <p>Observaciones: </p><hr>
+    
 
-<p>
-    <hr width=50%  align="right" size=1>
- <p>
+
+    <div id="footer_content"> <pdf:pagenumber>
+        de <pdf:pagecount><hr>
+    </div>
     
+</body>
     
+
 
    
 

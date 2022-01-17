@@ -14,10 +14,8 @@ new Vue({
   data: {
     guia: '',
     kword: '',
-    id_courrier: '',
+    full_name: '',
     lista_agregados: [],
-    lista_nombres_agregados: [],
-    lista_nombres: [],
     lista_lenguajes: [],
     nextTodoId: 1
   },
@@ -37,10 +35,6 @@ new Vue({
           console.log(error);
         })
     },
-
-    AgregarLenguaje: function (lenguaje) {
-      this.lista_nombres_agregados.push(lenguaje)
-    },
     
     AgregarGuia: function () {
       this.lista_agregados.push({
@@ -49,6 +43,7 @@ new Vue({
       })
       this.guia = ''
     },
+
     
     RegistrarProgramador: function () {
       //
@@ -56,15 +51,10 @@ new Vue({
       for (let i = 0; i < this.lista_agregados.length; i++) {
         lista_id_guia.push(this.lista_agregados[i].id_guia)
       }
-
-      var lista_id_nombres = []
-      for (let i = 0; i < this.lista_nombres_agregados.length; i++) {
-        lista_id_nombres.push(this.lista_nombres_agregados[i].id_courrier)
-      }
       
       //
       var data_programador = {
-        'full_name': lista_id_nombres,
+        'full_name': this.full_name,
         'guia': lista_id_guia
       }
 

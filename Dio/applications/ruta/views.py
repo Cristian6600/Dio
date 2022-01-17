@@ -85,14 +85,17 @@ class ListEmpleadosPdf(ListView):
     def get(self, request, *args, **kwargs):
         
         nombre = self.kwargs['full_name']
-        # mostrarpub = Planilla.objects.latest('fecha')
         
+        mostrar_pla = Planilla.objects.latest('id')
+        mostrar_nom = Planilla.objects.latest('cargue')
         mostrarpub = Planilla.objects.latest('fecha')
-        guia = Planilla.objects.filter(cargue__id = nombre).order_by('id')
+        guia = Planilla.objects.filter(cargue__id = nombre)
         data = {
             'count': guia.count(),
             'empleados': guia,
             'mostrarpub': mostrarpub,
+            'mostrar_nom': mostrar_nom,
+            'mostrar_pla': mostrar_pla
             
         }
         pdf = render_to_pdf('ruta/pdf_planillas.html', data)
@@ -128,6 +131,7 @@ class FisicoListApiView(LoginRequiredMixin, ListAPIView):
         )
 
 class RegistrarCargue(CreateAPIView):
+    queryset = Cargue.objects.all()
     serializer_class = CargueSerializer
     permission_classes = [permissions.AllowAny]
 

@@ -4,54 +4,139 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <img src="https://firstsource.net.co/wp-content/uploads/2020/06/Enmascarar-grupo-31.png"
+    <!-- <img src="https://firstsource.net.co/wp-content/uploads/2020/06/Enmascarar-grupo-31.png"
     width="320"
-    height="60">
+    height="60"> -->
 
     <style>
         @page {
-            size: letter landscape;
-            margin: 2cm;
+            
+       
+        @frame col1_frame {             /* Content frame 1 */
+            left: 10pt; width: 280pt; top: 25pt; height: 632pt;
         }
-        
+        @frame col2_frame {             /* Content frame 2 */
+            left: 295pt; width: 280pt; top: 50pt; height: 632pt;
+        }
+        @frame footer_frame {           /* Static frame */
+            -pdf-frame-content: footer_content;
+            left: 50pt; width: 512pt; top: 772pt; height: 20pt;
+            
+        }
+    }
+                
     </style>
 
 </head>
-<div>
-    <pdf:toc />
- </div>
-
-<table BORDER="1px" >
-    <th width="40">Firstsource</th>
-    <th width="55">Nit:900861729</th>
-    <th width="210">RESOLUCION MINTIC NO. 3290 del 4 de diciembre de 2018</th>
-</table>
-
+<body>
+    
+<p></p>
 <table >
-    <thead>
-        <th>Guia</th>
-        <th>Destinatario</th>
-        <th>Direccion</th>
-        <th>Fecha</th>
-        <th>Impresion</th>
-    </thead>
     <tbody>
         {% for e in empleados %}
-            <tr>
-                <td pdf:toc />{{ e.seudo_dg }}</td>
-                <td>{{ e.fecha }}</td>
-                <td>{{ e.direccion }}</td>
-                <td>{{ e.seudo_dg }}</td>
-                <td> 
-                    <a href="{% url 'ruta_apps:impresion' e.id_datos_g %}" class="button warning"><i class="fi-eye"></i></a>
-                </td>
-                
-            </tr>
+            
+            <table BORDER="1px" >
+    <th width="40">Firstsource</th>
+    <th width="55">Nit:900861729</th>
+    <th width="300">RESOLUCION MINTIC NO. 3290 del 4 de diciembre de 2018</th>
+</table>
+<table border="1">
+			<caption>Tabla con combinación de filas</caption>
+			<tr>
+				<th>Celda 1</th>
+				<th>Celda 2</th>
+				
+			</tr>
+			<tr>
+				<td rowspan="2"><pdf:barcode value="{{ e.seudo_dg }}" type="code128" humanreadable="1" align="right" />
+            
+    <div>
+   <pdf:toc />
+</div></td>
+				<td>Celda 5</td>
+				
+			</tr>
+			<tr>
+				<td>Celda 7</td>
+			</tr>
+		</table>
+            
+<p>Destinatario: {{ e.dest }}  <br>
+C.C  {{ e.d_i }}   C.postal {{ e.postal }} </p>
+
+<p>ESTE PRODUCTO SE ENCUENTRA DESINFECTADO, CON EL PROPOSITO DE CUIDAR NUESTROS 
+CLIENTE, HEMOS TOMADO TODAS LAS MEDIDAS DE ASEPSIA, RECUERDA LAVARTE LAS MANOS pr</p>
+Fecha proxima Entrega <br>
+Fecha y hora Llegad <br>
+Recibe</p>
+<table BORDER="px" >
+        <thead>
+            <th colspan="4">Devoluciones</th>
+            <th>Desconocido</th>
+            <th>Rehusado</th>
+            <th>No reside</th>
+            <th>No reclama</th>
+            <th>Dir errada</th>
+            <th>Otro</th>
+            
+                 
+        </thead>
+    </table>
+        <table BORDER="1" >
+        
+            <tr>         
+                    <td>1 Intento</td>
+                    <td width="15"></td>
+                    <td width="15"></td>
+                    <td width="15"></td>
+                    <td width="15"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>         
+                    <td>2 Intento</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>         
+                    <td>3 Intento</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+       
+    </table>
+
+<p>El usuario deja constancia expresa de que tuvo conocimiento del contrato que se encuentra publicado en la pagina web firstsource.net.co; el 
+cual regula el servicio acordado entre las partes, cuyo contenido clausular acepta expresamente con la suscripcion de este documento. El 
+cliente puede realizar el rastreo de sus envios en la pagina web firstsource.net.co o en la linea telefonica +57) (1) 8903906. El cliente puede 
+presentar sus peticiones,quejas y recursos en la web y telefono descrito anteriormente o a traves del correo electronico 
+servicio@firstsource.net.co.</p>
         {% endfor %}
     </tbody>
 </table>
 
+<div id="footer_content">pagina <pdf:pagenumber>
+        de <pdf:pagecount>
 
+        
+        
+            
+        </body>
 
 </html>
 
