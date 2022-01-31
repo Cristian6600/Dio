@@ -27,13 +27,13 @@ class courrier(models.Model):
     id_courrier = models.IntegerField(
         verbose_name = 'Id Courrier'
     )
-    d_i = models.BigIntegerField()
+    d_i = models.CharField(max_length=12)
 
     courrier = models.CharField(
         max_length=70, 
         verbose_name = 'Nombre courrier'
     )
-    cel = models.PositiveBigIntegerField(
+    cel = models.CharField(max_length=12,
         verbose_name = 'Celular'
     )
     dir = models.CharField(

@@ -21,17 +21,17 @@ SECRET_KEY = 'u5h4i@k8zl$24!dhx)=22c)ue@5y%$pg)hpr&@#*wt6rcjx0)f'
 # Application definition
 
 INSTALLED_APPS = [
-    'captcha',
-    'material',
-    'material.admin',
+    # 'captcha',
+    # 'material',
+    # 'material.admin',
     # 'simple_history',
     'import_export',
 
     # 'grappelli',
-    'rest_framework',
-    'rest_framework.authtoken',
-    'related_admin',
-    # 'django.contrib.admin',
+    # 'rest_framework',
+    # 'rest_framework.authtoken',
+    # 'related_admin',
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
