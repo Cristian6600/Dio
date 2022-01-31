@@ -2,7 +2,7 @@ from typing import List
 from django.http import HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
-from . models import Paquete
+from . models import Paquete, Fisico
 from django.views.generic import TemplateView, CreateView, ListView, DetailView
 from django.views.generic.detail import SingleObjectMixin
 from django.views import View
@@ -33,6 +33,13 @@ class FisicoListView(LoginRequiredMixin, ListView):
     model = Paquete
     paginate_by = 10
     success_url = '.'
+
+class EstadoRutaListView(LoginRequiredMixin, ListView):
+    template_name = "fisico/estado_ruta.html"
+    queryset = Fisico.objects.filter(est_planilla = 1)
+    paginate_by = 10
+    success_url = '.'
+    context_object_name ='estado_planilla'
 
 # class FisicoCreateView(LoginRequiredMixin, CreateView):
 #     template_name = "fisico/fisico.html"

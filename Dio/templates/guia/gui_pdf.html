@@ -1,0 +1,165 @@
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <img src="https://firstsource.net.co/wp-content/uploads/2020/06/Enmascarar-grupo-31.png"
+    width="80"
+    height="15"> -->
+
+    <style>
+        
+        @page {
+            size: letter landscape;
+        
+       
+        @frame col1_frame {             /* Content frame 1 */
+            left: 15pt; width: 355pt; top: 3pt; height: 635pt;
+        }
+        @frame col2_frame {             /* Content frame 2 */
+            left: 390pt; width: 355pt; top: 3pt; height: 632pt;
+        }
+        @frame footer_frame {           /* Static frame */
+            -pdf-frame-content: footer_content;
+            left: 50pt; width: 512pt; top: 772pt; height: 15pt;
+            
+        }
+        
+    }    
+                
+    </style>
+   
+
+</head>
+<body>
+    <thead>
+        {% for e in guias %}
+            
+        <table BORDER="1px" >
+            <th width="55">Firstsource</th>
+            <th width="70">Nit:900861729</th>
+            <th width="300">RESOLUCION MINTIC NO. 3290 del 4 de diciembre de 2018</th>
+        </table>
+        <table border="">
+    
+    </thead>
+    <table>
+		<tbody>
+			<tr>
+				<td  rowspan="6"><pdf:barcode value="{{ e.id_guia }}" type="code128" humanreadable="1" align="right" barwidth ="1" /></td>
+                    <td>Domicilio ${{e.domicilio}}</td>         
+                    <td>Tipo de envio: <strong>Mensajeria</strong> </td>     
+            </tr>        
+   			
+			<tr>
+				<td>Acarreo: ${{e.acarreo}}</td>
+                <td>Unidades</td>
+			</tr>
+            <tr>
+				<td>Declarado ${{e.declarado}}</td>
+                <td>Contiene</td>
+			</tr>
+            <tr>
+				<td>s/flete: </td>
+                <td>Remitente:Davivienda </td>
+			</tr>
+            <tr>
+				<td>Flete ${{e.flete}}</td>
+                <td>Nit: 860034313-7</td>
+			</tr>
+            
+				<td>Total</td>
+                <td>Cl 28 # 13 A - 17 Bogota</td>
+			
+
+        </body>
+	</table>
+            
+    <p>Destinatario: {{ e.destinatario }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Bolsa:  {{e.bolsa}}  <br>
+        C.C  {{ e.d_i }} &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;   C.postal {{ e.postal }} <br>
+        {{ e.direccion }} <br>
+        <strong> ESTE PRODUCTO SE ENCUENTRA DESINFECTADO, CON EL PROPOSITO DE CUIDAR NUESTROS 
+            CLIENTE, HEMOS TOMADO TODAS LAS MEDIDAS DE ASEPSIA, RECUERDA LAVARTE LAS MANOS 
+        </strong><br>
+        Fecha proxima Entrega: {{e.fecha|date:"year " }}  Fecha y... <br>
+        Fecha y hora Llegad: &nbsp;&nbsp&nbsp;&nbsp&nbsp; &nbsp&nbsp&nbsp&nbsp;&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{e.fecha}} <br>
+        Recibe:    
+    </p>
+
+        <table BORDER="px" >
+            <thead>
+                <th colspan="5" >Devoluciones</th>
+                <th width = "40">Desconocido</th>
+                <th width = "45">Rehusado</th>
+                <th width = "40">No reside</th>
+                <th width = "45">No reclama</th>
+                <th width = "45">Dir errada</th>
+                <th width = "40">Otro</th>
+            
+                 
+            </thead>
+        </table>
+        <table BORDER="1" >
+        
+            <tr>         
+                    <td width="30">1 Intento</td>
+                    <td width="10"></td>
+                    <td width="10"></td>
+                    <td width="10"></td>
+                    <td width="10"></td>
+                    <td width="10"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>         
+                    <td>2 Intento</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    
+                </tr>
+                <tr>         
+                    <td>3 Intento</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    
+                </tr>
+       
+        </table>
+
+        <font size=2>El usuario deja constancia expresa de que tuvo conocimiento del contrato que se encuentra publicado en la pagina web firstsource.net.co; el 
+            cual regula el servicio acordado entre las partes, cuyo contenido clausular acepta expresamente con la suscripcion de este documento. El 
+            cliente puede realizar el rastreo de sus envios en la pagina web firstsource.net.co o en la linea telefonica +57) (1) 8903906. El cliente puede 
+            presentar sus peticiones,quejas y recursos en la web y telefono descrito anteriormente o a traves del correo electronico 
+            servicio@firstsource.net.co 
+        </font><br><br>
+            {% endfor %}
+</tbody>
+
+
+<div id="footer_content">pagina <pdf:pagenumber>
+        de <pdf:pagecount>
+
+        
+            
+            
+       
+
+</html>

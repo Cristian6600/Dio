@@ -8,22 +8,30 @@
 <div class="off-canvas-wrapper">
     <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
 
-        <div class="off-canvas position-left reveal-for-large" id="my-info" data-off-canvas data-position="left" style="background-color: #000000;">
+        <div class="off-canvas position-left reveal-for-large" id="my-info" data-off-canvas data-position="left"  style="background: linear-gradient( #020202, #00095c); ">
             <div class="row column">
               
-                <h3 style="text-align: center; padding: 0.3em; color: #008cff;">Firstsource</h3>
+                <h3 style="text-align: center; padding: 0.3em; color: #ffffff;">FIRST SOURCE</h3>
+                <ul class="vertical menu accordion-menu" data-accordion-menu>
+                  <li>
+                    
+                    <ul class="menu vertical nested">
+                      
+                    </ul>
+                  </li>
                 <ul class="vertical menu">
                     <li>
-                        <a href="#"><span class="label warning">Consultar</span></a>
+                        <a href="#"><span style="color: white;">Consultar</span></a>
                         <ul class="nested vertical menu">
                             <li class="{% if request.resolver_match.url_name == 'lista-cliente' %}activeli{% endif %}">
                                 <a href="{% url 'producto_app:lista-cliente' %}" style="color: white;">Productos</a>
                             </li>
                         </ul>
                 </ul>
+                
                 <ul class="vertical menu">
                     <li>
-                      <a href="#"><span class="label warning">Custodia</span></a>
+                      <a href="#"><span style="color: white;">Custodia</span></a>
                       <ul class="nested vertical menu">
                         <li class="{% if request.resolver_match.url_name == 'venta-index' %}activeli{% endif %}">
                           <a href="{% url 'producto_app:producto-crear' %}" style="color: white;">Agregar fisico</a>
@@ -34,21 +42,32 @@
                         <li class="{% if request.resolver_match.url_name == 'caja-index' %}activeli{% endif %}">
                           <a href="{% url 'gatos_g:datos-cliente' %} " style="color: white;">Impresion Guia</a>
                         </li>
+                        <li class="{% if request.resolver_match.url_name == 'caja-index' %}activeli{% endif %}">
+                          <a href="{% url 'producto_app:guia-buscar' %} " style="color: white;">Impresion por guia imprimir</a>
+                        </li>
+                        
                       </ul>
                     </li>
                 </ul> 
+                
+                  
                 <ul class="vertical menu">
                     <li>
-                      <a href="#"><span class="label warning">Ruta</span></a>
+                      <a href="#"><span style="color: white;">Ruta</span></a>
                       <ul class="nested vertical menu">
-                        <!-- <li class="{% if request.resolver_match.url_name == 'venta-index' %}activeli{% endif %}">
-                          <a href="{% url 'ruta_apps:cargue-ruta' %}" style="color: white;">Ruta</a>
-                        </li> -->
-                        <li class="{% if request.resolver_match.url_name == 'venta-index' %}activeli{% endif %}">
+                        
+                                                  
+                          <li class="{% if request.resolver_match.url_name == 'venta-index' %}activeli{% endif %}">
+                            <a href="{% url 'ruta_apps:asignar' %}" style="color: white;">Asignar a mensajero</a>
+                          </li>
+                          <li class="{% if request.resolver_match.url_name == 'venta-index' %}activeli{% endif %}">
                             <a href="{% url 'ruta_apps:cargue-recepcion' %}" style="color: white;">Recepcion</a>
                           </li>
                           <li class="{% if request.resolver_match.url_name == 'venta-index' %}activeli{% endif %}">
-                            <a href="{% url 'ruta_apps:listarr-planillas' %}" style="color: white;">Impresion planilla</a>
+                            <a href="{% url 'ruta_apps:planillas' %}" style="color: white;">imprimir</a>
+                          </li>
+                          <li class="{% if request.resolver_match.url_name == 'venta-index' %}activeli{% endif %}">
+                            <a href="{% url 'fisico_app:estado-ruta' %}" style="color: white;">Pendiente cerrar</a>
                           </li>
                         
                         </li>
@@ -61,13 +80,13 @@
                 <div class="off-canvas-content" data-off-canvas-content>
                     <!-- declaramos un nuevo bloque para contenidod e panel -->
                     <div class="grid-x">
-                        <div class="cell top-bar" style="background-color: #000000;">
+                        <div class="cell top-bar" style="background: linear-gradient(45deg, #020202, #000230);">
                             <div class="top-bar-left">
                                 <h4 style="color: white;">Sesion de: {{ user.username }}</h4>
                             </div>
                             <div class="top-bar-right">
                                 <a href="{% url 'users_app:user-logout' %}">
-                                    <span class="label warning">Salir</span>
+                                    <span class="label secondary">Salir</span>
                                 </a>
                             </div>
                         </div>

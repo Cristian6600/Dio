@@ -21,10 +21,18 @@ urlpatterns = [
         views.bolsaCreateView.as_view(), 
         name='producto-crear',
     ),
+    
+    path(
+        'guia-buscar/', 
+        views.GuiaListView.as_view(), 
+        name='guia-buscar',
+    ),
 
-
-    path('nam', views.handleMultipleImagesUpload, name = "upload-multiple")
-
+    path(
+        'buscar-guias/<buscar>/',
+        views.BuscarGuiaPdf.as_view(),
+        name = 'busca-guia',
+    ),
 
 
     ]

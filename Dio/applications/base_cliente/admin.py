@@ -28,7 +28,7 @@ class bd_clieAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     # list_filter = ('id_clie', 'fecha')
     search_fields = ('seudo_bd', 'fecha', 'cliente')
     raw_id_fields = ("id_est_clie",)
-    # date_hierarchy = ('fecha')
+    # date_hierarchy = ('fecha_planilla')
 
     icon_name  =  'cloud_upload'
     

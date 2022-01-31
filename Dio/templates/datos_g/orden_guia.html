@@ -4,19 +4,31 @@
 {% block panel-content %}
 
 <div class="grid-x grid-margin-x">
+    <form class="cell grid-x grid-margin-x" method="GET">
+      <div class="cell input-group">
+        <span class="input-group-label">Buscar</span>
+        <input class="input-group-field" type="text" id="courrier" name="courrier" 
+          value="{{request.GET.kword}}"
+          placeholder="Buscar ..."
+          >
+      </div>
+
+<div class="grid-x grid-margin-x">
 <form method="post">{% csrf_token %}
 </div>
 
 <table>
     <thead>
         <th>Orden de impresion</th>
+        <th>Fecha</th>
     </thead>
     <tbody>
         {% for e in orden  %}
         <tr>
             <td>{{ e.orden }}</td>
+            <td>{{e.fecha}}</td>
             <td>
-                <a href="{% url 'gatos_g:impresion-guia' e.id %}" class="button warning"><i class="fi-eye"></i></a>
+                <a href="{% url 'gatos_g:impresion-guia' e.id %}" class="button"><i class="fi-print"></i></a>
             </td>
         </tr>
         {% endfor %}

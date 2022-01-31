@@ -80,6 +80,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return str(self.username) + ' ' +str(self.ciudad)
 
+
     
 class Profile(models.Model):
     id = models.OneToOneField(User, primary_key=True, on_delete=models.CASCADE)

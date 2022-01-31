@@ -10,12 +10,18 @@ from django.views.generic import CreateView, ListView, DetailView
 from django.views.generic.detail import SingleObjectMixin
 from .forms import guiafisicoForm, ImgForm
 from . models import Guia, img
-
+from django.shortcuts import render
+from .utils import render_to_pdf
 
 class ProductListView(LoginRequiredMixin, ListView):
     template_name = "producto/cliente.html"
-    model = Guia
-    paginate_by = 6
+    paginate_by = 4
+
+    def get_queryset(self):
+        kword = self.request.GET.get("kword", '')
+        order = self.request.GET.get("order", '')
+        queryset = Guia.objects.buscar_producto(kword, order)
+        return queryset
            
 class ProductDetailView(LoginRequiredMixin, DetailView):
     template_name = "producto/detail.html"
@@ -43,7 +49,7 @@ class ImgCreateView(CreateView):
     form_class = ImgForm
     success_url = '.'
 
-# @login_required
+@login_required
 def handleMultipleImagesUpload(request):
         if request.method == "POST":
             images = request.FILES.getlist('images')
@@ -55,6 +61,32 @@ def handleMultipleImagesUpload(request):
             return JsonResponse({"imagenes": [{"url": image.image.url} for image in uploaded_images]})
         return render(request, "index.html")    
 
+#--------Impresion por guia--------------
+class GuiaListView(ListView):
+    template_name = "guia/imprimir_guia.html"
+    context_object_name = 'guia'
+
+    def get_queryset(self, ):
+        queryset = Guia.objects.filter(
+            id_guia=self.request.GET.get('id_guia'),
+        )
+        return queryset   
+#-------------PDF impresion por guia--------------
+class BuscarGuiaPdf(ListView):
+    # template_name = "guia/gui_pdf.html"
+    # model = Guia
+    # fields = ('__all__')
+
+    def get(self, request, *args, **kwargs):
+        nombre = self.kwargs['buscar']
+        guia = Guia.objects.filter(id_guia = nombre)
+        data = {
+            'count': guia.count(),
+            'guias': guia
+        }
+        pdf = render_to_pdf('guia/gui_pdf.html', data)
+        return HttpResponse(pdf, content_type='application/pdf')
+     
 
 
 

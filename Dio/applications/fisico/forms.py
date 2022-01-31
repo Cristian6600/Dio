@@ -7,7 +7,8 @@ class ProductForm(forms.ModelForm):
         model = Paquete
         fields = (
             'bolsa',
-            'seudo'            
+            'seudo',
+            'user'          
         )
 
         widgets = {

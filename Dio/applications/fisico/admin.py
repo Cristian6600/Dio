@@ -7,6 +7,12 @@ from . models import Paquete, Fisico, Bolsa, Mesa, Motivo_mesa, Proceso
 from django.db import models
 from django.forms import ModelForm
 from django import forms
+
+class FisicoResource(resources.ModelResource):
+    
+    class Meta:
+        model = Fisico
+        import_id_fields = ('id_guia',) 
     
 # class MyForm(forms.ModelForm):
 #     seudo = forms.CharField(
@@ -20,27 +26,21 @@ from django import forms
 class PaqueteAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     
     # change_form_template = 'admin/fisico/change_form.html'
-    # raw_id_fields = ("seudo",)
-    fields = (  
-        ('bolsa'),
-        ('seudo'),
-        ('estado'),
-        
-    )
+    
+    raw_id_fields = ("seudo",)
 
     list_display = ('seudo', 'bolsa', 'fecha', 'estado')
 
     search_fields = ('bolsa', 'Seudo',)
 
-    list_filter = ('bolsa', 'seudo', 'fecha', 'estado', )
-
-    # form = MyForm
-
     icon_name  =  'local_shipping'
 
-class FisicoAdmin(admin.ModelAdmin):
-    list_display = ('id_guia', 'bolsa', 'fecha', 'estado')
-
+class FisicoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    resource_class = FisicoResource
+    list_display = ('id_guia', 'bolsa', 'fecha', 'estado', 'mensajero', 'fecha_planilla')
+    date_hierarchy = ('fecha_planilla')
+    list_filter = ('est_planilla', 'mensajero',)
+    
 class BolsaAdmin(admin.ModelAdmin):
     pass
 

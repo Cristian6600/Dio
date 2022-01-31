@@ -6,7 +6,7 @@ from . models import Cliente, Ciudad, Departamento
 class CiudadAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     raw_id_fields = ('departamento',)
     list_display = ('id', 'ciudad', 'departamento', 'cubrimiento')
-    search_fields = ('id', 'ciudad', 'departamento')
+    search_fields = ('id', 'ciudad')
     list_filter = ('ciudad', 'departamento', 'cubrimiento')
     icon_name  =  'location_city'
 

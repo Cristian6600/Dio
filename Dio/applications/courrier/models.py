@@ -1,6 +1,7 @@
 from django.db import models
 
 from applications.cliente.models import Ciudad
+from .managers import CourrierManager
 
 class vehiculo(models.Model):
 
@@ -65,6 +66,8 @@ class courrier(models.Model):
     modelo = models.DateField()
 
     licencia = models.IntegerField()
+
+    objects = CourrierManager()
 
     class Meta:
         verbose_name = "Courrier"

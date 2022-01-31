@@ -1,0 +1,35 @@
+{% extends "guia/base_fisico.html" %} 
+
+{% load static %}
+
+{% block panel-content %}
+<div class="cell grid-x grid-margin-x">
+    <h5 class="cell" style="text-align: center;">Planillas pendientes de guias por cerrar</h5>
+    <div class="cell">
+
+
+    <table>
+        <thead>
+            <th>Guia</th>
+            <th>Mensajero</th>
+        </thead>
+        <tbody>
+
+            
+            {% for e in estado_planilla %}
+            <tr>
+                <td>{{e.guia}}</td>
+                <td>{{e.mensajero}}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td>No se encuentraron pendientes, gracias por su gestion... </td>
+               
+            </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock panel-content %}

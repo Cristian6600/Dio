@@ -1,0 +1,39 @@
+{% extends "ruta/base_cargue.html" %} 
+
+{% load static %}
+
+{% block panel-content %}
+
+<div class="grid-x grid-margin-x">
+    <div class="cell grid-x grid-margin-x">
+      <form class="cell small-9 input-group" method="GET">
+        <span class="input-group-label"></span>
+        <input class="input-group-field" type="text" id="kword" name="kword" placeholder="Mensajero...">
+        <div class="input-group-button">
+          <input type="submit" class="button secondary" value="Buscar">
+        </div>
+</form>
+      
+    <table>
+        <thead>
+            <th>Mensajero</th>
+        
+        </thead>
+        <tbody>
+            <td></td>
+        </tbody>
+        {% for e in planillas %}
+        <tr>
+            <td>{{ e.courrier }}</td>
+        
+            <td>
+            <a href="{% url 'ruta_apps:impresion' e.id %}" class="button"><i class="fi-print"></i></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+
+
+{% endblock panel-content %}

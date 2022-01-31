@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class Departamento(models.Model):
     departamento = models.CharField(max_length=30)
 
@@ -37,7 +36,7 @@ class Ciudad (models.Model):
         return str (self.ciudad) 
 
 class Cliente (models.Model):
-    id_clie = models.IntegerField(
+    id_clie = models.CharField(max_length=10,
         primary_key = True,
         verbose_name = 'Id cliente'
     )

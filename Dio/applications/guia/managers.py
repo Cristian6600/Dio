@@ -10,7 +10,7 @@ class ProductManager(models.Manager):
 
     def buscar_producto(self, kword, order):
         consulta = self.filter(
-            Q(name__icontains=kword) | Q(barcode=kword)
+            Q(seudo__seudo_bd__icontains=kword) | Q(id_guia__icontains=kword)
         )
         # verificamos en que orden se solicita
         if order == 'date':

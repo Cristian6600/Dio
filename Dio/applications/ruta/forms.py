@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import widgets
-from .models import Cargue, Recepcion
+from .models import Cargue, Planilla, Recepcion
 from applications.guia.models import Guia
 from django.core.exceptions import NON_FIELD_ERRORS
 from django.utils.translation import gettext_lazy as _
@@ -31,42 +31,39 @@ class CargueForm(forms.ModelForm):
             ),
             }
         
-              
-# form = CargueForm()
-# article = Cargue.objects.get(pk=1)
-# form = CargueForm(instance=article)
 
-class RecepcionForm(forms.ModelForm):   
+class AsignarForm(forms.ModelForm):   
     class Meta:
-        model = Recepcion
-        fields = ['planilla', 'motivo', 'guia', 'estado']
+        model = Planilla
+        fields = ['full_name', 'guia', 'user']
 
-        widgets={
-            'planilla': forms.Select(
+        widgets = {
+            
+            'full_name': forms.Select(
                 attrs={
                     'class': 'input-group-field',
                 }
             ),
+            }
+
+        
+class RecepcionForm(forms.ModelForm):   
+    class Meta:
+        model = Recepcion
+        fields = ['guia', 'estado', 'motivo',]
+
+        widgets = {
             'motivo': forms.Select(
-                attrs = {
-                'class': 'input-group-field',
-                'value': '5',
+                attrs={
+                    'class': 'input-group-field',
                 }
             ),
             'estado': forms.Select(
-                attrs= {
+                attrs={
                     'class': 'input-group-field',
+                    'readonly': True
                 }
             ),
-            'guia': forms.NumberInput(
-                attrs = {
-                    'placeholder': 'Barcode guia',
-                    'class': 'input-group-field',
-                    'autofocus': 'autofocus'  ,
-                    'class': 'input-group-field',
-                    'size': '10'
-                }
-            ),
-                
             }
+
         

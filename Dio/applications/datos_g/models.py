@@ -53,19 +53,19 @@ class Motivo(models.Model):
         verbose_name_plural = "Motivo"
 
 class Orden (models.Model):
-    orden = models.IntegerField()
+    orden = models.IntegerField(primary_key= True)
+    fecha = models.DateTimeField(auto_now=True, blank=True, null=True)
 
     def __str__(self):
         return str(self.orden)
 
 class datos_g (models.Model):
-    id_datos_g = models.CharField(primary_key=True, max_length=30)
 
     seudo_dg = models.ForeignKey(
         Guia,
         on_delete=models.CASCADE,
-        blank=True,
-        null = True
+        primary_key=True,
+        
     )
 
     fecha = models.DateTimeField(auto_now_add=True,
@@ -262,8 +262,20 @@ class datos_g (models.Model):
 
         super(datos_g, self).save(*args, **kwargs)
 
-    
-    
+class Cubrimiento(models.Model):
+      id_cubrimiento = models.IntegerField(
+          primary_key= True,
+          verbose_name='Codigo'
+        )
+      oficina = models.CharField(max_length=80)
+      direccion = models.CharField(max_length=100)
+      dane = models.ForeignKey(Ciudad,
+        on_delete=models.CASCADE,
+        related_name = 'Ciudad'
+        )
+      dias = models.CharField(max_length=6)
+      direccion_cita = models.CharField(max_length=180)
+      postal = models.IntegerField()
 
 
 

@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from applications.datos_g.views import MyView
 
 app_name = "gatos_g"
 
@@ -15,4 +16,11 @@ urlpatterns = [
         views.ListGuiaPdf.as_view(),
         name = 'impresion-guia',
     ),
+    path(
+        'orden-impresion-guia/',
+         views.OrdenListView.as_view(),
+         name='guia-buscar',
+    ),
+    path('mine/', MyView.as_view(), name='my-view'),
+    
 ]

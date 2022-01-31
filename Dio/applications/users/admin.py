@@ -4,9 +4,10 @@ from import_export import resources
 from . models import User, Profile
 
 class UserAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-
+    
     list_display = ('id', 'username', 'email', 'nombres', 'apellidos', 'genero', 'ciudad')
     search_fields = ('username', 'nombres')
+    raw_id_fields = ['ciudad']
 
 class ProfileAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     pass

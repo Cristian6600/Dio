@@ -15,7 +15,6 @@ from applications.fisico.models import Fisico
 from django.utils.encoding import smart_text
 from django.conf import settings 
 
-# from .managers import ProductManager
 # from simple_history.models import HistoricalRecords
 # from simple_history import register
 
@@ -375,14 +374,7 @@ class img(models.Model):
         self.id_guia.save()     
         super (img, self).save(*args, **kwargs)
  
-class Feed(models.Model):
-    user=models.ForeignKey(User, on_delete=models.CASCADE, related_name='feeds')
-    text=models.TextField(blank=False, max_length=500)
 
-
-class FeedFile(models.Model):
-    file = models.FileField(upload_to="files/%Y/%m/%d")
-    feed = models.ForeignKey(Feed, on_delete=models.CASCADE, related_name='files')
  
     
 

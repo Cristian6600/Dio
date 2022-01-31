@@ -2520,16 +2520,16 @@ ul.no-bullet, ol.no-bullet {
     background-color: #5e5e5e;
     color: #fefefe; }
   .button.success, .button.success.disabled, .button.success[disabled], .button.success.disabled:hover, .button.success[disabled]:hover, .button.success.disabled:focus, .button.success[disabled]:focus {
-    background-color: #17baba;
+    background-color: #3adb76;
     color: #0a0a0a; }
   .button.success:hover, .button.success:focus {
-    background-color: #17baba;
+    background-color: #22bb5b;
     color: #0a0a0a; }
   .button.warning, .button.warning.disabled, .button.warning[disabled], .button.warning.disabled:hover, .button.warning[disabled]:hover, .button.warning.disabled:focus, .button.warning[disabled]:focus {
-    background-color: #17b3ba;
+    background-color: #ffae00;
     color: #0a0a0a; }
   .button.warning:hover, .button.warning:focus {
-    background-color: #3adb76;
+    background-color: #cc8b00;
     color: #0a0a0a; }
   .button.alert, .button.alert.disabled, .button.alert[disabled], .button.alert.disabled:hover, .button.alert[disabled]:hover, .button.alert.disabled:focus, .button.alert[disabled]:focus {
     background-color: #cc4b37;
@@ -2564,7 +2564,7 @@ ul.no-bullet, ol.no-bullet {
     border-color: #157539;
     color: #157539; }
   .button.hollow.warning, .button.hollow.warning.disabled, .button.hollow.warning[disabled], .button.hollow.warning.disabled:hover, .button.hollow.warning[disabled]:hover, .button.hollow.warning.disabled:focus, .button.hollow.warning[disabled]:focus {
-    border: 1px solid #1191e6;
+    border: 1px solid #ffae00;
     color: #ffae00; }
   .button.hollow.warning:hover, .button.hollow.warning:focus {
     border-color: #805700;
@@ -3086,7 +3086,7 @@ select {
     background: #3adb76;
     color: #0a0a0a; }
   .badge.warning {
-    background: #17abba;
+    background: #ffae00;
     color: #0a0a0a; }
   .badge.alert {
     background: #cc4b37;
@@ -3200,7 +3200,7 @@ select {
     background-color: #22bb5b;
     color: #0a0a0a; }
   .button-group.warning .button, .button-group.warning .button.disabled, .button-group.warning .button[disabled], .button-group.warning .button.disabled:hover, .button-group.warning .button[disabled]:hover, .button-group.warning .button.disabled:focus, .button-group.warning .button[disabled]:focus {
-    background-color: #17baba;
+    background-color: #ffae00;
     color: #0a0a0a; }
   .button-group.warning .button:hover, .button-group.warning .button:focus {
     background-color: #cc8b00;
@@ -3232,8 +3232,8 @@ select {
     border-color: #3b3b3b;
     color: #3b3b3b; }
   .button-group.hollow.success .button, .button-group.hollow.success .button.disabled, .button-group.hollow.success .button[disabled], .button-group.hollow.success .button.disabled:hover, .button-group.hollow.success .button[disabled]:hover, .button-group.hollow.success .button.disabled:focus, .button-group.hollow.success .button[disabled]:focus, .button-group.hollow .button.success, .button-group.hollow .button.success.disabled, .button-group.hollow .button.success[disabled], .button-group.hollow .button.success.disabled:hover, .button-group.hollow .button.success[disabled]:hover, .button-group.hollow .button.success.disabled:focus, .button-group.hollow .button.success[disabled]:focus {
-    border: 1px solid #17baba;
-    color: #17baba; }
+    border: 1px solid #3adb76;
+    color: #3adb76; }
   .button-group.hollow.success .button:hover, .button-group.hollow.success .button:focus, .button-group.hollow .button.success:hover, .button-group.hollow .button.success:focus {
     border-color: #157539;
     color: #157539; }
@@ -4161,7 +4161,7 @@ select {
     background: #3adb76;
     color: #0a0a0a; }
   .label.warning {
-    background: #17baba;
+    background: #ffae00;
     color: #0a0a0a; }
   .label.alert {
     background: #cc4b37;

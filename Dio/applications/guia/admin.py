@@ -4,7 +4,7 @@ from related_admin import RelatedFieldAdmin
 from import_export import resources
 from django.contrib.admin.models import ADDITION, LogEntry
 
-from . models import Estado, Servicio, Cod_vis, Guia, img, Feed, FeedFile
+from . models import Estado, Servicio, Cod_vis, Guia, img
 from django.utils.html import format_html
 from django.contrib.admin.models import LogEntry, ADDITION, CHANGE
 from django.contrib.admin import AdminSite
@@ -17,7 +17,7 @@ class guiaResource(resources.ModelResource):
     class Meta:
         model = Guia
         import_id_fields = ('seudo',) 
-        fields = ('fecha',  'seudo__cliente', 'seudo__d_i', 'seudo__id_pro__producto', 'id_ciu__ciudad', 'direccion', 'bolsa', 'id_guia', 'postal', 'proceso__proceso', )
+        fields = ('fecha',  'seudo__cliente', 'seudo__d_i', 'seudo__id_pro__producto', 'id_ciu__ciudad', 'direccion', 'bolsa', 'id_guia', 'postal', 'proceso__proceso', 'seudo' )
         export_order = ('seudo__id_pro__producto', 'seudo__d_i', 'seudo__cliente', 'direccion', 'bolsa', 'id_guia', 'id_ciu__ciudad', 'fecha',  )
 @admin.register(Guia)
 class guiaAdmin(ImportExportModelAdmin, RelatedFieldAdmin):
@@ -86,6 +86,5 @@ admin.site.register(LogEntry, MoniterLog)
 admin.site.register(Cod_vis, Cod_visAdmin)
 
 admin.site.register(img, ImgAdmin)
-admin.site.register(Feed)
-admin.site.register(FeedFile)
+
 

@@ -5,11 +5,13 @@ from django.conf import settings
 
 from applications.base_cliente.models import Bd_clie, Producto, Est_clie
 from applications.cliente.models import Ciudad
+from applications.courrier.models import courrier
 
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from simple_history.models import HistoricalRecords
 from django.core.exceptions import ValidationError
+
 
 
 class Proceso(models.Model):
@@ -100,11 +102,24 @@ class Fisico(Fisi_pa, Bolsa):
 
     fecha_recepcion = models.DateTimeField(blank = True, null= True)
 
+    fecha_planilla = models.DateTimeField(blank= True, null= True)
+
     imagen = models.ImageField(
         upload_to = 'guia',
         null=True, 
         blank = True,   
     )
+    mensajero = models.ForeignKey(
+        courrier, 
+        on_delete=models.CASCADE, 
+        blank = True, null= True
+        )
+    
+    est_planilla = models.CharField(max_length= 30 )
+
+    id_planilla = models.IntegerField(blank=True, null= True)
+
+    
     
     unique_together = ('bolsa', 'seudo')
 
@@ -123,7 +138,6 @@ class Paquete(Fisi_pa):
         Bd_clie,
         primary_key = True,
         on_delete=models.CASCADE,
-        help_text = 'Codigo de barras',
         unique = True
     )
     user = models.ForeignKey(
@@ -133,8 +147,8 @@ class Paquete(Fisi_pa):
         editable=True,
         verbose_name= 'Usuario'
     )
-    
-    unique_together = ('bolsa', 'seudo')
+    class Meta:
+        unique_together = ('bolsa', 'seudo')
 
     @property
     def var(self):
@@ -150,7 +164,6 @@ class Paquete(Fisi_pa):
     def __str__(self):
         return str(self.seudo) 
     
-
 class Motivo_mesa(models.Model):
     motivo = models.CharField(max_length=100)
 
