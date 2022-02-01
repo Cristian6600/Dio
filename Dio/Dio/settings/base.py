@@ -24,7 +24,7 @@ INSTALLED_APPS = [
     # 'captcha',
     'material' ,
     'material.admin' ,
-    # 'simple_history',
+    'simple_history',
     'import_export',
     # 'grappelli',
     # 'rest_framework',
@@ -89,7 +89,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'simple_history.middleware.HistoryRequestMiddleware',
+    'simple_history.middleware.HistoryRequestMiddleware',
    
 ]
 

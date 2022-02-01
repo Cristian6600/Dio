@@ -61,7 +61,7 @@ class Orden (models.Model):
 
 class datos_g (models.Model):
 
-    seudo_dg = models.ForeignKey(
+    seudo_dg = models.OneToOneField(
         Guia,
         on_delete=models.CASCADE,
         primary_key=True,

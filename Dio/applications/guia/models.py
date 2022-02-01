@@ -15,8 +15,8 @@ from applications.fisico.models import Fisico
 from django.utils.encoding import smart_text
 from django.conf import settings 
 
-# from simple_history.models import HistoricalRecords
-# from simple_history import register
+from simple_history.models import HistoricalRecords
+from simple_history import register
 
 class LogEntryManager(models.Manager):
         use_in_migrations = True
@@ -199,6 +199,8 @@ class Guia(Fisico, TimeStampedModel):
         null=True
         )
 
+    history = HistoricalRecords()    
+
     class Meta:
         verbose_name = "Guia"
         verbose_name_plural = "Guia"
@@ -206,13 +208,10 @@ class Guia(Fisico, TimeStampedModel):
         def __str__(self):
             return str(self.seudo) + self.destinatario
 
-    
     objects = ProductManager()
     # objects = LogEntryManager()
 
     var_g = ("guia")
-    # history = HistoricalRecords()    
-    # objects = ProductManager()
 
     @property
     def bols(self):
@@ -356,11 +355,12 @@ class img(models.Model):
     )
     
     numero = models.CharField(max_length=30, blank=True, null=True)
-
+    
     class Meta:
         verbose_name = "Imagenes Guia"
         verbose_name_plural = "Imagenes Guia"
 
+    
     @property
     def fe(self):
         return str(self.image)

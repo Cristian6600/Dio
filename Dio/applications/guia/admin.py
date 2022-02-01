@@ -8,7 +8,7 @@ from . models import Estado, Servicio, Cod_vis, Guia, img
 from django.utils.html import format_html
 from django.contrib.admin.models import LogEntry, ADDITION, CHANGE
 from django.contrib.admin import AdminSite
-# from simple_history.admin import SimpleHistoryAdmin
+from simple_history.admin import SimpleHistoryAdmin
 
 admin.site.site_title = 'My site admin'
 
@@ -19,8 +19,8 @@ class guiaResource(resources.ModelResource):
         import_id_fields = ('seudo',) 
         fields = ('fecha',  'seudo__cliente', 'seudo__d_i', 'seudo__id_pro__producto', 'id_ciu__ciudad', 'direccion', 'bolsa', 'id_guia', 'postal', 'proceso__proceso', 'seudo' )
         export_order = ('seudo__id_pro__producto', 'seudo__d_i', 'seudo__cliente', 'direccion', 'bolsa', 'id_guia', 'id_ciu__ciudad', 'fecha',  )
-@admin.register(Guia)
-class guiaAdmin(ImportExportModelAdmin, RelatedFieldAdmin):
+
+class guiaAdmin(SimpleHistoryAdmin, ImportExportModelAdmin,  RelatedFieldAdmin):
     # date_hierarchy = ('fe_entrega')
     list_per_page = 5
     raw_id_fields = ["seudo", "mot", "id_est", "cod_vis"]
@@ -84,7 +84,7 @@ admin.site.register(Estado, EstadoAdmin)
 admin.site.register(Servicio)
 admin.site.register(LogEntry, MoniterLog)
 admin.site.register(Cod_vis, Cod_visAdmin)
-
+admin.site.register(Guia, guiaAdmin)
 admin.site.register(img, ImgAdmin)
 
 
