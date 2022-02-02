@@ -10,6 +10,7 @@ from django.views.generic import CreateView, ListView, DetailView
 from django.views.generic.detail import SingleObjectMixin
 from .forms import guiafisicoForm, ImgForm
 from . models import Guia, img
+from applications.users.mixins import CustodiaPermisoMixin
 from django.shortcuts import render
 from .utils import render_to_pdf
 

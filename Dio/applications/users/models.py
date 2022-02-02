@@ -15,7 +15,6 @@ from .managers import UserManager
 
 from django.db.models.signals import post_save
 
-
 class Areas(models.Model):
     Areas = models.CharField(max_length=30, primary_key=True)
 
@@ -23,6 +22,25 @@ class Areas(models.Model):
         return self.Areas
 
 class User(AbstractBaseUser, PermissionsMixin):
+    # TIPO DE USUARIOS
+    CUSTODIA = '0'
+    MESA = '1'
+    CALL = '2'
+    COURRIER = '3'
+    SIG = '4'
+    TECNOLOGIA = '5'
+    ADMINISTRADOR = '6'
+
+    OCUPATION_CHOICES = [
+        (CUSTODIA, 'Custodia'),
+        (MESA, 'Mesa'),
+        (CALL, 'Call'),
+        (COURRIER, 'Courrier'),
+        (SIG, 'Sig'),
+        (TECNOLOGIA, 'Tecnologia'),
+        (ADMINISTRADOR, 'Administrador'),
+        
+    ]
 
     GENDER_CHOICES = (
         ('M', 'Masculino'),
@@ -48,6 +66,13 @@ class User(AbstractBaseUser, PermissionsMixin):
         max_length=1, 
         choices=GENDER_CHOICES, 
         blank=True
+    )
+
+    ocupation = models.CharField(
+        max_length=1, 
+        choices=OCUPATION_CHOICES, 
+        verbose_name= 'Ocupacion'
+        
     )
     
     ciudad = models.ForeignKey(
@@ -80,8 +105,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return str(self.username) + ' ' +str(self.ciudad)
 
-
-    
 class Profile(models.Model):
     id = models.OneToOneField(User, primary_key=True, on_delete=models.CASCADE)
     bio = models.TextField(max_length=500, blank=True)

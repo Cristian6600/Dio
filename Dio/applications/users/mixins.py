@@ -17,14 +17,14 @@ def check_ocupation_user(ocupation, user_ocupation):
         return False
 
 
-class AlmacenPermisoMixin(LoginRequiredMixin):
+class CustodiaPermisoMixin(LoginRequiredMixin):
     login_url = reverse_lazy('users_app:user-login')
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             return self.handle_no_permission()
         #
-        if not check_ocupation_user(request.user.ocupation, User.ALMACEN):
+        if not check_ocupation_user(request.user.ocupation, User.CUSTODIA):
             # no tiene autorizacion
             return HttpResponseRedirect(
                 reverse(
@@ -35,14 +35,14 @@ class AlmacenPermisoMixin(LoginRequiredMixin):
         return super().dispatch(request, *args, **kwargs)
 
 
-class VentasPermisoMixin(LoginRequiredMixin):
+class MesaPermisoMixin(LoginRequiredMixin):
     login_url = reverse_lazy('users_app:user-login')
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             return self.handle_no_permission()
         #
-        if not check_ocupation_user(request.user.ocupation, User.VENTAS):
+        if not check_ocupation_user(request.user.ocupation, User.MESA):
             # no tiene autorizacion
             return HttpResponseRedirect(
                 reverse(
@@ -59,7 +59,7 @@ class AdminPermisoMixin(LoginRequiredMixin):
         if not request.user.is_authenticated:
             return self.handle_no_permission()
         #
-        if not check_ocupation_user(request.user.ocupation, User.ADMINISTRADOR):
+        if not check_ocupation_user(request.user.ocupation, User.CALL):
             # no tiene autorizacion
             return HttpResponseRedirect(
                 reverse(

@@ -16,8 +16,6 @@ BASE_DIR = Path(__file__).ancestor(3)
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'u5h4i@k8zl$24!dhx)=22c)ue@5y%$pg)hpr&@#*wt6rcjx0)f'
 
-
-
 # Application definition
 
 INSTALLED_APPS = [
