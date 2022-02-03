@@ -3,9 +3,28 @@ from django.db import models
 from applications.cliente.models import Ciudad
 from .managers import CourrierManager
 
-class vehiculo(models.Model):
+class Tipo_vehiculo(models.Model):
+    tipo= models.CharField(max_length=25)
 
-    id_veg = models.IntegerField(primary_key=True, verbose_name = 'Id vehiculo')
+    def __str__(self):
+        return str(self.tipo)
+
+class Marca_vehiculo(models.Model):
+
+    marca = models.CharField(max_length=40)
+
+    def __str__(self):
+        return str(self.marca)
+
+class Linea_vehiculo(models.Model):
+    linea = models.CharField(max_length=25)
+
+class vehiculo(models.Model):
+    id_veg = models.AutoField(primary_key=True, verbose_name = 'Id vehiculo')
+
+    name = models.CharField(max_length=50, verbose_name = 'Propietario de vehiculo')
+
+    cc = models.CharField(max_length=13)
 
     vehiculo = models.CharField(max_length=35)
 
@@ -14,6 +33,30 @@ class vehiculo(models.Model):
     cilindraje = models.IntegerField()
 
     capacidad = models.IntegerField()
+
+    modelo = models.DateField()
+
+    placa = models.CharField(max_length=10)
+
+    soat = models.CharField(
+        max_length = 25
+    )
+
+    tecnomecanica = models.BooleanField(
+        default=False
+    )
+    marca = models.ForeignKey(
+        'Marca_vehiculo',
+        on_delete=models.CASCADE,
+    )
+    linea = models.ForeignKey('Linea_vehiculo', on_delete=models.CASCADE,)
+
+    tipo = models.ForeignKey(
+        'Tipo_vehiculo',
+        on_delete=models.CASCADE,
+        verbose_name = 'Tipo vehiculo'
+    )
+    
 
     class Meta:
         verbose_name = "Vehiculo"
@@ -24,10 +67,7 @@ class vehiculo(models.Model):
 
 class courrier(models.Model):
 
-    id_courrier = models.IntegerField(
-        verbose_name = 'Id Courrier'
-    )
-    d_i = models.CharField(max_length=12)
+    d_i = models.CharField(max_length=12, verbose_name='Documento identidad')
 
     courrier = models.CharField(
         max_length=70, 
@@ -37,33 +77,22 @@ class courrier(models.Model):
         verbose_name = 'Celular'
     )
     dir = models.CharField(
-        max_length=120
+        max_length=120,
+        verbose_name='Direccion'
     )
     id_ciu = models.ForeignKey(
         Ciudad, 
         on_delete=models.CASCADE,
-        verbose_name = 'Id ciudad'
+        verbose_name = 'Ciudad'
     )
 
-    id_veh = models.IntegerField(
-        verbose_name = 'Id vehiculo'
-    )
-
-    placa = models.CharField(
-        max_length = 6
-    )
-
-    soat = models.CharField(
-        max_length = 25
-    )
-
-    tecnomecanica = models.BooleanField(
-        default=False
+    id_veh = models.ForeignKey(
+        'vehiculo',
+        on_delete=models.CASCADE,
+        verbose_name = 'Datos vehiculo'
     )
 
     infraccion = models.IntegerField()
-
-    modelo = models.DateField()
 
     licencia = models.IntegerField()
 
