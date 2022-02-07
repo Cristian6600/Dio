@@ -3,13 +3,12 @@ from django.http import HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
 from . models import Paquete, Fisico
-from django.views.generic import TemplateView, CreateView, ListView, DetailView
+from django.views.generic import CreateView, ListView
 from django.views.generic.detail import SingleObjectMixin
-from django.views import View
-
 from .forms import ProductForm
+from applications.users.mixins import CustodiaPermisoMixin
 
-class BolsaCreateView(LoginRequiredMixin, CreateView, ListView):
+class BolsaCreateView(CustodiaPermisoMixin, CreateView, ListView):
     template_name = "fisico/add-fisico.html"
     form_class = ProductForm
     paginate_by = '5'
@@ -28,21 +27,10 @@ class BolsaCreateView(LoginRequiredMixin, CreateView, ListView):
         self.object.save()
         return super(BolsaCreateView, self).form_valid(form)
 
-class FisicoListView(LoginRequiredMixin, ListView):
-    template_name = "fisico/ver-fisico.html"
-    model = Paquete
-    paginate_by = 10
-    success_url = '.'
-
 class EstadoRutaListView(LoginRequiredMixin, ListView):
     template_name = "fisico/estado_ruta.html"
     queryset = Fisico.objects.filter(est_planilla = 1)
     paginate_by = 10
     success_url = '.'
     context_object_name ='estado_planilla'
-
-# class FisicoCreateView(LoginRequiredMixin, CreateView):
-#     template_name = "fisico/fisico.html"
-#     form_class = FisicoForm
-#     success_url = '.'
 

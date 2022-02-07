@@ -10,15 +10,10 @@ urlpatterns = [
          name = 'fisico-paquete',
          ),
 
-    path('lista-fisico/', views.FisicoListView.as_view()),
-
     path(
         'estado-ruta/',
          views.EstadoRutaListView.as_view(),
          name = 'estado-ruta',
          ),
-
-
-    
 
 ]

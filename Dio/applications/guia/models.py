@@ -4,7 +4,7 @@ from django.db.models.signals import post_save
 from PIL import Image
 from model_utils.models import TimeStampedModel
 from .managers import ProductManager
-
+# from applications.call.models import Telefono
 from applications.base_cliente.models import Bd_clie, Producto, Est_clie
 
 from applications.users.models import User
@@ -27,7 +27,6 @@ class LogEntryManager(models.Manager):
             object_repr[:200], action_flag, change_message
         )
             e.save()
-
 
 class Estado (models.Model):
     id = models.IntegerField(
@@ -199,6 +198,12 @@ class Guia(Fisico, TimeStampedModel):
         null=True
         )
 
+    tel = models.CharField(
+        max_length=80,
+        null=True, 
+        blank = True
+    )
+
     history = HistoricalRecords()    
 
     class Meta:
@@ -273,8 +278,12 @@ class Guia(Fisico, TimeStampedModel):
     def decha_fi(self):
         return self.fecha
 
-    def save(self, *args, **kwargs):
+    @property
+    def fecha_gestion(self):
+        return self.fecha_planilla
 
+    def save(self, *args, **kwargs):
+        self.seudo.fecha_recepcion = self.fecha_gestion
         self.seudo.fe_fisico = self.fecha
         self.imagen  = self.img
         # self.seudo.id_est_clie_id = self.codigo

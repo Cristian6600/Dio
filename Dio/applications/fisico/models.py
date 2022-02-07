@@ -1,3 +1,4 @@
+from tabnanny import verbose
 from django.db import models
 # from applications.base_cliente.models import Bd_clie
 # from applications.guia.models import Servicio, Cod_vis, Estado
@@ -11,7 +12,6 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 from simple_history.models import HistoricalRecords
 from django.core.exceptions import ValidationError
-
 
 
 class Proceso(models.Model):
@@ -28,7 +28,10 @@ class Proceso(models.Model):
 class Fisi_pa(models.Model):
 
     fecha = models.DateTimeField(
-        auto_now=True
+        auto_now_add=True,
+        blank=True,
+        null=True,
+        verbose_name= 'Fecha fisico'
     )
     estado = models.BooleanField(
         default=True
@@ -100,7 +103,7 @@ class Fisico(Fisi_pa, Bolsa):
 
     d_i = models.CharField(max_length=15, blank = True, null=True)
 
-    fecha_recepcion = models.DateTimeField(blank = True, null= True)
+    fecha_recepcion = models.DateTimeField(blank = True, null= True, verbose_name='Fecha gestion')
 
     fecha_planilla = models.DateTimeField(blank= True, null= True)
 
@@ -119,7 +122,7 @@ class Fisico(Fisi_pa, Bolsa):
 
     id_planilla = models.IntegerField(blank=True, null= True)
 
-    
+    history = HistoricalRecords()    
     
     unique_together = ('bolsa', 'seudo')
 

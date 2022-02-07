@@ -1,6 +1,5 @@
 from django.urls import path
 from . import views
-from applications.datos_g.views import MyView
 
 app_name = "gatos_g"
 
@@ -21,6 +20,5 @@ urlpatterns = [
          views.OrdenListView.as_view(),
          name='guia-buscar',
     ),
-    path('mine/', MyView.as_view(), name='my-view'),
     
 ]

@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from applications.guia.views import handleMultipleImagesUpload
 
 app_name = "producto_app"
 
@@ -18,7 +19,7 @@ urlpatterns = [
 
     path(
         'add-fisico/', 
-        views.bolsaCreateView.as_view(), 
+        views.FisicoCreateView.as_view(), 
         name='producto-crear',
     ),
     
@@ -33,6 +34,7 @@ urlpatterns = [
         views.BuscarGuiaPdf.as_view(),
         name = 'busca-guia',
     ),
+    path('uploads/', handleMultipleImagesUpload, name="home"),
 
 
     ]

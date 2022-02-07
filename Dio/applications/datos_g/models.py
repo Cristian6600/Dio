@@ -68,7 +68,7 @@ class datos_g (models.Model):
         
     )
 
-    fecha = models.DateTimeField(auto_now_add=True,
+    fecha = models.DateField(auto_now_add=True,
         verbose_name = 'Fecha fisico')
 
     d_i = models.BigIntegerField(
@@ -176,6 +176,8 @@ class datos_g (models.Model):
         )
 
     zona = models.CharField(max_length=30, blank=True, null=True)
+
+    oficina= models.CharField(max_length=5)
 
     def save(self, *args, **kwargs):
         EAN = barcode.get_barcode_class('ean13')

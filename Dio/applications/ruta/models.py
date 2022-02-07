@@ -113,7 +113,7 @@ class Planilla(TimeStampedModel) :
 
 #f
     def save(self, *args, **kwargs):
-        
+        self.guia.fecha_recepcion = self.fecha_planilla
         self.guia.id_est_id = self.guia.id_est_id = 4
         self.guia.mensajero = self.mensajero
         self.guia.est_planilla = self.guia.est_planilla = 1
@@ -168,15 +168,23 @@ class Recepcion(models.Model):
       return self.motivo.id
 
     @property
+    def varu(self):
+      return self.motivo.id
+
+    @property
+    def fecha_re(self):
+        return self.fecha
+
+    @property
     def estados(self):
         return self.estado
         
     def save(self, *args, **kwargs):
-    
+        self.guia.fecha_recepciond = self.fecha_re
         self.guia.mot_id = self.varu
         self.guia.id_est = self.estados
         self.guia.est_planilla = self.guia.est_planilla =  2
-        print (self.varu)
+        
         self.guia.save()
 
         super(Recepcion, self).save(*args, **kwargs)

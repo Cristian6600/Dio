@@ -12,20 +12,21 @@ from simple_history.admin import SimpleHistoryAdmin
 
 admin.site.site_title = 'My site admin'
 
-class guiaResource(resources.ModelResource):
+# class guiaResource(resources.ModelResource):
     
-    class Meta:
-        model = Guia
-        import_id_fields = ('seudo',) 
-        fields = ('fecha',  'seudo__cliente', 'seudo__d_i', 'seudo__id_pro__producto', 'id_ciu__ciudad', 'direccion', 'bolsa', 'id_guia', 'postal', 'proceso__proceso', 'seudo' )
-        export_order = ('seudo__id_pro__producto', 'seudo__d_i', 'seudo__cliente', 'direccion', 'bolsa', 'id_guia', 'id_ciu__ciudad', 'fecha',  )
+#     class Meta:
+#         model = Guia
+#         import_id_fields = ('seudo',) 
+#         fields = ('fecha',  'seudo__cliente', 'seudo__d_i', 'seudo__id_pro__producto', 'id_ciu__ciudad', 'direccion', 'bolsa', 'id_guia', 'postal', 'proceso__proceso', 'seudo' )
+#         export_order = ('seudo__id_pro__producto', 'seudo__d_i', 'seudo__cliente', 'direccion', 'bolsa', 'id_guia', 'id_ciu__ciudad', 'fecha',  )
 
-class guiaAdmin(SimpleHistoryAdmin, ImportExportModelAdmin,  RelatedFieldAdmin):
+class guiaAdmin(SimpleHistoryAdmin, RelatedFieldAdmin):
+    history_list_display = ["mot", "mensajero"]
     # date_hierarchy = ('fe_entrega')
     list_per_page = 5
     raw_id_fields = ["seudo", "mot", "id_est", "cod_vis"]
     # change_list_template = 'admin/guia/guia_change_list.html'
-    resource_class = guiaResource
+    # resource_class = guiaResource
     fieldsets = [
         (None,  {'fields':[('seudo', 'bolsa', 'destinatario'), ('producto', 'estado', 'id_ciu'), ('direccion', 'barrio', 'postal', ), ]}),
         ('Estados', {'fields':[('id_est', 'mot', 'id_ser',), ('cod_vis', 'id_clie', 'proceso'),
@@ -33,13 +34,12 @@ class guiaAdmin(SimpleHistoryAdmin, ImportExportModelAdmin,  RelatedFieldAdmin):
     ]
 #     # raw_id_fields = ("mot",)
     search_fields = ('id_guia', 'seudo__seudo_bd', 'mot__motivo',)
-    list_display = ('id_guia', 'mot__motivo', 'd_i', 'seudo', 'direccion', 'id_ciu', 'fecha', 'user', 'destinatario', 'imagen')
+    list_display = ('id_guia', 'mot__motivo', 'd_i', 'seudo', 'direccion', 'id_ciu', 'fecha', 'user', 'destinatario', 'imagen', 'mensajero')
     ordering = ('id_guia',)
     list_filter = ('user', 'id_ciu__departamento','fecha', 'mot__motivo', 'estado')
 #     # readonly_fields = ('fecha', 'cantidad', 'user')
 #     actions = None
 #     # raw_id_fields = ("id",)
-
 #     icon_name  =  'next_week's
     def save_model(self, request, obj, form, change):
         if getattr(obj, 'author', None) is None:
@@ -69,8 +69,6 @@ class ImgAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     LogEntry.objects.filter(action_flag=ADDITION)
     list_filter = ('fecha',)
     date_hierarchy = ('fecha')
-    
-    
     # def save_model(self, request, obj, form, change):
     #     if getattr(obj, 'author', None) is None:
     #         obj.user = request.user 

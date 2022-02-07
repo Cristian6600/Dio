@@ -1,11 +1,17 @@
 from django.db import models
-from applications.datos_g.models import Motivo
+
 from applications.users.models import User
 from simple_history.models import HistoricalRecords
 from applications.guia.models import Guia
 from applications.users.models import User
 from applications.datos_g.models import datos_g
 from django.conf import settings 
+
+class Tel(models.Model):
+    telefono= models.CharField(primary_key=True, max_length=12)
+
+    def __str__(self):
+        return self.telefono
 
 class Indicativo(models.Model):
     
@@ -20,8 +26,8 @@ class Indicativo(models.Model):
         return str(self.ind)
 
 class Telefono(models.Model):
-    cc = models.CharField(max_length =15)
-    tel = models.CharField(primary_key=True, max_length=15)
+    id = models.OneToOneField(Guia,on_delete=models.CASCADE, primary_key=True, max_length=12)
+    tel = models.CharField(max_length=80)
     indicativo = models.ForeignKey(
         Indicativo, 
         on_delete=models.CASCADE,
@@ -30,10 +36,21 @@ class Telefono(models.Model):
     def __str__(self):
         return str(self.tel)
 
+    @property
+    def telefono(self):
+        return str(self.tel)
+
+    def save(self, *args, **kwargs, ):
+        
+        self.id.tel = self.telefono
+        
+        self.id.save()     
+        super (Telefono, self).save(*args, **kwargs)
+
 class Datos_t(models.Model):
     
-    d_i = models.ForeignKey(datos_g,
-        on_delete=models.CASCADE, verbose_name= "Seudo buscar"
+    d_i = models.CharField(max_length=12,
+        verbose_name= "Seudo buscar"
         )
 
     telefono = models.ForeignKey(Telefono, on_delete=models.CASCADE)
@@ -45,10 +62,6 @@ class Datos_t(models.Model):
         editable=True,
         verbose_name= 'Usuario'
         )
-    # id_mot = models.ForeignKey(
-    #     Motivo, 
-    #     on_delete=models.CASCADE
-    #     )
 
     activo = models.BooleanField(
         default=True
@@ -59,7 +72,6 @@ class Datos_t(models.Model):
         verbose_name = "Gestion"
         verbose_name_plural = "Gestion"
     
-
     def __str__(self):
         return str(self.telefono)
 

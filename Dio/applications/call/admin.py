@@ -2,7 +2,7 @@ from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
 from import_export import resources
 from import_export.fields import Field
-from . models import Datos_t, Indicativo, Telefono, Pregunta, Auditoria, calificacion
+from . models import Datos_t, Indicativo, Telefono, Pregunta, Auditoria, calificacion, Tel
 from simple_history.admin import SimpleHistoryAdmin
 from django.db import transaction
 
@@ -31,7 +31,7 @@ class datos_tAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
     history_list_display = ["status"]
     list_display = ('telefono', 'activo', 'user', 'd_i')
     SIMPLE_HISTORY_REVERT_DISABLED=True
-    raw_id_fields = ["telefono", "d_i"]
+    raw_id_fields = ["telefono",]
     search_fields = ('d_i',)
     # fields = ('d_i', 'telefono', 'indicativo')
 
@@ -47,8 +47,8 @@ class IndicativoAdmin(admin.ModelAdmin):
     list_display = ('ind', 'Region')
 
 class TelefonoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ('cc', 'tel')
-    search_fields = ('cc',)
+    list_display = ('id', )
+    search_fields = ('id',)
 
 class AuditoriaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     
@@ -82,6 +82,8 @@ admin.site.register(Pregunta)
 admin.site.register(Auditoria, AuditoriaAdmin)
 
 admin.site.register(calificacion)
+
+admin.site.register(Tel)
 
 
 

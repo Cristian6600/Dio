@@ -1,17 +1,37 @@
+from audioop import maxpp
+from tabnanny import verbose
 from django.db import models
 
 from applications.cliente.models import Ciudad
 from .managers import CourrierManager
 
+class Tipo_infraccion(models.Model):
+    infraccion = models.CharField(max_length=4)
+
+    class Meta:
+        verbose_name='Tipo de infraccion'
+        verbose_name_plural = 'Tipo infraccion'
+
+    def __str__(self):
+        return self.infraccion
+
 class Tipo_vehiculo(models.Model):
     tipo= models.CharField(max_length=25)
 
+    class Meta:
+        verbose_name= 'Tipo'
+        verbose_name_plural = 'Tipo'
+
     def __str__(self):
         return str(self.tipo)
-
+    
 class Marca_vehiculo(models.Model):
 
     marca = models.CharField(max_length=40)
+
+    class Meta:
+        verbose_name= 'Marca'
+        verbose_name_plural = 'Marca'
 
     def __str__(self):
         return str(self.marca)
@@ -19,14 +39,19 @@ class Marca_vehiculo(models.Model):
 class Linea_vehiculo(models.Model):
     linea = models.CharField(max_length=25)
 
+    class Meta:
+        verbose_name= 'Liena '
+        verbose_name_plural = 'Linea'
+
+    def __str__(self):
+        return self.linea
+
 class vehiculo(models.Model):
     id_veg = models.AutoField(primary_key=True, verbose_name = 'Id vehiculo')
 
     name = models.CharField(max_length=50, verbose_name = 'Propietario de vehiculo')
 
     cc = models.CharField(max_length=13)
-
-    vehiculo = models.CharField(max_length=35)
 
     marca = models.CharField(max_length=20)
 
@@ -38,13 +63,10 @@ class vehiculo(models.Model):
 
     placa = models.CharField(max_length=10)
 
-    soat = models.CharField(
-        max_length = 25
-    )
+    soat = models.DateField()
 
-    tecnomecanica = models.BooleanField(
-        default=False
-    )
+    tecnomecanica = models.DateField()
+
     marca = models.ForeignKey(
         'Marca_vehiculo',
         on_delete=models.CASCADE,
@@ -57,7 +79,6 @@ class vehiculo(models.Model):
         verbose_name = 'Tipo vehiculo'
     )
     
-
     class Meta:
         verbose_name = "Vehiculo"
         verbose_name_plural = "Vehiculo"
@@ -92,9 +113,11 @@ class courrier(models.Model):
         verbose_name = 'Datos vehiculo'
     )
 
-    infraccion = models.IntegerField()
+    infraccion = models.ManyToManyField(Tipo_infraccion)
 
-    licencia = models.IntegerField()
+    licencia = models.DateField()
+
+    est_courrier = models.BooleanField(default=True, verbose_name= 'Estado courrier')
 
     objects = CourrierManager()
 

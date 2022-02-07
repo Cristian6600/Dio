@@ -25,14 +25,12 @@ class bd_clieAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_per_page = 5
     readonly_fields = ('sucursal', 'fe_fisico',)
     list_display = ('seudo_bd', 'guia', 'bolsa', 'jornada', 'cliente', 'fe_fisico', 'id_proc', 'tipo', 'd_i_a', 'id_est_clie')
-    # list_filter = ('id_clie', 'fecha')
+    list_filter = ('fecha','fecha_recepcion')
     search_fields = ('seudo_bd', 'fecha', 'cliente')
     raw_id_fields = ("id_est_clie",)
     # date_hierarchy = ('fecha_planilla')
-
     icon_name  =  'cloud_upload'
-    
-
+   
 class emisionAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = EmiResource
     list_display = ('t_emi', 'emision')

@@ -6,7 +6,6 @@ from django.views.generic import View
 #
 from .models import User
 
-
 def check_ocupation_user(ocupation, user_ocupation):
     #
     
@@ -15,7 +14,6 @@ def check_ocupation_user(ocupation, user_ocupation):
         return True
     else:
         return False
-
 
 class CustodiaPermisoMixin(LoginRequiredMixin):
     login_url = reverse_lazy('users_app:user-login')
@@ -52,7 +50,7 @@ class MesaPermisoMixin(LoginRequiredMixin):
         return super().dispatch(request, *args, **kwargs)
 
 
-class AdminPermisoMixin(LoginRequiredMixin):
+class CallPermisoMixin(LoginRequiredMixin):
     login_url = reverse_lazy('users_app:user-login')
 
     def dispatch(self, request, *args, **kwargs):

@@ -45,4 +45,6 @@ class ordenAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 class CubrimientoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('id_cubrimiento', 'oficina', 'direccion', 'dane')
     resource_class = CubrimientoResource
+
+
     

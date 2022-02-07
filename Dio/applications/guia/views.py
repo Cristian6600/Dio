@@ -10,7 +10,7 @@ from django.views.generic import CreateView, ListView, DetailView
 from django.views.generic.detail import SingleObjectMixin
 from .forms import guiafisicoForm, ImgForm
 from . models import Guia, img
-from applications.users.mixins import CustodiaPermisoMixin
+from applications.users.mixins import CustodiaPermisoMixin, MesaPermisoMixin
 from django.shortcuts import render
 from .utils import render_to_pdf
 
@@ -28,7 +28,7 @@ class ProductDetailView(LoginRequiredMixin, DetailView):
     template_name = "producto/detail.html"
     model = Guia
     
-class bolsaCreateView(LoginRequiredMixin, CreateView, ListView):
+class FisicoCreateView(CustodiaPermisoMixin, LoginRequiredMixin, CreateView, ListView):
     template_name = "guia/guia-fisico.html"
     # model = Guia
     # fields = ['id_guia', 'seudo', 'bolsa', 'user']
@@ -43,14 +43,14 @@ class bolsaCreateView(LoginRequiredMixin, CreateView, ListView):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
         self.object.save()
-        return super(bolsaCreateView, self).form_valid(form)
+        return super(FisicoCreateView, self).form_valid(form)
 
 class ImgCreateView(CreateView):
     template_name = "guia/img_prueba.html"  
     form_class = ImgForm
     success_url = '.'
 
-@login_required
+@permission_required('applications.guia')
 def handleMultipleImagesUpload(request):
         if request.method == "POST":
             images = request.FILES.getlist('images')
@@ -63,7 +63,7 @@ def handleMultipleImagesUpload(request):
         return render(request, "index.html")    
 
 #--------Impresion por guia--------------
-class GuiaListView(ListView):
+class GuiaListView(CustodiaPermisoMixin, ListView):
     template_name = "guia/imprimir_guia.html"
     context_object_name = 'guia'
 
@@ -73,11 +73,10 @@ class GuiaListView(ListView):
         )
         return queryset   
 #-------------PDF impresion por guia--------------
-class BuscarGuiaPdf(ListView):
+class BuscarGuiaPdf(CustodiaPermisoMixin, ListView):
     # template_name = "guia/gui_pdf.html"
     # model = Guia
     # fields = ('__all__')
-
     def get(self, request, *args, **kwargs):
         nombre = self.kwargs['buscar']
         guia = Guia.objects.filter(id_guia = nombre)

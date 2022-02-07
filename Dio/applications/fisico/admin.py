@@ -7,6 +7,7 @@ from . models import Paquete, Fisico, Bolsa, Mesa, Motivo_mesa, Proceso
 from django.db import models
 from django.forms import ModelForm
 from django import forms
+from simple_history.admin import SimpleHistoryAdmin
 
 class FisicoResource(resources.ModelResource):
     
@@ -35,7 +36,8 @@ class PaqueteAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 
     icon_name  =  'local_shipping'
 
-class FisicoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+class FisicoAdmin(SimpleHistoryAdmin, ImportExportModelAdmin, admin.ModelAdmin):
+    history_list_display = ["mot", "mensajero"]
     resource_class = FisicoResource
     list_display = ('id_guia', 'bolsa', 'fecha', 'estado', 'mensajero', 'fecha_planilla')
     date_hierarchy = ('fecha_planilla')

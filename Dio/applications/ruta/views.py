@@ -7,13 +7,11 @@ from django.shortcuts import render
 from applications.users.models import User
 from applications.guia.models import Guia
 from applications.courrier.models import courrier
-from rest_framework.authtoken.models import Token
-from rest_framework.permissions import IsAuthenticated
-from rest_framework import permissions
 from django.views.generic.dates import DayArchiveView
 
 from django.contrib import messages
-import csv
+
+from applications.users.mixins import CustodiaPermisoMixin
 
 from django.contrib.auth.decorators import login_required, permission_required
 
@@ -24,7 +22,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.http import HttpResponse
 
-from django.views.generic import CreateView, View, ListView, UpdateView, DeleteView
+from django.views.generic import CreateView, ListView
 
 from . models import Cargue,   Recepcion, Planilla
 
@@ -35,7 +33,7 @@ from django.contrib.admin.models import LogEntry, ADDITION, CHANGE, DELETION
 from .forms import CargueForm, RecepcionForm, AsignarForm
 
 #----------------Recepcion------------------------
-class RecepcioCreateView(CreateView, ListView ):
+class RecepcioCreateView(CustodiaPermisoMixin, CreateView, ListView ):
        
     template_name = "ruta/add-recepcion.html"
     form_class = RecepcionForm
@@ -61,7 +59,7 @@ class RecepcioCreateView(CreateView, ListView ):
         return render(request, self.template_name, {'form': form})
 
 #------------------Pdf Cargue----------------------
-class ListEmpleadosPdf(ListView):
+class ListEmpleadosPdf(CustodiaPermisoMixin, ListView):
 
     def get(self, request, *args, **kwargs):
         
@@ -80,24 +78,10 @@ class ListEmpleadosPdf(ListView):
         }
         pdf = render_to_pdf('ruta/pdf_planillas.html', data)
         return HttpResponse(pdf, content_type='application/pdf')
-
-#-------------lista filtro planilla----------------------
-
-class PLanillaListView(ListView): 
-    template_name ='ruta/lista_planillas.html'
-    context_object_name = 'lista'
-    
-    def get_queryset(self):
-
-        nombre = self.kwargs['full_name']
-        lista = Planilla.objects.filter(
-        cargue__full_name = nombre
-    )   
-        return  lista
     
     #------Asignar guia a mensajero--------------------
 
-class AsignarCreateView(LoginRequiredMixin, CreateView, ListView):
+class AsignarCreateView(CustodiaPermisoMixin, CreateView, ListView):
     template_name = "ruta/asignar.html"
     form_class = AsignarForm
     queryset = Planilla.objects.order_by('-fecha')
@@ -123,9 +107,8 @@ class AsignarCreateView(LoginRequiredMixin, CreateView, ListView):
 
         return render(request, self.template_name, {'form': form})
 
-
 #----------Lista mensajeros Ruta a imprimir -------------
-class AsignarListview(ListView):
+class AsignarListview(CustodiaPermisoMixin, ListView):
     context_object_name = "planillas" 
     template_name = "ruta/asignado_planillas.html"
     paginate_by = 5

@@ -216,9 +216,8 @@ class Bd_clie (models.Model):
     sucursal = models.CharField(
         max_length=50,
         blank=True,  null =True,
-    )   
-    
-        
+    )  
+    fecha_recepcion = models.DateTimeField(blank = True, null= True)
     class Meta:
         verbose_name = "Base Cliente"
         verbose_name_plural = "Base Cliente"
