@@ -30,7 +30,7 @@ class BolsaCreateView(CustodiaPermisoMixin, CreateView, ListView):
 class EstadoRutaListView(LoginRequiredMixin, ListView):
     template_name = "fisico/estado_ruta.html"
     queryset = Fisico.objects.filter(est_planilla = 1)
-    paginate_by = 10
+    paginate_by = 5
     success_url = '.'
     context_object_name ='estado_planilla'
 

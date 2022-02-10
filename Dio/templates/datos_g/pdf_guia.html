@@ -1,3 +1,5 @@
+
+{% load static %} 
 <html>
 <head>
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
@@ -12,41 +14,54 @@
             size: letter landscape;
                
         @frame col1_frame {             /* Content frame 1 */
-            left: 32pt; width: 365pt; top: 2pt; height: 600pt;
+            left: 10pt; width: 380pt; top: 1pt; height: 650pt;
         }
         @frame col2_frame {             /* Content frame 2 */
-            left: 425pt; width: 365pt; top: 2pt; height: 600pt;
+            left: 410pt; width: 380pt; top: 1pt; height: 650pt;
         }
-        @frame footer_frame {           /* Static frame */
-            -pdf-frame-content: footer_content;
-            left: 50pt; width: 512pt; top: 772pt; height: 2pt;
-            
-        }
+        
         p {
         border: gray 0px solid;  
         padding: 1px;
         }
 
-    }            
+    }          
     </style>
 
 <body>
-    <thead>
-        {% for e in empleados %}            
+    
+    {% for e in empleados %}    
+    <table border="">
+        
+			<tr>
+				<td width="130" rowspan="3"> <img src="https://firstsource.net.co/wp-content/uploads/2020/06/Enmascarar-grupo-31.png">
+                    </td>
+				<td >Destinatario:</td>
+				<td colspan="2"><strong> {{ e.dest }} </strong></td>            
+			</tr>
+			<tr>
+				<td >Direccion:</td>
+				<td><strong> {{ e.direccion }} </strong></td>
+				<td >Ciudad: <strong> {{e.id_ciu}}</strong></td>
+			</tr>
+			<tr>
+				<td>Telefono:</td>
+                <td></td>
+                <td>C.postal: <strong>{{ e.postal }} </strong></td>
+			</tr>
+		</table>                   
         <table BORDER="1px" >
-            <th width="55">Firstsource</th>
-            <th width="70">Nit:900861729</th>
-            <th width="300">RESOLUCION MINTIC NO. 3290 del 4 de diciembre de 2018</th>
+            <th>Firstsource</th>
+            <th>Nit:900861729</th>
+            <th width="250">RESOLUCION MINTIC NO. 3290 del 4 de diciembre de 2018</th>
         </table>
-        <table border="">    
-    </thead>    
-    <table BORDER="">
-		
+         
+    <table BORDER="">		
 			<tr>
 				<td width= "130" rowspan="6"><pdf:barcode value="{{ e.seudo_dg }}" type="code128"  align="right" barwidth ="0,9" middle="20"/><h1>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;{{ e.seudo_dg }}</h1></td>
-                <td width = "50">Domicilio</td>  
+                <td>Domicilio</td>  
                 <td width= "30"><strong> ${{e.seudo_dg.domicilio}} </strong></td>              
-                <td width= "50">Tipo de envio: </td>     
+                <td >Tipo de envio: </td>     
                 <td width= "100"><strong>Mensajeria</strong> </td>                         
             </tr>           			
 			<tr>
@@ -64,7 +79,7 @@
             <tr>
 				<td>s/flete: </td>
                 <td><strong> $0 </strong></td>
-                <td > </td>
+                <td > 1</td>
                 <td rowspan="3"><strong> Davivienda Cl 28 # 13 A - 17 Bogota Bogota, D.C. ColombiaTel:8903906 </strong></td>                
 			</tr>
             <tr>
@@ -77,31 +92,32 @@
                 <td><strong>$0 </strong></td>
             </tr>
             <tr>				
-                <td><h1></h1></td>
-                <td><h1></h1></td>
-                <td><h1></h1></td>
-                <td></td>
-                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FO-OP-28 V.1</td>
-            </tr>
-            <tr>				
+                <td>FO-OP-28 V.1</td>
                 <td><h1>{{e.proc.proceso}}</h1></td>
-                <td><h1></h1></td>
-                <td><h1></h1></td>
+                <td></td>
                 <td><h1><strong>{{e.seudo_dg.bolsa}} </strong></h1></td>
                 <td><h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>{{forloop.counter}}</strong></h1></td>
-            </tr>       
-	</table>
-    
-        <table border="">
-    
-    <h4>Destinatario: <strong>{{ e.dest }} </strong> <br> 
-        C.C  <strong>{{ e.d_i }} </strong>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;  C.postal <strong> {{ e.postal }} </strong>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;  <br>
-        <strong>{{ e.direccion }} </strong>
-    </h4>
+            </tr>    
+            <tr>
+				<td ><h3> Destinatario:  <strong>{{ e.dest }}</h3> </strong>  </td>
+                    <td colspan="3"></td>
+                    <td></td>                     
+            </tr>
+            <tr>
+                <td><h3> <strong> {{ e.direccion }} </h2></strong></td>
+                <td colspan="4">1</td>
+                
+            </tr>
+            <tr>
+                <td><strong>C.C  <strong>{{ e.d_i }} </strong></strong></td>
+                <td>C.postal </td>  
+                <td colspan="3"><strong> {{ e.postal }}</strong> Ciudad: <strong> {{e.id_ciu}} </strong></td>      
+            </tr>      
+        </table>
         
-        <caption> ESTE PRODUCTO SE ENCUENTRA DESINFECTADO, CON EL PROPOSITO DE CUIDAR NUESTROS 
+    <table>
+        
+        <caption>ESTE PRODUCTO SE ENCUENTRA DESINFECTADO, CON EL PROPOSITO DE CUIDAR NUESTROS 
         CLIENTE, HEMOS TOMADO TODAS LAS MEDIDAS DE ASEPSIA, RECUERDA LAVARTE LAS MANOS. </caption>
         <tr>
             <td>Fecha proxima Entrega:</td>
@@ -172,19 +188,18 @@
                 </tr>
        
         </table>
-
         <font size=1>El usuario deja constancia expresa de que tuvo conocimiento del contrato que se encuentra publicado en la pagina web firstsource.net.co; el 
             cual regula el servicio acordado entre las partes, cuyo contenido clausular acepta expresamente con la suscripcion de este documento. El 
             cliente puede realizar el rastreo de sus envios en la pagina web firstsource.net.co o en la linea telefonica +57) (1) 8903906. El cliente puede 
             presentar sus peticiones,quejas y recursos en la web y telefono descrito anteriormente o a traves del correo electronico
             servicio@firstsource.net.co 
-        </font><br>
-            {% endfor %}
-            
+        </font>
+        <hr width=400>
+        <hr width=400>
+            {% endfor %}           
 </tbody>
 
 <div id="footer_content">pagina <pdf:pagenumber>
         de <pdf:pagecount>
 
 </html>
-

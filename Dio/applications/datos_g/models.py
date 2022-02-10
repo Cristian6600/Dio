@@ -86,7 +86,8 @@ class datos_g (models.Model):
         max_length=100, blank=True, null = True
     )
 
-    d_i_a = models.IntegerField(
+    d_i_a = models.CharField(
+        max_length=12,
         null=True, 
         blank = True,
         verbose_name = 'CC autorizado'

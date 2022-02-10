@@ -88,15 +88,14 @@ class Pregunta(models.Model):
         return self.pregunta
 
 class Auditoria(models.Model):
-    calificacionn_5 = [
-        (1, '1'),
-        (2, '2'),
-        (3, '3'),
-        (4, '4'),
-        (5, '5'),
-    ]
+    calificacionn_5 = (
+        ('1', '1'),
+        ('2', '2'),
+        ('3', '3'),
+        ('4', '4'),
+        ('5', '5'),
+    )
     entregas = models.ForeignKey(Guia, on_delete=models.CASCADE)
-    telefono = models.ForeignKey(Telefono, on_delete=models.CASCADE)
     pregunta_1= models.ForeignKey(Pregunta, on_delete=models.CASCADE, default = 1, blank = True, null = True)
     calificacion_1 = models.ForeignKey(calificacion, on_delete=models.CASCADE, related_name = 'calificacion_1')
     pregunta_2= models.ForeignKey(Pregunta, on_delete=models.CASCADE, related_name="Pregunta_2", default= 2, blank = True, null = True)
@@ -113,7 +112,7 @@ class Auditoria(models.Model):
         choices=calificacionn_5,
     )
     observacion = models.CharField(max_length = 30)
-    fecha = models.DateTimeField(auto_now=True)
+    fecha = models.DateTimeField(auto_now=True, blank= True, null=True)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE, 
@@ -125,4 +124,8 @@ class Auditoria(models.Model):
     def __str__(self):
         return str(self.entregas)
 
-    
+    def save(self, *args, **kwargs):
+        self.entregas.estado = self.entregas.estado = 0
+
+        self.entregas.save()       
+        super(Auditoria, self).save(*args, **kwargs)

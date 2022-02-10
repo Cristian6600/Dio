@@ -1,0 +1,71 @@
+{% extends "call/base_call.html" %} 
+
+{% load static %}
+
+{% block panel-content %}
+<div class="cell grid-x grid-margin-x">
+    <h5 class="cell" style="text-align: center;">Auditoria</h5>
+    <div class="cell">
+      <table>
+        <thead>
+            
+            <th>Seudo</th>
+            <th>Destinatario</th>
+            <th>CC</th>
+            <th>Direccion</th>
+            <th>Ciudad</th>
+            <th>Mensajero</th>
+            <th>Telefonos</th>
+            
+            
+        </thead>
+        <tbody>
+            {% for e in auditoria %}
+            <tr>
+                <td>{{e.seudo}}</td>
+                <td>{{e.destinatario}}</td>  
+                <td>{{e.d_i}}</td>
+                <td>{{e.direccion}}</td>  
+                <td>{{e.id_ciu}}</td>
+                <td>{{e.mensajero}}</td>  
+                <td>{{e.tel}}</td>
+                
+                <td>
+                    <a href="{% url 'call_app:create-call-auditoria'  %}" class="button"><i class="fi-page-search"></i></a>
+                    </td>        
+            </tr>
+            
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <div class="cell">
+        {% if is_paginated %}
+        <nav aria-label="Pagination">
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                <li class="pagination-previous">
+                    <a href="?page={{page_obj.previous_page_number}}">Atras</a>
+                </li>
+                {% endif %}
+                
+                {% for pagina in paginator.page_range %}
+             
+                {% ifequal pagina page_obj.number %}
+                <li class="current"><span class="show-for-sr">You're on page</span> {{ pagina }}</li>
+                {% else %}
+                <li class=""><a href="?page={{pagina}}">{{ pagina }}</a></li>
+                {% endifequal %}
+                {% endfor %}
+                
+                {% if page_obj.has_next %}
+                <li class="pagination-next">
+                    <a href="?page={{page_obj.next_page_number}}">Siguiente</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+    </div>
+
+{% endblock panel-content %}

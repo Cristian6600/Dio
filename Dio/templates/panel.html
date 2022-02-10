@@ -80,6 +80,9 @@
                     <ul class="nested vertical menu">
                       <li class="{% if request.resolver_match.url_name == 'venta-index' %}activeli{% endif %}">
                         <a href="{% url 'call_app:lista-call' %}"style="color: white;">Gestion</a>
+                      </li>  
+                      <li class="{% if request.resolver_match.url_name == 'venta-index' %}activeli{% endif %}">
+                        <a href="{% url 'call_app:lista-call-auditoria' %}"style="color: white;">Auditoria</a>
                       </li>                      
                     </ul>
                   </li>

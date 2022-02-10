@@ -117,8 +117,8 @@ class Planilla(TimeStampedModel) :
         self.guia.id_est_id = self.guia.id_est_id = 4
         self.guia.mensajero = self.mensajero
         self.guia.est_planilla = self.guia.est_planilla = 1
-        self.guia.id_planilla = self.id_planilla     
-        self.guia.fecha_planilla   = self.fecha_planilla
+        self.guia.id_planilla = self.id_planilla  
+        
 
         self.guia.save()       
         super(Planilla,  self).save(*args, **kwargs)
@@ -183,11 +183,30 @@ class Recepcion(models.Model):
         self.guia.fecha_recepciond = self.fecha_re
         self.guia.mot_id = self.varu
         self.guia.id_est = self.estados
-        self.guia.est_planilla = self.guia.est_planilla =  2
+
+        self.guia.est_planilla = self.guia.est_planilla =  2 # estado de planiñlla activo o inactivo para mostrar en filtro nomas
+        self.guia.cantidad = self.guia.cantidad + 1
         
+        self.guia.id_est_id = self.guia.id_est_id = 3
+        self.guia.suma = self.guia.suma
+        if self.guia.suma <=2:
+            self.guia.suma +=1
         self.guia.save()
 
         super(Recepcion, self).save(*args, **kwargs)
 
+ # def save(self, *args, **kwargs):
+    # contador = 0
+        # self.guia.mot = self.var
+    # self.guia.id_est = self.estados
+        # self.guia.id_est_id = self.guia.id_est_id = 3
+        # self.guia.cantidad = self.guia.cantidad + 1
+    # # Funcion contador ok copiar codigo para pruebas
+        # self.guia.suma = self.guia.suma
+        # si self.guia.suma <=2:
+        # self.guia.suma +=1 # suma en campo sum en cada momento que se ejecuta el boton de guardar
+                      
+        # self.guia.save()
 
+        # super(Recep_guia, self).save(*args, **kwargs)
 

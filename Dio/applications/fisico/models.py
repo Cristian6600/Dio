@@ -105,7 +105,7 @@ class Fisico(Fisi_pa, Bolsa):
 
     fecha_recepcion = models.DateTimeField(blank = True, null= True, verbose_name='Fecha gestion')
 
-    fecha_planilla = models.DateTimeField(blank= True, null= True)
+    fecha_planilla = models.DateTimeField(auto_now=True, blank= True, null= True)
 
     imagen = models.ImageField(
         upload_to = 'guia',
@@ -132,6 +132,8 @@ class Fisico(Fisi_pa, Bolsa):
     @property
     def cant_vi(self):
         return str(self.cantidad_vi)
+
+    
 
 class Paquete(Fisi_pa):
     

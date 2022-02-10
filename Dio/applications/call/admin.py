@@ -55,9 +55,9 @@ class AuditoriaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     date_hierarchy = ('fecha')
     resource_class = AuditoriaResource
     list_filter  = ('pregunta_1', 'fecha', 'calificacion_1')       
-    raw_id_fields = ["entregas", 'telefono' ]
+    raw_id_fields = ["entregas",]
     list_display = ('fecha', 'user', 'pregunta_1', 'calificacion_1','pregunta_2', 'calificacion_2', 'pregunta_3', 'calificacion_3', 'pregunta_4', 'calificacion_4')
-    fields =(('entregas', 'telefono'), 
+    fields =(('entregas', ), 
              ('pregunta_1', 'calificacion_1', 'pregunta_2', 'calificacion_2'),
              
              ('pregunta_3', 'calificacion_3', 'pregunta_4', 'calificacion_4'),
@@ -71,13 +71,16 @@ class AuditoriaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
             obj.user = request.user 
         obj.save()
 
+class PregutasAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display = ('pregunta', )
+
 admin.site.register(Datos_t, datos_tAdmin)
 
 admin.site.register(Indicativo, IndicativoAdmin)
 
 admin.site.register(Telefono, TelefonoAdmin)
 
-admin.site.register(Pregunta)
+admin.site.register(Pregunta, PregutasAdmin)
 
 admin.site.register(Auditoria, AuditoriaAdmin)
 

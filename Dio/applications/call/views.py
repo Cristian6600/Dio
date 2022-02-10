@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from django.views.generic.edit import UpdateView
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView
 from applications.guia.models import Guia
+from applications.call.models import Auditoria
 from django.urls import reverse_lazy
+from .forms import CallfisicoForm
 from django.db.models import Q
 from applications.users.mixins import CallPermisoMixin
 
@@ -20,8 +22,24 @@ class CallListView(CallPermisoMixin, ListView):
     context_object_name = 'call'
     paginate_by = 5
     
+class AuditoriaListView(ListView):
+    template_name = "call/auditoria.html"
+    context_object_name = 'auditoria'
+    queryset = Guia.objects.filter(mot = 21, estado=1)
+    paginate_by = 5
 
+class AuditoriaCreateView(CreateView):
+    template_name = "call/create_auditoria.html"
+    form_class = CallfisicoForm
+    success_url = reverse_lazy('call_app:lista-call-auditoria')
 
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return super(AuditoriaCreateView, self).form_valid(form)
+     
+    
 
 
 
