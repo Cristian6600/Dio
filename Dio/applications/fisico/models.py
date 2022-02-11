@@ -48,7 +48,7 @@ class Bolsa(models.Model):
         verbose_name = 'motivo',
         null=True,
         blank=True,
-        default = 3)  
+        default = 4)  
 
     def __str__(self):
         return str(self.bolsa)
@@ -93,7 +93,7 @@ class Fisico(Fisi_pa, Bolsa):
         null=True, 
         blank = True,
         verbose_name = 'Estado',
-        default= 0
+        default= 4
     )
     proceso = models.ForeignKey('Proceso',
         on_delete=models.CASCADE, 
