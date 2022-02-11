@@ -34,19 +34,19 @@
     <table border="">
         
 			<tr>
-				<td width="130" rowspan="3"> <img src="https://firstsource.net.co/wp-content/uploads/2020/06/Enmascarar-grupo-31.png">
+				<td width="130" rowspan="3"> 
                     </td>
 				<td >Destinatario:</td>
 				<td colspan="2"><strong> {{ e.dest }} </strong></td>            
 			</tr>
 			<tr>
-				<td >Direccion:</td>
-				<td><strong> {{ e.direccion }} </strong></td>
+				<td>Direccion:</td>
+				<td colspan="2"><strong> {{ e.direccion }} </strong></td>
 				
 			</tr>
 			<tr>
 				<td>Telefono:</td>
-                <td></td>
+                <td>1</td>
                 <td>Ciudad: <strong>{{e.id_ciu}} </strong></td>
 			</tr>
 		</table>                   
@@ -93,19 +93,19 @@
             </tr>
             <tr>				
                 <td>FO-OP-28 V.1</td>
-                <td><h1>{{e.proc.proceso}}</h1></td>
+                <td>{{e.proc.proceso}}</td>
                 <td></td>
                 <td><h1><strong>{{e.seudo_dg.bolsa}} </strong></h1></td>
                 <td><h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>{{forloop.counter}}</strong></h1></td>
             </tr>    
             <tr>
-				<td ><h3> Destinatario:  <strong>{{ e.dest }}</h3> </strong>  </td>
-                    <td colspan="3"></td>
-                    <td></td>                     
+				<td >Destinatario:  </td>
+                    <td colspan="4">{{e.dest}}</td>
+                                         
             </tr>
             <tr>
-                <td><h3> <strong> {{ e.direccion }} </h2></strong></td>
-                <td colspan="4">1</td>
+                <td colspan="2"><h3> <strong> {{ e.direccion }} </h2></strong></td>
+                <td colspan="2">1</td>
                 
             </tr>
             <tr>
@@ -193,9 +193,10 @@
             cliente puede realizar el rastreo de sus envios en la pagina web firstsource.net.co o en la linea telefonica +57) (1) 8903906. El cliente puede 
             presentar sus peticiones,quejas y recursos en la web y telefono descrito anteriormente o a traves del correo electronico
             servicio@firstsource.net.co 
-        </font>
+        </font><hr width=400>
+	
         <hr width=400>
-        <hr width=400>
+        
             {% endfor %}           
 </tbody>
 
