@@ -45,6 +45,9 @@
                         <li class="{% if request.resolver_match.url_name == 'caja-index' %}activeli{% endif %}">
                           <a href="{% url 'producto_app:guia-buscar' %} " style="color: white;">Impresion por guia imprimir</a>
                         </li>
+                        <li class="{% if request.resolver_match.url_name == 'caja-index' %}activeli{% endif %}">
+                          <a href="{% url 'fisico_app:cobertura-fisico' %} " style="color: white;">No cobertura</a>
+                        </li>
                         
                       </ul>
                     </li>
@@ -87,6 +90,19 @@
                     </ul>
                   </li>
               </ul> 
+              <ul class="vertical menu">
+                <li>
+                  <a href="#"><span style="color: white;">Sig</span></a>
+                  <ul class="nested vertical menu">
+                                              
+                      <li class="{% if request.resolver_match.url_name == 'venta-index' %}activeli{% endif %}">
+                        <a href="{% url 'bd_app:bd-Informe' %}" style="color: white;">Informe</a>
+                      </li>
+                      
+                    </li>
+                  </ul>
+                </li>
+            </ul> 
             </div>
         </div>
     

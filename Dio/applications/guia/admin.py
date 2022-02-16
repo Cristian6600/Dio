@@ -4,7 +4,7 @@ from related_admin import RelatedFieldAdmin
 from import_export import resources
 from django.contrib.admin.models import ADDITION, LogEntry
 
-from . models import Estado, Servicio, Cod_vis, Guia, img
+from . models import Servicio, Guia, img
 from django.utils.html import format_html
 from django.contrib.admin.models import LogEntry, ADDITION, CHANGE
 from django.contrib.admin import AdminSite
@@ -21,8 +21,8 @@ admin.site.site_title = 'My site admin'
 #         export_order = ('seudo__id_pro__producto', 'seudo__d_i', 'seudo__cliente', 'direccion', 'bolsa', 'id_guia', 'id_ciu__ciudad', 'fecha',  )
 
 class guiaAdmin(SimpleHistoryAdmin, RelatedFieldAdmin):
-    history_list_display = ["mot", "mensajero"]
-    # date_hierarchy = ('fe_entrega')
+    history_list_display = ["mot", "fecha_recepcion"]
+    date_hierarchy = ('fecha')
     list_per_page = 5
     raw_id_fields = ["seudo", "mot", "id_est", "cod_vis"]
     # change_list_template = 'admin/guia/guia_change_list.html'
@@ -34,9 +34,9 @@ class guiaAdmin(SimpleHistoryAdmin, RelatedFieldAdmin):
     ]
 #     # raw_id_fields = ("mot",)
     search_fields = ('id_guia', 'seudo__seudo_bd', 'mot__motivo',)
-    list_display = ('id_guia', 'mot__motivo', 'd_i', 'seudo', 'direccion', 'id_ciu', 'fecha', 'user', 'destinatario', 'imagen', 'mensajero', 'estado')
+    list_display = ('id_guia', 'mot__motivo', 'd_i', 'fecha_recepcion', 'seudo', 'direccion', 'id_ciu', 'fecha', 'user', 'destinatario', 'imagen', 'mensajero', 'estado')
     ordering = ('id_guia',)
-    list_filter = ('user', 'id_ciu__departamento','fecha', 'mot__motivo', 'estado')
+    list_filter = ('user', 'id_ciu__departamento','fecha_recepcion', 'mot__motivo', 'estado')
 #     # readonly_fields = ('fecha', 'cantidad', 'user')
 #     actions = None
 #     # raw_id_fields = ("id",)
@@ -74,10 +74,8 @@ class ImgAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     #         obj.user = request.user 
     #     obj.save()
 
-admin.site.register(Estado, EstadoAdmin)
 admin.site.register(Servicio)
 admin.site.register(LogEntry, MoniterLog)
-admin.site.register(Cod_vis, Cod_visAdmin)
 admin.site.register(Guia, guiaAdmin)
 admin.site.register(img, ImgAdmin)
 

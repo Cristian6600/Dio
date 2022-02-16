@@ -2,11 +2,11 @@ from django.db import models
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from applications.base_cliente.models import Bd_clie, Producto
-from applications.cliente.models import Ciudad, Cliente
-
+from applications.cliente.models import Ciudad, Cliente, Oficinas
+from applications.argumento.models import Estado, Motivo, Cod_vis, Proceso
 # from applications.fisico.models import Fisico
 from applications.guia.models import Guia
-from applications.fisico.models import Proceso
+
 import barcode                      
 from barcode.writer import ImageWriter
 from io import BytesIO
@@ -14,43 +14,6 @@ from django.core.files import File
 
 from django.dispatch import receiver
 from django.db.models.signals import post_save
-
-class Tipo(models.Model):
-    id_tip = models.IntegerField(
-        primary_key=True
-    )
-
-    Tipo = models.CharField(
-        max_length=20
-    )
-
-    class Meta:
-        verbose_name = "Tipo"
-        verbose_name_plural = "Tipo"
-
-    def __str__(self):
-        return str(self.Tipo)
-
-class Motivo(models.Model):
-    
-    id = models.IntegerField(primary_key=True, default = 0)
-
-    motivo = models.CharField(
-        max_length=50
-    )
-
-    id_tip = models.ForeignKey(
-        Tipo, 
-        on_delete=models.CASCADE,
-        blank=True, 
-        null=True
-    )
-    def __str__(self):
-        return str(self.motivo) #+ "-" + self.motivo
-    
-    class Meta:
-        verbose_name = "Motivo"
-        verbose_name_plural = "Motivo"
 
 class Orden (models.Model):
     orden = models.IntegerField(primary_key= True)
@@ -65,6 +28,7 @@ class datos_g (models.Model):
         Guia,
         on_delete=models.CASCADE,
         primary_key=True,
+        related_name= 'guia_d_g'
         
     )
 
@@ -83,7 +47,7 @@ class datos_g (models.Model):
         null=True,
     )
     dest = models.CharField(
-        max_length=100, blank=True, null = True
+        max_length=100, blank=True, null = True, verbose_name='Destinatario'
     )
 
     d_i_a = models.CharField(
@@ -127,13 +91,14 @@ class datos_g (models.Model):
         on_delete=models.CASCADE,
         null=True,
         blank=True,
+        verbose_name='Producto'
     )
     proc = models.ForeignKey(Proceso,
         on_delete=models.CASCADE, blank = True, null = True, verbose_name='Proceso'
         )
 
     cod_vis = models.ForeignKey(
-        'guia.Cod_vis',
+        Cod_vis,
         on_delete=models.CASCADE,
         blank = True,
         null = True,
@@ -157,15 +122,12 @@ class datos_g (models.Model):
         blank=True,)
 
     id_estado = models.ForeignKey(
-        'guia.Estado',
+        Estado,
         on_delete=models.CASCADE, 
         null=True, 
         blank = True,
         verbose_name = 'Estado'
     )
-    lote = models.IntegerField(
-        blank=True, 
-        null=True)
 
     cantidad = models.IntegerField(blank=True, null=True)
 
@@ -178,7 +140,7 @@ class datos_g (models.Model):
 
     zona = models.CharField(max_length=30, blank=True, null=True)
 
-    oficina= models.CharField(max_length=5)
+    oficina= models.ForeignKey(Oficinas, on_delete= models.CASCADE,)
 
     def save(self, *args, **kwargs):
         EAN = barcode.get_barcode_class('ean13')

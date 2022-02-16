@@ -5,7 +5,7 @@ from django.db import models
 from applications.cliente.models import Ciudad
 from .managers import CourrierManager
 
-class Modelo(models.Model):
+class Modelos(models.Model):
     modelo = models.IntegerField(primary_key=True)
 
 class Tipo_infraccion(models.Model):
@@ -62,7 +62,7 @@ class vehiculo(models.Model):
 
     capacidad = models.IntegerField()
 
-    modelos = models.ForeignKey(Modelo, on_delete=models.CASCADE,)
+    modelos = models.ForeignKey(Modelos, on_delete=models.CASCADE,)
 
     placa = models.CharField(max_length=10)
 

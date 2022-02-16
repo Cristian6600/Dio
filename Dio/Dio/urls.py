@@ -18,12 +18,15 @@ from django.urls import path
 from django.urls import include, path, re_path
 from django.conf import settings
 from django.conf.urls.static import static 
-from applications.guia.views import handleMultipleImagesUpload
-
+from applications.guia.views import handleMultipleImagesUpload, export, export_address
+from applications.base_cliente.views import exportSig
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('upload/', handleMultipleImagesUpload, name="home"),
+    path('export-oficinas/', export, name="oficinas"),
+    path('export-address-principal/', export_address, name="export-address"),
+    path('informe-sig/', exportSig, name="sig"),
     re_path('', include('applications.users.urls')),
     re_path('', include('applications.home.urls')),
     re_path('', include('applications.guia.urls')),
@@ -31,6 +34,7 @@ urlpatterns = [
     re_path('', include('applications.ruta.urls')),
     re_path('', include('applications.datos_g.urls')),
     re_path('', include('applications.call.urls')),
+    re_path('', include('applications.base_cliente.urls')),
     
     
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

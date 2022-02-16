@@ -1,11 +1,12 @@
+from dataclasses import field
 from typing import List
 from django.http import HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
-from . models import Paquete, Fisico
-from django.views.generic import CreateView, ListView
+from . models import Cobertura, Paquete, Fisico
+from django.views.generic import CreateView, ListView, UpdateView
 from django.views.generic.detail import SingleObjectMixin
-from .forms import ProductForm
+from .forms import ProductForm, CoberturaForm
 from applications.users.mixins import CustodiaPermisoMixin
 
 class BolsaCreateView(CustodiaPermisoMixin, CreateView, ListView):
@@ -34,3 +35,17 @@ class EstadoRutaListView(LoginRequiredMixin, ListView):
     success_url = '.'
     context_object_name ='estado_planilla'
 
+class CoberturaCreateView(CreateView, ListView):
+    template_name = "fisico/cobertura_bolsa.html"
+    form_class = CoberturaForm
+    context_object_name = 'cobertura'
+    success_url = '.'
+
+    def get_queryset(self):
+        return Cobertura.objects.order_by('bolsa')
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return super(CoberturaCreateView, self).form_valid(form)

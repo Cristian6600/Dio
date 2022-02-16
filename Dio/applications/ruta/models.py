@@ -6,7 +6,7 @@ from  django.db.models.signals import post_save
 from django.conf import settings 
 
 from django.urls import reverse
-from applications.guia.models import  Estado
+from applications.argumento.models import Estado
 from applications.courrier.models import courrier
 from applications.datos_g.models import Motivo
 from applications.fisico.models import Fisico, Bolsa

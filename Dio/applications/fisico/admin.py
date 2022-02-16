@@ -1,9 +1,10 @@
+from dataclasses import field
 from django.contrib import admin
 from django.db.models.query_utils import FilteredRelation
 
 from import_export.admin import ImportExportModelAdmin
 from import_export import resources
-from . models import Paquete, Fisico, Bolsa, Mesa, Motivo_mesa, Proceso
+from . models import Paquete, Fisico, Bolsa, Mesa, Motivo_mesa, Proceso, Cobertura
 from django.db import models
 from django.forms import ModelForm
 from django import forms
@@ -14,6 +15,13 @@ class FisicoResource(resources.ModelResource):
     class Meta:
         model = Fisico
         import_id_fields = ('id_guia',) 
+
+class CoberturaResource(resources.ModelResource):
+    
+    class Meta:
+        model = Cobertura
+        import_id_fields = ('bolsa',) 
+        fields = ('bolsa__direccion')
     
 # class MyForm(forms.ModelForm):
 #     seudo = forms.CharField(
@@ -58,12 +66,17 @@ class ImgAdmin(admin.ModelAdmin):
 class ProcesoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     pass
 
+class CoberturaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    resource_class = CoberturaResource
+    list_display = ('bolsa', 'fecha')
+
 admin.site.register(Paquete, PaqueteAdmin)
 admin.site.register(Fisico, FisicoAdmin)
 admin.site.register(Bolsa, BolsaAdmin)
 admin.site.register(Mesa, MesaAdmin)
 admin.site.register(Motivo_mesa)
 admin.site.register(Proceso, ProcesoAdmin)
+admin.site.register(Cobertura, CoberturaAdmin)
 
 
 

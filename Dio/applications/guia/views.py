@@ -2,7 +2,7 @@ from django.db.models import fields
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required, permission_required
-
+import csv
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.urls import reverse_lazy
@@ -86,6 +86,56 @@ class BuscarGuiaPdf(CustodiaPermisoMixin, ListView):
         }
         pdf = render_to_pdf('guia/gui_pdf.html', data)
         return HttpResponse(pdf, content_type='application/pdf')
+
+def export(request):
+    response = HttpResponse(content_type='text/csv')
+
+    writer = csv.writer(response)
+    writer.writerow([
+        'CODIGO DE OFICINA', 'NOMBRE OFICINA', #1
+        'DIRECCION DESTINO', 'CIUDAD DESTINO', #2
+        'TELEFONO', 'CEDULA',          #3
+        'OBSERVACION', 'PSEUDOCODIGO', #4 
+        'BOLSA', 'TIPO DE EMISION',    #5
+        'PROCESO',
+        ])
+
+    for guia in Guia.objects.filter(id_est = 8).values_list(
+        'id_ciu__id', 'guia_d_g__oficina', 
+        'direccion', 'id_ciu__ciudad',
+        'tel', 'd_i', 
+        'destinatario', 
+        'seudo', 'bolsa', 
+        'seudo__t_emi'):
+        writer.writerow(guia)
+
+    return response
+
+def export_address(request):
+    response = HttpResponse(content_type='text/csv')
+
+    writer = csv.writer(response)
+    writer.writerow([
+        'COD DANE', 'CIUDAD', #1
+        'DIRECCION 1', 'TELEFONO', #2
+        'CEDULA', 'NOMBRE_USUARIO', #3
+        'PSEUDOCODIGO', 'OBSERVACION', #4 
+        'TIPO ENTREGA', 'BOLSA', #5
+        'TIPO DE EMISION', 'PROCESO', #6 
+        ])
+
+    for guia in Guia.objects.filter(id_est = 8).values_list(
+        'id_ciu__id', 'id_ciu__ciudad', #1
+        'direccion', 'tel', #2
+        'd_i', 'destinatario', #3
+        'seudo', 'seudo', #4
+        'proceso__cod_dir', 'bolsa', #5
+        'seudo__t_emi', 
+        ):
+        
+        writer.writerow(guia)
+
+    return response
      
 
 

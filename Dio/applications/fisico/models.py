@@ -1,29 +1,15 @@
 from tabnanny import verbose
 from django.db import models
 # from applications.base_cliente.models import Bd_clie
-# from applications.guia.models import Servicio, Cod_vis, Estado
 from django.conf import settings 
-
-from applications.base_cliente.models import Bd_clie, Producto, Est_clie
+from applications.base_cliente.models import Bd_clie
 from applications.cliente.models import Ciudad
 from applications.courrier.models import courrier
-
+from applications.argumento.models import Estado, Motivo, Cod_vis, Proceso
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from simple_history.models import HistoricalRecords
 from django.core.exceptions import ValidationError
-
-
-class Proceso(models.Model):
-    
-    id = models.IntegerField(primary_key=True)
-    proceso = models.CharField(
-        max_length=30
-        )
-    cod_dir = models.CharField(max_length=4)
-
-    def __str__(self):
-        return str(self.id)
 
 class Fisi_pa(models.Model):
 
@@ -43,12 +29,21 @@ class Bolsa(models.Model):
     bolsa = models.IntegerField(primary_key=True)
 
     mot = models.ForeignKey(
-        'datos_g.Motivo', 
+        Motivo, 
         on_delete=models.CASCADE, 
         verbose_name = 'motivo',
         null=True,
         blank=True,
         default = 4)  
+
+    id_est = models.ForeignKey(
+        Estado, 
+        on_delete=models.CASCADE, 
+        null=True, 
+        blank = True,
+        verbose_name = 'Estado',
+        default= 4
+    )
 
     def __str__(self):
         return str(self.bolsa)
@@ -80,22 +75,14 @@ class Fisico(Fisi_pa, Bolsa):
     )
 
     cod_vis = models.ForeignKey(
-        'guia.Cod_vis',
+        Cod_vis,
         on_delete=models.CASCADE,
         blank = True,
         null = True,
         default= 0
     )
-
-    id_est = models.ForeignKey(
-        'guia.Estado', 
-        on_delete=models.CASCADE, 
-        null=True, 
-        blank = True,
-        verbose_name = 'Estado',
-        default= 4
-    )
-    proceso = models.ForeignKey('Proceso',
+   
+    proceso = models.ForeignKey(Proceso,
         on_delete=models.CASCADE, 
         blank=True, null=True
         )
@@ -103,7 +90,7 @@ class Fisico(Fisi_pa, Bolsa):
 
     d_i = models.CharField(max_length=15, blank = True, null=True)
 
-    fecha_recepcion = models.DateTimeField(blank = True, null= True, verbose_name='Fecha gestion')
+    fecha_recepcion = models.DateTimeField(auto_now=True, blank = True, null= True, verbose_name='Fecha gestion')
 
     fecha_planilla = models.DateTimeField(auto_now=True, blank= True, null= True)
 
@@ -132,8 +119,6 @@ class Fisico(Fisi_pa, Bolsa):
     @property
     def cant_vi(self):
         return str(self.cantidad_vi)
-
-    
 
 class Paquete(Fisi_pa):
     
@@ -187,8 +172,30 @@ class Mesa(models.Model):
     def __str__(self):
         return str(self.guia)
 
+class Cobertura(models.Model):
+    bolsa = models.OneToOneField(Bolsa, on_delete=models.CASCADE, primary_key=True)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE, 
+        blank=True, null=True, 
+        editable=True,
+        verbose_name= 'Usuario'
+    )
+    fecha = models.DateTimeField(
+        auto_now_add=True,
+        blank=True,
+        null=True,
+        verbose_name= 'Fecha fisico'
+    )
 
+    def __str__(self):
+        return str(self.bolsa)
 
+    def save(self, *args, **kwargs):
+        self.bolsa.id_est_id  = self.bolsa.id_est_id = 8
+        
+        self.bolsa.save()
 
+        super(Cobertura, self).save(*args, **kwargs)
 
 

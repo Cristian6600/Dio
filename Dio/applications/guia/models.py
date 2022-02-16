@@ -7,6 +7,7 @@ from .managers import ProductManager
 # from applications.call.models import Telefono
 from applications.base_cliente.models import Bd_clie, Producto, Est_clie
 
+
 from applications.users.models import User
 from applications.cliente.models import Ciudad, Cliente
 
@@ -27,35 +28,6 @@ class LogEntryManager(models.Manager):
             object_repr[:200], action_flag, change_message
         )
             e.save()
-
-class Estado (models.Model):
-    id = models.IntegerField(
-        primary_key = True
-    )
-    Estado = models.CharField(
-        max_length=35
-    )
-
-    class Meta:
-        verbose_name = "Estado"
-        verbose_name_plural = "Estado"
-
-    def __str__(self):
-        return str(self.Estado)
-    
-class Cod_vis(models.Model):    
-
-    id = models.IntegerField(
-        primary_key= True,
-        verbose_name='Codigo de visita',
-    )
-    visita = models.CharField(
-        max_length= 36
-    )
-    tipo = models.CharField(max_length=12)
-
-    def __str__(self):
-        return str(self.id)
 
 class Servicio(models.Model):
     id_serv = models.IntegerField(
@@ -218,14 +190,6 @@ class Guia(Fisico, TimeStampedModel):
 
     var_g = ("guia")
 
-    @property
-    def bols(self):
-        return self.bolsa
-    
-    @property
-    def guia(self):
-        return self.id_guia
-
     # @property
     # def estado_cli(self):
     #     return self.codigo
@@ -244,6 +208,7 @@ class Guia(Fisico, TimeStampedModel):
       return str(self.user)
         
     contador= 0  
+    prueba = 0
 
     @property
     def can_vi(self):
@@ -261,7 +226,6 @@ class Guia(Fisico, TimeStampedModel):
     def motis(self):
         return str(self.mot.id)
 
-    
     @property
     def estados(self):
         return self.id_est.id
@@ -274,22 +238,11 @@ class Guia(Fisico, TimeStampedModel):
     def concatenar(self):
         return  str(self.cantidad_vi) + (self.motis) + str(self.estados) + str(self.cod_vis) 
 
-    @property
-    def decha_fi(self):
-        return self.fecha
-
-    @property
-    def fecha_gestion(self):
-        return self.fecha_planilla
-
     def save(self, *args, **kwargs):
-        self.seudo.fecha_recepcion = self.fecha_gestion
-        self.seudo.fe_fisico = self.fecha
+        
         self.imagen  = self.img
         # self.seudo.id_est_clie_id = self.codigo
         self.seudo.sucursal = self.userbd
-        self.seudo.bolsa = self.bols
-        self.seudo.guia = self.guia
         # self.seudo.id_est_clie = self.estado_cli
         self.codigo = self.concatenar   
         self.cantidad_vi = str(self.cod_vis) #codvis, captura el codigo de visita, para cantidad_vi

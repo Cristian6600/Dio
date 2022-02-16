@@ -16,4 +16,10 @@ urlpatterns = [
          name = 'estado-ruta',
          ),
 
+    path(
+        'cobertura-fisico/',
+        views.CoberturaCreateView.as_view(),
+        name = 'cobertura-fisico',
+    )
+
 ]

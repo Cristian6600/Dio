@@ -1,5 +1,5 @@
 from django import forms
-from .models import Paquete, Fisico
+from .models import Paquete, Cobertura
 
 class ProductForm(forms.ModelForm):
 
@@ -49,3 +49,18 @@ class ProductForm(forms.ModelForm):
 #         model = Fisico
 #         fields = ('bolsa', 'seudo')
 
+class CoberturaForm(forms.ModelForm):
+    class Meta:
+        model = Cobertura
+        fields = (
+            'bolsa',
+                  
+        )
+        widgets = {
+            'bolsa': forms.TextInput(
+                attrs = {
+                    'placeholder': 'Codigo de barras Bolsa', 'autofocus': 'autofocus',
+                    'class': 'input-group-field',
+                }
+            ),
+        }

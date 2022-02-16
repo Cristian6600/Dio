@@ -1,3 +1,4 @@
+from email.errors import MultipartConversionError
 from django.db import models
 
 class Departamento(models.Model):
@@ -82,6 +83,31 @@ class Cliente (models.Model):
 
     def __str__(self):
         return self.nit
+
+class Oficinas(models.Model):
+    id= models.IntegerField(primary_key=True)
+    nom_ofi = models.CharField(max_length=70)
+    direccion = models.CharField(max_length=200)
+    dane = models.ForeignKey(Ciudad, on_delete=models.CASCADE,)
+    hora_norm = models.CharField(max_length=14, verbose_name= 'Horario normal')
+    hora_adi = models.CharField(max_length=14, verbose_name= 'Horario adicional')
+    hora_sab = models.CharField(max_length=14, verbose_name='Horario sabado')
+    categoria = models.CharField(max_length=20)
+    num_dia_entr = models.CharField(max_length=5, verbose_name = 'N° Días Entrega_(hábiles)')
+    lunes = models.CharField(max_length=3)
+    martes = models.CharField(max_length=3)
+    miercoles = models.CharField(max_length=3)
+    jueves = models.CharField(max_length=3)
+    viernes = models.CharField(max_length=3)
+    sabado = models.CharField(max_length=3)
+    fusionada = models.CharField(max_length=60)
+    observacion = models.TextField()
+    fecha_actu = models.DateField(verbose_name = 'Fecha ultima actualizacion')
+    dir_cita = models.CharField(max_length=150, verbose_name='Direccion cita')
+    cub = models.CharField (max_length=16)
+
+    def __str__(self):
+        return str (self.id)
 
 
 

@@ -1,8 +1,13 @@
 
 from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
+from import_export import resources
+from  . models import courrier, vehiculo, Tipo_vehiculo, Marca_vehiculo, Linea_vehiculo, Tipo_infraccion, Modelos
 
-from  . models import courrier, vehiculo, Tipo_vehiculo, Marca_vehiculo, Linea_vehiculo, Tipo_infraccion
+class VehiculoResource(resources.ModelResource):
+    class Meta:
+        model = vehiculo
+        import_id_fields = ('id_veg',)
 
 class courrierAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     icon_name  =  'person_outline'
@@ -14,13 +19,30 @@ class courrierAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     raw_id_fields = ["id_veh",]
     search_fields = ("d_i", "courrier")
     list_display = ('courrier', 'd_i', 'cel', 'est_courrier')
+    list_per_page = 5
 
 class VehiculoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    resource_class = VehiculoResource
     list_display = ('id_veg', 'name', 'cc', 'marca', 'cilindraje')
-  
+    list_per_page = 5
+    search_fields = ('cc',)
+
+@admin.register(Modelos)
+class EstadoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display = ('modelo',)
+
+@admin.register(Marca_vehiculo)  
+class MarcaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display = ('marca',)
+
+@admin.register(Linea_vehiculo)  
+class LineaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display = ('linea',)
+
+@admin.register(Tipo_infraccion)
+class LineaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display = ('infraccion',)
+
 admin.site.register(courrier, courrierAdmin)
 admin.site.register(vehiculo, VehiculoAdmin)
 admin.site.register(Tipo_vehiculo)
-admin.site.register(Marca_vehiculo)
-admin.site.register(Linea_vehiculo)
-admin.site.register(Tipo_infraccion)
