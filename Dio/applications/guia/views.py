@@ -101,7 +101,9 @@ def export(request):
         'PROCESO',
         ])
 
-    for guia in Guia.objects.filter(id_est = 8).values_list(
+    for guia in Guia.objects.filter(
+        id_est = 2, mot = 3, producto = 3
+        ).values_list(
         'id_ciu__id', 'guia_d_g__oficina', 
         'direccion', 'id_ciu__ciudad',
         'tel', 'd_i', 
@@ -126,14 +128,14 @@ def export_address(request):
         'TIPO DE EMISION', 'PROCESO', #6 
         ])
 
-    for guia in Guia.objects.filter(id_est = 8).values_list(
+    for guia in Guia.objects.filter(id_est = 2, mot = 3).values_list(
         'id_ciu__id', 'id_ciu__ciudad', #1
         'direccion', 'tel', #2
         'd_i', 'destinatario', #3
         'seudo', 'seudo', #4
         'proceso__cod_dir', 'bolsa', #5
         'seudo__t_emi', 
-        ):
+        ).exclude(producto = 3):
         
         writer.writerow(guia)
 
