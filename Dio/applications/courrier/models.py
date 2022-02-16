@@ -50,7 +50,7 @@ class Linea_vehiculo(models.Model):
         return self.linea
 
 class vehiculo(models.Model):
-    id_veg = models.AutoField(primary_key=True, verbose_name = 'Id vehiculo')
+    id_veg = models.CharField(primary_key=True, verbose_name = 'Id vehiculo', max_length=20)
 
     name = models.CharField(max_length=50, verbose_name = 'Propietario de vehiculo')
 
