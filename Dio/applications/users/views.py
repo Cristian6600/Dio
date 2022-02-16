@@ -60,8 +60,6 @@ class UserRegisterView(LoginRequiredMixin, FormView):
             )
         )
 
-
-
 class LoginUser(FormView):
     template_name = 'users/login.html'
     form_class = LoginForm
@@ -85,8 +83,6 @@ class LogoutView(View):
                 'users_app:user-login'
             )
         )
-
-
 class UpdatePasswordView(LoginRequiredMixin, FormView):
     template_name = 'users/update.html'
     form_class = UpdatePasswordForm

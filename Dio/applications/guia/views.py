@@ -87,6 +87,7 @@ class BuscarGuiaPdf(CustodiaPermisoMixin, ListView):
         pdf = render_to_pdf('guia/gui_pdf.html', data)
         return HttpResponse(pdf, content_type='application/pdf')
 
+@login_required
 def export(request):
     response = HttpResponse(content_type='text/csv')
 
@@ -111,6 +112,7 @@ def export(request):
 
     return response
 
+@login_required
 def export_address(request):
     response = HttpResponse(content_type='text/csv')
 

@@ -3,7 +3,9 @@ import csv
 from . models import Bd_clie
 from django.http import HttpResponse
 from django.views.generic import ListView
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def exportSig(request):
     response = HttpResponse(content_type='text/csv')
 
