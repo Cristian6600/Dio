@@ -296,7 +296,11 @@ class Guia(Fisico, TimeStampedModel):
     
 class img(models.Model):
     
-    id_guia = models.OneToOneField('fisico.Fisico', on_delete=models.CASCADE, blank = True, null = True)
+    id_guia = models.OneToOneField(
+        Fisico, 
+        on_delete=models.CASCADE, 
+        related_name= 'image_mesa',
+        blank = True, null = True)
 
     image = models.ImageField(
         upload_to = 'guia',
@@ -321,7 +325,6 @@ class img(models.Model):
     class Meta:
         verbose_name = "Imagenes Guia"
         verbose_name_plural = "Imagenes Guia"
-
     
     @property
     def fe(self):
@@ -331,10 +334,18 @@ class img(models.Model):
     def save(self, *args, **kwargs, ):
         
         self.id_guia_id = (self.fe[-14:-4])
-        self.id_guia.imagen =  str(self.fe)
         
         self.id_guia.save()     
         super (img, self).save(*args, **kwargs)
+
+def optimize_image(sender, instance, **kwargs):
+    print("==========")
+    print(instance)
+    if instance.image:
+            image = Image.open(instance.image.path)
+            image.save(instance.image.path, quality=25, optimize = True)
+        
+post_save.connect(optimize_image, sender = img)
  
 
  

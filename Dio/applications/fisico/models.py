@@ -94,11 +94,7 @@ class Fisico(Fisi_pa, Bolsa):
 
     fecha_planilla = models.DateTimeField(auto_now=True, blank= True, null= True)
 
-    imagen = models.ImageField(
-        upload_to = 'guia',
-        null=True, 
-        blank = True,   
-    )
+    
     mensajero = models.ForeignKey(
         courrier, 
         on_delete=models.CASCADE, 

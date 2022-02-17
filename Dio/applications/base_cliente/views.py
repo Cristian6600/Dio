@@ -4,6 +4,7 @@ from . models import Bd_clie
 from django.http import HttpResponse
 from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
+from applications.users.mixins import SigPermisoMixin
 
 @login_required
 def exportSig(request):
@@ -44,7 +45,8 @@ def exportSig(request):
 
     return response
 
-class Bd_clieListView(ListView):
+
+class Bd_clieListView(SigPermisoMixin, ListView):
     template_name = "bd/bd.html"
     context_object_name = 'bd'
     paginate_by = 5

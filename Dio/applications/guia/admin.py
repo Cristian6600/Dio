@@ -30,14 +30,14 @@ class guiaAdmin(SimpleHistoryAdmin, RelatedFieldAdmin):
     fieldsets = [
         (None,  {'fields':[('seudo', 'bolsa', 'destinatario'), ('producto', 'estado', 'id_ciu'), ('direccion', 'barrio', 'postal', ), ]}),
         ('Estados', {'fields':[('id_est', 'mot', 'id_ser',), ('cod_vis', 'id_clie', 'proceso'),
-        ('cantidad_vi', 'cantidad', 'codigo', ), 'suma', 'imagen', 'orden' ]}) 
+        ('cantidad_vi', 'cantidad', 'codigo', ), 'suma', 'orden' ]}) 
     ]
 #     # raw_id_fields = ("mot",)
     search_fields = ('id_guia', 'seudo__seudo_bd', 'mot__motivo',)
-    list_display = ('id_guia', 'mot__motivo', 'd_i', 'fecha_recepcion', 'seudo', 'direccion', 'id_ciu', 'fecha', 'user', 'destinatario', 'imagen', 'mensajero', 'estado')
+    list_display = ('id_guia', 'image_mesa__image', 'mot__motivo', 'd_i', 'fecha_recepcion', 'seudo', 'direccion', 'id_ciu', 'fecha', 'user', 'destinatario', 'mensajero', 'estado')
     ordering = ('id_guia',)
     list_filter = ('user', 'id_ciu__departamento','fecha_recepcion', 'mot__motivo', 'estado')
-#     # readonly_fields = ('fecha', 'cantidad', 'user')
+    
 #     actions = None
 #     # raw_id_fields = ("id",)
 #     icon_name  =  'next_week's

@@ -134,7 +134,7 @@ def export_address(request):
         'd_i', 'destinatario', #3
         'seudo', 'seudo', #4
         'proceso__cod_dir', 'bolsa', #5
-        'seudo__t_emi', 
+        'seudo__t_emi',
         ).exclude(producto = 3):
         
         writer.writerow(guia)

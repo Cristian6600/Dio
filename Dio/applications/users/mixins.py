@@ -32,7 +32,6 @@ class CustodiaPermisoMixin(LoginRequiredMixin):
 
         return super().dispatch(request, *args, **kwargs)
 
-
 class MesaPermisoMixin(LoginRequiredMixin):
     login_url = reverse_lazy('users_app:user-login')
 
@@ -48,7 +47,6 @@ class MesaPermisoMixin(LoginRequiredMixin):
                 )
             )
         return super().dispatch(request, *args, **kwargs)
-
 
 class CallPermisoMixin(LoginRequiredMixin):
     login_url = reverse_lazy('users_app:user-login')
