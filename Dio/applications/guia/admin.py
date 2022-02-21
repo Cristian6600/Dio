@@ -20,7 +20,7 @@ admin.site.site_title = 'My site admin'
 #         fields = ('fecha',  'seudo__cliente', 'seudo__d_i', 'seudo__id_pro__producto', 'id_ciu__ciudad', 'direccion', 'bolsa', 'id_guia', 'postal', 'proceso__proceso', 'seudo' )
 #         export_order = ('seudo__id_pro__producto', 'seudo__d_i', 'seudo__cliente', 'direccion', 'bolsa', 'id_guia', 'id_ciu__ciudad', 'fecha',  )
 
-class guiaAdmin(SimpleHistoryAdmin, RelatedFieldAdmin):
+class guiaAdmin(ImportExportModelAdmin, SimpleHistoryAdmin, RelatedFieldAdmin):
     history_list_display = ["mot", "fecha_recepcion"]
     date_hierarchy = ('fecha')
     list_per_page = 5
