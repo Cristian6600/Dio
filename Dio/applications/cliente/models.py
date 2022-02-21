@@ -85,7 +85,7 @@ class Cliente (models.Model):
         return self.nit
 
 class Oficinas(models.Model):
-    id= models.IntegerField(primary_key=True)
+    id= models.CharField(max_length=6, primary_key=True)
     nom_ofi = models.CharField(max_length=70)
     direccion = models.CharField(max_length=200)
     dane = models.ForeignKey(Ciudad, on_delete=models.CASCADE,)

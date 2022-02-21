@@ -148,6 +148,7 @@ class Recepcion(models.Model):
         null=True, 
         default = 3
     )
+    
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE, 
@@ -162,6 +163,8 @@ class Recepcion(models.Model):
 
     def __str__(self):
         return str(self.id)
+
+    contador= 0 
 
     @property
     def varu(self):
@@ -184,13 +187,25 @@ class Recepcion(models.Model):
         self.guia.mot_id = self.varu
         self.guia.id_est = self.estados
 
-        self.guia.est_planilla = self.guia.est_planilla =  2 # estado de planiñlla activo o inactivo para mostrar en filtro nomas
+        self.guia.est_planilla = self.guia.est_planilla = 2 # estado de planiñlla activo o inactivo para mostrar en filtro nomas
         self.guia.cantidad = self.guia.cantidad + 1
         
         self.guia.id_est_id = self.guia.id_est_id = 3
-        self.guia.suma = self.guia.suma
-        if self.guia.suma <=2:
-            self.guia.suma +=1
+
+        
+        ###########################################
+        self.cantidad_vi = int(self.varu)
+        if int(self.cantidad_vi) >= 16 and int(self.cantidad_vi) > 18:
+                self.guia.cantidad_vi = self.contador
+        
+        elif int(self.cantidad_vi) > 18:
+            self.guia.cantidad_vi = self.contador
+
+        elif int(self.cantidad_vi) < 16:
+            self.guia.cantidad_vi = self.contador
+        
+        elif self.guia.cantidad_vi <=2:
+            self.guia.cantidad_vi +=1
         self.guia.save()
 
         super(Recepcion, self).save(*args, **kwargs)

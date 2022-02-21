@@ -151,30 +151,13 @@ class Guia(Fisico, TimeStampedModel):
         editable=True,
         verbose_name= 'Usuario'
     )
-    cantidad_vi = models.CharField(
-        max_length= 10,
-        verbose_name='Cantidad visitas',
-        blank=True,
-        null=True, 
-        
-        )
-    
-    codigo = models.CharField(
-        max_length=28,
-        blank=True, 
-        null=True
-        )
-
-    or_imp = models.IntegerField(
-        blank=True,
-        null=True
-        )
 
     tel = models.CharField(
         max_length=80,
         null=True, 
         blank = True
     )
+    prueba_c = models.CharField(max_length=10)#campo solo es como prueba de concatenar eliminar
 
     history = HistoricalRecords()    
 
@@ -193,22 +176,12 @@ class Guia(Fisico, TimeStampedModel):
     # @property
     # def estado_cli(self):
     #     return self.codigo
-
-    # Decorador concatenar ruta imagen
-    @property
-    def img(self):
-      return self.var_g  + str(self.id_guia) + '.jpg'
-
-    # """ def save(self, *args, **kwargs):
-    #     self.imagen  = self.img
-    #     super (Guia, self).save() """
       
     @property
     def userbd(self):
       return str(self.user)
         
     contador= 0  
-    prueba = 0
 
     @property
     def can_vi(self):
@@ -237,61 +210,16 @@ class Guia(Fisico, TimeStampedModel):
     @property
     def concatenar(self):
         return  str(self.cantidad_vi) + (self.motis) + str(self.estados) + str(self.cod_vis) 
-
+#aca
     def save(self, *args, **kwargs):
         
-        self.imagen  = self.img
         # self.seudo.id_est_clie_id = self.codigo
         self.seudo.sucursal = self.userbd
         # self.seudo.id_est_clie = self.estado_cli
         self.codigo = self.concatenar   
-        self.cantidad_vi = str(self.cod_vis) #codvis, captura el codigo de visita, para cantidad_vi
-        # self.cantidad_vi = self.moti 
-        if int(self.cantidad_vi) >=30:  #si cantidad_vi es mayor o igual a 30 retorneme a 0 "self.contador" 
-            self.cantidad_vi = (self.contador)
-            if self.suma >=3:   #quiere decir que al cumplir la condicion anterior es verdadera i si es mayor igual a 3 resetee el contador
-                self.suma = self.contador
-
-        elif int(self.cantidad_vi) <=29: #si la condicion anterior no era verdadera retorne cantidad y sum 
-            self.cantidad_vi = self.suma
-
-        self.cantidad_vi = int(self.moti) 
-        print(self.cantidad_vi)
-           #(self.fe[-14:-4])
-        if self.cantidad_vi >= 16 and self.cantidad_vi >= 19:
-            self.cantidad_vi = self.contador
-            if self.suma >=3:
-                self.suma = self.contador
-        elif self.cantidad_vi >=16: #si la condicion anterior no era verdadera retorne cantidad y sum 
-            self.cantidad_vi = self.suma
-        else:self.cantidad_vi = self.contador
-         
+          
         self.seudo.save()       
         super(Guia, self).save(*args, **kwargs)
-
-# [int(s) for s in str.split() if s.isdigit()]
-
-    # candidate = form.save(commit=False)
-    # candidate.user = request.user
-    # candidate.save()
-
-    # def optimize_image(sender, instance, **kwargs):.
-    #     print("==========")
-    #     print(instance)
-    #     if instance.Imagen:
-    #         Imagen = Image.open(instance.Imagen.path)
-    #         Imagen.save(instance.Imagen.path, quality=20, optimize = True)
-        
-    #     post_save.connect(optimize_image, sender = guia)
-
-# def optimize_image(sender, instance, **kwargs):
-#     print("==========")
-#     print(instance)
-#     if instance.image:
-#         image = Image.open(instance.image.path)
-#         image.save(instance.image.path, quality=20, optimize = True)
-        
-# post_save.connect(optimize_image, sender = img)
     
     
 class img(models.Model):

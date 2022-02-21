@@ -129,7 +129,7 @@ class datos_g (models.Model):
         verbose_name = 'Estado'
     )
 
-    cantidad = models.IntegerField(blank=True, null=True)
+    # cantidad = models.IntegerField(blank=True, null=True)
 
     orimp = models.ForeignKey(
         Orden, on_delete= models.CASCADE,
@@ -197,6 +197,10 @@ class datos_g (models.Model):
     def or_imp(self):
         return self.orimp.orden
 
+    # @property
+    # def cantidad(self):
+    #     return self.orimp.cantidad
+
     @property
     def proceso(self):
         return self.proc
@@ -216,12 +220,11 @@ class datos_g (models.Model):
         self.seudo_dg.mot = self.motivo
         self.seudo_dg.id_est = self.id_est
         self.seudo_dg.d_i = self.documento
-        self.seudo_dg.orden = self.or_imp
         self.seudo_dg.proceso = self.proceso
+        self.seudo_dg.suma = self.seudo_dg.suma = 0
 
         #orden impresion
         # self.orimp.orden = self.orden
-        
         
         self.seudo_dg.save()
 

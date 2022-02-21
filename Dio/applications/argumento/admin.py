@@ -13,11 +13,11 @@ class EmiResource(resources.ModelResource):
 
 @admin.register(Estado)
 class EstadoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ('Estado',)
+    list_display = ('id', 'Estado',)
 
 @admin.register(Motivo)
 class MotivoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ('motivo', )
+    list_display = ('id', 'motivo', )
 
 @admin.register(Cod_vis)
 class MotivoAdmin(ImportExportModelAdmin, admin.ModelAdmin):

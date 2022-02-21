@@ -5,7 +5,7 @@ from django.conf import settings
 from applications.base_cliente.models import Bd_clie
 from applications.cliente.models import Ciudad
 from applications.courrier.models import courrier
-from applications.argumento.models import Estado, Motivo, Cod_vis, Proceso
+from applications.argumento.models import Estado, Motivo, Cod_vis, Proceso, Est_clie
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from simple_history.models import HistoricalRecords
@@ -52,7 +52,7 @@ class Fisico(Fisi_pa, Bolsa):
 
     id_guia = models.AutoField(primary_key=True)
 
-    direccion = models.CharField(max_length=100, blank = True, null=True)
+    direccion = models.CharField(max_length=240, blank = True, null=True)
 
     id_ciu = models.ForeignKey(
         Ciudad, 
@@ -66,12 +66,6 @@ class Fisico(Fisi_pa, Bolsa):
         verbose_name = 'Cantidad Total',
         blank = True,
         null = True, 
-    )
-
-    suma = models.IntegerField(
-        blank = True,
-        null = True,
-        default= 0
     )
 
     cod_vis = models.ForeignKey(
@@ -94,7 +88,6 @@ class Fisico(Fisi_pa, Bolsa):
 
     fecha_planilla = models.DateTimeField(auto_now=True, blank= True, null= True)
 
-    
     mensajero = models.ForeignKey(
         courrier, 
         on_delete=models.CASCADE, 
@@ -105,6 +98,26 @@ class Fisico(Fisi_pa, Bolsa):
 
     id_planilla = models.IntegerField(blank=True, null= True)
 
+    cantidad_vi = models.IntegerField(
+        
+        verbose_name='Cantidad visitas', #lleva valor definitivo contador
+        blank=True,
+        null=True, 
+        
+        )
+
+    codigo = models.CharField(
+        max_length=28,
+        blank=True, 
+        null=True
+        )
+    
+    cod_ins = models.ForeignKey(
+        Est_clie,
+        on_delete=models.CASCADE, 
+        blank = True, null= True
+    )
+
     history = HistoricalRecords()    
     
     unique_together = ('bolsa', 'seudo')
@@ -112,9 +125,44 @@ class Fisico(Fisi_pa, Bolsa):
     def __str__(self):
         return str(self.id_guia)
 
+     #### concatenar codigo
+    @property
+    def can_vi(self):
+        return str(self.cantidad_vi) 
+
+    @property
+    def motis(self):
+        return str(self.mot.id) 
+
+    @property
+    def estados(self):
+        return self.id_est.id 
+
+    @property
+    def c_vis(self): 
+        return str(self.cod_vis) 
+
+    ############################################  
+    #  contador para generar reset
+    contador= 0  
+
+    @property
+    def concatenar(self):
+        return  str(self.cantidad_vi) + (self.motis) + str(self.estados) + str(self.cod_vis) 
+
     @property
     def cant_vi(self):
         return str(self.cantidad_vi)
+
+    @property
+    def prueba(self):
+        return str(self.codigo)
+#aca
+    def save(self, *args, **kwargs):
+        self.codigo = self.concatenar 
+        self.cod_ins_id = self.prueba
+
+        super(Fisico, self).save(*args, **kwargs)
 
 class Paquete(Fisi_pa):
     
