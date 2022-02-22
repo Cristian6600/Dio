@@ -4,18 +4,12 @@ from django.db.models.signals import post_save
 from PIL import Image
 from model_utils.models import TimeStampedModel
 from .managers import ProductManager
-# from applications.call.models import Telefono
-from applications.base_cliente.models import Bd_clie, Producto, Est_clie
-
-
+from applications.base_cliente.models import Bd_clie, Producto
 from applications.users.models import User
-from applications.cliente.models import Ciudad, Cliente
-
+from applications.cliente.models import Cliente
 from applications.fisico.models import Fisico
-# from applications.fisico.models import n_guia
 from django.utils.encoding import smart_text
 from django.conf import settings 
-
 from simple_history.models import HistoricalRecords
 from simple_history import register
 
@@ -157,7 +151,6 @@ class Guia(Fisico, TimeStampedModel):
         null=True, 
         blank = True
     )
-    prueba_c = models.CharField(max_length=10)#campo solo es como prueba de concatenar eliminar
 
     history = HistoricalRecords()    
 
@@ -171,56 +164,45 @@ class Guia(Fisico, TimeStampedModel):
     objects = ProductManager()
     # objects = LogEntryManager()
 
-    var_g = ("guia")
-
-    # @property
-    # def estado_cli(self):
-    #     return self.codigo
-      
-    @property
-    def userbd(self):
-      return str(self.user)
+    var_g = ("guia")    
         
-    contador= 0  
-
+#-------------------------------------------------------
     @property
     def can_vi(self):
-        return str(self.cantidad_vi)
+        return str(self.cantidad_vi)#
+
+    @property
+    def motis(self):
+        return str(self.mot.id)#
 
     @property
     def c_vis(self): 
-        return str(self.cod_vis) 
+        return str(self.cod_vis) #
+
+    @property
+    def estados(self):
+        return self.id_est.id #
 
     @property
     def moti(self):
         return str(self.mot.id)
 
     @property
-    def motis(self):
-        return str(self.mot.id)
-
-    @property
-    def estados(self):
-        return self.id_est.id
-
-    @property
-    def cod(self):
-        return (self.codigo)
-
-    @property
     def concatenar(self):
-        return  str(self.cantidad_vi) + (self.motis) + str(self.estados) + str(self.cod_vis) 
-#aca
+        return  str(self.can_vi) + (self.motis) + str(self.estados) + str(self.cod_vis) 
+#-------------------------------------------------------------
+    
+    @property
+    def userbd(self):
+      return str(self.user)
+
     def save(self, *args, **kwargs):
         
-        # self.seudo.id_est_clie_id = self.codigo
         self.seudo.sucursal = self.userbd
-        # self.seudo.id_est_clie = self.estado_cli
         self.codigo = self.concatenar   
           
         self.seudo.save()       
         super(Guia, self).save(*args, **kwargs)
-    
     
 class img(models.Model):
     

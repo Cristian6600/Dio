@@ -29,13 +29,13 @@ def exportSig(request):
     for guia in Bd_clie.objects.all().values_list(
         'guias__fecha', 'seudo_bd',   #1      
         'guias__d_i', 'guias__destinatario',#2
-        'guias__proceso', 'guias__cod_ins__descripcion', #3
-        'guias__id_est__Estado', 'guias__mot', #4
-        'guias__proceso__cod_dir', 'guias__proceso__proceso', #5 #verificar
+        'guias__proceso__proceso',  'guias__cod_ins__descripcion', #3
+        'guias__id_est__Estado', 'guias__cod_ins__mot_est', #4
+        'guias__proceso__cod_dir', 'guias__cod_ins__t_entrega', #5 
         'nom_pro', 'guias__id_ciu', #6
         'guias__id_ciu', 'guias__fecha_recepcion', #7
         'guias__fecha_recepcion', 'guias__cantidad', #8
-        'guias__proceso__cod_dir', 'guias__bolsa', #9
+        'guias__proceso__tipo_e', 'guias__bolsa', #9
         'guias__proceso__cod_dir', 'guias__direccion', #10
         'guias__guia_d_g__oficina', 'guias__guia_d_g__oficina', # 11
         'guias__id_ciu__ciudad', 'guias__direccion', #12

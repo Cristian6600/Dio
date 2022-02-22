@@ -1,17 +1,14 @@
 from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
 from import_export import resources
-from . models import Bd_clie, Producto
+from . models import Bd_clie
 
 class BdResource(resources.ModelResource):
     class Meta:
         model = Bd_clie
         import_id_fields = ('seudo_bd',)
         
-class ProductoResource(resources.ModelResource):
-    class Meta:
-        model = Producto
-        import_id_fields = ('id_pro',)
+#----------------------------------------------------
 
 @admin.register(Bd_clie)
 class bd_clieAdmin(ImportExportModelAdmin, admin.ModelAdmin):
@@ -26,11 +23,6 @@ class bd_clieAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     # date_hierarchy = ('fecha_planilla')
     icon_name  =  'cloud_upload'
    
-@admin.register(Producto)
-class productoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    resource_class = ProductoResource
-    list_display = ('id_pro', 'id_clie', 'producto', 'tipo', 'homologacion')
-
 
 
 

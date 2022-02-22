@@ -1,15 +1,10 @@
-from tabnanny import verbose
 from django.db import models
-# from applications.base_cliente.models import Bd_clie
 from django.conf import settings 
 from applications.base_cliente.models import Bd_clie
 from applications.cliente.models import Ciudad
 from applications.courrier.models import courrier
 from applications.argumento.models import Estado, Motivo, Cod_vis, Proceso, Est_clie
-from django.dispatch import receiver
-from django.db.models.signals import post_save
 from simple_history.models import HistoricalRecords
-from django.core.exceptions import ValidationError
 
 class Fisi_pa(models.Model):
 
@@ -99,17 +94,11 @@ class Fisico(Fisi_pa, Bolsa):
     id_planilla = models.IntegerField(blank=True, null= True)
 
     cantidad_vi = models.IntegerField(
-        
+        default = 0,
         verbose_name='Cantidad visitas', #lleva valor definitivo contador
         blank=True,
         null=True, 
         
-        )
-
-    codigo = models.CharField(
-        max_length=28,
-        blank=True, 
-        null=True
         )
     
     cod_ins = models.ForeignKey(

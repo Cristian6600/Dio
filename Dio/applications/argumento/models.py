@@ -80,6 +80,7 @@ class Proceso(models.Model):
         max_length=30
         )
     cod_dir = models.CharField(max_length=4)
+    tipo_e = models.CharField(max_length=5)
 
     def __str__(self):
         return str(self.id)
@@ -147,7 +148,8 @@ class Est_clie (models.Model):
     cod_est = models.IntegerField()
     estado = models.CharField(max_length = 55)
     descripcion = models.CharField(max_length = 55)
-    proceso = models.CharField(max_length = 20)
+    mot_est = models.CharField(max_length=50)
+    t_entrega = models.CharField(max_length=30, blank=True, null=True)
     
     verbose_name = "Estado Cliente"
     verbose_name_plural = "Estado del cliente"
