@@ -140,7 +140,12 @@ class datos_g (models.Model):
 
     zona = models.CharField(max_length=30, blank=True, null=True)
 
-    oficina= models.ForeignKey(Oficinas, on_delete= models.CASCADE,)
+    oficina= models.ForeignKey(
+        Oficinas, 
+        on_delete= models.CASCADE,
+        blank=True,
+        null=True,
+        )
 
     def save(self, *args, **kwargs):
         EAN = barcode.get_barcode_class('ean13')
