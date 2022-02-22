@@ -100,6 +100,12 @@ class Fisico(Fisi_pa, Bolsa):
         null=True, 
         
         )
+
+    codigo = models.CharField(
+        max_length=28,
+        blank=True, 
+        null=True
+        )
     
     cod_ins = models.ForeignKey(
         Est_clie,
