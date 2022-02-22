@@ -18,6 +18,8 @@ class ClienteAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 
 class OficinasAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('id','direccion')
+    search_fields = ('id',)
+    list_per_page = 7
 
 admin.site.register(Cliente, ClienteAdmin)
 admin.site.register(Ciudad, CiudadAdmin)
