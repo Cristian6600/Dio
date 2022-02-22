@@ -4,10 +4,19 @@ from related_admin import RelatedFieldAdmin
 from django.contrib.admin.models import ADDITION, LogEntry, CHANGE
 from . models import Servicio, Guia, img
 from simple_history.admin import SimpleHistoryAdmin
+from import_export import resources
+
+class GuiaResource(resources.ModelResource):
+    
+    class Meta:
+        model = Guia
+        import_id_fields = ('seudo',) 
+#---------------------------------------------------------
 
 @admin.register(Guia)
 class guiaAdmin(ImportExportModelAdmin, SimpleHistoryAdmin, RelatedFieldAdmin):
     history_list_display = ["mot", "fecha_recepcion"]
+    resource_class = GuiaResource
     date_hierarchy = ('fecha')
     list_per_page = 5
     raw_id_fields = ["seudo", "mot", "id_est", "cod_vis"]
