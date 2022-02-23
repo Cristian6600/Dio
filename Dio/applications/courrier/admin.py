@@ -9,6 +9,7 @@ class VehiculoResource(resources.ModelResource):
         model = vehiculo
         import_id_fields = ('id_veg',)
 
+@admin.register(courrier)
 class courrierAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     icon_name  =  'person_outline'
     raw_id_fields = ["id_ciu",]
@@ -21,6 +22,7 @@ class courrierAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('courrier', 'd_i', 'cel', 'est_courrier')
     list_per_page = 5
 
+@admin.register(vehiculo)
 class VehiculoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = VehiculoResource
     list_display = ('id_veg', 'name', 'cc', 'marca', 'cilindraje')
@@ -43,6 +45,4 @@ class LineaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 class LineaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('infraccion',)
 
-admin.site.register(courrier, courrierAdmin)
-admin.site.register(vehiculo, VehiculoAdmin)
 admin.site.register(Tipo_vehiculo)

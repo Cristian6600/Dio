@@ -8,6 +8,8 @@
     
   </style>
 </head>
+<background src="{% static 'img/first.png' %}" alt="150" width="450">
+<body background="{% static 'img/first.png' %}">
 <div >
   <div class="grid-container">  
     <div class="grid-y medium-grid-frame align-center">
@@ -16,7 +18,7 @@
         method="POST" 
         style="border: 1px solid #424242; padding: 2em; border-radius: 10px;">
       {% csrf_token %}
-      <img src="https://firstsource.net.co/wp-content/uploads/2020/06/Enmascarar-grupo-31.png" alt="" width="500" />
+      <img src="{% static 'img/first.png' %}" alt="150" width="450">
 
         <h4  class="cell" style="text-align: center;">Bienvenido</h4>
         <div class="cell medium-12">
@@ -32,6 +34,7 @@
             <span class="input-group-label"><i class="fi-lock"></i></span>
             {{form.password}}
           </div>
+  
         </div>
         <button type="submit" class="cell primary button">Ingresar</button>
       </form>

@@ -33,36 +33,25 @@ class CargueAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     success_url = '.'
     icon_name  =  'motorcycle'
 
-    
 @admin.register(Planilla)
 class PlanillaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     # resource_class = PlanillaResource
     list_display = ('id','guia', 'full_name',  'fecha', 'user')
     search_fields = ('id',)
 
-# @admin.register(Recep_guia)
-# class Recep_GuiaAdmin(admin.ModelAdmin):
-#     pass
-
 @admin.register(Recepcion)
 class RecepcionAdmin(ImportExportModelAdmin, RelatedFieldAdmin):
     fields = (('motivo'), 'estado', 'guia', 'user')
     # inlines = [Recepinline ,]
     raw_id_fields = ["motivo"]
-    # filter_vertical = ('guia',) 
     list_display = (
         'guia', 'motivo', 'fecha', 'motivo__id', )
-
     # readonly_fields = ('estado',)
-    # search_fields = ['Recepinline',]
-    # list_editable = ('motivo',)
-    # list_filter = ('fecha',)
-    # raw_id_fields = ("motivo",)
 
+@admin.register(Est_planilla)
 class Est_plaAdmin(admin.ModelAdmin):
     list_display = ('id', 'estado')
 
-admin.site.register  (Est_planilla, Est_plaAdmin)
 
 
 

@@ -12,7 +12,6 @@ class GuiaResource(resources.ModelResource):
         model = Guia
         import_id_fields = ('seudo',) 
 #---------------------------------------------------------
-
 @admin.register(Guia)
 class guiaAdmin(ImportExportModelAdmin, SimpleHistoryAdmin, RelatedFieldAdmin):
     history_list_display = ["mot", "fecha_recepcion"]

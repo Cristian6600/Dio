@@ -9,7 +9,6 @@ class BdResource(resources.ModelResource):
         import_id_fields = ('seudo_bd',)
         
 #----------------------------------------------------
-
 @admin.register(Bd_clie)
 class bd_clieAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = BdResource
@@ -20,7 +19,6 @@ class bd_clieAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_filter = ('fecha',)
     search_fields = ('seudo_bd',)
     raw_id_fields = ("id_est_clie",)
-    # date_hierarchy = ('fecha_planilla')
     icon_name  =  'cloud_upload'
    
 
