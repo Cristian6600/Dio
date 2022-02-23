@@ -21,4 +21,15 @@ urlpatterns = [
         views.TemplatePruebaMixin.as_view(),
         name='mixn',
     ),
+    path(
+        'publico/', 
+        views.probando.as_view(),
+        name='publico',
+    ),
+    
+    path(
+        'contacto/', 
+        views.Contacto.as_view(),
+        name='contacto',
+    ),
 ]

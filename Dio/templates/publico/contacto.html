@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% load  static %}
+
+{% block content %}
+
+<section class="contact-us-section">
+    <div class="row medium-unstack">
+      <div class="columns contact-us-section-left">
+        
+        
+         
+        </div>
+  
+        <ul class="contact-us-list">
+          <li class="address">Dirección: Dg. 79a Bis ##53-50, Bogotá</li>
+          <li class="email"><a href="mailto:">Hola@firstsource.com</a></li>
+          <li class="phone">
+            60 1 445 9978
+          </li>
+        </ul>
+      </div>
+      <div class="columns contact-us-section-right">
+        <h1 class="contact-us-header">Cuentanos sobre ti</h1>
+        <form class="contact-us-form">
+          <input type="text" placeholder="Primer nombre">
+          <input type="email" placeholder="Correo">
+          <textarea name="message" id="" rows="12" placeholder="Observacion"></textarea>
+          <div class="contact-us-form-actions">
+            <input type="submit" class="button" value="Enviar" />
+            <div>
+              <input type="file" id="FileUpload" class="show-for-sr">
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  {% endblock content %}
+  
+  

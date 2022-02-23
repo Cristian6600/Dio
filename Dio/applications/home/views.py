@@ -10,6 +10,14 @@ from django.views.generic import (
 )
 
 
+class probando(TemplateView):
+    template_name = "publico/index.html"
+
+class Contacto(TemplateView):
+    template_name = "publico/contacto.html"
+
+    #############
+
 class PanelHomeView(LoginRequiredMixin, TemplateView):
     template_name = "home/index.html"
 
@@ -28,4 +36,6 @@ class HomePage(LoginRequiredMixin, TemplateView):
 
 class TemplatePruebaMixin(FechaMixin, TemplateView):
     template_name = "home/mixin.html"
+
+
 

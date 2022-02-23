@@ -20,6 +20,7 @@ from django.conf import settings
 from django.conf.urls.static import static 
 from applications.guia.views import handleMultipleImagesUpload, export, export_address
 from applications.base_cliente.views import exportSig
+from applications.home.views import probando
 
 urlpatterns = [
     path('admin/', admin.site.urls),
