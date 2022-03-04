@@ -29,7 +29,7 @@ class Bolsa(models.Model):
         verbose_name = 'motivo',
         null=True,
         blank=True,
-        default = 4)  
+        default = 0)  
 
     id_est = models.ForeignKey(
         Estado, 
@@ -37,7 +37,7 @@ class Bolsa(models.Model):
         null=True, 
         blank = True,
         verbose_name = 'Estado',
-        default= 4
+        default= 2
     )
 
     def __str__(self):
