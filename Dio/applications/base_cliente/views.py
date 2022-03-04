@@ -41,7 +41,7 @@ def exportSig(request):
         'guias__guia_d_g__oficina', 'guias__guia_d_g__oficina__nom_ofi', # 11
         'guias__id_ciu__ciudad', 'guias__direccion', #12
         't_emi', 'guias__id_guia',#13
-        'guias__planilla_filtro__full_name', 'guias__planilla_filtro__user',#14
+        'guias__planilla_filtro__user__ciudad', 'guias__planilla_filtro__full_name__id_ciu', #14
         ):
         writer.writerow(guia)
 
