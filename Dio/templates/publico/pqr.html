@@ -1,0 +1,101 @@
+{% extends "publico/base_publico.html" %} 
+
+{% load  static %}
+
+{% block publico-content %}
+
+<div class="grid-x grid-margin-x align-center">
+  <h3 class="cell" style="margin-bottom: 2em; text-align: center;">PQR </h3>  
+  <form class="cell medium-9 grid-x grid-margin-x" method="POST">{% csrf_token %}
+
+    <div class="cell medium-6">
+      <label>Ciudad:</label>
+      <div class="input-group">
+        
+        {{form.ciudad_radi}}
+      </div>
+    </div>
+
+    <div class="cell medium-6">
+      <label>Fecha:</label>
+      <div class="input-group">
+        
+        {{form.fecha}}
+      </div>
+    </div>
+
+    <div class="cell medium-6">
+      <label>otro_cual:</label>
+      <div class="input-group">
+        
+        {{form.fecha}}
+      </div>
+    </div>
+    <div class="cell medium-6">
+      <label>Tipo de documento:</label>
+      <div class="input-group">
+        
+        {{form.tipo_do}}
+      </div>
+    </div>
+    <div class="cell medium-6">
+      <label>Numero de documento:</label>
+      <div class="input-group">
+        
+        {{form.n_documento}}
+      </div>
+    </div>
+    <div class="cell medium-6">
+      <label>Apellidos:</label>
+      <div class="input-group">
+        
+        {{form.apellidos}}
+      </div>
+    </div>
+    <div class="cell medium-6">
+      <label>Nombre:</label>
+      <div class="input-group">
+        
+        {{form.nombre}}
+      </div>
+    </div>
+    <div class="cell medium-6">
+      <label>Email:</label>
+      <div class="input-group">
+        
+        {{form.email}}
+      </div>
+    </div>
+    <div class="cell medium-6">
+      <label>numero de contacto:</label>
+      <div class="input-group">
+        
+        {{form.email}}
+      </div>
+    </div>
+    <div class="cell medium-6">
+      <label>Direccion</label>
+      <div class="input-group">
+        
+        {{form.email}}
+      </div>
+    </div>
+    <div class="cell medium-6">
+      <label>Numero de guia</label>
+      <div class="input-group">
+        {{form.n_guia}}
+      </div>
+    </div>
+    <div class="cell medium-6">
+      <label>Descripcion o motivo</label>
+      <div class="input-group">
+        {{form.desc_pqr}}
+      </div>
+    </div>
+
+
+</div>
+
+  {% endblock publico-content %}
+  
+  

@@ -1,0 +1,195 @@
+{% extends "publico/base_publico.html" %} 
+
+{% load static %}
+
+{% block publico-content %}
+
+<div class="callout large">
+  <div class="hero-section">
+    <div class="hero-section-text">
+      <h1>Quienes somos </h1>
+    </div>
+  </div>
+</div>
+
+  <ul class="tabs" data-responsive-accordion-tabs="tabs medium-accordion large-tabs" id="example-tabs">
+    <li class="tabs-title is-active"><a href="#panel1" aria-selected="true">Misión y visión</a></li>
+    <li class="tabs-title"><a href="#panel2">Política integral</a></li>
+    <li class="tabs-title"><a href="#panel3">Política de seguridad vial</a></li>
+    <li class="tabs-title"><a href="#panel4">Premios y distinciones</a></li>
+  </ul>
+
+  <div class="tabs-content" data-tabs-content="example-tabs">
+    <div class="tabs-panel is-active" id="panel1">
+      <article class="grid-container">
+        <div class="grid-x grid-margin-x">
+          <div class="medium-6 cell small-order-2 medium-order-1">
+            <h3>Misión</h3>
+                <p class="subheader">Brindar soluciones logísticas adaptadas a las necesidades de cada uno de nuestros clientes; con estándares de calidad, rentabilidad y sostenibilidad por medio de la administración de los procesos, tecnología y personal altamente capacitado; generando el cumplimiento de la promesa de valor y valor agregado a nuestros aliados.</p>
+                <h3>Visión</h3>
+                <p class="subheader">Para el año 2025 Firstsource bajo su marca Le-Tran busca ser una empresa innovadora y líder en la operación de logística integral a través de procesos estratégicos de alto nivel, orientados al excelente servicio y experiencia especializada al cliente.</p>
+                <h3>Valores Corporativos</h3>
+                <p class="subheader">
+                  La compañía FIRSTSOURCE SAS busca la excelencia de su servicio al cliente a través de los siguientes valores corporativos:
+                </p>
+            </div>
+            <div class="medium-6 cell small-order-1 medium-order-2">
+              <img class="thumbnail" src="{% static 'img/letran-grupo.jpeg' %}">
+          </div>
+        </div>
+        <div class="grid-x grid-margin-x">
+          <div class="medium-4 cell">
+            <li class="subheader">Respeto</li>
+            <li class="subheader">Honestidad</li>
+            <li class="subheader">Compromiso</li>
+          </div>
+          <div class="medium-4 cell">
+            <li class="subheader">Confidencialidad</li>
+            <li class="subheader">Excelencia</li>
+            <li class="subheader"> Trabajo en equipo</li>
+          </div>
+        <div class="medium-4 cell">
+    
+            <li class="subheader">Flexibilidad</li>
+            <li class="subheader">Liderazgo</li>
+            <li class="subheader">Orientación al cliente</li> 
+        </div>
+    
+    </article>
+      
+    </div>
+    <div class="tabs-panel" id="panel2">
+      <p>Hola 2</p>
+      
+    </div>
+    <div class="tabs-panel" id="panel3">
+      <p>Hola 3</p>
+      
+    </div>
+    <div class="tabs-panel" id="panel4">
+      <p>Hola 4</p>
+      
+    </div>
+    <div class="tabs-panel" id="panel5">
+      <p>five</p>
+      <p>Check me out! I'm a super cool Tab panel with text content!</p>
+    </div>
+    <div class="tabs-panel" id="panel6">
+      <p>six</p>
+      <img class="thumbnail" src="assets/img/generic/rectangle-8.jpg">
+    </div>
+  </div>
+    
+  <!-- <div class="medium-9 cell">
+    <div class="blog-post">
+
+      </div>
+      <div class="tabs-content" data-tabs-content="example-tabs">
+        <div class="tabs-panel is-active" id="panel1"></div>
+          <article class="grid-container">
+            <div class="grid-x grid-margin-x">
+              <div class="medium-6 cell small-order-2 medium-order-1">
+                <h3>Misión</h3>
+                <p class="subheader">Brindar soluciones logísticas adaptadas a las necesidades de cada uno de nuestros clientes; con estándares de calidad, rentabilidad y sostenibilidad por medio de la administración de los procesos, tecnología y personal altamente capacitado; generando el cumplimiento de la promesa de valor y valor agregado a nuestros aliados.</p>
+                <h3>Visión</h3>
+                <p class="subheader">Para el año 2025 Firstsource bajo su marca Le-Tran busca ser una empresa innovadora y líder en la operación de logística integral a través de procesos estratégicos de alto nivel, orientados al excelente servicio y experiencia especializada al cliente.</p>
+                <h3>Valores Corporativos</h3>
+                <p class="subheader">
+                  La compañía FIRSTSOURCE SAS busca la excelencia de su servicio al cliente a través de los siguientes valores corporativos:
+                </p>
+            </div>
+            <div class="medium-6 cell small-order-1 medium-order-2">
+              <img class="thumbnail" src="{% static 'img/letran-grupo.jpeg' %}">
+            
+          </div>
+        </div>
+
+        
+
+              <div class="grid-x grid-margin-x">
+                <div class="medium-4 cell">
+                  <li class="subheader">Respeto</li>
+                  <li class="subheader">Honestidad</li>
+                  <li class="subheader">Compromiso</li>
+                </div>
+                <div class="medium-4 cell">
+                  <li class="subheader">Confidencialidad</li>
+                  <li class="subheader">Excelencia</li>
+                  <li class="subheader"> Trabajo en equipo</li>
+                </div>
+              <div class="medium-4 cell">
+          
+                  <li class="subheader">Flexibilidad</li>
+                  <li class="subheader">Liderazgo</li>
+                  <li class="subheader">Orientación al cliente</li> 
+              </div>
+        </div>
+    
+        </article>
+        <div class="tabs-panel" id="panel2">
+          <p>Hola esto es una prueba</p>
+          <img class="thumbnail" src="assets/img/generic/rectangle-7.jpg">
+        </div>
+    
+  
+        
+        
+      </div>
+          
+    </div>
+  </div>
+  <div class="callout"></div> -->
+
+<article class="grid-container">
+  <div class="grid-x grid-margin-x">
+    <div class="medium-6 cell small-order-2 medium-order-1">
+     <h3>Política de SGI</h3>
+      <p class="subheader">FIRSTSOURCE S.A.S mediante el Sistema de Gestión Integrado (SGI), entrega soluciones logísticas enfocadas en el cumplimiento del servicio a traves de las políticas trabajadas en el Sistema de Gestión de Calidad (SGC), el Sistema de Gestión de Seguridad y Salud en el Trabajo(SG-SST) y el Plan de Seguridad Vial (PESV).
+        
+        </p>
+        <li><a href="{% url 'home_app:politica-sgc' %}" ><FONT COLOR="navy">Sistema de Gestión de Calidad (SGC) </FONT></a> </li>
+        <li><a href="{% url 'home_app:politica-sgc' %}" ><FONT COLOR="navy">Sistema de Gestión de Seguridad y Salud en el Trabajo (SG-SST) </FONT></a> </li>
+        <li><a href="{% url 'home_app:politica-sgc' %}" ><FONT COLOR="navy">Plan de Seguridad Vial (PESV)</FONT></a> </li>
+        <li><a href="{% url 'home_app:politica-sgc' %}" ><FONT COLOR="navy">PCI-DSS</FONT></a> </li>
+      
+    </div>
+    <div class="medium-6 cell small-order-1 medium-order-2">
+      <img class="thumbnail" src="{% static 'img/45.jpeg' %}">
+    </div>
+  </div>
+
+</article>
+<div class="news-image-gallery-container">
+  <div class="row">
+    <div class="small-6 medium-6 large-1 columns">
+      <div class="orbit" role="region" aria-label="Favorite Space Pictures" data-orbit data-options="animInFromLeft:fade-in; animInFromRight:fade-in; animOutToLeft:fade-out; animOutToRight:fade-out;">
+        <ul class="orbit-container">
+          <button class="orbit-previous"><span class="show-for-sr">Previous Slide</span>&#9664;&#xFE0E;</button>
+          <button class="orbit-next"><span class="show-for-sr">Next Slide</span>&#9654;&#xFE0E;</button>
+          <li class="is-active orbit-slide">
+            <img class="orbit-image" src="{% static 'img/CLIENTES 1.png' %}" alt="12">
+            
+          </li>
+          <li class="is-active orbit-slide">
+              <img class="orbit-image" src="{% static 'img/CLIENTESs 2.png' %}" alt="12">
+            </li>
+        </ul>
+        
+        <nav class="orbit-bullets">
+          <button class="is-active" data-slide="0"><span class="show-for-sr">First slide details.</span><span class="show-for-sr">Current Slide</span></button>
+          <button data-slide="1"><span class="show-for-sr">Second slide details.</span></button>
+          <button data-slide="2"><span class="show-for-sr">Third slide details.</span></button>
+          
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    
+  
+  
+
+
+{% endblock publico-content %}

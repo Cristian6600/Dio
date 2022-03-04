@@ -2259,7 +2259,8 @@ h6, .h6 {
 
 a {
   line-height: inherit;
-  color: #1779ba;
+  color: #ffffff;
+
   text-decoration: none;
   cursor: pointer; }
   a:hover, a:focus {
@@ -5227,12 +5228,11 @@ table.hover:not(.unstriped) tr:nth-of-type(even):hover {
 .thumbnail {
   display: inline-block;
   max-width: 100%;
-  margin-bottom: 1rem;
-  border: 4px solid #fefefe;
+  margin-bottom: 0rem;
+  border: 4px solid #1e2a36;
   border-radius: 0;
-  -webkit-box-shadow: 0 0 0 1px rgba(10, 10, 10, 0.2);
-          box-shadow: 0 0 0 1px rgba(10, 10, 10, 0.2);
-  line-height: 0; }
+  
+           }
 
 a.thumbnail {
   -webkit-transition: -webkit-box-shadow 200ms ease-out;
@@ -5399,7 +5399,7 @@ a.thumbnail {
           flex-wrap: wrap; }
   .top-bar,
   .top-bar ul {
-    background-color: #e6e6e6; }
+    background-color: #000000; }
   .top-bar input {
     max-width: 200px;
     margin-right: 1rem; }

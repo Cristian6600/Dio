@@ -1,0 +1,85 @@
+{% extends "base.html" %} 
+
+{% load static %}
+
+{% block content %}
+
+
+  <div class="title-bar" data-responsive-toggle="responsive-menu" data-hide-for="medium">
+    <button class="menu-icon" type="button" data-toggle="responsive-menu"></button>
+    <div class="title-bar-title">Menu</div>
+  </div>
+  
+  <div class="top-bar" id="responsive-menu">
+    
+    <div class="top-bar-left">
+      <ul class="dropdown menu" data-dropdown-menu>
+        <a href="{% url 'home_app:publico' %}"> <img src="{% static 'img/colores letran +.png' %}"  alt="10" width="95"> </a>
+        <li class="has-submenu">
+          <a href="#0"><strong>Servicios</strong> </a>
+          <ul class="submenu menu vertical" data-submenu>
+              <li><a href="{% url 'home_app:mensajeria-documentos' %}">Mensajeria expresa</a></li>
+              <li><a href="{% url 'home_app:paqueteo' %}">Cargue paqueteo</a></li>
+              <li><a href="{% url 'home_app:servicios-adicionales' %}">Servicios adicionales</a></li>
+          </ul>      
+        </li>
+        <li class="has-submenu">
+          <a href="#0"><strong>Rastrear</strong> </a>
+          <ul class="submenu menu vertical" data-submenu>
+            <li><a href="https://express.firstsource.net.co/tk/">Envios</a></li>
+            <li><a href="http://190.24.11.51/openc3/">Financiero</a></li>
+            <li><a href="https://firstsource.appsiscore.com/app/">Servicio</a></li>
+          </ul>
+        </li>
+        <li class="has-submenu">
+          <a href="{% url 'home_app:quienes-somos' %}"><strong>Quienes somos</strong> </a>
+        </li>
+        <li class="has-submenu">
+          <a href="{% url 'home_app:sedes' %}"><strong>Sedes</strong> </a>
+        </li>
+
+      </ul>
+    </div>
+    <div class="top-bar-right">
+      <ul class="menu">
+        <li></li>
+        
+      </ul>
+    </div>
+  </div>
+                        {% block publico-content %}
+                        {% endblock publico-content %}
+                        
+
+              <footer class="marketing-site-footer">
+                          
+                  <article class="grid-container">
+                          <div class="grid-x grid-margin-x">
+                              <div class="medium-6 cell small-order-2 medium-order-1">
+                                <h4>Centro de ayuda</h4>
+                                <li><a href="#">Cumplimiento</a></li>
+                                <li><a href="{% url 'pqr_app:pqr' %}">PQR´s</a></li>
+                                <li><a href="#">Trabaje con nosotros</a></li>
+                              </div>
+                              
+                                <div class="medium-6 cell small-order-1 medium-order-2">
+                                  <img class="thumbnail" src="{% static 'img/LETRAN NEGRO.PNG' %} " width="385">
+                                </div>
+                          </div>
+       
+                  </article>
+                          <div class="marketing-site-footer-bottom">
+                            <div class="row large-unstack align-middle">
+                              <p class="text-center">© Letran, 2022.</p>
+                                <ul class="menu marketing-site-footer-bottom-links">
+                                  <li ><a href="{% url 'home_app:politica-t-datos' %}">Politica de privacidad</a></li>
+                                  <li><a href="{% url 'home_app:terminos-condiciones' %}">Terminos y condiciones</a></li>
+                                  <img src="{% static 'img/MINITIC.png' %}" alt="20" width="110">
+                                  <img src="{% static 'img/MINTRANSPORTE.png' %}" alt="20" width="110">
+                                </ul>
+                              </div>
+                            </div>
+                </footer>
+
+ 
+  {% endblock content %}

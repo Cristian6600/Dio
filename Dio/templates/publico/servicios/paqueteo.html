@@ -1,0 +1,62 @@
+{% extends "publico/base_publico.html" %} 
+
+{% load static %}
+
+{% block publico-content %}
+
+<div class="callout large">
+  <div class="hero-section">
+    <div class="hero-section-text">
+      <h1>Cargue Paqueteo </h1>
+    </div>
+  </div>
+</div>
+
+<article class="grid-container">
+  <div class="grid-x grid-margin-x">
+    <div class="medium-6 cell small-order-2 medium-order-1">
+      <img src="{% static 'img/ICO_PAQUETEO.png' %}" alt="20" width="110">
+      <h3>Paqueteo</h3>
+      <p class="subheader">Envíos unitarios de paquetes y cajas <br>
+        con un peso mayor a 5 kg y menor de <br>
+        30 kg, su liquidación se realiza por <br>
+        unidad de empaque</p>
+    </div>
+    <div class="medium-6 cell small-order-1 medium-order-2">
+      <img class="thumbnail" src="{% static 'img/paqueteo 1.png' %}">
+    </div>
+  </div>
+  
+
+  <div class="grid-x grid-margin-x">
+    <div class="medium-4 cell">
+      <img src="{% static 'img/ICO_LETRAN HOY MISMO.png' %}" alt="20" width="85">
+      <h3>Le-Tran hoy mismo</h3>
+      <p class="subheader">Este servicio aplica únicamente para
+        ciudades principales, y consiste en la
+        entrega de sobres o paquetes
+        inferiores a 30 kilos con entrega el
+        mismo día..</p>
+    </div>
+    <div class="medium-4 cell">
+      <img src="{% static 'img/ICO_MASIVOS LETRAN.png' %}" alt="20" width="130">
+      <h3>Masivos Le-Tran</h3>
+      <p class="subheader">Servicio dedicado para el transporte
+        masivo y semimasivo de mercancía según
+        lo requiera el cliente.
+        .</p>
+    </div>
+    <div class="medium-4 cell">
+      <img src="{% static 'img/ICO_LETRAN AEREO.png' %}" alt="20" width="130">
+      <h3>Le-tran aereo</h3>
+      <p class="subheader">Servicio de transporte aeropuerto -
+        aeropuerto y/o aeropuerto ultima milla.
+        </p>
+    </div>
+  </div>
+
+
+  <hr>
+</article>
+
+{% endblock publico-content %}

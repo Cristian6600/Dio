@@ -32,12 +32,12 @@ def exportSig(request):
         'guias__proceso__proceso',  'guias__cod_ins__descripcion', #3
         'guias__id_est__Estado', 'guias__cod_ins__mot_est', #4
         'guias__proceso__cod_dir', 'guias__cod_ins__t_entrega', #5 
-        'nom_pro', 'guias__id_ciu', #6
+        'nom_pro__nom_producto', 'guias__id_ciu', #6
         'guias__id_ciu', 'guias__fecha_recepcion', #7
         'guias__fecha_recepcion', 'guias__cantidad', #8
         'guias__proceso__tipo_e', 'guias__bolsa', #9
         'guias__proceso__cod_dir', 'guias__direccion', #10
-        'guias__guia_d_g__oficina', 'guias__guia_d_g__oficina', # 11
+        'guias__guia_d_g__oficina', 'guias__guia_d_g__oficina__nom_ofi', # 11
         'guias__id_ciu__ciudad', 'guias__direccion', #12
         't_emi', 'guias__id_guia',
         ):

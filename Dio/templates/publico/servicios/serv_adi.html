@@ -1,0 +1,59 @@
+{% extends "publico/base_publico.html" %} 
+
+{% load static %}
+
+{% block publico-content %}
+
+<div class="callout large">
+    <div class="hero-section">
+      <div class="hero-section-text">
+      <h1>Servicios adicionales </h1>
+    
+    </div>
+  </div>
+</div>
+
+<article class="grid-container">
+  <div class="grid-x grid-margin-x">
+    <div class="medium-6 cell small-order-2 medium-order-1">
+      <img src="{% static 'img/ICO_SERVICOS ADICIONALES.png' %}" alt="20" width="110">
+      <h3>Servicios Adicionales</h3>
+      <p class="subheader">Contamos con un recurso humano <br>
+        capacitado, y eficiente para gestionar <br>
+        todos los procesos administrativos en <br>
+        la empresa publica y privada según se <br>
+        requiera.
+        </p>
+    </div>
+    <div class="medium-6 cell small-order-1 medium-order-2">
+      <img class="thumbnail" src="{% static 'img/adicionales.png' %}">
+    </div>
+  </div>
+  <br><br> <br>
+
+  <div class="grid-x grid-margin-x">
+    <div class="medium-4 cell">
+      <img src="{% static 'img/hora.png' %}" alt="20" width="110">
+      <h3>Adicional /hora</h3>
+      <p class="subheader">Este servicio aplica únicamente para
+        ciudades principales, y consiste en la
+        entrega de sobres o paquetes
+        inferiores a 30 kilos con entrega el
+        mismo día..</p>
+    </div>
+    <div class="medium-4 cell">
+      <img src="{% static 'img/mes.png' %}" alt="20" width="100">
+      <h3>Adicional mes</h3>
+      <p class="subheader">Servicio dedicado para el transporte
+        masivo y semimasivo de mercancía según
+        lo requiera el cliente.
+        .</p>
+    </div>
+    
+  </div>
+
+
+  <hr>
+</article>
+
+{% endblock publico-content %}

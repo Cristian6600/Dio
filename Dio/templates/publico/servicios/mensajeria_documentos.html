@@ -1,0 +1,61 @@
+{% extends "publico/base_publico.html" %} 
+
+{% load static %}
+
+{% block publico-content %}
+
+<div class="callout large">
+  <div class="hero-section">
+    <div class="hero-section-text">
+      <h1>Mensajeria Documentos</h1>
+    </div>
+  </div>
+</div>
+
+<article class="grid-container">
+  
+  <div class="grid-x grid-margin-x">
+    <div class="medium-6 cell small-order-2 medium-order-1">
+      <img src="{% static 'img/ICO_DOCUMENTACIÓN MASIVA.png' %}" alt="20" width="110">
+      <h3>Documentación masiva.</h3>
+      <p class="subheader">Servicio masivo de entrega de documentos, con <br>
+         un peso inferior o igual a un kg. <br>
+      Este servicio se presta apartir de 100 unidades <br>
+       en adelante donde las actividades de alistamiento <br>
+      presenta un costo aparte</p>
+    </div>
+      <div class="medium-6 cell small-order-1 medium-order-2">
+        <img class="thumbnail" src="{% static 'img/expresa.png' %}" alt="100">
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-x grid-margin-x">
+    <div class="medium-4 cell">
+      <img src="{% static 'img/ICO_RADICADOS LETRAN.png' %}" alt="20" width="80">
+      <h3>Radicados letran</h3>
+      <p class="subheader">Entrega de documentos no mayores a un kg, con el
+        retorno de la copia firmada y sellada
+        por el destinatario, en el regreso no se podra incluir ningun documento adicional.</p>
+    </div>
+    <div class="medium-4 cell">
+      <img src="{% static 'img/ICO_LETRAN MENSAJERIA MENOR5KG.png' %}" alt="20" width="110">
+      <h3>Letran mensajeria (< 5kg)</h3>
+      <p class="subheader">Transporte y entrega de objetos
+        postales y paquetes cuyo peso real o
+        volumétrico sea igual o inferior a 5 kg.
+        .</p>
+    </div>
+    <div class="medium-4 cell">
+      <img src="{% static 'img/ICO_MENSAJERIA DE DOCUMENTOS.png' %}" alt="20" width="110">
+      <h3>Mensajería de documentos</h3>
+      <p class="subheader">Transporte y entrega de documentos,
+        cuyo peso real o volumétrico sea igual
+        o inferior a 2 kg.</p>
+    </div>
+  </div>
+
+
+  
+</article>
+{% endblock publico-content %}
