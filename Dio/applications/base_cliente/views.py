@@ -30,7 +30,7 @@ def exportSig(request):
     for guia in Bd_clie.objects.all().values_list(
         'guias__fecha', 'seudo_bd',   #1      
         'guias__d_i', 'guias__destinatario',#2
-        'guias__proceso__proceso',  'guias__cod_ins__descripcion', #3
+        'producto',  'guias__cod_ins__descripcion', #3
         'guias__id_est__Estado', 'guias__cod_ins__mot_est', #4
         'guias__proceso__cod_dir', 'guias__cod_ins__t_entrega', #5 
         'nom_pro__nom_producto', 'guias__id_ciu', #6
@@ -41,7 +41,7 @@ def exportSig(request):
         'guias__guia_d_g__oficina', 'guias__guia_d_g__oficina__nom_ofi', # 11
         'guias__id_ciu__ciudad', 'guias__direccion', #12
         't_emi', 'guias__id_guia',#13
-        'guias__planilla_filtro__user__ciudad', 'guias__planilla_filtro__full_name__id_ciu', #14
+        'guias__planilla_filtro__user__ciudad', 'guias__planilla_filtro__full_name__id_ciu__ciudad', #14
         ):
         writer.writerow(guia)
 

@@ -92,12 +92,6 @@ class AsignarCreateView(CustodiaPermisoMixin, CreateView, ListView):
     #     form = self.form_class(initial=self.initial)
     #     return render(request, self.template_name,{'form':form})
 
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
-        return super(AsignarCreateView, self).form_valid(form)
-
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
@@ -105,6 +99,12 @@ class AsignarCreateView(CustodiaPermisoMixin, CreateView, ListView):
             messages.success(request, 'Planilla Data Added')
 
         return render(request, self.template_name, {'form': form})
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return super(AsignarCreateView, self).form_valid(form)
 
 #----------Lista mensajeros Ruta a imprimir -------------
 class AsignarListview(CustodiaPermisoMixin, ListView):
