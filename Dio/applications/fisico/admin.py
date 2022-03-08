@@ -19,7 +19,7 @@ class CoberturaResource(resources.ModelResource):
 #--------------------------------------------------------------------
 @admin.register(Paquete)    
 class PaqueteAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    
+    list_filter = ('fecha',)
     raw_id_fields = ("seudo",)
     list_display = ('seudo', 'bolsa', 'fecha', 'estado')
     search_fields = ('bolsa', 'Seudo',)
