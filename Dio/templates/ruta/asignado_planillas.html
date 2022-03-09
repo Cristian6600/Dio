@@ -17,6 +17,9 @@
     <table>
         <thead>
             <th>Mensajero</th>
+            <th>Cedula</th>
+            <th>Ciudad</th>
+            <th>Imprimir</th>
         
         </thead>
         <tbody>
@@ -25,6 +28,8 @@
         {% for e in planillas %}
         <tr>
             <td>{{ e.courrier }}</td>
+            <td>{{ e.d_i }}</td>
+            <td>{{ e.id_ciu }}</td>
         
             <td>
             <a href="{% url 'ruta_apps:impresion' e.id %}" class="button"><i class="fi-print"></i></a>

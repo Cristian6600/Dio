@@ -129,6 +129,6 @@ class courrier(models.Model):
         verbose_name_plural = "Courrier"
 
     def __str__(self):
-        return self.courrier
+        return str(self.id_ciu) + '-' + self.courrier 
 
 

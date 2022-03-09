@@ -8,6 +8,7 @@ from django.views.generic import CreateView, ListView, UpdateView
 from django.views.generic.detail import SingleObjectMixin
 from .forms import ProductForm, CoberturaForm
 from applications.users.mixins import CustodiaPermisoMixin
+from applications.courrier.models import courrier
 
 class BolsaCreateView(CustodiaPermisoMixin, CreateView, ListView):
     template_name = "fisico/add-fisico.html"
@@ -34,6 +35,12 @@ class EstadoRutaListView(LoginRequiredMixin, ListView):
     paginate_by = 5
     success_url = '.'
     context_object_name ='estado_planilla'
+
+    def get_queryset(self):
+        kword = self.request.GET.get("kword", '')
+        order = self.request.GET.get("order", '')
+        queryset = courrier.objects.buscar_producto(kword, order)
+        return queryset
 
 class CoberturaCreateView(CreateView, ListView):
     template_name = "fisico/cobertura_bolsa.html"
