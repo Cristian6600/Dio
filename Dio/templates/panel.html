@@ -44,6 +44,9 @@
                         <li class="{% if request.resolver_match.url_name == 'caja-index' %}activeli{% endif %}">
                           <a href="{% url 'producto_app:guia-buscar' %} " style="color: white;">Impresion por guia imprimir</a>
                         </li>
+                        <li class="{% if request.resolver_match.url_name == 'caja-index' %}activeli{% endif %}">
+                          <a href="{% url 'gatos_g:datos-cliente' %} " style="color: white;">Impresion Agendamiento</a>
+                        </li>
                         
                         <li class="{% if request.resolver_match.url_name == 'caja-index' %}activeli{% endif %}">
                           <a href="{% url 'fisico_app:cobertura-fisico' %} " style="color: white;">No cobertura</a>

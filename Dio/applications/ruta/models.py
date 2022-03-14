@@ -118,6 +118,7 @@ class Planilla(TimeStampedModel) :
         self.guia.mensajero = self.mensajero
         self.guia.est_planilla = self.guia.est_planilla = 1
         self.guia.id_planilla = self.id_planilla  
+        self.guia.id_planilla = self.id_planilla  
         
 
         self.guia.save()       
@@ -132,7 +133,8 @@ class Recepcion(models.Model):
 
     guia = models.ForeignKey(
         Fisico, 
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name = 'recepcion_guia'
         
     )
 

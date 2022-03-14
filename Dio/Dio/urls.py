@@ -19,7 +19,7 @@ from django.urls import include, path, re_path
 from django.conf import settings
 from django.conf.urls.static import static 
 from applications.guia.views import handleMultipleImagesUpload, export, export_address
-from applications.base_cliente.views import exportSig
+from applications.base_cliente.views import exportSig, exportSig_paquete
 from applications.home.views import probando
 
 urlpatterns = [
@@ -28,6 +28,7 @@ urlpatterns = [
     path('export-oficinas/', export, name="oficinas"),
     path('export-address-principal/', export_address, name="export-address"),
     path('informe-sig/', exportSig, name="sig"),
+    path('informe-sig-paquete/', exportSig_paquete, name="sig-paquete"),
     re_path('', include('applications.users.urls')),
     re_path('', include('applications.home.urls')),
     re_path('', include('applications.guia.urls')),

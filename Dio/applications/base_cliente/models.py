@@ -20,6 +20,9 @@ class Bd_clie (models.Model):
         on_delete=models.CASCADE,
         verbose_name = 'Id cliente'
     )
+    nombre = models.CharField(max_length=180)
+
+    cc = models.CharField(max_length=12)
     
     t_emi = models.ForeignKey(
         Emision, 

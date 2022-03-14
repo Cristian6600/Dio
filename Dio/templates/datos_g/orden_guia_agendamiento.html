@@ -1,0 +1,34 @@
+{% extends "datos_g/base_datos_g.html" %} 
+% load static %}
+
+{% block panel-content %}
+<h1>Probando agendameinto {{ request.headers.orden }}</h1>
+
+
+
+<div class="grid-x grid-margin-x">
+<form method="post">{% csrf_token %}
+</div>
+
+<table>
+    <thead>
+        <th>Orden de impresion</th>
+        <th>Fecha</th>
+        <th>Imprimir</th>
+    </thead>
+    <tbody>
+        {% for e in orden  %}
+        
+            <td>{{ e.orden }}</td>
+            <td>{{e.fecha}}</td>
+            <td>
+                <a href="{% url 'gatos_g:guia-buscar-agendamientos' e.orden %}" class="button"><i class="fi-print"></i></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
+{% endblock panel-content %}

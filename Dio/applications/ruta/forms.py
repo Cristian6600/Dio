@@ -45,6 +45,11 @@ class AsignarForm(forms.ModelForm):
                 }
             ),
             }
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return super(AsignarForm, self).form_valid(form)    
 
         
 class RecepcionForm(forms.ModelForm):   

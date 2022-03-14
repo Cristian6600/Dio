@@ -20,5 +20,16 @@ urlpatterns = [
          views.OrdenListView.as_view(),
          name='guia-buscar',
     ),
+    path(
+        'orden-impresion-guia-agendamiento/',
+         views.OrdenListView.as_view(),
+         name='guia-buscar-agendamiento',
+    ),
+    #Lista_gendamientos
+    path(
+        'listar-guias-a/<id_datos_g_agendamiento>/',
+         views.Lista_gendamientos.as_view(),
+         name='guia-buscar-agendamientos',
+    ),
     
 ]

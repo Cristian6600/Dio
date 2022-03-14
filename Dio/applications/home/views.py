@@ -1,11 +1,12 @@
 import datetime
 from re import template
 #
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy, reverse
 from django.views.generic import (
-    TemplateView,
+    TemplateView, View,
     ListView
 )
 
@@ -67,4 +68,10 @@ class TemplatePruebaMixin(FechaMixin, TemplateView):
     template_name = "home/mixin.html"
 
 
+######################################
 
+class GreetingView(View):
+    greeting = "Eso es una prueba"
+
+    def get(self, request):
+        return HttpResponse(self.greeting)

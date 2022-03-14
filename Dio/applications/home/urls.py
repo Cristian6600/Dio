@@ -79,5 +79,13 @@ urlpatterns = [
         views.Politica_SGC.as_view(),
         name='politica-sgc',
     ),
+
+    ###########prueba########
+    path(
+        'hola/', 
+        views.GreetingView.as_view(),
+        name='hola',
+    ),
+    
     
 ]

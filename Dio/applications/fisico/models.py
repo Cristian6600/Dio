@@ -161,13 +161,17 @@ class Fisico(Fisi_pa, Bolsa):
 
 class Paquete(Fisi_pa):
     
-    bolsa = models.IntegerField()
+    bolsa = models.ForeignKey(
+        Bolsa, 
+        on_delete=models.CASCADE, 
+        related_name = 'bolsa_p')
 
     seudo = models.OneToOneField(
         Bd_clie,
         primary_key = True,
         on_delete=models.CASCADE,
-        unique = True
+        unique = True,
+        related_name = 'bd_paquete'
     )
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,

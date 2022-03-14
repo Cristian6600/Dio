@@ -78,15 +78,15 @@ class ListEmpleadosPdf(CustodiaPermisoMixin, ListView):
         pdf = render_to_pdf('ruta/pdf_planillas.html', data)
         return HttpResponse(pdf, content_type='application/pdf')
     
-    #------Asignar guia a mensajero--------------------
+    #------------------Asignar guia a mensajero--------------------
 
-class AsignarCreateView(CustodiaPermisoMixin, CreateView, ListView):
+class AsignarCreateView(CreateView, ListView):
     template_name = "ruta/asignar.html"
     form_class = AsignarForm
     queryset = Planilla.objects.order_by('-fecha')
     initial = {'key':'value'}
     paginate_by = '5'
-    success_url = '.' 
+    
     
     # def get(self, request, *args, **kwargs):
     #     form = self.form_class(initial=self.initial)

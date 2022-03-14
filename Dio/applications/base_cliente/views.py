@@ -1,6 +1,7 @@
 from django.shortcuts import render
 import csv
 from . models import Bd_clie
+from applications.fisico.models import Paquete
 from django.http import HttpResponse
 from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
@@ -25,7 +26,8 @@ def exportSig(request):
         'COD', 'NOMBRE OFICINA', #11
         'MUNICIPIO','DIRECCION', #12
         'TIPO DE EMISION','ID REGISTRO ',#13
-        'CIUDAD SEDE', 'CIUDAD COURRIER'  ])#14
+        'CIUDAD SEDE', 'CIUDAD COURRIER', #14
+        'PRUEBA'  ])
 
     for guia in Bd_clie.objects.all().values_list(
         'guias__fecha', 'seudo_bd',   #1      
@@ -42,6 +44,24 @@ def exportSig(request):
         'guias__id_ciu__ciudad', 'guias__direccion', #12
         't_emi', 'guias__id_guia',#13
         'guias__planilla_filtro__user__ciudad', 'guias__planilla_filtro__full_name__id_ciu__ciudad', #14
+        'guias__bolsa_p__seudo' 
+        ):
+        writer.writerow(guia)
+
+    return response
+
+@login_required
+def exportSig_paquete(request):
+    response = HttpResponse(content_type='text/csv')
+
+    writer = csv.writer(response)
+    writer.writerow([
+        
+        'BOLSA', 'SEUDO', 'NOMBRE', 'CEDULA', 'NOMBRE PRODUCTO' ])
+
+    for guia in Paquete.objects.all().values_list(
+        'bolsa', 'seudo_id', 'seudo_id__nombre', 'seudo_id__cc', 'seudo_id__nom_pro'   #1      
+       
         ):
         writer.writerow(guia)
 

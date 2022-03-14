@@ -24,9 +24,11 @@ class ProductListView(LoginRequiredMixin, ListView):
         queryset = Guia.objects.buscar_producto(kword, order)
         return queryset
            
-class ProductDetailView(LoginRequiredMixin, DetailView):
+class ProductDetailView(LoginRequiredMixin,  DetailView):
     template_name = "producto/detail.html"
     model = Guia
+    
+    
     
 class FisicoCreateView(CustodiaPermisoMixin, LoginRequiredMixin, CreateView, ListView):
     template_name = "guia/guia-fisico.html"
