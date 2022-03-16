@@ -31,13 +31,13 @@
 <body>
     
     {% for e in empleados %}    
-    <table border="">
+    <table border="1">
 			<tr>
 				<td >Destinatario:</td>
 				<td colspan="2"><strong> {{ e.dest }} </strong></td>            
 			</tr>
 			<tr>
-				<td colspan="3"><p> Dir:{{ e.direccion }} <p></td>	
+				<td colspan="3"><font size=3> {{ e.direccion }} </font></td>	
 			</tr>
 			<tr>
 				<td>Telefono:</td>
