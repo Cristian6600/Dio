@@ -27,9 +27,13 @@ class ProductListView(LoginRequiredMixin, ListView):
 class ProductDetailView(LoginRequiredMixin,  DetailView):
     template_name = "producto/detail.html"
     model = Guia
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(ProductDetailView, self).get_context_data(*args, **kwargs)
+        context['recepcion_list'] = Guia.objects.all()
+        return context
     
-    
-    
+
 class FisicoCreateView(CustodiaPermisoMixin, LoginRequiredMixin, CreateView, ListView):
     template_name = "guia/guia-fisico.html"
     # model = Guia
@@ -52,7 +56,7 @@ class ImgCreateView(CreateView):
     form_class = ImgForm
     success_url = '.'
 
-@login_required
+
 def handleMultipleImagesUpload(request):
         if request.method == "POST":
             images = request.FILES.getlist('images')
@@ -74,6 +78,7 @@ class GuiaListView(CustodiaPermisoMixin, ListView):
             id_guia=self.request.GET.get('id_guia'),
         )
         return queryset   
+        
 #-------------PDF impresion por guia--------------
 class BuscarGuiaPdf(CustodiaPermisoMixin, ListView):
     # template_name = "guia/gui_pdf.html"

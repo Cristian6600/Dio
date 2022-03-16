@@ -22,7 +22,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.http import HttpResponse
 
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, View
 
 from . models import Cargue,   Recepcion, Planilla
 
@@ -80,23 +80,30 @@ class ListEmpleadosPdf(CustodiaPermisoMixin, ListView):
     
     #------------------Asignar guia a mensajero--------------------
 
-class AsignarCreateView(CreateView, ListView):
+class AsignarCreateView(View):
     template_name = "ruta/asignar.html"
+    model = Planilla
     form_class = AsignarForm
-    queryset = Planilla.objects.order_by('-fecha')
     initial = {'key':'value'}
     paginate_by = '5'
+
+    def get_queryset(self):
+        return self.model.objects.order_by('-fecha')
+
+    def get_context_data(self, **kwargs):
+        contexto = {}
+        contexto ['planilla_list'] = self.get_queryset()
+        contexto ['form'] = self.form_class
+        return contexto
     
-    
-    # def get(self, request, *args, **kwargs):
-    #     form = self.form_class(initial=self.initial)
-    #     return render(request, self.template_name,{'form':form})
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name, self.get_context_data())
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Planilla Data Added')
+            messages.success(request, 'Planilla Data Added', )
 
         return render(request, self.template_name, {'form': form})
 

@@ -150,7 +150,7 @@ class Fisico(Fisi_pa, Bolsa):
         return str(self.cantidad_vi)
 
     @property
-    def prueba(self):
+    def prueba(self): 
         return str(self.codigo)
 #aca
     def save(self, *args, **kwargs):

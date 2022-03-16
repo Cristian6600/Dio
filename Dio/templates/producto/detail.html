@@ -56,12 +56,16 @@
                       </tr>
                     </thead>
                     <tbody>
+                      {% for e in recepcion_list %}
                       <tr>
-                        <td>{{ object.fecha }}</td>
-                        <td>{{ object.id_est }}</td>
-                        <td>{{ object.mot }}</td>
+                        
+                        <td>{{ e.fecha }}</td>
+                        <td>{{ e.id_est }}</td>
+                        <td>{{ e.mot }}</td>
+                          
+                        
                       </tr>
-                      
+                      {% endfor %}
                       
                     </tbody>
                   </table>
@@ -81,6 +85,10 @@
               </div>
             </div>
           </form>
+
+          
+          </table>
+
           
 
 
