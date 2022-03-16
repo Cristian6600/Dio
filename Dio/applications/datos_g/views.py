@@ -21,7 +21,7 @@ class ListGuiaPdf(CustodiaPermisoMixin, ListView):
         
     def get(self, request, *args, **kwargs):
         nombre = self.kwargs['id_datos_g']
-        guia =datos_g.objects.filter(orimp = nombre, seudo_dg__user=self.request.user). order_by('seudo_dg__id_guia' )
+        guia =datos_g.objects.filter(orimp = nombre, seudo_dg__user=self.request.user). order_by('seudo_dg__id_guia' ).exclude(seudo_dg__mot = 3)
         data = {
             'count': guia.count(),
             'empleados': guia
