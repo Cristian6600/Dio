@@ -67,7 +67,7 @@ class ListEmpleadosPdf(CustodiaPermisoMixin, ListView):
                
         mostrar_nom = Guia.objects.order_by("mensajero").last()
         mostrarpub = Guia.objects.latest('fecha')
-        guia = Guia.objects.filter(mensajero__id = nombre, est_planilla = 1 ).order_by('-fecha_planilla')
+        guia = Guia.objects.filter(mensajero__id = nombre, est_planilla = 1 ).order_by('fecha_planilla')
         data = {
             'count': guia.count(),
             'empleados': guia,

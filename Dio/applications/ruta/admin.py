@@ -37,7 +37,7 @@ class CargueAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 class PlanillaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     # resource_class = PlanillaResource
     list_display = ('id','guia', 'full_name',  'fecha', 'user')
-    search_fields = ('id',)
+    search_fields = ('id', 'guia__id_guia')
 
 @admin.register(Recepcion)
 class RecepcionAdmin(ImportExportModelAdmin, RelatedFieldAdmin):
