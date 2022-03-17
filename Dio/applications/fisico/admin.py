@@ -32,6 +32,7 @@ class FisicoAdmin(SimpleHistoryAdmin, ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('id_guia', 'bolsa', 'fecha', 'estado', 'mensajero', 'fecha_planilla')
     date_hierarchy = ('fecha_planilla')
     list_filter = ('est_planilla', 'mensajero',)
+    search_fields = ('bolsa__bolsa', )
 
 @admin.register(Bolsa)    
 class BolsaAdmin(admin.ModelAdmin):
