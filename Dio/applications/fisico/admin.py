@@ -22,7 +22,7 @@ class PaqueteAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_filter = ('fecha',)
     raw_id_fields = ("seudo",)
     list_display = ('seudo', 'bolsa', 'fecha', 'estado')
-    search_fields = ('bolsa', 'Seudo',)
+    search_fields = ('bolsa__bolsa', )
     icon_name  =  'local_shipping'
 
 @admin.register(Fisico)
