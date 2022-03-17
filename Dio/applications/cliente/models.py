@@ -86,12 +86,12 @@ class Cliente (models.Model):
 
 class Oficinas(models.Model):
     id= models.CharField(max_length=6, primary_key=True)
-    nom_ofi = models.CharField(max_length=70)
+    nom_ofi = models.CharField(max_length=80)
     direccion = models.CharField(max_length=200)
     dane = models.ForeignKey(Ciudad, on_delete=models.CASCADE,)
-    hora_norm = models.CharField(max_length=60, verbose_name= 'Horario normal')
-    hora_adi = models.CharField(max_length=60, verbose_name= 'Horario adicional')
-    hora_sab = models.CharField(max_length=60, verbose_name='Horario sabado')
+    hora_norm = models.CharField(max_length=90, verbose_name= 'Horario normal')
+    hora_adi = models.CharField(max_length=90, verbose_name= 'Horario adicional')
+    hora_sab = models.CharField(max_length=90, verbose_name='Horario sabado')
     categoria = models.CharField(max_length=20)
     num_dia_entr = models.CharField(max_length=8, verbose_name = 'N° Días Entrega_(hábiles)')
     lunes = models.CharField(max_length=3)
