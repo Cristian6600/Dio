@@ -31,16 +31,16 @@ class BolsaCreateView(CustodiaPermisoMixin, CreateView, ListView):
 
 class EstadoRutaListView(LoginRequiredMixin, ListView):
     template_name = "fisico/estado_ruta.html"
+    model = Fisico
     queryset = Fisico.objects.filter(est_planilla = 1)
     paginate_by = 5
-    success_url = '.'
     context_object_name ='estado_planilla'
 
-    def get_queryset(self):
-        kword = self.request.GET.get("kword", '')
-        order = self.request.GET.get("order", '')
-        queryset = courrier.objects.buscar_producto(kword, order)
-        return queryset
+    # def get_queryset(self):
+    #     kword = self.request.GET.get("kword", '')
+    #     order = self.request.GET.get("order", '')
+    #     queryset = courrier.objects.buscar_producto(kword, order)
+    #     return queryset
 
 class CoberturaCreateView(CreateView, ListView):
     template_name = "fisico/cobertura_bolsa.html"

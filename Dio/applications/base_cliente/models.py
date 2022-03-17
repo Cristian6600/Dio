@@ -100,6 +100,9 @@ class Bd_clie (models.Model):
     )  
 
     nom_pro = models.ForeignKey(Nom_producto, on_delete=models.CASCADE, verbose_name='Nombre del producto')
+
+    fisico = models.BooleanField()
+
     objects = BdManager()
 
     class Meta:

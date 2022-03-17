@@ -210,6 +210,10 @@ class datos_g (models.Model):
     def proceso(self):
         return self.proc
     
+    @property
+    def producto(self):
+        return self.id_pro
+    
     # @property
     # def orden(self):
     #     return self.orimp
@@ -227,6 +231,7 @@ class datos_g (models.Model):
         self.seudo_dg.d_i = self.documento
         self.seudo_dg.proceso = self.proceso
         self.seudo_dg.suma = self.seudo_dg.suma = 0
+        self.seudo_dg.producto = self.producto
 
         #orden impresion
         # self.orimp.orden = self.orden

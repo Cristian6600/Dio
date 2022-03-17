@@ -150,9 +150,12 @@ class Fisico(Fisi_pa, Bolsa):
         return str(self.cantidad_vi)
 
     @property
-    def prueba(self): 
+    def prueba(self):
         return str(self.codigo)
 #aca
+    def clean(self):
+        print(self.codigo)
+
     def save(self, *args, **kwargs):
         self.codigo = self.concatenar 
         self.cod_ins_id = self.prueba
@@ -188,7 +191,7 @@ class Paquete(Fisi_pa):
       return (self.bolsa)
 
     def save(self, *args, **kwargs):
-        self.seudo.bolsa  = self.var
+        self.seudo.fisico  = self.seudo.fisico = True
         
         self.seudo.save()
 

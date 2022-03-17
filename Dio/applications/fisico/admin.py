@@ -10,7 +10,11 @@ class FisicoResource(resources.ModelResource):
     class Meta:
         model = Fisico
         import_id_fields = ('id_guia',) 
-
+        
+class BolsaResource(resources.ModelResource):
+    class Meta:
+        model = Bolsa
+        
 class CoberturaResource(resources.ModelResource):
     class Meta:
         model = Cobertura
@@ -36,8 +40,9 @@ class FisicoAdmin(SimpleHistoryAdmin, ImportExportModelAdmin, admin.ModelAdmin):
     search_fields = ('bolsa', )
 
 @admin.register(Bolsa)    
-class BolsaAdmin(admin.ModelAdmin):
+class BolsaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     search_fields = ('bolsa',)
+    resource_class = BolsaResource
 
 @admin.register(Mesa)
 class MesaAdmin(admin.ModelAdmin):
