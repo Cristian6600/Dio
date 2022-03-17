@@ -39,6 +39,7 @@ class PlanillaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('id','guia', 'full_name',  'fecha', 'user')
     search_fields = ('id', 'guia__id_guia')
     list_filter = ('full_name',)
+    list_per_page = 10
 
 @admin.register(Recepcion)
 class RecepcionAdmin(ImportExportModelAdmin, RelatedFieldAdmin):
@@ -48,6 +49,7 @@ class RecepcionAdmin(ImportExportModelAdmin, RelatedFieldAdmin):
     list_display = (
         'guia', 'motivo', 'fecha', 'motivo__id', )
     # readonly_fields = ('estado',)
+    list_per_page = 10
 
 @admin.register(Est_planilla)
 class Est_plaAdmin(admin.ModelAdmin):
