@@ -24,6 +24,7 @@ class PaqueteAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('seudo', 'bolsa', 'fecha', 'estado')
     search_fields = ('bolsa__bolsa', )
     icon_name  =  'local_shipping'
+    ###p
 
 @admin.register(Fisico)
 class FisicoAdmin(SimpleHistoryAdmin, ImportExportModelAdmin, admin.ModelAdmin):
