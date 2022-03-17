@@ -20,6 +20,7 @@ class CoberturaResource(resources.ModelResource):
         model = Cobertura
         import_id_fields = ('bolsa',) 
         fields = ('bolsa__direccion')
+        list_per_page = 5
 #--------------------------------------------------------------------
 @admin.register(Paquete)    
 class PaqueteAdmin(ImportExportModelAdmin, admin.ModelAdmin):
@@ -28,7 +29,7 @@ class PaqueteAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('seudo', 'bolsa', 'fecha', 'estado')
     search_fields = ('bolsa__bolsa', )
     icon_name  =  'local_shipping'
-    ###p
+    list_per_page = 5
 
 @admin.register(Fisico)
 class FisicoAdmin(SimpleHistoryAdmin, ImportExportModelAdmin, admin.ModelAdmin):
@@ -38,11 +39,13 @@ class FisicoAdmin(SimpleHistoryAdmin, ImportExportModelAdmin, admin.ModelAdmin):
     date_hierarchy = ('fecha_planilla')
     list_filter = ('est_planilla', 'mensajero',)
     search_fields = ('bolsa', )
+    list_per_page = 5
 
 @admin.register(Bolsa)    
 class BolsaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     search_fields = ('bolsa',)
     resource_class = BolsaResource
+    list_per_page = 5
 
 @admin.register(Mesa)
 class MesaAdmin(admin.ModelAdmin):
@@ -50,11 +53,13 @@ class MesaAdmin(admin.ModelAdmin):
     list_display = ('guia', 'id_motivo_m', 'observacion', )
     search_fields = ('guia__id_guia',)
     list_filter = ("id_motivo_m",)
+    list_per_page = 5
 
 @admin.register(Cobertura)
 class CoberturaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = CoberturaResource
     list_display = ('bolsa', 'fecha')
+    list_per_page = 5
 
 admin.site.register(Motivo_mesa)
 
