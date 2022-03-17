@@ -38,6 +38,7 @@ class PlanillaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     # resource_class = PlanillaResource
     list_display = ('id','guia', 'full_name',  'fecha', 'user')
     search_fields = ('id', 'guia__id_guia')
+    list_filter = ('full_name',)
 
 @admin.register(Recepcion)
 class RecepcionAdmin(ImportExportModelAdmin, RelatedFieldAdmin):
