@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from applications.guia.views import handleMultipleImagesUpload
+# from applications.guia.views import 
 from . views import export
 
 app_name = "producto_app"
@@ -36,6 +36,6 @@ urlpatterns = [
         name = 'busca-guia',
     ),
     
-    path('uploads/', handleMultipleImagesUpload, name="home"),
+    
     
     ]

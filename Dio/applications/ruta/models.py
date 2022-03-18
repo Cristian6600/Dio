@@ -120,8 +120,8 @@ class Planilla(TimeStampedModel) :
         self.guia.id_planilla = self.id_planilla  
         self.guia.id_planilla = self.id_planilla  
         
-
-        self.guia.save()       
+        self.guia.save() 
+              
         super(Planilla,  self).save(*args, **kwargs)
 
 class Recepcion(models.Model):

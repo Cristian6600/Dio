@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
 from applications.users.mixins import SigPermisoMixin
+from django.views import View, generic
 
 @login_required
 def exportSig(request):
@@ -27,7 +28,7 @@ def exportSig(request):
         'MUNICIPIO','DIRECCION', #12
         'TIPO DE EMISION','ID REGISTRO ',#13
         'CIUDAD SEDE', 'CIUDAD COURRIER', #14
-        'PRUEBA'  ])
+          ])
 
     for guia in Bd_clie.objects.all().values_list(
         'guias__fecha', 'seudo_bd',   #1      
@@ -43,8 +44,8 @@ def exportSig(request):
         'guias__guia_d_g__oficina', 'guias__guia_d_g__oficina__nom_ofi', # 11
         'guias__id_ciu__ciudad', 'guias__direccion', #12
         't_emi', 'guias__id_guia',#13
-        'guias__planilla_filtro__user__ciudad', 'guias__planilla_filtro__full_name__id_ciu__ciudad', #14
-        'guias__bolsa_p__seudo' 
+        'guias__planilla_filtro__full_name__courrier', 'guias__planilla_filtro__full_name__id_ciu__ciudad' #14
+        
         ):
         writer.writerow(guia)
 
@@ -78,3 +79,7 @@ class Bd_clieListView(SigPermisoMixin, ListView):
         order = self.request.GET.get("order", '')
         queryset = Bd_clie.objects.buscar_bd(kword, order)
         return queryset
+
+
+
+

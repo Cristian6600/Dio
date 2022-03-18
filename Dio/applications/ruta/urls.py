@@ -1,7 +1,6 @@
 from django.urls import path
 from . import views
 
-
 app_name = "ruta_apps"
 
 urlpatterns = [
@@ -30,6 +29,7 @@ urlpatterns = [
         views.AsignarListview.as_view(),
         name='planillas',
     ),
+    
      
     # path(
     #     'guia/buscar/', 
