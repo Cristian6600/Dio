@@ -92,6 +92,7 @@ MIDDLEWARE = [
     'simple_history.middleware.HistoryRequestMiddleware',
    
 ]
+SESSION_COOKIE_AGE = 300 # 600 segundos = 10 minutos
 
 ROOT_URLCONF = 'Dio.urls'
 
