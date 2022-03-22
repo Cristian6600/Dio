@@ -93,6 +93,7 @@ MIDDLEWARE = [
    
 ]
 SESSION_COOKIE_AGE = 300 # 600 segundos = 10 minutos
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 ROOT_URLCONF = 'Dio.urls'
 
