@@ -3,10 +3,11 @@ from related_admin import RelatedFieldAdmin
 from import_export.admin import ImportExportModelAdmin
 from import_export import resources
 from import_export.fields import Field
-from . models import Cargue, Recepcion, Planilla, Est_planilla
+from . models import Cargue, Recepcion, Planilla, Est_planilla, Sucursales, Destino, Descargue
 from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.utils.text import format_lazy
 from applications.fisico.models import Fisico
+from simple_history.admin import SimpleHistoryAdmin
 
 class Recepinline (admin.StackedInline):
     model = Fisico
@@ -34,7 +35,7 @@ class CargueAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     icon_name  =  'motorcycle'
 
 @admin.register(Planilla)
-class PlanillaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+class PlanillaAdmin(ImportExportModelAdmin, SimpleHistoryAdmin, admin.ModelAdmin):
     # resource_class = PlanillaResource
     list_display = ('id','guia', 'full_name',  'fecha', 'user')
     search_fields = ('id', 'guia__id_guia')
@@ -55,6 +56,10 @@ class RecepcionAdmin(ImportExportModelAdmin, RelatedFieldAdmin):
 class Est_plaAdmin(admin.ModelAdmin):
     list_display = ('id', 'estado')
 
+
+admin.site.register(Sucursales)
+admin.site.register(Destino)
+admin.site.register(Descargue)
 
 
 

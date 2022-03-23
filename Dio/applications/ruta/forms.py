@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import widgets
-from .models import Cargue, Planilla, Recepcion
+from .models import Cargue, Planilla, Recepcion, Destino, Descargue
 from applications.guia.models import Guia
 from django.core.exceptions import NON_FIELD_ERRORS
 from django.utils.translation import gettext_lazy as _
@@ -70,6 +70,39 @@ class RecepcionForm(forms.ModelForm):
                     'readonly': True
                 }
             ),
+            }
+
+class DestinoForm(forms.ModelForm):   
+    class Meta:
+        model = Destino
+        fields = ['sucursal', 'destino', 'guia',]
+
+        widgets = {
+            'sucursal': forms.Select(
+                attrs={
+                    'class': 'input-group-field',
+                }
+            ),
+            'guia': forms.Select(
+                attrs={
+                    'class': 'input-group-field',
+                }
+            ),
+            
+            }
+
+class DescargueForm(forms.ModelForm):   
+    class Meta:
+        model = Descargue
+        fields = ['guia', 'user']
+
+        widgets = {
+            'guia': forms.Select(
+                attrs={
+                    'class': 'input-group-field',
+                }
+            ),
+            
             }
 
         

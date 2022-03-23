@@ -51,6 +51,12 @@
                         <li class="{% if request.resolver_match.url_name == 'caja-index' %}activeli{% endif %}">
                           <a href="{% url 'fisico_app:cobertura-fisico' %} " style="color: white;">No cobertura</a>
                         </li>
+                        <li class="{% if request.resolver_match.url_name == 'caja-index' %}activeli{% endif %}">
+                          <a href="{% url 'ruta_apps:destino' %} " style="color: white;">Origen destino</a>
+                        </li>
+                        <li class="{% if request.resolver_match.url_name == 'caja-index' %}activeli{% endif %}">
+                          <a href="{% url 'ruta_apps:destino' %} " style="color: white;">Descargue</a>
+                        </li>
                         
                       </ul>
                     </li>

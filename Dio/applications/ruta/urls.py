@@ -29,8 +29,19 @@ urlpatterns = [
         views.AsignarListview.as_view(),
         name='planillas',
     ),
+
+    path(
+        'generar/destino/', 
+        views.DestinoCreate.as_view(),
+        name='destino'
+    ),
     
-     
+    path(
+        'generar/descargue/', 
+        views.DescargueCreateView.as_view(),
+        name='destino-descargue'
+    ),
+    
     # path(
     #     'guia/buscar/', 
     #     views.ConsultarImprimirGuiaListView.as_view(),

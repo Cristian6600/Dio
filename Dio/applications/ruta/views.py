@@ -24,13 +24,13 @@ from django.http import HttpResponse
 
 from django.views.generic import CreateView, ListView, View
 
-from . models import Cargue,   Recepcion, Planilla
+from . models import Planilla
 
 from .utils import render_to_pdf
 
 from django.contrib.admin.models import LogEntry, ADDITION, CHANGE, DELETION
 
-from .forms import CargueForm, RecepcionForm, AsignarForm
+from .forms import CargueForm, RecepcionForm, AsignarForm, DestinoForm, DescargueForm
 
 #----------------Recepcion------------------------
 class RecepcioCreateView(CustodiaPermisoMixin, CreateView, ListView ):
@@ -124,6 +124,31 @@ class AsignarListview(CustodiaPermisoMixin, ListView):
         order = self.request.GET.get("order", '')
         queryset = courrier.objects.buscar_producto(kword, order)
         return queryset
+
+class DestinoCreate(CreateView):
+    template_name = "ruta/destino.html"
+    form_class = DestinoForm
+    success_url = '.'
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Planilla Data Added', )
+
+        return render(request, self.template_name, {'form': form})
+
+class DescargueCreateView(CreateView):
+    template_name = "ruta/descargue-destino.html"
+    form_class = DescargueForm
+    success_url = '.'
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return super(DescargueCreateView, self).form_valid(form)
+    
          
 #---------------appi----------------------------
 # from .serializers import(

@@ -27,7 +27,7 @@ def exportSig(request):
         'COD', 'NOMBRE OFICINA', #11
         'MUNICIPIO','DIRECCION', #12
         'TIPO DE EMISION','ID REGISTRO ',#13
-        'CIUDAD SEDE', 'CIUDAD COURRIER', #14
+        'ORIGEN-DESTINO', 'DESTINO', #14
           ])
 
     for guia in Bd_clie.objects.all().values_list(
@@ -44,7 +44,7 @@ def exportSig(request):
         'guias__guia_d_g__oficina', 'guias__guia_d_g__oficina__nom_ofi', # 11
         'guias__id_ciu__ciudad', 'guias__direccion', #12
         't_emi', 'guias__id_guia',#13
-        'guias__planilla_filtro__full_name__courrier', 'guias__planilla_filtro__full_name__id_ciu__ciudad' #14
+        'guias__guia_destino__origen_destino', 'guias__guia_descargue__user__ciudad__ciudad' #14
         
         ):
         writer.writerow(guia)
