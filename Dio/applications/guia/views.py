@@ -118,7 +118,7 @@ def export(request):
         'seudo', 'bolsa', 
         'seudo__t_emi'):
         writer.writerow(guia)
-
+        
     return response
 
 @login_required
@@ -145,7 +145,7 @@ def export_address(request):
         ).exclude(producto = 3):
         
         writer.writerow(guia)
-
+        
     return response
      
 

@@ -38,25 +38,36 @@
                         <li class="{% if request.resolver_match.url_name == 'caja-index' %}activeli{% endif %}">
                           <a href="{% url 'fisico_app:fisico-paquete' %} " style="color: white;">Agregar fisico paquete</a>
                         </li>
-                        <li class="{% if request.resolver_match.url_name == 'caja-index' %}activeli{% endif %}">
-                          <a href="{% url 'gatos_g:datos-cliente' %} " style="color: white;">Impresion Guia</a>
-                        </li>
-                        <li class="{% if request.resolver_match.url_name == 'caja-index' %}activeli{% endif %}">
-                          <a href="{% url 'producto_app:guia-buscar' %} " style="color: white;">Impresion por guia imprimir</a>
-                        </li>
-                        <li class="{% if request.resolver_match.url_name == 'caja-index' %}activeli{% endif %}">
-                          <a href="{% url 'gatos_g:datos-cliente' %} " style="color: white;">Impresion Agendamiento</a>
-                        </li>
                         
-                        <li class="{% if request.resolver_match.url_name == 'caja-index' %}activeli{% endif %}">
-                          <a href="{% url 'fisico_app:cobertura-fisico' %} " style="color: white;">No cobertura</a>
-                        </li>
-                        <li class="{% if request.resolver_match.url_name == 'caja-index' %}activeli{% endif %}">
-                          <a href="{% url 'ruta_apps:destino' %} " style="color: white;">Origen destino</a>
-                        </li>
-                        <li class="{% if request.resolver_match.url_name == 'caja-index' %}activeli{% endif %}">
-                          <a href="{% url 'ruta_apps:destino' %} " style="color: white;">Descargue</a>
-                        </li>
+                        
+                        <ul class="vertical menu">
+                          <li>
+                            <a href="#"><span style="color: white;"><strong> Imprimir </strong></span></a>
+                            <ul class="nested vertical menu">
+                              <li class="{% if request.resolver_match.url_name == 'caja-index' %}activeli{% endif %}">
+                                <a href="{% url 'gatos_g:datos-cliente' %} " style="color: white;">Impresion Guia</a>
+                              </li>
+
+                              <li class="{% if request.resolver_match.url_name == 'caja-index' %}activeli{% endif %}">
+                                <a href="{% url 'producto_app:guia-buscar' %} " style="color: white;">Impresion por guia imprimir</a>
+                              </li>
+
+                              <li class="{% if request.resolver_match.url_name == 'caja-index' %}activeli{% endif %}">
+                                <a href="{% url 'gatos_g:datos-cliente' %} " style="color: white;">Impresion Agendamiento</a>
+                              </li>
+
+                             
+                              
+                            </ul>
+                          </li>
+                      </ul> 
+                      <li class="{% if request.resolver_match.url_name == 'caja-index' %}activeli{% endif %}">
+                        <a href="{% url 'fisico_app:cobertura-fisico' %} " style="color: white;">No cobertura</a>
+                      </li>
+                      <li class="{% if request.resolver_match.url_name == 'caja-index' %}activeli{% endif %}">
+                        <a href="{% url 'bd_app:no-fisico' %} " style="color: white;">Fisico reportar</a>
+                      </li>
+                      
                         
                       </ul>
                     </li>
@@ -81,6 +92,24 @@
                           <li class="{% if request.resolver_match.url_name == 'venta-index' %}activeli{% endif %}">
                             <a href="{% url 'fisico_app:estado-ruta' %}" style="color: white;">Pendiente cerrar</a>
                           </li>
+                          <ul class="vertical menu">
+                            <li>
+                              <a href="#"><span style="color: white;"><strong> Traslados </strong></span></a>
+                              <ul class="nested vertical menu">
+                                <li class="{% if request.resolver_match.url_name == 'caja-index' %}activeli{% endif %}">
+                                  <a href="{% url 'ruta_apps:destino' %} " style="color: white;">Origen destino</a>
+                                </li>
+    
+                                <li class="{% if request.resolver_match.url_name == 'caja-index' %}activeli{% endif %}">
+                                  <a href="{% url 'ruta_apps:destino' %} " style="color: white;">Descargue</a>
+                                </li>
+    
+                                
+                               
+                                
+                              </ul>
+                            </li>
+                        </ul> 
                         
                         </li>
                       </ul>

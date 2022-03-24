@@ -191,7 +191,7 @@ class Paquete(Fisi_pa):
       return (self.bolsa)
 
     def save(self, *args, **kwargs):
-        self.seudo.fisico  = self.seudo.fisico = True
+        self.seudo.fisico  = self.seudo.fisico = 1
         
         self.seudo.save()
 

@@ -1,12 +1,18 @@
+from dataclasses import field
+from pyexpat import model
+from re import template
 from django.shortcuts import render
+from django.template import loader
 import csv
 from . models import Bd_clie
 from applications.fisico.models import Paquete
 from django.http import HttpResponse
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView
 from django.contrib.auth.decorators import login_required
 from applications.users.mixins import SigPermisoMixin
 from django.views import View, generic
+from .forms import No_fisicoForm
+from . models import No_fisico
 
 @login_required
 def exportSig(request):
@@ -47,7 +53,10 @@ def exportSig(request):
         'guias__guia_destino__origen_destino', 'guias__guia_descargue__user__ciudad__ciudad' #14
         
         ):
+        
+        
         writer.writerow(guia)
+        response['Content-Disposition'] = 'attachment; filename="Informe principal.csv"'
 
     return response
 
@@ -65,9 +74,8 @@ def exportSig_paquete(request):
        
         ):
         writer.writerow(guia)
-
+        response['Content-Disposition'] = 'attachment; filename="Informe Paquete.csv"'
     return response
-
 
 class Bd_clieListView(SigPermisoMixin, ListView):
     template_name = "bd/bd.html"
@@ -79,6 +87,15 @@ class Bd_clieListView(SigPermisoMixin, ListView):
         order = self.request.GET.get("order", '')
         queryset = Bd_clie.objects.buscar_bd(kword, order)
         return queryset
+
+class No_fisicoCreateView(CreateView, ListView):
+    template_name = "bd/faltante.html"
+    form_class = No_fisicoForm
+    success_url = '.'
+    paginate_by = 16
+
+    def get_queryset(self):
+        return No_fisico.objects.all()
 
 
 

@@ -10,6 +10,13 @@ from .managers import BdManager
 
 class Bd_clie (models.Model):
 
+    TIPOS = (
+        ('0', 'Faltante'),
+        ('1', 'Fisico'),
+        ('2', 'No llego fisico'),
+        
+    )
+
     seudo_bd = models.CharField(
         max_length=35,
         primary_key=True,       
@@ -99,9 +106,11 @@ class Bd_clie (models.Model):
         blank=True,  null =True,
     )  
 
-    nom_pro = models.ForeignKey(Nom_producto, on_delete=models.CASCADE, verbose_name='Nombre del producto')
+    nom_pro = models.ForeignKey(Nom_producto, default=0, on_delete=models.CASCADE, verbose_name='Nombre del producto')
 
-    fisico = models.BooleanField()
+    fisicos = models.CharField(
+        max_length=8,
+        choices=TIPOS,)
 
     objects = BdManager()
 
@@ -115,3 +124,17 @@ class Bd_clie (models.Model):
     def was_published_recently(self):
         return self.pub_date >= timezone.now() 
 
+class No_fisico(models.Model):
+    seudo = models.OneToOneField(
+        Bd_clie,
+        on_delete=models.CASCADE, 
+        primary_key = True
+    )
+
+    def save(self, *args, **kwargs):
+        
+        self.seudo.fisicos = self.seudo.fisicos = 2
+        print(self.seudo.fisicos)
+          
+        self.seudo.save()       
+        super(No_fisico, self).save(*args, **kwargs)

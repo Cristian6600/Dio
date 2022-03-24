@@ -9,5 +9,11 @@ urlpatterns = [
          views.Bd_clieListView.as_view(),
          name='bd-Informe',
     ),
+    
+    path(
+        'no-fisico/',
+         views.No_fisicoCreateView.as_view(),
+         name='no-fisico',
+    ),
 
      ]

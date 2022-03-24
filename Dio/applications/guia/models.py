@@ -200,7 +200,7 @@ class Guia(Fisico, TimeStampedModel):
         
         self.seudo.sucursal = self.userbd
         self.codigo = self.concatenar   
-        self.seudo.fisico  = self.seudo.fisico = True
+        self.seudo.fisico  = self.seudo.fisico = 1
           
         self.seudo.save()       
         super(Guia, self).save(*args, **kwargs)
