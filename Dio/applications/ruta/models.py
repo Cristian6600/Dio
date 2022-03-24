@@ -254,7 +254,7 @@ class Destino(models.Model):
 
     def save(self, *args, **kwargs):
         self.origen_destino = self.origen_dest
-        self.guia.id_est = self.guia.id_est = 4
+        self.guia.id_est.id = self.guia.id_est.id = 4
 
         self.guia.save()
 
