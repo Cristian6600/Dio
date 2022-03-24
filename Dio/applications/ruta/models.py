@@ -256,6 +256,8 @@ class Destino(models.Model):
         self.origen_destino = self.origen_dest
         self.guia.id_est = self.guia.id_est = 4
 
+        self.guia.save()
+
         super (Destino, self).save()
 
 class Descargue(models.Model):
