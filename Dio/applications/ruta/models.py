@@ -254,6 +254,8 @@ class Destino(models.Model):
 
     def save(self, *args, **kwargs):
         self.origen_destino = self.origen_dest
+        self.guia.id_est = self.guia.id_est = 4
+
         super (Destino, self).save()
 
 class Descargue(models.Model):
