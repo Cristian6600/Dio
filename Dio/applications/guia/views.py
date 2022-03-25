@@ -56,7 +56,7 @@ class ImgCreateView(CreateView):
     form_class = ImgForm
     success_url = '.'
 
-
+@login_required
 def handleMultipleImagesUpload(request):
         if request.method == "POST":
             images = request.FILES.getlist('images')

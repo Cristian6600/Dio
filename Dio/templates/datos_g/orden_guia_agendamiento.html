@@ -2,7 +2,17 @@
 % load static %}
 
 {% block panel-content %}
-<h1>Probando agendameinto {{ request.headers.orden }}</h1>
+<h4>Imprimir agendamientos </h4>
+
+<div class="grid-x grid-margin-x">
+    <form class="cell grid-x grid-margin-x" method="GET">
+      <div class="cell input-group">
+        <span class="input-group-label">Buscar</span>
+        <input class="input-group-field" type="text" id="courrier" name="courrier" 
+          value="{{request.GET.kword}}"
+          placeholder="Buscar ..."
+          >
+      </div>
 
 <div class="grid-x grid-margin-x">
 <form method="post">{% csrf_token %}
@@ -12,15 +22,14 @@
     <thead>
         <th>Orden de impresion</th>
         <th>Fecha</th>
-        <th>Imprimir</th>
     </thead>
     <tbody>
         {% for e in orden  %}
-        
+        <tr>
             <td>{{ e.orden }}</td>
             <td>{{e.fecha}}</td>
             <td>
-                <a href="{% url 'gatos_g:guia-buscar-agendamientos' e.orden %}" class="button"><i class="fi-print"></i></a>
+                <a href="{% url 'gatos_g:impresion-guia' e.orden %}" class="button"><i class="fi-print"></i></a>
             </td>
         </tr>
         {% endfor %}

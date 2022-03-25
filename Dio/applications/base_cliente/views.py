@@ -50,13 +50,13 @@ def exportSig(request):
         'guias__guia_d_g__oficina', 'guias__guia_d_g__oficina__nom_ofi', # 11
         'guias__id_ciu__ciudad', 'guias__direccion', #12
         't_emi', 'guias__id_guia',#13
-        'guias__guia_destino__origen_destino', 'guias__guia_descargue__user__ciudad__ciudad' #14
+        'guias__guia_destino__origen_destino', 'guias__users__ciudad__ciudad' #14
         
         ):
         
         
         writer.writerow(guia)
-        response['Content-Disposition'] = 'attachment; filename="Informe principal.csv"'
+        response['Content-Disposition'] = 'attachment; filename="informe.csv"'
 
     return response
 
@@ -74,7 +74,7 @@ def exportSig_paquete(request):
        
         ):
         writer.writerow(guia)
-        response['Content-Disposition'] = 'attachment; filename="Informe Paquete.csv"'
+        response['Content-Disposition'] = 'attachment; filename="paquete.csv"'
     return response
 
 class Bd_clieListView(SigPermisoMixin, ListView):

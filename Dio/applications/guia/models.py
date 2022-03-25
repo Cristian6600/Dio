@@ -142,7 +142,6 @@ class Guia(Fisico, TimeStampedModel):
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE, 
         blank=True, null=True, 
-        editable=True,
         verbose_name= 'Usuario'
     )
 

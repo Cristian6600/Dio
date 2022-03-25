@@ -112,6 +112,12 @@ class Fisico(Fisi_pa, Bolsa):
         on_delete=models.CASCADE, 
         blank = True, null= True
     )
+    users = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE, 
+        blank=True, null=True, 
+        verbose_name= 'Usuario'
+    )
 
     history = HistoricalRecords()    
     

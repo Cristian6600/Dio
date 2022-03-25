@@ -273,8 +273,14 @@ class Descargue(models.Model):
     def __str__(self):
         return str(self.guia)
 
+    @property
+    def usuario(self):
+        return self.user
+
     def save(self, *args, **kwargs):
         self.guia.id_est.id = self.guia.id_est.id = 3
+        self.guia.users = self.usuario
+        print(self.guia.users)
 
         self.guia.save()
 
