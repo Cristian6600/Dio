@@ -88,6 +88,11 @@ class DestinoForm(forms.ModelForm):
                     'class': 'input-group-field',
                 }
             ),
+            'destino': forms.Select(
+                attrs={
+                    'class': 'input-group-field',
+                }
+            ),
             
             }
 

@@ -239,7 +239,12 @@ class Sucursales(models.Model):
         return self.sucursal
 
 class Destino(models.Model):
-    sucursal= models.ForeignKey(Sucursales, on_delete=models.CASCADE, )
+    sucursal= models.ForeignKey(
+        Sucursales, 
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True)
+        
     destino= models.ForeignKey(Sucursales, on_delete=models.CASCADE, related_name='destinos')
     guia = models.ForeignKey(Fisico, on_delete=models.CASCADE, related_name = 'guia_destino')
     origen_destino = models.CharField(max_length=60, blank=True, null=True)
@@ -249,18 +254,35 @@ class Destino(models.Model):
         null=True,
         verbose_name= 'Fecha Destino'
     )
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE, 
+        blank=True, null=True, 
+        editable=True,
+        verbose_name= 'Usuario'
+    )
 
     def __str__(self):
         return str(self.sucursal)
 
     @property
-    def origen_dest(self):
-      return (self.sucursal.sucursal)+ ' ' +(self.destino.sucursal)+'/'+ str(self.fecha)
+    def origen(self):
+        return self.user.ciudad.ciudad
+
+    @property
+    def destinoss(self):
+        return str(self.destino)
+
+    # @property
+    # def origen_dest(self):
+    #   return str(self.user)+ '/' +(self.destino.sucursal)
     # print(origen_dest)
 
     def save(self, *args, **kwargs):
-        self.origen_destino = self.origen_dest
+        # self.origen_destino = self.origen_dest
         self.guia.id_est.id = self.guia.id_est.id = 4
+        self.guia.origen = self.origen
+        self.guia.destino = self.destinoss
 
         self.guia.save()
 

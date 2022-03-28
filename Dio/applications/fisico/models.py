@@ -119,11 +119,17 @@ class Fisico(Fisi_pa, Bolsa):
         verbose_name= 'Usuario Descargue'
     )
     fecha_descargue = models.DateField(
-        auto_now_add=True,
         blank=True,
         null=True,
         verbose_name= 'Descargue'
     )
+    origen = models.CharField(
+        max_length=60, 
+        blank=True, null=True)
+
+    destino = models.CharField(
+        max_length=60, 
+        blank=True, null=True)
 
     history = HistoricalRecords()    
     
