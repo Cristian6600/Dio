@@ -8,9 +8,8 @@ from django.db.models import Q
 
 class OrdenListView(CustodiaPermisoMixin, ListView):
     template_name = "datos_g/orden_guia.html"
-    queryset = Orden.objects.order_by('-fecha')
+    queryset = Orden.objects.order_by('-fecha'). exclude(orden = -1)
     context_object_name = 'orden'
-
 
 
 class ListGuiaPdf(CustodiaPermisoMixin, ListView):

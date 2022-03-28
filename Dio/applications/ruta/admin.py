@@ -56,9 +56,11 @@ class RecepcionAdmin(ImportExportModelAdmin, RelatedFieldAdmin):
 class Est_plaAdmin(admin.ModelAdmin):
     list_display = ('id', 'estado')
 
+@admin.register(Destino)
+class DestinoAdmin(admin.ModelAdmin):
+    list_display = ('sucursal', 'destino', 'fecha', )
 
 admin.site.register(Sucursales)
-admin.site.register(Destino)
 admin.site.register(Descargue)
 
 

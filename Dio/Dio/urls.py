@@ -24,7 +24,7 @@ from applications.home.views import probando
 
 urlpatterns = [
     path('admin/', admin.site.urls, name="admin"),
-    path('upload/', handleMultipleImagesUpload, name="home"),
+    # path('', handleMultipleImagesUpload, name="home"),
     path('export-oficinas/', export, name="oficinas"),
     path('export-address-principal/', export_address, name="export-address"),
     path('informe-sig/', exportSig, name="sig"),

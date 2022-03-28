@@ -13,6 +13,7 @@ from . models import Guia, img
 from applications.users.mixins import CustodiaPermisoMixin, MesaPermisoMixin
 from django.shortcuts import render
 from .utils import render_to_pdf
+from django.db.models import Count
 
 class ProductListView(LoginRequiredMixin, ListView):
     template_name = "producto/cliente.html"

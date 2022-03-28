@@ -35,6 +35,8 @@ urlpatterns = [
         views.BuscarGuiaPdf.as_view(),
         name = 'busca-guia',
     ),
+
+    path('upload', views.handleMultipleImagesUpload, name='index'),
     
     
     

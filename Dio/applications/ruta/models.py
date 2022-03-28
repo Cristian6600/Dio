@@ -242,14 +242,20 @@ class Destino(models.Model):
     sucursal= models.ForeignKey(Sucursales, on_delete=models.CASCADE, )
     destino= models.ForeignKey(Sucursales, on_delete=models.CASCADE, related_name='destinos')
     guia = models.ForeignKey(Fisico, on_delete=models.CASCADE, related_name = 'guia_destino')
-    origen_destino = models.CharField(max_length=45, blank=True, null=True)
+    origen_destino = models.CharField(max_length=60, blank=True, null=True)
+    fecha = models.DateField(
+        auto_now_add=True,
+        blank=True,
+        null=True,
+        verbose_name= 'Fecha Destino'
+    )
 
     def __str__(self):
         return str(self.sucursal)
 
     @property
     def origen_dest(self):
-      return (self.sucursal.sucursal)+ ' ' +(self.destino.sucursal)
+      return (self.sucursal.sucursal)+ ' ' +(self.destino.sucursal)+'/'+ str(self.fecha)
     # print(origen_dest)
 
     def save(self, *args, **kwargs):
@@ -269,16 +275,27 @@ class Descargue(models.Model):
         editable=True,
         verbose_name= 'Usuario'
     )
+    fecha = models.DateField(
+        auto_now_add=True,
+        blank=True,
+        null=True,
+        verbose_name= 'Descargue'
+    )
 
     def __str__(self):
         return str(self.guia)
-
+    
     @property
     def usuario(self):
         return self.user
 
+    @property
+    def fecha_re(self):
+        return self.fecha
+
     def save(self, *args, **kwargs):
         self.guia.id_est.id = self.guia.id_est.id = 3
+        self.guia.fecha = self.fecha_re
         self.guia.users = self.usuario
         print(self.guia.users)
 

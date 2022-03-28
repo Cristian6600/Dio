@@ -116,7 +116,13 @@ class Fisico(Fisi_pa, Bolsa):
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE, 
         blank=True, null=True, 
-        verbose_name= 'Usuario'
+        verbose_name= 'Usuario Descargue'
+    )
+    fecha_descargue = models.DateField(
+        auto_now_add=True,
+        blank=True,
+        null=True,
+        verbose_name= 'Descargue'
     )
 
     history = HistoricalRecords()    
