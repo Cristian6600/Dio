@@ -41,7 +41,7 @@ def exportSig(request):
         'guias__fecha', 'seudo_bd',   #1      
         'guias__d_i', 'guias__destinatario',#2
         'guias__guia_d_g__id_pro__producto', 'guias__cod_ins__descripcion', #3
-        'guias__id_est__Estado', 'guias__cod_ins__mot_est', #4
+        'guias__cod_ins__estado', 'guias__cod_ins__mot_est', #4
         'guias__proceso__cod_dir', 'guias__cod_ins__t_entrega', #5 
         'nom_pro__nom_producto', 'guias__id_ciu', #6
         'guias__id_ciu', 'guias__fecha_recepcion', #7
