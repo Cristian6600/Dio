@@ -267,7 +267,7 @@ class Destino(models.Model):
 
     @property
     def origen(self):
-        return self.user.ciudad.ciudad
+        return str(self.user.ciudad.ciudad) + '/' + str(self.destino)
 
     @property
     def destinoss(self):
@@ -281,8 +281,8 @@ class Destino(models.Model):
     def save(self, *args, **kwargs):
         # self.origen_destino = self.origen_dest
         self.guia.id_est_id = self.guia.id_est_id = 4
-        print(self.guia.id_est)
         self.guia.origen = self.origen
+        print(self.guia.origen)
         self.guia.destino = self.destinoss
 
         self.guia.save()

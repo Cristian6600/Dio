@@ -14,6 +14,7 @@ from applications.users.mixins import CustodiaPermisoMixin, MesaPermisoMixin
 from django.shortcuts import render
 from .utils import render_to_pdf
 from django.db.models import Count
+from django.core.paginator import Paginator
 
 class ProductListView(LoginRequiredMixin, ListView):
     template_name = "producto/cliente.html"
@@ -43,8 +44,22 @@ class FisicoCreateView(CustodiaPermisoMixin, LoginRequiredMixin, CreateView, Lis
     paginate_by = '5'
     success_url = '.'   
     
+    
     def get_queryset(self):
         return Guia.objects.filter(user=self.request.user).order_by('-fecha')
+    
+    # def get_count(self):
+    #     return Guia.objects.count()
+
+    # def get(self, request):
+        
+    #     contexto = {
+    #         'lista': self.get_queryset,
+    #         'count': self.get_count,
+    #         'form' : self.form_class
+    #     }
+    #     return render(request, self.template_name, contexto, )
+
 
     def form_valid(self, form):
         self.object = form.save(commit=False)

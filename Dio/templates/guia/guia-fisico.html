@@ -41,7 +41,7 @@
 </div>
 
 <div class="cell grid-x grid-margin-x">
-  <h5 class="cell" style="text-align: center;">Fisicos Registrados</h5>
+  <h5 class="cell" style="text-align: center;">Fisicos Registrados {{count}}</h5>
   <div class="cell">
     <table>
       <thead>
@@ -51,7 +51,7 @@
           <th>Usuario</th>          
       </thead>
       <tbody>
-          {% for guia in object_list %}
+          {% for guia in lista %}
           <tr>
               <td>{{guia}}</td>
               <td>{{guia.seudo}}</td>

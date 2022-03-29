@@ -33,7 +33,7 @@ def exportSig(request):
         'COD', 'NOMBRE OFICINA', #11
         'MUNICIPIO','DIRECCION', #12
         'TIPO DE EMISION','ID REGISTRO ',#13
-        'ORIGEN', 'DESTINO',  #14
+        'ORIGEN', 'DESCARGUE',  #14
         'FECHA-DESTINO' #15
           ])
 
