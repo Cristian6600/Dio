@@ -2,6 +2,8 @@ from django.db.models import fields
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required, permission_required
+from datetime import date
+from django.utils.timezone import datetime #important if using timezones
 import csv
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
@@ -14,7 +16,6 @@ from applications.users.mixins import CustodiaPermisoMixin, MesaPermisoMixin
 from django.shortcuts import render
 from .utils import render_to_pdf
 from django.db.models import Count
-from django.core.paginator import Paginator
 
 class ProductListView(LoginRequiredMixin, ListView):
     template_name = "producto/cliente.html"
@@ -41,31 +42,28 @@ class FisicoCreateView(CustodiaPermisoMixin, LoginRequiredMixin, CreateView, Lis
     # model = Guia
     # fields = ['id_guia', 'seudo', 'bolsa', 'user']
     form_class = guiafisicoForm
-    paginate_by = '5'
     success_url = '.'   
     
-    
     def get_queryset(self):
-        return Guia.objects.filter(user=self.request.user).order_by('-fecha')
-    
-    # def get_count(self):
-    #     return Guia.objects.count()
+        return Guia.objects.filter(user=self.request.user).order_by('-fecha')[:5]
 
-    # def get(self, request):
+    def get_cantidad(self):
         
-    #     contexto = {
-    #         'lista': self.get_queryset,
-    #         'count': self.get_count,
-    #         'form' : self.form_class
-    #     }
-    #     return render(request, self.template_name, contexto, )
-
+        return Guia.objects.filter(user=self.request.user).count()
+        # return Guia.objects.filter(user=self.request.user, fecha=date.today()).count()
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
         self.object.save()
         return super(FisicoCreateView, self).form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        contexto = {}
+        contexto ['lista'] = self.get_queryset()
+        contexto ['form'] = self.form_class
+        contexto ['count'] = self.get_cantidad()
+        return contexto
 
 class ImgCreateView(CreateView):
     template_name = "guia/img_prueba.html"  
