@@ -38,6 +38,10 @@ urlpatterns = [
 
     path('upload', views.handleMultipleImagesUpload, name='index'),
     
-    
+    path(
+        'prueba/',
+        views.ImgCreateView.as_view(),
+        name = 'prueba',
+    ),
     
     ]

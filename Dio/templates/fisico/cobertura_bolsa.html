@@ -18,6 +18,16 @@
               <span class="input-group-label"><i class="fi-archive"></i></span>
               {{form.bolsa}}
             </div>
+        </div>
+
+            <div class="cell medium-6">
+                <label>Estado:</label>
+                <div class="input-group">
+                    <span class="input-group-label"><i class="fi-archive" ></i></span>
+                    {{form.estado}}
+                </div>
+            </div>
+            
 
             <div class="cell medium-6">
                 <button type="submit" class="button" style="width: 200px;">Guardar</button>
@@ -36,7 +46,7 @@
                 
             </thead>
             <tbody>
-                {% for e in cobertura %}
+                {% for e in lista_cobertura %}
                 <tr>
                     
                     <td>{{e.bolsa}}</td>

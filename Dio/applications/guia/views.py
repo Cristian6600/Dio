@@ -80,7 +80,10 @@ def handleMultipleImagesUpload(request):
 
             uploaded_images = img.objects.all()
             return JsonResponse({"imagenes": [{"url": image.image.url} for image in uploaded_images]})
-        return render(request, "index.html")    
+        return render(request, "index.html")  
+
+        
+          
 
 #--------Impresion por guia--------------
 class GuiaListView(CustodiaPermisoMixin, ListView):

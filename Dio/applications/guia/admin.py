@@ -6,6 +6,7 @@ from . models import Servicio, Guia, img
 from simple_history.admin import SimpleHistoryAdmin
 from import_export import resources
 
+
 class GuiaResource(resources.ModelResource):
     
     class Meta:
@@ -26,7 +27,7 @@ class guiaAdmin(ImportExportModelAdmin, SimpleHistoryAdmin, RelatedFieldAdmin):
             ('direccion', 'barrio', 'postal', ), ]}),
 
         ('Estados', {'fields':[
-
+                
             ('id_est', 'mot', 'id_ser',), 
             ('cod_vis', 'id_clie', 'proceso'),
             ('cantidad_vi', 'cantidad', 'codigo', ), ]}) 

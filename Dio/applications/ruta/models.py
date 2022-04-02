@@ -262,6 +262,8 @@ class Destino(models.Model):
         verbose_name= 'Usuario'
     )
 
+    history = HistoricalRecords()    
+
     def __str__(self):
         return str(self.sucursal)
 
@@ -304,6 +306,9 @@ class Descargue(models.Model):
         null=True,
         verbose_name= 'Descargue'
     )
+
+    history = HistoricalRecords()    
+
 
     def __str__(self):
         return str(self.guia)

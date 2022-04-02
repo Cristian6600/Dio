@@ -112,6 +112,8 @@ class Bd_clie (models.Model):
         max_length=8,
         choices=TIPOS,)
 
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE, blank = True, null=True)
+
     objects = BdManager()
 
     class Meta:

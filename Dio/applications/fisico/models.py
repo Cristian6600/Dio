@@ -251,12 +251,19 @@ class Cobertura(models.Model):
         null=True,
         verbose_name= 'Fecha fisico'
     )
+    estado = models.ForeignKey(
+        Estado, on_delete=models.CASCADE
+    )
+
+    @property
+    def estados(self):
+        return str(self.estado.id)
 
     def __str__(self):
         return str(self.bolsa)
 
     def save(self, *args, **kwargs):
-        self.bolsa.id_est_id  = self.bolsa.id_est_id = 8
+        self.bolsa.id_est_id  = self.estados
         
         self.bolsa.save()
 

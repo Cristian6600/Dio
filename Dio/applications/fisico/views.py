@@ -9,6 +9,8 @@ from django.views.generic.detail import SingleObjectMixin
 from .forms import ProductForm, CoberturaForm
 from applications.users.mixins import CustodiaPermisoMixin
 from applications.courrier.models import courrier
+from django.contrib import messages
+from simple_history.models import HistoricalRecords
 
 class BolsaCreateView(CustodiaPermisoMixin, CreateView, ListView):
     template_name = "fisico/add-fisico.html"
@@ -17,11 +19,11 @@ class BolsaCreateView(CustodiaPermisoMixin, CreateView, ListView):
     success_url = '.'
     context_object_name = 'paquete'
 
-    def get_queryset(self):
-        return Paquete.objects.order_by('-fecha')
+    # def get_queryset(self):
+    #     return Paquete.objects.order_by('-fecha')
 
     def get_queryset(self):
-        return Paquete.objects.filter(user=self.request.user)
+        return Paquete.objects.filter(user=self.request.user).order_by('-fecha')
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -45,8 +47,16 @@ class EstadoRutaListView(LoginRequiredMixin, ListView):
 class CoberturaCreateView(CreateView, ListView):
     template_name = "fisico/cobertura_bolsa.html"
     form_class = CoberturaForm
-    context_object_name = 'cobertura'
+    # context_object_name = 'cobertura'
     success_url = '.'
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Planilla Data Added')
+
+        return render(request, self.template_name, {'form': form})
 
     def get_queryset(self):
         return Cobertura.objects.order_by('bolsa')
@@ -56,3 +66,11 @@ class CoberturaCreateView(CreateView, ListView):
         self.object.user = self.request.user
         self.object.save()
         return super(CoberturaCreateView, self).form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        contexto = {}
+        contexto ['lista_cobertura'] = self.get_queryset()
+        contexto ['form'] = self.form_class
+        
+        return contexto
+        

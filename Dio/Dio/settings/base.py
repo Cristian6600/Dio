@@ -92,7 +92,7 @@ MIDDLEWARE = [
     'simple_history.middleware.HistoryRequestMiddleware',
    
 ]
-SESSION_COOKIE_AGE = 9900 # 600 segundos = 10 minutos
+# SESSION_COOKIE_AGE = 9900 # 600 segundos = 10 minutos
 
 
 ROOT_URLCONF = 'Dio.urls'
