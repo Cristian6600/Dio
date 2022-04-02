@@ -40,6 +40,12 @@ class Bolsa(models.Model):
         default= 2
     )
 
+    fecha_bolsa = models.DateTimeField(
+        auto_now_add=True,
+        blank=True,
+        null=True,
+    )
+
     def __str__(self):
         return str(self.bolsa)
 

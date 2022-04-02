@@ -26,9 +26,9 @@
 <body>
     
     <h3>Fecha: {{ mostrarpub.fecha|date }}</h3>
-    {% for empleado in empleados %}
+    
     <h3>Mensajero:  {{ empleado.direccion|first }} </h3>
-    {% endfor %}
+    
     <h3>Cantidad a entregar: {{ count }}  </h3>
     
     <table BORDER="1px" >
