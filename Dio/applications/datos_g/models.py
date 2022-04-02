@@ -230,7 +230,7 @@ class datos_g (models.Model):
         self.seudo_dg.id_est = self.id_est
         self.seudo_dg.d_i = self.documento
         self.seudo_dg.proceso = self.proceso
-        self.seudo_dg.suma = self.seudo_dg.suma = 0
+        self.seudo_dg.cantidad = self.seudo_dg.cantidad = 0
         self.seudo_dg.producto = self.producto
 
         #orden impresion
