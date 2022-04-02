@@ -43,7 +43,7 @@ class FisicoAdmin(SimpleHistoryAdmin, ImportExportModelAdmin, admin.ModelAdmin):
 
 @admin.register(Bolsa)    
 class BolsaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_filter
+    
     search_fields = ('bolsa',)
     resource_class = BolsaResource
     list_per_page = 5
