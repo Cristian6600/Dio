@@ -147,6 +147,8 @@ class datos_g (models.Model):
         null=True,
         )
 
+    cantidad = models.IntegerField()
+
     def save(self, *args, **kwargs):
         EAN = barcode.get_barcode_class('ean13')
         ean = EAN(f'{self.country_id}{self.manufacturer_id}{self.product_id}', writer=ImageWriter())
@@ -214,6 +216,10 @@ class datos_g (models.Model):
     def producto(self):
         return self.id_pro
     
+    @property
+    def cantidades(self):
+        return self.cantidad
+    
     # @property
     # def orden(self):
     #     return self.orimp
@@ -230,7 +236,7 @@ class datos_g (models.Model):
         self.seudo_dg.id_est = self.id_est
         self.seudo_dg.d_i = self.documento
         self.seudo_dg.proceso = self.proceso
-        self.seudo_dg.cantidad = self.seudo_dg.cantidad = 0
+        self.seudo_dg.cantidad = self.cantidad
         self.seudo_dg.producto = self.producto
 
         #orden impresion
