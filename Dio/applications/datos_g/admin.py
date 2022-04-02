@@ -20,7 +20,7 @@ class datos_gResource(resources.ModelResource):
 class datos_gAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = datos_gResource
     list_per_page = 12
-    search_fields = ("id_datos_g",)
+    search_fields = ("d_i",)
     list_display = ('seudo_dg', 'direccion', 'd_i', 'id_ciu', 'barrio', 'fecha', )
     icon_name  =  'directions'
 
