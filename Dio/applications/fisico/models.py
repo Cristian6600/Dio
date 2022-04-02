@@ -176,9 +176,8 @@ class Fisico(Fisi_pa, Bolsa):
     @property
     def prueba(self):
         return str(self.codigo)
-#aca
-    def clean(self):
-        print(self.codigo)
+
+
 
     def save(self, *args, **kwargs):
         self.codigo = self.concatenar 

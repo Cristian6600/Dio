@@ -219,6 +219,10 @@ class datos_g (models.Model):
     @property
     def cantidades(self):
         return self.cantidad
+
+    @property
+    def union(self):
+        return str(self.cantidad) + str(self.motivo.id) + str(self.id_est.id) + str(self.cod_vi)
     
     # @property
     # def orden(self):
@@ -236,8 +240,11 @@ class datos_g (models.Model):
         self.seudo_dg.id_est = self.id_est
         self.seudo_dg.d_i = self.documento
         self.seudo_dg.proceso = self.proceso
-        self.seudo_dg.cantidad = self.cantidad
+        self.seudo_dg.cantidad_vi = self.cantidad
         self.seudo_dg.producto = self.producto
+        self.seudo_dg.codigo = self.union
+
+        print(self.seudo_dg.codigo)
 
         #orden impresion
         # self.orimp.orden = self.orden
