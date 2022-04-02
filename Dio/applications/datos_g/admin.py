@@ -15,6 +15,7 @@ class datos_gResource(resources.ModelResource):
         model = datos_g     
         import_id_fields = ('seudo_dg',)   
 
+##
 @admin.register(datos_g)
 class datos_gAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = datos_gResource
