@@ -92,27 +92,29 @@
             </tr>
             <tr>				
                 <td>{{e.proc.proceso}}</td>
-                <td> FO-OP-28 V.1</td>
-                <td></td>
-                <td><h1><strong>{{e.seudo_dg.bolsa}} </strong></h1></td>
-                <td><h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>{{forloop.counter}}</strong></h1></td>
+                <td > FO-OP-28 V.1</td>
+                
+                <td colspan="2"><h1><strong>{{e.seudo_dg.bolsa}} </strong></h1></td>
+                <td><h1><strong>{{forloop.counter}}</strong></h1></td>
             </tr>    
             <tr>
 		        <td colspan="5"> Destinatario:<strong>{{e.dest}} </strong> </td>                                     
             </tr>
             <tr>
-                <td colspan="5"><h4> <strong><font size=2> {{ e.direccion }} </font></strong></td>     
+                <td colspan="5"> <strong><font size=2> {{ e.direccion }} </font></strong></td>     
             </tr>
+            
             <tr>
                 <td><strong>C.C  <strong>{{ e.d_i }} </strong></strong></td>
                 <td>C.postal </td>  
                 <td colspan="3"><strong> {{ e.postal }}</strong> Ciudad: <strong> {{e.id_ciu}} </strong></td>      
             </tr>      
         </table>
-            <tfoot> 
+            <tfoot> <font size=2>
                 ESTE PRODUCTO SE ENCUENTRA DESINFECTADO, CON EL PROPOSITO DE CUIDAR NUESTROS 
                 CLIENTE, HEMOS TOMADO TODAS LAS MEDIDAS DE ASEPSIA, RECUERDA LAVARTE LAS MANOS. 
-            <tfoot>
+            </font>
+                <tfoot>
         
 	 <table>
         
