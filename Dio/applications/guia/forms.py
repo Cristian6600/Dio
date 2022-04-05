@@ -25,6 +25,7 @@ class guiafisicoForm(forms.ModelForm):
                 attrs = {
                     'placeholder': 'Codigo se barrras Seudo...',
                     'class': 'input-group-field',
+                    'maxlength' : 22
                     
                 }
             ),

@@ -2,6 +2,7 @@ from django.db import models
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from PIL import Image
+from datetime import date
 from model_utils.models import TimeStampedModel
 from .managers import ProductManager
 from applications.base_cliente.models import Bd_clie, Producto
@@ -230,6 +231,7 @@ class img(models.Model):
         related_name='edited_by'
         
     )
+    mod_date = models.DateField(default=date.today, blank=True, null=True)
     
     numero = models.CharField(max_length=30, blank=True, null=True)
     

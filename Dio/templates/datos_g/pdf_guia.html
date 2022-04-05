@@ -15,11 +15,11 @@
     
        
     @frame col1_frame {             /* Content frame 1 */
-        left: 12pt; width: 375 pt; top: 3pt; height: 632pt;
+        left: 3pt; width: 390 pt; top: 3pt; height: 625pt;
     }
     
     @frame col2_frame {             /* Content frame 2 */
-        left: 400pt; width: 375pt; top: 3pt; height: 632pt;
+        left: 400pt; width: 390pt; top: 3pt; height: 625pt;
     }
     
     p {
@@ -57,7 +57,7 @@
          
         <table BORDER="">		
 			<tr>
-				<td width= "130" rowspan="5"><pdf:barcode value="{{ e.seudo_dg }}" type="code128"  align="right" barwidth ="1" middle="20"/></td>
+				<td width= "130" rowspan="5"><pdf:barcode value="{{ e.seudo_dg }}" type="code128"  align="right" barwidth ="0,9" middle="20"/></td>
                 <td>Domicilio</td>  
                 <td width= "30"><strong> ${{e.seudo_dg.domicilio}} </strong></td>              
                 <td >Tipo de envio: </td>     
@@ -102,14 +102,16 @@
 		        <td colspan="5"> Destinatario:<strong>{{e.dest}} </strong> </td>                                     
             </tr>
             <tr>
-                <td colspan="5"> <strong><font size=2> {{ e.direccion }} </font></strong></td>     
+                <td colspan="5"> <p> {{ e.direccion }} </p></td>     
             </tr>
+            
             
             <tr>
                 <td><strong>C.C  <strong>{{ e.d_i }} </strong></strong></td>
                 <td>C.postal </td>  
                 <td colspan="3"><strong> {{ e.postal }}</strong> Ciudad: <strong> {{e.id_ciu}} </strong></td>      
-            </tr>      
+            </tr>  
+                
         </table>
             <tfoot> <font size=2>
                 ESTE PRODUCTO SE ENCUENTRA DESINFECTADO, CON EL PROPOSITO DE CUIDAR NUESTROS 
@@ -191,12 +193,14 @@
 	</tbody>
 </table>
         <tfoot> 
-            <font size=1>El usuario deja constancia expresa de que tuvo conocimiento del contrato que se encuentra publicado en la pagina web firstsource.net.co; el 
+            <font size=1>El usuario deja constancia expresa de que tuvo conocimiento del contrato que se encuentra publicado en la pagina web letran.com.co el 
                 cual regula el servicio acordado entre las partes, cuyo contenido clausular acepta expresamente con la suscripcion de este documento. El 
-                cliente puede realizar el rastreo de sus envios en la pagina web firstsource.net.co o en la linea telefonica +57) (1) 8903906. El cliente puede 
+                cliente puede realizar el rastreo de sus envios en la pagina web letran.com.co o en la linea telefonica +57 (1) 8903906. El cliente puede 
                 presentar sus peticiones,quejas y recursos en la web y telefono descrito anteriormente o a traves del correo electronico
                 servicio@firstsource.net.co
-            </font><hr width=400><hr width=400>
+                <hr width=385> <br> <hr width=385>
+            </font>
+            
         </foot> 
         
 

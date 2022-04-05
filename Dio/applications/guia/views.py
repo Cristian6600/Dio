@@ -82,7 +82,11 @@ def handleMultipleImagesUpload(request):
             return JsonResponse({"imagenes": [{"url": image.image.url} for image in uploaded_images]})
         return render(request, "index.html")  
 
-        
+        def form_valid(self, form):
+            self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return super(FisicoCreateView, self).form_valid(form)
           
 
 #--------Impresion por guia--------------
