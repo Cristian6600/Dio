@@ -27,7 +27,7 @@
     
     <h3>Fecha: {{ mostrarpub.fecha|date }}</h3>
     
-    <h3>Mensajero:  {{ empleado.direccion|first }} </h3>
+    <h3>Mensajero:  {{ mostrar_nom.mensajero}} </h3>
     
     <h3>Cantidad a entregar: {{ count }}  </h3>
     
@@ -52,7 +52,7 @@
                     <td>{{ empleado.destinatario }}</td>
                     <td>{{ empleado.id_ciu }}</td>
                     <td>{{ empleado.d_i }}</td>
-                    <td></td>
+                    <td>{{empleado.mensajero}}</td>
                                                      
                 </tr>
             {% endfor %}

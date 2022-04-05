@@ -65,14 +65,14 @@ class ListEmpleadosPdf(CustodiaPermisoMixin, ListView):
         
         nombre = self.kwargs['full_name']
                
-        mostrar_nom = Guia.objects.order_by("mensajero").last()
+        mostrar_nom = Guia.objects.filter(mensajero__id = nombre, est_planilla = 1).order_by('fecha_planilla')[0]
         mostrarpub = Guia.objects.latest('fecha')
         guia = Guia.objects.filter(mensajero__id = nombre, est_planilla = 1 ).order_by('fecha_planilla')
         data = {
             'count': guia.count(),
             'empleados': guia,
             'mostrarpub': mostrarpub,
-            'mostrar_nom': mostrar_nom,
+            'mostrar_nom': mostrar_nom
                                     
         }
         pdf = render_to_pdf('ruta/pdf_planillas.html', data)
