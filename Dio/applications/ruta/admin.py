@@ -1,3 +1,4 @@
+from re import search
 from django.contrib import admin
 from related_admin import RelatedFieldAdmin
 from import_export.admin import ImportExportModelAdmin
@@ -51,6 +52,7 @@ class RecepcionAdmin(ImportExportModelAdmin, RelatedFieldAdmin):
         'guia', 'motivo', 'fecha', 'motivo__id', )
     # readonly_fields = ('estado',)
     list_per_page = 10
+    search_fields = ('guia__id_guia',)
 
 @admin.register(Est_planilla)
 class Est_plaAdmin(admin.ModelAdmin):

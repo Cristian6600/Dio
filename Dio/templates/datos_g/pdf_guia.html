@@ -3,15 +3,13 @@
 {% load static %}
 
 
-
 <head>
     <style>
-    @page {
-    background-image: url("https://starteq.net/wp-content/uploads/2019/11/mcdonalds-png-logo-picture-3-1024x1001.png");
-}
 
     @page {
         size: letter landscape;
+        
+        
     
        
     @frame col1_frame {             /* Content frame 1 */
@@ -25,16 +23,18 @@
     p {
     border: gray 0px solid;  
     padding: 1px;
+    
 }
     }
     
-    </style>
+   </style>
     
 </head>
 
     <body>
     
     {% for e in empleados %}    
+    
     <table border="1">
 			<tr>
 				<td >Destinatario:</td>
