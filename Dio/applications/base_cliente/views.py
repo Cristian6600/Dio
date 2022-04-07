@@ -40,7 +40,7 @@ def exportSig(request):
     for guia in Bd_clie.objects.all().values_list(
         'guias__fecha', 'seudo_bd',   #1      
         'guias__d_i', 'guias__destinatario',#2
-        'producto', 'guias__cod_ins__descripcion', #3
+        'producto__producto', 'guias__cod_ins__descripcion', #3
         'guias__cod_ins__estado', 'guias__cod_ins__mot_est', #4
         'guias__proceso__cod_dir', 'guias__cod_ins__t_entrega', #5 
         'nom_pro__nom_producto', 'guias__id_ciu', #6
