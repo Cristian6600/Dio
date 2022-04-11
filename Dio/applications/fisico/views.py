@@ -3,7 +3,7 @@ from typing import List
 from django.http import HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
-from . models import Cobertura, Paquete, Fisico
+from . models import Cobertura, Paquete, Fisico, Bolsa
 from django.views.generic import CreateView, ListView, UpdateView
 from django.views.generic.detail import SingleObjectMixin
 from .forms import ProductForm, CoberturaForm
@@ -73,4 +73,19 @@ class CoberturaCreateView(CreateView, ListView):
         contexto ['form'] = self.form_class
         
         return contexto
+
+
+class Bolsa_add_CreateView(CreateView, ListView):
+    model = Bolsa
+    fields =['bolsa',]
+    template_name = "fisico/create_bolsa.html"
+    success_url = '.'   
+
+    def get_queryset(self):
+        return Bolsa.objects.order_by('-fecha_bolsa')[:5]
+
+
+
+        
+
         

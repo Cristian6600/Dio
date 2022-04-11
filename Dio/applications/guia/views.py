@@ -8,7 +8,7 @@ import csv
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView, DetailView
+from django.views.generic import CreateView, ListView, DetailView, UpdateView
 from django.views.generic.detail import SingleObjectMixin
 from .forms import guiafisicoForm, ImgForm
 from . models import Guia, img
@@ -168,6 +168,30 @@ def export_address(request):
         writer.writerow(guia)
         
     return response
+
+class GuiaListView(ListView):
+    template_name = "guia/update_list_guia.html"
+    model = Guia
+    paginate_by = 5
+
+    def get_queryset(self):
+        print('*******')
+        palabra_clave = self.request.GET.get("kword")
+        lista = Guia.objects.filter(
+            id_guia = palabra_clave
+        )
+        return lista
+        # return Guia.objects.order_by('-fecha_bolsa')
+
+
+class GuiaUpdateView(UpdateView):
+    template_name = "guia/bolsa_update.html"
+    model = Guia
+    fields = ['bolsa',]
+    success_url = reverse_lazy('producto_app:lista-guia-update')
+    
+
+    
      
 
 

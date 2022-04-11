@@ -20,6 +20,12 @@ urlpatterns = [
         'cobertura-fisico/',
         views.CoberturaCreateView.as_view(),
         name = 'cobertura-fisico',
+    ),
+    
+    path(
+        'bolsa-create/',
+        views.Bolsa_add_CreateView.as_view(),
+        name = 'bolsa-create',
     )
 
 ]

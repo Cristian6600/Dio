@@ -43,5 +43,16 @@ urlpatterns = [
         views.ImgCreateView.as_view(),
         name = 'prueba',
     ),
+
+    path(
+        'lista-guia-update/', 
+        views.GuiaListView.as_view(), 
+        name='lista-guia-update',
+    ),
+    path(
+        'guia-update/<pk>/',
+         views.GuiaUpdateView.as_view(),
+         name='guia-bolsa-update',
+    ),
     
     ]
