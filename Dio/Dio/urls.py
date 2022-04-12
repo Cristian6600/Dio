@@ -23,7 +23,7 @@ from applications.base_cliente.views import exportSig, exportSig_paquete
 from applications.home.views import probando
 
 urlpatterns = [
-    path('admin/', admin.site.urls, name="admin"),
+    path('admin/', admin.site.urls),
     # path('', handleMultipleImagesUpload, name="home"),
     path('export-oficinas/', export, name="oficinas"),
     path('export-address-principal/', export_address, name="export-address"),

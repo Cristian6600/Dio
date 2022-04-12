@@ -15,7 +15,8 @@ class Tel(models.Model):
 
 class Indicativo(models.Model):
     
-    ind = models.IntegerField(
+    ind = models.CharField(
+        max_length = 10,
         verbose_name = 'Indicativo'
     )
     Region = models.CharField(
