@@ -65,7 +65,7 @@ class Cod_vis(models.Model):
     tipo = models.CharField(max_length=12)
 
     def __str__(self):
-        return str(self.id)
+        return str(self.visita)
 
 class Nom_producto(models.Model):
     id = models.CharField(max_length=3, primary_key=True)

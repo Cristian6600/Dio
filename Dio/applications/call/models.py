@@ -7,6 +7,7 @@ from applications.users.models import User
 from applications.datos_g.models import datos_g
 from django.conf import settings 
 
+
 class Tel(models.Model):
     telefono= models.CharField(primary_key=True, max_length=12)
 

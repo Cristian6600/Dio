@@ -159,7 +159,7 @@ class Fisico(Fisi_pa, Bolsa):
 
     @property
     def c_vis(self): 
-        return str(self.cod_vis) 
+        return str(self.cod_vis.id) 
 
     ############################################  
     #  contador para generar reset
@@ -167,7 +167,7 @@ class Fisico(Fisi_pa, Bolsa):
 
     @property
     def concatenar(self):
-        return  str(self.cantidad_vi) + (self.motis) + str(self.estados) + str(self.cod_vis) 
+        return  str(self.cantidad_vi) + (self.motis) + str(self.estados) + str(self.cod_vis.id) 
 
     @property
     def cant_vi(self):

@@ -4,7 +4,7 @@ from django.db.models.signals import post_save
 from PIL import Image
 from datetime import date
 from model_utils.models import TimeStampedModel
-from .managers import ProductManager
+from .managers import ProductManagers
 from applications.base_cliente.models import Bd_clie, Producto
 from applications.users.models import User
 from applications.cliente.models import Cliente
@@ -161,7 +161,7 @@ class Guia(Fisico, TimeStampedModel):
         def __str__(self):
             return str(self.seudo) + self.destinatario
 
-    objects = ProductManager()
+    objects = ProductManagers()
     # objects = LogEntryManager()
 
     var_g = ("guia")    
@@ -189,7 +189,7 @@ class Guia(Fisico, TimeStampedModel):
 
     @property
     def concatenar(self):
-        return  str(self.can_vi) + (self.motis) + str(self.estados) + str(self.cod_vis) 
+        return  str(self.can_vi) + (self.motis) + str(self.estados) + str(self.cod_vis.id) 
 #-------------------------------------------------------------
     
     @property

@@ -8,30 +8,68 @@ from .forms import CallfisicoForm
 from django.db.models import Q
 from applications.users.mixins import CallPermisoMixin
 
+
 class CallUpdateView(CallPermisoMixin, UpdateView):
     template_name = "call/_update_form.html"
     model = Guia
     fields = ['direccion', 'id_ciu', 'postal', 'mot', 'cod_vis']
-    template_name_suffix = '_update_form'
+    template_name_suffix = '_update_form'          
     success_url = reverse_lazy('call_app:lista-call')
+
+    
 
 class CallListView(CallPermisoMixin, ListView):
     template_name = "call/gestion.html"
     context_object_name = 'call'
-    queryset = Guia.objects.filter(Q(id_est = 3), Q(mot=5) | Q(mot=6)| Q(mot=7)| Q(mot=8)). order_by('-fecha')
-    context_object_name = 'call'
+    # queryset = Guia.objects.filter(Q(id_est = 3), Q(mot=5) | Q(mot=6)| Q(mot=7)| Q(mot=8)). order_by('-fecha')
+    # context_object_name = 'call'
     paginate_by = 5
-    
+
+    def get_queryset(self, **kwargs):
+        
+        reason = self.request.GET.get("reason", "")
+        seudo = self.request.GET.get("kword", "")
+        fecha = self.request.GET.get("date_start", "")
+        lista = Guia.objects.filter(id_est = 3).filter(
+            fecha_recepcion__icontains = fecha
+        ).filter(
+            Q(seudo__seudo_bd__icontains=seudo)|
+            Q(id_ciu__ciudad__icontains = seudo)|
+            Q(d_i__icontains =seudo)|
+            Q(id_guia__icontains = seudo)
+            ).filter(mot__motivo__icontains = reason)
+
+        return lista
+
+    # def get_context_data(self, **kwargs):
+    #     contexto = {}
+    #     contexto ['call'] = self.get_queryset()
+        
+    #     # contexto ['form'] = self.form_class
+        
+    #     return contexto
+
 class AuditoriaListView(ListView):
     template_name = "call/auditoria.html"
     context_object_name = 'auditoria'
-    queryset = Guia.objects.filter(mot = 21, estado=1)
+    # queryset = Guia.objects.filter(mot = 21, estado=1)
     paginate_by = 5
+
+    def get_queryset(self, **kwargs):
+        
+        mensajero = self.request.GET.get("kword", "")
+        fecha = self.request.GET.get("date_start", "")
+        lista = Guia.objects.filter(mot = 21, estado=1).filter(
+            fecha_recepcion__icontains = fecha
+        ).filter(mensajero__courrier__icontains = mensajero)
+        return lista
 
 class AuditoriaCreateView(CreateView):
     template_name = "call/create_auditoria.html"
     form_class = CallfisicoForm
     success_url = reverse_lazy('call_app:lista-call-auditoria')
+
+    
 
     def form_valid(self, form):
         self.object = form.save(commit=False)

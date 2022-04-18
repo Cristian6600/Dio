@@ -4,9 +4,9 @@
 
 {% block panel-content %}
 
-<p>Probando vista</p>
-
+<p>Editar
 <form method="post">{% csrf_token %}
+    
     {{ form.as_p }}
     <div class="cell medium-6">
         <button type="submit" class="button" style="width: 200px;">Guardar</button>

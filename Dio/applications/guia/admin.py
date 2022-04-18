@@ -19,7 +19,7 @@ class guiaAdmin(ImportExportModelAdmin, SimpleHistoryAdmin, RelatedFieldAdmin):
     resource_class = GuiaResource
     date_hierarchy = ('fecha')
     list_per_page = 5
-    raw_id_fields = ["seudo", "mot", "id_est", "cod_vis"]
+    raw_id_fields = ["seudo", "mot", "id_est", "cod_vis", "id_ciu"]
     fieldsets = [
         (None,  {'fields':[(
             'seudo', 'bolsa', 'destinatario'), 

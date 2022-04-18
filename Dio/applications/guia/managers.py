@@ -5,7 +5,7 @@ from django.db import models
 from django.utils import timezone
 from django.db.models import Q, F
 
-class ProductManager(models.Manager):
+class ProductManagers(models.Manager):
     """ procedimiento modelo product """
 
     def buscar_producto(self, kword, order):

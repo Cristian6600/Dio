@@ -1,6 +1,7 @@
 from email.policy import default
 from django import forms
 from .models import Auditoria
+from applications.guia.models import Guia
 
 class CallfisicoForm(forms.ModelForm):
     
@@ -29,7 +30,7 @@ class CallfisicoForm(forms.ModelForm):
             'calificacion_1': forms.Select(
                 attrs = {
                     'class': 'input-group-field',
-                    
+                    'width': 1100
                 }
             ),
             'pregunta_2': forms.Select(
@@ -90,3 +91,13 @@ class CallfisicoForm(forms.ModelForm):
             
 
         }
+class guiafisicoForm(forms.ModelForm):
+    
+    class Meta:
+        model = Guia
+        fields = (
+            'id_guia',
+            'bolsa',
+            'seudo',   
+            'user',   
+        )
