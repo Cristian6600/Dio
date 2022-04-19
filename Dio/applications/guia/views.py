@@ -36,7 +36,6 @@ class ProductDetailView(LoginRequiredMixin,  DetailView):
         context['recepcion_list'] = Guia.objects.all()
         return context
     
-
 class FisicoCreateView(CustodiaPermisoMixin, LoginRequiredMixin, CreateView, ListView):
     template_name = "guia/guia-fisico.html"
     # model = Guia

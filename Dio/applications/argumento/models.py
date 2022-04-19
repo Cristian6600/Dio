@@ -157,3 +157,9 @@ class Est_clie (models.Model):
 
     def __str__(self):
         return str (self.id)
+
+class Motivo_call(models.Model):
+    motivo = models.CharField(max_length=35)
+
+    def __str__(self):
+        return self.motivo

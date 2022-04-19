@@ -12,12 +12,11 @@ from applications.users.mixins import CallPermisoMixin
 class CallUpdateView(CallPermisoMixin, UpdateView):
     template_name = "call/_update_form.html"
     model = Guia
-    fields = ['direccion', 'id_ciu', 'postal', 'mot', 'cod_vis']
+    fields = ['direccion', 'id_ciu', 'postal', 'mot', 'cod_vis', 'motivo_call']
     template_name_suffix = '_update_form'          
     success_url = reverse_lazy('call_app:lista-call')
 
     
-
 class CallListView(CallPermisoMixin, ListView):
     template_name = "call/gestion.html"
     context_object_name = 'call'
@@ -68,8 +67,6 @@ class AuditoriaCreateView(CreateView):
     template_name = "call/create_auditoria.html"
     form_class = CallfisicoForm
     success_url = reverse_lazy('call_app:lista-call-auditoria')
-
-    
 
     def form_valid(self, form):
         self.object = form.save(commit=False)

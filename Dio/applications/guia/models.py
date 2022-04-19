@@ -9,6 +9,7 @@ from applications.base_cliente.models import Bd_clie, Producto
 from applications.users.models import User
 from applications.cliente.models import Cliente
 from applications.fisico.models import Fisico
+from applications.argumento.models import Motivo_call
 from django.utils.encoding import smart_text
 from django.conf import settings 
 from simple_history.models import HistoricalRecords
@@ -151,6 +152,11 @@ class Guia(Fisico, TimeStampedModel):
         null=True, 
         blank = True
     )
+    motivo_call = models.ForeignKey(
+        Motivo_call, 
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True)
 
     history = HistoricalRecords()    
 

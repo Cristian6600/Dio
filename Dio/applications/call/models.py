@@ -131,3 +131,4 @@ class Auditoria(models.Model):
 
         self.entregas.save()       
         super(Auditoria, self).save(*args, **kwargs)
+
