@@ -18,7 +18,6 @@ class CallUpdateView(CallPermisoMixin, UpdateView, ListView):
     template_name_suffix = '_update_form'          
     success_url = reverse_lazy('call_app:lista-call')
 
-
     
 class CallListView(CallPermisoMixin, ListView):
     template_name = "call/gestion.html"
@@ -42,8 +41,6 @@ class CallListView(CallPermisoMixin, ListView):
             ).filter(mot__motivo__icontains = reason)
 
         return lista
-
-
 
 class AuditoriaListView(ListView):
     template_name = "call/auditoria.html"

@@ -108,7 +108,7 @@ class Oficinas(models.Model):
 
 
     def __str__(self):
-        return str (self.dir_cita[6:])
+        return str (self.dir_cita33)
 
 
 
