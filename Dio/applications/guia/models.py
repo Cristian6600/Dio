@@ -1,3 +1,5 @@
+from asyncio.windows_events import NULL
+from contextlib import nullcontext
 from django.db import models
 from django.dispatch import receiver
 from django.db.models.signals import post_save
@@ -7,7 +9,7 @@ from model_utils.models import TimeStampedModel
 from .managers import ProductManagers
 from applications.base_cliente.models import Bd_clie, Producto
 from applications.users.models import User
-from applications.cliente.models import Cliente
+from applications.cliente.models import Cliente, Oficinas
 from applications.fisico.models import Fisico
 from applications.argumento.models import Motivo_call
 from django.utils.encoding import smart_text
@@ -158,6 +160,14 @@ class Guia(Fisico, TimeStampedModel):
         blank=True,
         null=True)
 
+    oficina= models.ForeignKey(
+        Oficinas, 
+        on_delete= models.CASCADE,
+        blank=True,
+        null=True,
+        )
+    
+
     history = HistoricalRecords()    
 
     class Meta:
@@ -194,6 +204,11 @@ class Guia(Fisico, TimeStampedModel):
         return str(self.mot.id)
 
     @property
+    def ofi(self):
+        return self.oficina
+    
+
+    @property
     def concatenar(self):
         return  str(self.can_vi) + (self.motis) + str(self.estados) + str(self.cod_vis.id) 
 #-------------------------------------------------------------
@@ -203,11 +218,19 @@ class Guia(Fisico, TimeStampedModel):
       return str(self.user)
 
     def save(self, *args, **kwargs):
-        
+        print(self.ofi)
         self.seudo.sucursal = self.userbd
         self.codigo = self.concatenar   
         self.seudo.fisico  = self.seudo.fisico = 1
-          
+        
+        # self.ofi = str(self.ofi)
+        if self.ofi == None:
+            self.direccion = self.direccion
+        
+        else:
+            self.direccion = str(self.ofi)
+            
+
         self.seudo.save()       
         super(Guia, self).save(*args, **kwargs)
         

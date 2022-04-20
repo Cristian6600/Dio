@@ -31,9 +31,14 @@ class ProductDetailView(LoginRequiredMixin,  DetailView):
     template_name = "producto/detail.html"
     model = Guia
 
+    def get_queryset(self, **kwargs):
+        reason = self.request.GET.get("pk")
+        lista = Guia.objects.filter(seudo = 2207345598308066549903)
+        return lista
+
     def get_context_data(self, *args, **kwargs):
-        context = super(ProductDetailView, self).get_context_data(*args, **kwargs)
-        context['recepcion_list'] = Guia.objects.all()
+        context = super(ProductDetailView, self).get_context_data(**kwargs)
+        context['recepcion_list'] =self.get_queryset
         return context
     
 class FisicoCreateView(CustodiaPermisoMixin, LoginRequiredMixin, CreateView, ListView):

@@ -26,5 +26,6 @@ urlpatterns = [
          views.AuditoriaCreateView.as_view(),
          name='create-call-auditoria',
     ),
+    
 
      ]

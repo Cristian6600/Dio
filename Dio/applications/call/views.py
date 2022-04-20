@@ -1,3 +1,5 @@
+from multiprocessing import context
+from re import template
 from django.shortcuts import render
 from django.views.generic.edit import UpdateView
 from django.views.generic import ListView, CreateView
@@ -9,12 +11,13 @@ from django.db.models import Q
 from applications.users.mixins import CallPermisoMixin
 
 
-class CallUpdateView(CallPermisoMixin, UpdateView):
+class CallUpdateView(CallPermisoMixin, UpdateView, ListView):
     template_name = "call/_update_form.html"
     model = Guia
-    fields = ['direccion', 'id_ciu', 'postal', 'mot', 'cod_vis', 'motivo_call']
+    fields = ['direccion', 'id_ciu', 'postal', 'mot', 'cod_vis', 'motivo_call','oficina']
     template_name_suffix = '_update_form'          
     success_url = reverse_lazy('call_app:lista-call')
+
 
     
 class CallListView(CallPermisoMixin, ListView):
@@ -40,13 +43,7 @@ class CallListView(CallPermisoMixin, ListView):
 
         return lista
 
-    # def get_context_data(self, **kwargs):
-    #     contexto = {}
-    #     contexto ['call'] = self.get_queryset()
-        
-    #     # contexto ['form'] = self.form_class
-        
-    #     return contexto
+
 
 class AuditoriaListView(ListView):
     template_name = "call/auditoria.html"
@@ -56,11 +53,15 @@ class AuditoriaListView(ListView):
 
     def get_queryset(self, **kwargs):
         
-        mensajero = self.request.GET.get("kword", "")
+        kword = self.request.GET.get("kword", "")
         fecha = self.request.GET.get("date_start", "")
         lista = Guia.objects.filter(mot = 21, estado=1).filter(
             fecha_recepcion__icontains = fecha
-        ).filter(mensajero__courrier__icontains = mensajero)
+        ).filter(
+            Q(mensajero__courrier__icontains =kword)|
+            Q(seudo__seudo_bd__icontains=kword)
+        )
+            
         return lista
 
 class AuditoriaCreateView(CreateView):

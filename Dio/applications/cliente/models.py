@@ -106,8 +106,9 @@ class Oficinas(models.Model):
     dir_cita = models.CharField(max_length=150, verbose_name='Direccion cita')
     cub = models.CharField (max_length=16)
 
+
     def __str__(self):
-        return str (self.id)
+        return str (self.dir_cita[6:])
 
 
 
