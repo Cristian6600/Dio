@@ -22,7 +22,9 @@ class datos_gAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_per_page = 12
     search_fields = ("d_i",)
     list_display = ('seudo_dg', 'direccion', 'd_i', 'id_ciu', 'barrio', 'fecha', )
+    list_filter = ('fecha',)
     icon_name  =  'directions'
+    date_hierarchy = ('fecha')
 
 @admin.register(Orden)
 class ordenAdmin(ImportExportModelAdmin, admin.ModelAdmin):
