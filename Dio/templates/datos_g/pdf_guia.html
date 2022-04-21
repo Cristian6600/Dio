@@ -33,9 +33,9 @@
     
     {% for e in empleados %}    
     
-    <table BORDER="1">
+    <table border="1">
 			<tr>
-				<td >Destinatarios:</td>
+				<td >Destinatario:</td>
 				<td colspan="2"><strong> {{ e.dest }} </strong></td>            
 			</tr>
 			<tr>
@@ -53,9 +53,9 @@
             <th width="250">RESOLUCION MINTIC NO. 3290 del 4 de diciembre de 2018</th>
         </table>
          
-        <table BORDER="">		
+        <table BORDER="0">		
 			<tr>
-				<!-- <td width= "130" rowspan="5"><pdf:barcode value="{{ e.seudo_dg }}" type="code128"  align="right" barwidth ="0,9" middle="20"/></td> -->
+				<td width= "130" rowspan="5"><pdf:barcode value="{{ e.seudo_dg }}" type="code128"  align="right" barwidth ="0,9" middle="20"/></td>
                 <td>Domicilio</td>  
                 <td width= "30"><strong> ${{e.seudo_dg.domicilio}} </strong></td>              
                 <td >Tipo de envio: </td>     
@@ -91,7 +91,7 @@
             </tr>
             <tr>				
                 <td>{{e.proc.proceso}}</td>
-                <td > FO-OP-28 V.1</td>
+                <td >FO-OP-28 V.1</td>
                 
                 <td colspan="2"><h1><strong>{{e.seudo_dg.bolsa}} </strong></h1></td>
                 <td><h1><strong>{{forloop.counter}}</strong></h1></td>
@@ -117,7 +117,7 @@
             </font>
                 <tfoot>
         
-	 <table>
+	 <table BORDER="0">
         
         <tr>
             <td>Fecha proxima Entrega:</td>
@@ -131,8 +131,9 @@
             <td>Recibe:</td>
             <td >Tipo D:</td>
         </tr>
+        </table>
         
-        <table BORDER="px" >
+        <table BORDER="1" >
             <thead>
                 <th colspan="25" >Devoluciones</th>
                 <th width = "48">Desconocido</th>
@@ -186,9 +187,10 @@
                     <td></td>
                     
                 </tr>
+            </table>
        
         
-	</tbody>
+	
 </table>
         <tfoot> 
             <font size=1>El usuario deja constancia expresa de que tuvo conocimiento del contrato que se encuentra publicado en la pagina web letran.com.co el 
