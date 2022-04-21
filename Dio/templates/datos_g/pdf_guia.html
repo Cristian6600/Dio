@@ -50,12 +50,12 @@
         <table BORDER="1px" >
             <th>Firstsource</th>
             <th>Nit:900861729</th>
-            <th width="250">RESOLUCION MINTIC NO. 3290 del 4 de diciembre de 2018</th>
+            <th width="259">RESOLUCION MINTIC NO. 3290 del 4 de diciembre de 2018</th>
         </table>
          
-        <table BORDER="0">		
+        <table BORDER="">		
 			<tr>
-				<td width= "130" rowspan="5"><pdf:barcode value="{{ e.seudo_dg }}" type="code128"  align="right" barwidth ="0,9" middle="20"/></td>
+				<!-- <td width= "130" rowspan="5"><pdf:barcode value="{{ e.seudo_dg }}" type="code128"  align="right" barwidth ="0,9" middle="20"/></td> -->
                 <td>Domicilio</td>  
                 <td width= "30"><strong> ${{e.seudo_dg.domicilio}} </strong></td>              
                 <td >Tipo de envio: </td>     
@@ -85,7 +85,7 @@
                 <td >Remitente:  </td>                
 			</tr>
             <tr>
-                <td><center><h1> {{ e.seudo_dg }}</h1></center> </td>
+                <td ALIGN="center"><h1> {{ e.seudo_dg }}</h1> </td>
 				<td>Total</td>
                 <td><strong>$0 </strong></td>
             </tr>
@@ -103,7 +103,6 @@
                 <td colspan="5"> <p> {{ e.direccion }} </p></td>     
             </tr>
             
-            
             <tr>
                 <td><strong>C.C  <strong>{{ e.d_i }} </strong></strong></td>
                 <td>C.postal </td>  
@@ -117,7 +116,7 @@
             </font>
                 <tfoot>
         
-	 <table BORDER="0">
+	 <table BORDER="">
         
         <tr>
             <td>Fecha proxima Entrega:</td>
@@ -135,13 +134,13 @@
         
         <table BORDER="1" >
             <thead>
-                <th colspan="25" >Devoluciones</th>
-                <th width = "48">Desconocido</th>
-                <th width = "36">Rehusado</th>
-                <th width = "34">N reside</th>
-                <th width = "41">N reclama</th>
-                <th width = "39">Dr errada</th>
-                <th width = "30" >Otro</th>                 
+                <th width="150">Devoluciones</th>
+                <th >Dconocido</th>
+                <th >Rehusado</th>
+                <th >N reside</th>
+                <th>N reclama</th>
+                <th >Dr errada</th>
+                <th  >Otro</th>                 
             </thead>
         </table>
         <table red BORDER= "1" >        
