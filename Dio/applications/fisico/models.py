@@ -269,6 +269,7 @@ class Cobertura(models.Model):
 
     def save(self, *args, **kwargs):
         self.bolsa.id_est_id  = self.estados
+        self.bolsa.mot_id = self.bolsa.mot_id = 3
         
         self.bolsa.save()
 

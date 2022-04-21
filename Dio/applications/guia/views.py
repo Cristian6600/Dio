@@ -136,12 +136,12 @@ def export(request):
     for guia in Guia.objects.filter(
         id_est = 2, mot = 3, producto = 3
         ).values_list(
-        'id_ciu__id', 'guia_d_g__oficina', 
+        'id_ciu__id', 'guia_d_g__oficina__nom_ofi', 
         'direccion', 'id_ciu__ciudad',
         'tel', 'd_i', 
         'destinatario', 
         'seudo', 'bolsa', 
-        'seudo__t_emi'):
+        'seudo__t_emi__emision'):
         writer.writerow(guia)
         
     return response
