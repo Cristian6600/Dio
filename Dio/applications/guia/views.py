@@ -98,7 +98,7 @@ class GuiaListView(CustodiaPermisoMixin, ListView):
     template_name = "guia/imprimir_guia.html"
     context_object_name = 'guia'
 
-    def get_queryset(self, ):
+    def get_queryset(self):
         queryset = Guia.objects.filter(
             id_guia=self.request.GET.get('id_guia'),
         )
@@ -173,26 +173,26 @@ def export_address(request):
         
     return response
 
-class GuiaListView(ListView):
-    template_name = "guia/update_list_guia.html"
-    model = Guia
-    paginate_by = 5
+# class GuiaListView(ListView):
+#     template_name = "guia/update_list_guia.html"
+#     model = Guia
+#     paginate_by = 5
 
-    def get_queryset(self):
-        print('*******')
-        palabra_clave = self.request.GET.get("kword")
-        lista = Guia.objects.filter(
-            id_guia = palabra_clave
-        )
-        return lista
+#     def get_queryset(self):
+#         print('*******')
+#         palabra_clave = self.request.GET.get("kword")
+#         lista = Guia.objects.filter(
+#             id_guia = palabra_clave
+#         )
+#         return lista
         # return Guia.objects.order_by('-fecha_bolsa')
 
 
-class GuiaUpdateView(UpdateView):
-    template_name = "guia/bolsa_update.html"
-    model = Guia
-    fields = ['bolsa',]
-    success_url = reverse_lazy('producto_app:lista-guia-update')
+# class GuiaUpdateView(UpdateView):
+#     template_name = "guia/bolsa_update.html"
+#     model = Guia
+#     fields = ['bolsa',]
+#     success_url = reverse_lazy('producto_app:lista-guia-update')
     
 
     

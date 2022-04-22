@@ -26,11 +26,7 @@ urlpatterns = [
          views.OrdenAgendaListView.as_view(),
          name='guia-buscar-agendamientos',
     ),
-    path(
-        'orden-impresion-guia/',
-         views.OrdenListView.as_view(),
-         name='guia-buscar',
-    ),
+    
     
     
 ]

@@ -62,6 +62,8 @@ class CoberturaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('bolsa', 'fecha')
     list_per_page = 5
     search_fields = ('bolsa__bolsa',)
+    raw_id_fields = ['bolsa',]
+    
 
 admin.site.register(Motivo_mesa)
 

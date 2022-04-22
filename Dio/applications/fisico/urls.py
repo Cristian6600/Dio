@@ -27,5 +27,6 @@ urlpatterns = [
         views.Bolsa_add_CreateView.as_view(),
         name = 'bolsa-create',
     )
+    
 
 ]

@@ -44,15 +44,15 @@ urlpatterns = [
         name = 'prueba',
     ),
 
-    path(
-        'lista-guia-update/', 
-        views.GuiaListView.as_view(), 
-        name='lista-guia-update',
-    ),
-    path(
-        'guia-update/<pk>/',
-         views.GuiaUpdateView.as_view(),
-         name='guia-bolsa-update',
-    ),
+    # path(
+    #     'lista-guia-update/', 
+    #     views.GuiaListView.as_view(), 
+    #     name='lista-guia-update',
+    # ),
+    # path(
+    #     'guia-update/<pk>/',
+    #      views.GuiaUpdateView.as_view(),
+    #      name='guia-bolsa-update',
+    # ),
     
     ]
