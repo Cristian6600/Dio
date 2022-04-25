@@ -1,3 +1,5 @@
+
+
 {% load static %}
 {% load custom_tags %}
 
@@ -28,7 +30,9 @@
 </head>
 
 <body>
-    {% for e in guias %}  
+    
+    {% for e in empleados %}    
+    
     <table border="1">
 		<tr>
 			<td >Destinatario:</td>
@@ -51,21 +55,21 @@
          
     <table BORDER="">		
 		<tr>
-			<td width= "130" rowspan="5"><pdf:barcode value="{{ e.id_guia }}" type="code128"  barwidth ="0,9" middle="20"/></td>
+			<td width= "130" rowspan="5"><pdf:barcode value="{{ e.seudo_dg }}" type="code128"  barwidth ="0,9" middle="20"/></td>
             <td>Domicilio</td>  
-            <td width= "30"><strong> ${{e.domicilio}} </strong></td>              
+            <td width= "30"><strong> ${{e.seudo_dg.domicilio}} </strong></td>              
             <td >Tipo de envio: </td>     
             <td width= "100"><strong>Mensajeria</strong> </td>                         
         </tr>           			
 		<tr>
 			<td>Acarreo:</td>
-            <td width= "30"><strong> ${{e.acarreo}} </strong></td>     
+            <td width= "30"><strong> ${{e.seudo_dg.acarreo}} </strong></td>     
             <td >Unidades:</td>
             <td><strong> <strong> 1  </strong> Peso: <strong> 20 </strong></strong></td>
 		</tr>
         <tr>
 			<td>Declarado </td>
-            <td width= "30"><strong> ${{e.declarado}} </strong></td>     
+            <td width= "30"><strong> ${{e.seudo_dg.declarado}} </strong></td>     
             <td>Contiene:</td>
             <td><strong> {{e.proc.proceso}} </strong></td>
 		</tr>
@@ -77,11 +81,11 @@
 		</tr>
         <tr>
 			<td>Flete:</td>
-            <td><strong> ${{e.flete}}</strong></td>
+            <td><strong> ${{e.seudo_dg.flete}}</strong></td>
             <td >Remitente:  </td>                
 		</tr>
         <tr>
-            <td ALIGN="center"><h1> {{ e.id_guia }}</h1> </td>
+            <td ALIGN="center"><h1> {{ e.seudo_dg }}</h1> </td>
 			<td>Total</td>
             <td><strong>$0 </strong></td>
         </tr>
@@ -89,14 +93,16 @@
             <td>{{e.proc.proceso}}</td>
             <td >FO-OP-28 V.1</td>
                 
-            <td colspan="2"><h1><strong>{{e.bolsa}} </strong></h1></td>
-            <td><h1><strong>{{forloop.counter}} {{e.seudo_dg}}</strong></h1></td>
+            <td colspan="2"><h1><strong>{{e.seudo_dg.bolsa}} </strong></h1></td>
+            <td type="text"><h1  ><strong> {{forloop.counter}} - {{e.seudo_dg|cadena_texto|cuts}}</strong></h1></td>
+            
         </tr>    
+        
         <tr>
 		    <td colspan="5"> Destinatario:<strong>{{e.dest}} </strong> </td>                                     
         </tr>
         <tr>
-            <td colspan="5"> <p> {{ e.direccion }} </p></td>     
+            <td colspan="5"> <p> {{ e.direccion}} </p></td>     
         </tr>
         <tr>
             <td><strong>C.C  <strong>{{ e.d_i }} </strong></strong></td>
@@ -195,11 +201,19 @@
             
         </foot> 
         
-</tbody>
-	
+</tbody>	
         
-            {% endfor %}    
+            {% endfor %}   
+            <script>
+                let text = "Hello world!";
+                let result = text.slice(0, 5);
+                
+                document.getElementById("demo").innerHTML = result;
+                </script> 
             
          
             
+
+
+
 

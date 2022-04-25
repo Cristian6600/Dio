@@ -5,6 +5,9 @@ from .utils import render_to_pdf
 from django.http import HttpResponse
 from applications.users.mixins import CustodiaPermisoMixin
 from django.db.models import Q
+from django import template
+
+register = template.Library()
 
 class OrdenListView(CustodiaPermisoMixin, ListView):
     template_name = "datos_g/orden_guia.html"
@@ -43,3 +46,4 @@ class Lista_gendamientos(CustodiaPermisoMixin, ListView):
         }
         pdf = render_to_pdf('datos_g/pdf-agenda.html', data)
         return HttpResponse(pdf, content_type='application/pdf')
+

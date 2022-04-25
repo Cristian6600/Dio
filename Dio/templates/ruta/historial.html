@@ -1,0 +1,28 @@
+{% extends "fisico/base_fisico.html" %} 
+
+{% load static %}
+
+{% block panel-content %}
+<table>
+    <thead>
+      <tr>
+        <th width="200">Guia</th>
+        <th>Seudo</th>
+        <th width="150">motivo</th>
+        <th width="150">estado</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for e in historial %}
+      <tr>
+        <td>{{e.guia}}</td>
+        <td></td>
+        <td>{{e.motivo}}</td>
+        <td>{{e.estado}}</td>
+        <td>{{e.fecha}}</td>
+      </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock panel-content %}

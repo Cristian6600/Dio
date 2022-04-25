@@ -42,6 +42,12 @@ urlpatterns = [
         name='destino-descargue'
     ),
     
+    path(
+        'generar/historial/<pk>/', 
+        views.HistorialListview.as_view(),
+        name='historial'
+    ),
+    
     # path(
     #     'guia/buscar/', 
     #     views.ConsultarImprimirGuiaListView.as_view(),

@@ -24,7 +24,7 @@ from django.http import HttpResponse
 
 from django.views.generic import CreateView, ListView, View
 
-from . models import Planilla, Descargue
+from . models import Planilla, Descargue, Recepcion
 
 from .utils import render_to_pdf
 
@@ -148,8 +148,17 @@ class DescargueCreateView(CreateView, ListView):
         self.object.user = self.request.user
         self.object.save()
         return super(DescargueCreateView, self).form_valid(form)
-    
-         
+
+class HistorialListview(CustodiaPermisoMixin, ListView):
+    context_object_name = "historial" 
+    template_name = "ruta/historial.html"
+    paginate_by = 5
+
+    def get_queryset(self):
+        kword = self.request.GET.get("pk", '')
+        queryset = Recepcion.objects.filter(guia__id_guia__icontains = kword)
+        return queryset
+        
 #---------------appi----------------------------
 # from .serializers import(
 #     CargueSerializer,

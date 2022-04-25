@@ -16,6 +16,15 @@ from applications.users.mixins import CustodiaPermisoMixin, MesaPermisoMixin
 from django.shortcuts import render
 from .utils import render_to_pdf
 from django.db.models import Count
+from django.template.defaulttags import register
+
+@register.filter
+def cuts(value):
+    return (value)[4:10]
+
+@register.filter
+def cadena_texto(value):
+    return str(value)
 
 class ProductListView(LoginRequiredMixin, ListView):
     template_name = "producto/cliente.html"
@@ -27,7 +36,7 @@ class ProductListView(LoginRequiredMixin, ListView):
         queryset = Guia.objects.buscar_producto(kword, order)
         return queryset
            
-class ProductDetailView(LoginRequiredMixin,  DetailView):
+class ProductDetailView(LoginRequiredMixin, DetailView):
     template_name = "producto/detail.html"
     model = Guia
 
