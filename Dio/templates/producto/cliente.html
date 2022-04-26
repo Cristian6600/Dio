@@ -6,7 +6,7 @@
 
 <div class="grid-x grid-margin-x">
     <div class="cell grid-x grid-margin-x">
-      <form class="cell small-9 input-group" method="GET">
+      <form class="cell small-9 input-group" method="GET"> {% csrf_token %}
         <span class="input-group-label"></span>
         <input class="input-group-field" type="text" id="kword" name="kword" placeholder="Bolsa o seudo...">
         <div class="input-group-button">
@@ -25,7 +25,8 @@
                 <th>Domicilio</th>
                 <th>Fecha</th>
                 <th>id_mot</th>
-                <th>Ver</th>
+                <th>Detalle</th>
+                <!-- <th>Tracking</th> -->
             </thead>
             <tbody>
                 {% for e in object_list %}
@@ -41,6 +42,9 @@
                     <td> 
                         <a href="{% url 'producto_app:producto-detail' e.seudo %}" class="submit success button "><i class="fi-eye"></i></a>
                     </td>
+                    <!-- <td> 
+                        <a href="{% url 'ruta_apps:historial' e.guia.id_guia %}" class="button"><i class="fi-clock "></i></a>
+                    </td> -->
                 </tr>
                 
                 {% endfor %}

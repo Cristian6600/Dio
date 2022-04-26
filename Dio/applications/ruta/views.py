@@ -8,6 +8,7 @@ from applications.users.models import User
 from applications.guia.models import Guia
 from applications.courrier.models import courrier
 from django.views.generic.dates import DayArchiveView
+from django.db.models import Q
 
 from django.contrib import messages
 
@@ -149,15 +150,17 @@ class DescargueCreateView(CreateView, ListView):
         self.object.save()
         return super(DescargueCreateView, self).form_valid(form)
 
-class HistorialListview(CustodiaPermisoMixin, ListView):
+class HistorialListview(ListView):
     context_object_name = "historial" 
     template_name = "ruta/historial.html"
     paginate_by = 5
 
     def get_queryset(self):
-        kword = self.request.GET.get("pk", '')
-        queryset = Recepcion.objects.filter(guia__id_guia__icontains = kword)
+        kword = self.request.GET.get("kword", "")
+        queryset = Recepcion.objects.filter(guia__id_guia__icontains= kword,)
+        print (queryset)
         return queryset
+            
         
 #---------------appi----------------------------
 # from .serializers import(

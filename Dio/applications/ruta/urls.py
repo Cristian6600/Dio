@@ -43,7 +43,7 @@ urlpatterns = [
     ),
     
     path(
-        'generar/historial/<pk>/', 
+        'generar/historial/<int:guia__id_guia>/', 
         views.HistorialListview.as_view(),
         name='historial'
     ),

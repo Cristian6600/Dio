@@ -3,6 +3,16 @@
 {% load static %}
 
 {% block panel-content %}
+
+<div class="grid-x grid-margin-x">
+  <form class="cell grid-x grid-margin-x" method="GET">
+    <div class="cell input-group">
+      <span class="input-group-label">Buscar</span>
+      <input class="input-group-field" type="text" id="kword" name="kword" 
+        value="{{request.GET.kword}}"
+        placeholder="Buscar ..."
+        >
+    </div>
 <table>
     <thead>
       <tr>
@@ -16,7 +26,6 @@
         {% for e in historial %}
       <tr>
         <td>{{e.guia}}</td>
-        <td></td>
         <td>{{e.motivo}}</td>
         <td>{{e.estado}}</td>
         <td>{{e.fecha}}</td>
