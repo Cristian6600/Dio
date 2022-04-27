@@ -90,11 +90,11 @@ def handleMultipleImagesUpload(request):
             return JsonResponse({"imagenes": [{"url": image.image.url} for image in uploaded_images]})
         return render(request, "index.html")  
 
-        def form_valid(self, form):
-            self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
-        return super(FisicoCreateView, self).form_valid(form)
+        # def form_valid(self, form):
+        #     self.object = form.save(commit=False)
+        # self.object.user = self.request.user
+        # self.object.save()
+        # return super(FisicoCreateView, self).form_valid(form)
           
 
 #--------Impresion por guia--------------
@@ -132,7 +132,7 @@ def export(request):
         'CODIGO DE OFICINA', 'NOMBRE OFICINA', #1
         'DIRECCION DESTINO', 'CIUDAD DESTINO', #2
         'TELEFONO', 'CEDULA',          #3
-        'OBSERVACION', 'PSEUDOCODIGO', #4 
+        'NOMBRE_USUARIO', 'PSEUDOCODIGO', #4 
         'BOLSA', 'TIPO DE EMISION',    #5
         'PROCESO',
         ])
@@ -145,7 +145,7 @@ def export(request):
         'tel', 'd_i', 
         'destinatario', 
         'seudo', 'bolsa', 
-        'seudo__t_emi__emision'):
+        'seudo__t_emi', 'seudo__producto__homologacion'):
         writer.writerow(guia)
         
     return response
@@ -170,7 +170,7 @@ def export_address(request):
         'd_i', 'destinatario', #3
         'seudo', 'seudo', #4
         'proceso__cod_dir', 'bolsa', #5
-        'seudo__t_emi',
+        'seudo__t_emi', 'seudo__producto__homologacion'
         ).exclude(producto = 3):
         
         writer.writerow(guia)

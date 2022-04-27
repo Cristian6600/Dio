@@ -167,7 +167,6 @@ class Guia(Fisico, TimeStampedModel):
         null=True,
         )
     
-
     history = HistoricalRecords()    
 
     class Meta:

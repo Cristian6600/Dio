@@ -38,11 +38,11 @@ urlpatterns = [
 
     path('upload', views.handleMultipleImagesUpload, name='index'),
     
-    path(
-        'prueba/',
-        views.ImgCreateView.as_view(),
-        name = 'prueba',
-    ),
+    # path(
+    #     'prueba/',
+    #     views.mesa.as_view(),
+    #     name = 'prueba',
+    # ),
 
     # path(
     #     'lista-guia-update/', 
