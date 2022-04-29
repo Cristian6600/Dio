@@ -6,6 +6,7 @@ from applications.cliente.models import Ciudad, Cliente, Oficinas
 from applications.argumento.models import Estado, Motivo, Cod_vis, Proceso
 # from applications.fisico.models import Fisico
 from applications.guia.models import Guia
+from django.conf import settings 
 
 import barcode                      
 from barcode.writer import ImageWriter
@@ -18,6 +19,7 @@ from django.db.models.signals import post_save
 class Orden (models.Model):
     orden = models.IntegerField(primary_key= True)
     fecha = models.DateTimeField(auto_now=True, blank=True, null=True)
+    nombre_orden = models.CharField(max_length=25)
 
     def __str__(self):
         return str(self.orden)
@@ -127,6 +129,12 @@ class datos_g (models.Model):
         null=True, 
         blank = True,
         verbose_name = 'Estado'
+    )
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE, 
+        blank=True, null=True, 
+        verbose_name= 'Usuario_datog'
     )
 
     # cantidad = models.IntegerField(blank=True, null=True)

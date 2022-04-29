@@ -27,6 +27,12 @@ urlpatterns = [
          name='guia-buscar-agendamientos',
     ),
     
+    path(
+        'pdg-guia-agendamiento/<id_agenda>/',
+         views.Lista_gendamientosListView.as_view(),
+         name='pdg-guia-agendamiento',
+    ),
+    
     
     
 ]

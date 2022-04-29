@@ -29,7 +29,7 @@
             <td>{{ e.orden }}</td>
             <td>{{e.fecha}}</td>
             <td>
-                <a href="{% url 'gatos_g:impresion-guia' e.orden %}" class="button"><i class="fi-print"></i></a>
+                <a href="{% url 'gatos_g:pdg-guia-agendamiento' e.orden %}" class="button"><i class="fi-print"></i></a>
             </td>
         </tr>
         {% endfor %}

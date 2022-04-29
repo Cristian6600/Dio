@@ -39,6 +39,7 @@ class EstadoRutaListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         kword = self.request.GET.get("kword", '')
         queryset = Fisico.objects.filter(
+            id_ciu__departamento=self.request.user.ciudad.departamento,
             mensajero__courrier__contains = kword,
             est_planilla = 1
         )

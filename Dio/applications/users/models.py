@@ -79,7 +79,8 @@ class User(AbstractBaseUser, PermissionsMixin):
         Ciudad,
         on_delete=models.CASCADE,
         null=True,
-        blank=True
+        blank=True,
+        related_name= "user_ciudad"
     )
 
     is_staff = models.BooleanField(

@@ -57,7 +57,7 @@ class FisicoCreateView(CustodiaPermisoMixin, LoginRequiredMixin, CreateView, Lis
 
     def get_cantidad(self):
         
-        return Guia.objects.filter(user=self.request.user).count()
+        return Guia.objects.filter(user=self.request.user)
         # return Guia.objects.filter(user=self.request.user, fecha=date.today()).count()
 
     def form_valid(self, form):
@@ -70,13 +70,14 @@ class FisicoCreateView(CustodiaPermisoMixin, LoginRequiredMixin, CreateView, Lis
         contexto = {}
         contexto ['lista'] = self.get_queryset()
         contexto ['form'] = self.form_class
-        contexto ['count'] = self.get_cantidad()
+        contexto ['count'] = self.get_cantidad().count
         return contexto
 
 class ImgCreateView(CreateView):
     template_name = "guia/img_prueba.html"  
     form_class = ImgForm
     success_url = '.'
+
 
 @login_required
 def handleMultipleImagesUpload(request):

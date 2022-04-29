@@ -81,7 +81,7 @@ def exportSig_paquete(request):
 
 class Bd_clieListView(SigPermisoMixin, ListView):
     template_name = "bd/bd.html"
-    context_object_name = 'bd'
+    # context_object_name = 'bd'
     paginate_by = 5
 
     def get_queryset(self):
@@ -89,6 +89,19 @@ class Bd_clieListView(SigPermisoMixin, ListView):
         order = self.request.GET.get("order", '')
         queryset = Bd_clie.objects.buscar_bd(kword, order)
         return queryset
+
+    def get_count(self):
+        return Bd_clie.objects.all()
+
+    def get_total_entregado(self):
+        return Bd_clie.objects.filter(guias__mot = 21 )
+
+    def get_context_data(self, **kwargs):
+        context = {}
+        context['bd'] = self.get_queryset()[:5 ]
+        context['count'] = self.get_count().count
+        context['count_total'] = self.get_total_entregado().count
+        return context
 
 class No_fisicoCreateView(CreateView, ListView):
     template_name = "bd/faltante.html"

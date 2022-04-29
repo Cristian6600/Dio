@@ -25,6 +25,7 @@ class datos_gAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_filter = ('fecha',)
     icon_name  =  'directions'
     date_hierarchy = ('fecha')
+    raw_id_fields = ['id_ciu',]
 
 @admin.register(Orden)
 class ordenAdmin(ImportExportModelAdmin, admin.ModelAdmin):

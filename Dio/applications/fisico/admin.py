@@ -40,6 +40,7 @@ class FisicoAdmin(SimpleHistoryAdmin, ImportExportModelAdmin, admin.ModelAdmin):
     list_filter = ('est_planilla', 'mensajero',)
     search_fields = ('bolsa', )
     list_per_page = 5
+    raw_id_fields = ['id_ciu',]
 
 @admin.register(Bolsa)    
 class BolsaAdmin(ImportExportModelAdmin, admin.ModelAdmin):

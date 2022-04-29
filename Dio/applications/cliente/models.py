@@ -20,7 +20,7 @@ class Ciudad (models.Model):
     departamento = models.ForeignKey(
         Departamento,
         on_delete=models.CASCADE,
-        verbose_name = 'Departamento'
+        verbose_name = 'departamento_ciudad'
     )
 
     cubrimiento = models.CharField(

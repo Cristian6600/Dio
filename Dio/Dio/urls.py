@@ -18,7 +18,7 @@ from django.urls import path
 from django.urls import include, path, re_path
 from django.conf import settings
 from django.conf.urls.static import static 
-from applications.guia.views import handleMultipleImagesUpload, export, export_address
+from applications.guia.views import export, export_address
 from applications.base_cliente.views import exportSig, exportSig_paquete
 from applications.home.views import probando
 

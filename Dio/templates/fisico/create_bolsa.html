@@ -5,7 +5,8 @@
 {% block panel-content %}
 
 <h1>Crear bolsa</h1>
-
+<div class="grid-x grid-margin-x">
+    <div class="cell grid-x grid-margin-x">
 <form method="post">{% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Guardar">
