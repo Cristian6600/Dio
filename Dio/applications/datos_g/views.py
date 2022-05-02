@@ -15,7 +15,6 @@ class OrdenListView(CustodiaPermisoMixin, ListView):
     queryset = Orden.objects.order_by('-fecha'). exclude(orden = -1)
     context_object_name = 'orden'
 
-
 class ListGuiaPdf(CustodiaPermisoMixin, ListView):
         
     def get(self, request, *args, **kwargs):
