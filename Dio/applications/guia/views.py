@@ -146,7 +146,7 @@ def export(request):
         'tel', 'd_i', 
         'destinatario', 
         'seudo', 'bolsa', 
-        'seudo__t_emi', 'seudo__producto__homologacion'):
+        'proceso__tipo_e', 'seudo__producto__homologacion'):
         writer.writerow(guia)
         
     return response
@@ -160,7 +160,7 @@ def export_address(request):
         'COD DANE', 'CIUDAD', #1
         'DIRECCION 1', 'TELEFONO', #2
         'CEDULA', 'NOMBRE_USUARIO', #3
-        'PSEUDOCODIGO', 'OBSERVACION', #4 
+        'PSEUDOCODIGO', #4 
         'TIPO ENTREGA', 'BOLSA', #5
         'TIPO DE EMISION', 'PROCESO', #6 
         ])
@@ -169,9 +169,9 @@ def export_address(request):
         'id_ciu__id', 'id_ciu__ciudad', #1
         'direccion', 'tel', #2
         'd_i', 'destinatario', #3
-        'seudo', 'seudo', #4
+        'seudo', #4
         'proceso__cod_dir', 'bolsa', #5
-        'seudo__t_emi', 'seudo__producto__homologacion'
+        'proceso__tipo_e', 'seudo__producto__homologacion'
         ).exclude(producto = 3):
         
         writer.writerow(guia)

@@ -220,7 +220,7 @@ class Guia(Fisico, TimeStampedModel):
         print(self.ofi)
         self.seudo.sucursal = self.userbd
         self.codigo = self.concatenar   
-        self.seudo.fisico  = self.seudo.fisico = 1
+        self.seudo.fisicos = self.seudo.fisicos = 1
         
         # self.ofi = str(self.ofi)
         if self.ofi == None:

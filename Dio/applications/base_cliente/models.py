@@ -11,7 +11,7 @@ from .managers import BdManager
 class Bd_clie (models.Model):
 
     TIPOS = (
-        ('0', 'Faltante'),
+       
         ('1', 'Fisico'),
         ('2', 'No llego fisico'),
         
@@ -133,10 +133,10 @@ class No_fisico(models.Model):
         primary_key = True
     )
 
-    def save(self, *args, **kwargs):
+    # def save(self, *args, **kwargs):
         
-        self.seudo.fisicos = self.seudo.fisicos = 2
-        print(self.seudo.fisicos)
+    #     self.seudo.fisicos = self.seudo.fisicos = 2
+    #     print(self.seudo.fisicos)
           
-        self.seudo.save()       
-        super(No_fisico, self).save(*args, **kwargs)
+    #     self.seudo.save()       
+    #     super(No_fisico, self).save(*args, **kwargs)
