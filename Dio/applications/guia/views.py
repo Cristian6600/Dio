@@ -97,7 +97,6 @@ def handleMultipleImagesUpload(request):
         # self.object.save()
         # return super(FisicoCreateView, self).form_valid(form)
           
-
 #--------Impresion por guia--------------
 class GuiaListView(CustodiaPermisoMixin, ListView):
     template_name = "guia/imprimir_guia.html"

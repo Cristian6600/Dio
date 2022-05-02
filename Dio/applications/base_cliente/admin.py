@@ -21,7 +21,7 @@ class bd_clieAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_per_page = 5
     readonly_fields = ('sucursal',)
     list_display = ('seudo_bd', 'jornada', 'tipo',  'id_est_clie')
-    list_filter = ('fecha', )
+    list_filter = ('fecha', 'fisicos')
     search_fields = ('seudo_bd',)
     raw_id_fields = ("id_est_clie",)
     icon_name  =  'cloud_upload'
