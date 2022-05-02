@@ -168,7 +168,7 @@ class InformeRutaCiudadListView(ListView):
 
     def get_queryset(self):
         
-        queryset = Guia.objects.filter(estado_destino = True)
+        queryset = Guia.objects.filter(estado_destino = True)[:5]
         return queryset
     
     def get_count(self):
