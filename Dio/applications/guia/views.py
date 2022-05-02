@@ -141,7 +141,7 @@ def export(request):
     for guia in Guia.objects.filter(
         id_est = 2, mot = 3, producto = 3
         ).values_list(
-        'id_ciu__id', 'guia_d_g__oficina__nom_ofi', 
+        'guia_d_g__oficina', 'guia_d_g__oficina__nom_ofi', 
         'direccion', 'id_ciu__ciudad',
         'tel', 'd_i', 
         'destinatario', 
