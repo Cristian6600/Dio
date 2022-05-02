@@ -115,6 +115,9 @@
                                 <li class="{% if request.resolver_match.url_name == 'caja-index' %}activeli{% endif %}">
                                   <a href="{% url 'ruta_apps:destino-descargue' %} " style="color: white;">Descargue</a>
                                 </li>
+                                <li class="{% if request.resolver_match.url_name == 'caja-index' %}activeli{% endif %}">
+                                  <a href="{% url 'ruta_apps:informe-destino' %} " style="color: white;">Consultar traslados</a>
+                                </li>
 
                               </ul>
                             </li>

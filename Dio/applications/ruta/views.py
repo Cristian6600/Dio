@@ -164,11 +164,11 @@ class HistorialListview(ListView):
 
 class InformeRutaCiudadListView(ListView):
     template_name = "ruta/informe_ruta_ciudad.html"
-    
+    context_object_name = 'lista'
 
     def get_queryset(self):
-        
-        queryset = Guia.objects.filter(estado_destino = True)[:5]
+        destino = self.request.GET.get("destino", "")
+        queryset = Guia.objects.filter(origen__contains= destino, estado_destino = True )
         return queryset
     
     def get_count(self):
@@ -177,7 +177,7 @@ class InformeRutaCiudadListView(ListView):
 
     def get_context_data(self, **kwargs):
         contexto = {}
-        contexto ['lista'] = self.get_queryset()
+        contexto ['lista'] = self.get_queryset()[:8]
         contexto ['count'] = self.get_queryset().count
         return contexto  
 
