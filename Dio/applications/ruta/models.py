@@ -242,6 +242,7 @@ class Destino(models.Model):
     sucursal= models.ForeignKey(
         Sucursales, 
         on_delete=models.CASCADE,
+        related_name= "guia_destino",
         blank=True,
         null=True)
         
@@ -286,6 +287,7 @@ class Destino(models.Model):
         self.guia.origen = self.origen
         print(self.guia.origen)
         self.guia.destino = self.destinoss
+        self.guia.estado_destino = self.guia.estado_destino = True
 
         self.guia.save()
 
@@ -325,6 +327,8 @@ class Descargue(models.Model):
         self.guia.id_est.id = self.guia.id_est.id = 3
         self.guia.fecha = self.fecha_re
         self.guia.users = self.usuario
+        self.guia.estado_destino = self.guia.estado_destino = False
+
         print(self.guia.users)
 
         self.guia.save()

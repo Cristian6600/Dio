@@ -1,0 +1,34 @@
+{% extends "ruta/base_cargue.html" %} 
+
+{% load static %}
+
+{% block panel-content %}
+<p>Informe traslados</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Guia</th>
+            <th>Ciudad</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for e in lista %}
+        <tr>
+            <th>{{e.guia}}</th>
+            <th></th>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+
+        <tr>
+    
+          <th>Total: {{count}}</th>
+    
+        </tr>
+    
+      </tfoot>
+</table>
+
+{% endblock panel-content %}

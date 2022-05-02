@@ -10,6 +10,8 @@ from applications.courrier.models import courrier
 from django.views.generic.dates import DayArchiveView
 from django.db.models import Q
 
+from applications.guia.models import Guia
+
 from django.contrib import messages
 
 from applications.users.mixins import CustodiaPermisoMixin
@@ -25,7 +27,7 @@ from django.http import HttpResponse
 
 from django.views.generic import CreateView, ListView, View
 
-from . models import Planilla, Descargue, Recepcion
+from . models import Planilla, Descargue, Recepcion, Destino
 
 from .utils import render_to_pdf
 
@@ -158,9 +160,27 @@ class HistorialListview(ListView):
     def get_queryset(self):
         kword = self.request.GET.get("kword", "")
         queryset = Recepcion.objects.filter(guia__id_guia__icontains= kword,)
-        print (queryset)
         return queryset
-            
+
+class InformeRutaCiudadListView(ListView):
+    template_name = "ruta/informe_ruta_ciudad.html"
+    
+
+    def get_queryset(self):
+        
+        queryset = Guia.objects.filter(estado_destino = True)
+        return queryset
+    
+    def get_count(self):
+        queryset = Guia.objects.filter(estado_destino = True)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        contexto = {}
+        contexto ['lista'] = self.get_queryset()
+        contexto ['count'] = self.get_queryset().count
+        return contexto  
+
         
 #---------------appi----------------------------
 # from .serializers import(

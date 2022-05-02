@@ -1,5 +1,6 @@
 from django.db import models
-from django.conf import settings 
+from django.conf import settings
+from django.forms import BooleanField 
 from applications.base_cliente.models import Bd_clie
 from applications.cliente.models import Ciudad
 from applications.courrier.models import courrier
@@ -136,6 +137,8 @@ class Fisico(Fisi_pa, Bolsa):
     destino = models.CharField(
         max_length=60, 
         blank=True, null=True)
+
+    estado_destino = models.BooleanField(default=False)
 
     history = HistoricalRecords()    
     

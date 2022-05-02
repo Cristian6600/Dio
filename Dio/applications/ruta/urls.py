@@ -48,6 +48,10 @@ urlpatterns = [
         name='historial'
     ),
     
-    
+    path(
+        'inf/destino/ciudad/', 
+        views.InformeRutaCiudadListView.as_view(),
+        name='informe-destino',
+    ),
     
     ]
