@@ -35,7 +35,7 @@ class guiaAdmin(ImportExportModelAdmin, SimpleHistoryAdmin, RelatedFieldAdmin):
     search_fields = ('id_guia', 'seudo__seudo_bd', 'mot__motivo',)
     list_display = ('id_guia', 'image_mesa__image', 'mot__motivo', 'd_i', 'fecha_recepcion', 'seudo', 'direccion', 'id_ciu', 'fecha', 'user', 'destinatario', 'mensajero', 'estado')
     ordering = ('id_guia',)
-    list_filter = ('user', 'id_ciu__departamento','fecha_recepcion', 'mot__motivo',)
+    list_filter = ('user', 'id_ciu__departamento','fecha_recepcion', 'mot__motivo','id_est')
     
 #     actions = None
     def save_model(self, request, obj, form, change):

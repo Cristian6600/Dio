@@ -324,7 +324,8 @@ class Descargue(models.Model):
         return self.fecha
 
     def save(self, *args, **kwargs):
-        self.guia.id_est.id = self.guia.id_est.id = 3
+        (self.guia.id_est_id) = self.guia.id_est_id = 3
+        print(self.guia.id_est.id)
         self.guia.fecha = self.fecha_re
         self.guia.users = self.usuario
         self.guia.estado_destino = self.guia.estado_destino = False
