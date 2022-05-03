@@ -133,7 +133,7 @@ class AsignarListview(CustodiaPermisoMixin, ListView):
     
     def get_context_data(self, **kwargs):
         contexto = {}
-        contexto ['planillas'] = self.get_queryset()[:2]
+        contexto ['planillas'] = self.get_queryset()[:8]
         contexto ['count'] = self.get_queryset().count
         return contexto  
 
