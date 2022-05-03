@@ -117,7 +117,9 @@ class AsignarListview(CustodiaPermisoMixin, ListView):
     def get_queryset(self):
         kword = self.request.GET.get("kword", '')
         order = self.request.GET.get("order", '')
-        queryset = courrier.objects.buscar_producto(kword, order)
+        queryset = courrier.objects.filter(id_ciu__departamento=self.request.user.ciudad.departamento).filter(
+            Q(id__icontains=kword) | Q(courrier__contains=kword) 
+        )
         return queryset
 
 class DestinoCreate(CreateView):
