@@ -6,18 +6,32 @@ from django.views.generic import ListView, CreateView
 from applications.guia.models import Guia
 from applications.call.models import Auditoria
 from django.urls import reverse_lazy
-from .forms import CallfisicoForm
+from .forms import CallfisicoForm, CallUpdateForm
 from django.db.models import Q
 from applications.users.mixins import CallPermisoMixin
 
 
-class CallUpdateView(CallPermisoMixin, UpdateView, ListView):
-    template_name = "call/_update_form.html"
-    model = Guia
-    fields = ['direccion', 'id_ciu', 'postal', 'mot', 'cod_vis', 'motivo_call','oficina']
-    template_name_suffix = '_update_form'          
+class CallUpdateView(CallPermisoMixin, UpdateView):
+    template_name = "call/update_form.html"
+    form_class = CallUpdateForm
+    model= Guia
+    # fields = ['direccion', 'id_ciu', 'postal', 'mot', 'cod_vis', 'motivo_call','oficina']
     success_url = reverse_lazy('call_app:lista-call')
+    
 
+    # def get_queryset(self, **kwargs):
+        
+    #     seudo = self.request.GET.get("pk", "")
+    #     lista = Guia.objects.filter(seudo__seudo_bd__icontains = seudo)
+        
+        
+    #     return lista
+
+    # def get_context_data(self, **kwargs):
+    #     contexto = {}
+    #     contexto ['lista'] = self.get_queryset()
+    #     contexto ['form'] = self.form_class
+    #     return contexto
     
 class CallListView(CallPermisoMixin, ListView):
     template_name = "call/gestion.html"
@@ -39,7 +53,7 @@ class CallListView(CallPermisoMixin, ListView):
             Q(d_i__icontains =seudo)|
             Q(id_guia__icontains = seudo)
             ).filter(mot__motivo__icontains = reason)
-
+        
         return lista
 
 class AuditoriaListView(ListView):

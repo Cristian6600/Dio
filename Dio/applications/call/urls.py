@@ -5,12 +5,12 @@ app_name = "call_app"
 
 urlpatterns = [
     path(
-        'call/',
+        'call-consultar/',
          views.CallListView.as_view(),
          name='lista-call',
     ),
     path(
-        'call-update/<pk>/',
+        'call-update/<int:pk>/',
          views.CallUpdateView.as_view(),
          name='lista-call-update',
     ),
