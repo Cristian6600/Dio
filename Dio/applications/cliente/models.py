@@ -36,6 +36,9 @@ class Ciudad (models.Model):
     def __str__(self):
         return str (self.ciudad) 
 
+    class Meta:
+        order_with_respect_to = 'ciudad'
+
 class Cliente (models.Model):
     id_clie = models.CharField(max_length=10,
         primary_key = True,
