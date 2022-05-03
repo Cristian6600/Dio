@@ -34,10 +34,13 @@ class Ciudad (models.Model):
         verbose_name_plural = "Ciudad"
 
     def __str__(self):
-        return str (self.ciudad) 
+        return self.ciudad + ' ' + self.departamento.departamento
+
+    def __unicode__(self): 
+        return self.ciudad
 
     class Meta:
-        order_with_respect_to = 'ciudad'
+        ordering = ['ciudad'] # Nota el guión
 
 class Cliente (models.Model):
     id_clie = models.CharField(max_length=10,
