@@ -114,13 +114,28 @@ class AsignarListview(CustodiaPermisoMixin, ListView):
     template_name = "ruta/asignado_planillas.html"
     paginate_by = 5
 
+    def listing(request):
+        contact_list = courrier.objects.all()
+        paginator = Paginator(contact_list, 25) # Show 25 contacts per page.
+
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        return render(request, 'list.html', {'page_obj': page_obj})
+
     def get_queryset(self):
         kword = self.request.GET.get("kword", '')
         order = self.request.GET.get("order", '')
-        queryset = courrier.objects.filter(id_ciu__departamento=self.request.user.ciudad.departamento).filter(
-            Q(id__icontains=kword) | Q(courrier__contains=kword) 
+        queryset = courrier.objects.filter(
+            id_ciu__departamento=self.request.user.ciudad.departamento).filter(
+            Q(id__icontains=kword) | Q(courrier__contains=kword)
         )
         return queryset
+    
+    def get_context_data(self, **kwargs):
+        contexto = {}
+        contexto ['planillas'] = self.get_queryset()[:2]
+        contexto ['count'] = self.get_queryset().count
+        return contexto  
 
 class DestinoCreate(CreateView):
     template_name = "ruta/destino.html"

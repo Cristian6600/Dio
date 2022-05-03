@@ -14,30 +14,42 @@
         </div>
 </form>
       
-    <table>
+<div class="cell grid-x grid-margin-x" style="margin-top: 2em;">
+    <table class="hover">
         <thead>
-            <th>Mensajeros</th>
+            <th>Mensajero</th>
             <th>Cedula</th>
             <th>Ciudad</th>
             <th>Imprimir</th>
         
         </thead>
         <tbody>
-            <td></td>
-        </tbody>
-        {% for e in planillas %}
-        <tr>
-            <td>{{ e.courrier }}</td>
-            <td>{{ e.d_i }}</td>
-            <td>{{ e.id_ciu }}</td>
         
-            <td>
-            <a href="{% url 'ruta_apps:impresion' e.id %}" class="button"><i class="fi-print"></i></a>
-            </td>
-        </tr>
-        {% endfor %}
+            {% for e in planillas %}
+            <tr>
+                <td>{{ e.courrier }}</td>
+                <td>{{ e.d_i }}</td>
+                <td>{{ e.id_ciu }}</td>
+                <td>
+                    <a href="{% url 'ruta_apps:impresion' e.id %}" class="button"><i class="fi-print"></i></a>
+                </td>
+            </tr>
+            <tr>
+                {% empty %}
+                <td>Por favor asegurese de escribir el nombre correcto, de lo contrario buscar con las iniciales .</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Total Mensajeros:</th>
+                <th>{{count}}</th>
+            </tr>
+        </tfoot>
     </table>
+    
 </div>
+
 
 
 
