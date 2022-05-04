@@ -47,6 +47,7 @@
             <th>Direccion</th>
             <th>Ciudad</th>
             <th>Telefonos</th>
+            <th>Auditar</th>
             
         </thead>
         <tbody>
@@ -77,7 +78,7 @@
                 </li>
                 {% endif %}
                 
-
+    
                 <li class="current"><span class="show-for-sr">You're on page</span> Pagina {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.</li>
                 
                 <li class=""><a href="?page={{pagina}}">{{ pagina }}</a></li>

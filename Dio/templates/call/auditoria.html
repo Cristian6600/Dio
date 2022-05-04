@@ -67,14 +67,12 @@
                 </li>
                 {% endif %}
                 
-                {% for pagina in paginator.page_range %}
-             
-                {% ifequal pagina page_obj.number %}
-                <li class="current"><span class="show-for-sr">You're on page</span> {{ pagina }}</li>
-                {% else %}
+    
+                <li class="current"><span class="show-for-sr">You're on page</span> Pagina {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.</li>
+                
                 <li class=""><a href="?page={{pagina}}">{{ pagina }}</a></li>
-                {% endifequal %}
-                {% endfor %}
+                
+               
                 
                 {% if page_obj.has_next %}
                 <li class="pagination-next">
@@ -84,6 +82,5 @@
             </ul>
         </nav>
         {% endif %}
-    </div>
 
 {% endblock panel-content %}

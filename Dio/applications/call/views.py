@@ -52,7 +52,8 @@ class CallListView(CallPermisoMixin, ListView):
             Q(id_ciu__ciudad__icontains = seudo)|
             Q(d_i__icontains =seudo)|
             Q(id_guia__icontains = seudo)
-            ).filter(mot__motivo__icontains = reason)
+            ).filter(mot__motivo__icontains = reason).order_by("-motivo_call"
+            ).exclude(mot = 1).exclude(mot = 22).exclude(mot = 21).exclude(mot = 20).exclude(mot=19)
         
         return lista
 

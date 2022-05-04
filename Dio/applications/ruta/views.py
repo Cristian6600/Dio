@@ -83,7 +83,13 @@ class ListEmpleadosPdf(CustodiaPermisoMixin, ListView):
     
     #------------------Asignar guia a mensajero--------------------
 
-class AsignarCreateView(CreateView, ListView):
+class PassRequestToFormViewMixin:
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
+
+class AsignarCreateView(PassRequestToFormViewMixin,CreateView, ListView):
     template_name = "ruta/asignar.html"
     form_class = AsignarForm
     queryset = Planilla.objects.order_by('-fecha')

@@ -2,6 +2,7 @@ from django import forms
 from django.forms import widgets
 from .models import Cargue, Planilla, Recepcion, Destino, Descargue
 from applications.guia.models import Guia
+from applications.courrier.models import courrier
 from django.core.exceptions import NON_FIELD_ERRORS
 from django.utils.translation import gettext_lazy as _
 from django.contrib.admin.widgets import FilteredSelectMultiple
@@ -33,6 +34,14 @@ class CargueForm(forms.ModelForm):
         
 
 class AsignarForm(forms.ModelForm):   
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(AsignarForm, self).__init__(*args, **kwargs)
+
+        self.fields["full_name"].queryset = courrier.objects.filter(id_ciu__departamento=self.request.user.ciudad.departamento)
+
+    
+
     class Meta:
         model = Planilla
         fields = ['full_name', 'guia', 'user']
@@ -50,7 +59,9 @@ class AsignarForm(forms.ModelForm):
         self.object = form.commisave(t=False)
         self.object.user = self.request.user
         self.object.save()
-        return super(AsignarForm, self).form_valid(form)    
+        return super(AsignarForm, self).form_valid(form)   
+
+    
 
         
 class RecepcionForm(forms.ModelForm):   
