@@ -3,6 +3,7 @@ from django import forms
 from .models import Auditoria
 from applications.guia.models import Guia
 from applications.argumento.models import Motivo, Cod_vis
+from applications.cliente.models import Ciudad
 from django.db.models import Q
 class CallfisicoForm(forms.ModelForm):
     
@@ -107,7 +108,7 @@ class CallUpdateForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(CallUpdateForm, self).__init__(*args, **kwargs)
-
+        self.fields['id_ciu'].queryset = Ciudad.objects.filter(cubrimiento = "COBERTURA")
         self.fields['mot'].queryset = Motivo.objects.filter(Q (id = 19)|Q(id = 20))
         self.fields['cod_vis'].queryset = Cod_vis.objects.filter(
             Q (id = 21)|Q(id = 22)|Q(id = 23)|Q(id = 24)|Q(id = 25)
