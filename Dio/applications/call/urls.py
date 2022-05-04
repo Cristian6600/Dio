@@ -16,6 +16,12 @@ urlpatterns = [
     ),
     
     path(
+        'call-update-estado-call/<int:pk>/',
+         views.CallEstadoUpdateView.as_view(),
+         name='call-update-estado-call',
+    ),
+    
+    path(
         'call-auditoria/',
          views.AuditoriaListView.as_view(),
          name='lista-call-auditoria',

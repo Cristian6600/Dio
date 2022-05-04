@@ -1,3 +1,4 @@
+from dataclasses import field
 from multiprocessing import context
 from re import template
 from django.shortcuts import render
@@ -18,20 +19,18 @@ class CallUpdateView(CallPermisoMixin, UpdateView):
     # fields = ['direccion', 'id_ciu', 'postal', 'mot', 'cod_vis', 'motivo_call','oficina']
     success_url = reverse_lazy('call_app:lista-call')
     
-
-    # def get_queryset(self, **kwargs):
-        
-    #     seudo = self.request.GET.get("pk", "")
-    #     lista = Guia.objects.filter(seudo__seudo_bd__icontains = seudo)
-        
-        
-    #     return lista
-
     # def get_context_data(self, **kwargs):
     #     contexto = {}
     #     contexto ['lista'] = self.get_queryset()
     #     contexto ['form'] = self.form_class
     #     return contexto
+
+class CallEstadoUpdateView(UpdateView):
+    template_name = "call/update-estado-call.html"
+    model = Guia
+    fields = ['motivo_call']
+    success_url = reverse_lazy('call_app:lista-call')
+
     
 class CallListView(CallPermisoMixin, ListView):
     template_name = "call/gestion.html"

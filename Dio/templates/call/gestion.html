@@ -47,6 +47,7 @@
             <th>Direccion</th>
             <th>Ciudad</th>
             <th>Telefonos</th>
+            <th>estado call</th>
             <th>Auditar</th>
             
         </thead>
@@ -58,10 +59,14 @@
                 <td>{{e.destinatario}}</td>  
                 <td>{{e.direccion}}</td>  
                 <td>{{e.id_ciu}}</td>  
-                <td>{{e.tel}}</td>  
+                <td>{{e.tel}}</td> 
+                <td>
+                    <a href="{% url 'call_app:call-update-estado-call' e.seudo %}" class="button secondary"><i class="fi-page-search"></i></a>
+                    </td>   
                 <td>
                     <a href="{% url 'call_app:lista-call-update' e.seudo %}" class="button"><i class="fi-page-search"></i></a>
-                    </td>        
+                    </td>   
+                    
             </tr>
             
             {% endfor %}
