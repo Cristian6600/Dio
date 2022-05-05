@@ -55,7 +55,7 @@ class Guia(Fisico, TimeStampedModel):
         on_delete=models.CASCADE, 
         null=True, 
         blank = True,
-        verbose_name = 'Servicio'       
+        verbose_name = 'Servicio'            
     )    
 
     postal = models.CharField(

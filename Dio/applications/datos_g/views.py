@@ -12,7 +12,9 @@ register = template.Library()
 
 class OrdenListView(CustodiaPermisoMixin, ListView):
     template_name = "datos_g/orden_guia.html"
-    queryset = Orden.objects.order_by('-fecha'). exclude(orden = -1)
+    queryset = Orden.objects.order_by('-fecha'
+    ). exclude(orden = -1). exclude(orden =-2).exclude(orden =-3).exclude(orden =-4
+    ).exclude(orden =-5).exclude(orden =-6).exclude(orden =-7).exclude(orden =-8).exclude(orden =-9).exclude(orden =-9)
     context_object_name = 'orden'
 
 class ListGuiaPdf(CustodiaPermisoMixin, ListView):

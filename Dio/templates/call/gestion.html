@@ -4,8 +4,6 @@
 
 {% block panel-content %}
 
-
-
 <div class="grid-x grid-margin-x">
     <form class="cell grid-x grid-margin-x" method="GET">{% csrf_token %}
       <div class="cell input-group">
@@ -42,6 +40,7 @@
         <thead>
             
             <th>Seudo</th>
+            <th>Fecha fisico</th>
             <th>Cedula</th>
             <th>Destinatario</th>
             <th>Direccion</th>
@@ -55,6 +54,7 @@
             {% for e in call %}
             <tr>
                 <td width="20">{{e.seudo}}</td> 
+                <td>{{e.fecha}}</td>
                 <td>{{e.d_i}}</td>  
                 <td>{{e.destinatario}}</td>  
                 <td>{{e.direccion}}</td>  
