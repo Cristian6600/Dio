@@ -124,7 +124,6 @@ class CallUpdateForm(forms.ModelForm):
             'postal',
             'mot',
             'cod_vis',
-            'motivo_call',
             'oficina',
             'proceso',
             
