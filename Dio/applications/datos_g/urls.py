@@ -15,11 +15,7 @@ urlpatterns = [
         views.ListGuiaPdf.as_view(),
         name = 'impresion-guia',
     ),
-    path(
-        'orden-impresion-guia/',
-         views.OrdenListView.as_view(),
-         name='guia-buscar',
-    ),
+    
     ########impresion agendamientos########
     path(
         'orden-impresion-guia-agendamientos/',

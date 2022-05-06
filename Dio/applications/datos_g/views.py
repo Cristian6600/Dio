@@ -3,6 +3,7 @@ from django.views.generic import ListView
 from.models import datos_g, Orden
 from .utils import render_to_pdf
 from django.http import HttpResponse
+from django.core.paginator import Paginator
 from applications.users.mixins import CustodiaPermisoMixin
 from django.db.models import Q
 from django import template
@@ -12,11 +13,16 @@ register = template.Library()
 
 class OrdenListView(CustodiaPermisoMixin, ListView):
     template_name = "datos_g/orden_guia.html"
-    queryset = Orden.objects.order_by('-fecha'
-    ). exclude(orden = -1). exclude(orden =-2).exclude(orden =-3).exclude(orden =-4
-    ).exclude(orden =-5).exclude(orden =-6).exclude(orden =-7).exclude(orden =-8
-    ).exclude(orden =-9).exclude(orden =-9).exclude(orden =-10).exclude(orden =-11)
-    context_object_name = 'orden'
+    paginate_by = 8
+
+    def get_queryset(self):
+        kword = self.request.GET.get("kword", '')
+        queryset = Orden.objects.order_by('-fecha'
+        ). exclude(orden = -1). exclude(orden =-2).exclude(orden =-3).exclude(orden =-4
+        ).exclude(orden =-5).exclude(orden =-6).exclude(orden =-7).exclude(orden =-8
+        ).exclude(orden =-9).exclude(orden =-9).exclude(orden =-10).exclude(orden =-11).filter(orden__icontains=kword)
+        return queryset
+        
 
 class ListGuiaPdf(CustodiaPermisoMixin, ListView):
         
