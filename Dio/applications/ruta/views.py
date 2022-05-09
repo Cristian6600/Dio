@@ -190,8 +190,9 @@ class InformeRutaCiudadListView(ListView):
     context_object_name = 'lista'
 
     def get_queryset(self):
+        fecha = self.request.GET.get("fecha", "")
         destino = self.request.GET.get("destino", "")
-        queryset = Guia.objects.filter(origen__contains= destino, estado_destino = True )
+        queryset = Guia.objects.filter(origen__contains= destino, estado_destino = True, fecha_recepcion__icontains = fecha)
         return queryset
     
     def get_count(self):
