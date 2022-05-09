@@ -40,9 +40,9 @@ class ListGuiaPdf(CustodiaPermisoMixin, ListView):
 
 class OrdenAgendaListView(CustodiaPermisoMixin, ListView):
     template_name = "datos_g/orden_guia_agendamiento.html"
-    queryset = Orden.objects.filter(orden = -7).order_by('-fecha')
+    queryset = Orden.objects.order_by("orden")
     context_object_name = 'orden'
-    paginate_by = 1
+    paginate_by = 7
 
 class Lista_gendamientosListView(CustodiaPermisoMixin, TodayArchiveView, ListView):
     date_field = "pub_date"
