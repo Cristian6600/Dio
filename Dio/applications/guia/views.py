@@ -47,8 +47,6 @@ class ProductDetailView(LoginRequiredMixin, DetailView):
     
 class FisicoCreateView(CustodiaPermisoMixin, LoginRequiredMixin, CreateView, ListView):
     template_name = "guia/guia-fisico.html"
-    # model = Guia
-    # fields = ['id_guia', 'seudo', 'bolsa', 'user']
     form_class = guiafisicoForm
     success_url = '.'   
     
@@ -56,7 +54,6 @@ class FisicoCreateView(CustodiaPermisoMixin, LoginRequiredMixin, CreateView, Lis
         return Guia.objects.filter(user=self.request.user).order_by('-fecha')[:5]
 
     def get_cantidad(self):
-        
         return Guia.objects.filter(user=self.request.user)
         # return Guia.objects.filter(user=self.request.user, fecha=date.today()).count()
 
