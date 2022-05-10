@@ -60,12 +60,7 @@ class CoberturaForm(forms.ModelForm):
                   
         )
         widgets = {
-            'bolsa': forms.TextInput(
-                attrs = {
-                    'placeholder': 'Codigo de barras Bolsa', 'autofocus': 'autofocus',
-                    'class': 'input-group-field',
-                }
-            ),
+            
             'estado': forms.Select(
                 attrs = {
                     'placeholder': 'Codigo de barras Bolsa', 'autofocus': 'autofocus',
