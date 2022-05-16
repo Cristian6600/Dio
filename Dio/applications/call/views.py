@@ -28,7 +28,7 @@ class CallUpdateView(CallPermisoMixin, UpdateView):
 class CallEstadoUpdateView(UpdateView):
     template_name = "call/update-estado-call.html"
     model = Guia
-    fields = ['motivo_call']
+    fields = ['motivo_call', 'observacion']
     success_url = reverse_lazy('call_app:lista-call')
 
     
@@ -41,18 +41,28 @@ class CallListView(CallPermisoMixin, ListView):
 
     def get_queryset(self, **kwargs):
         
+        producto = self.request.GET.get("producto", "")
         reason = self.request.GET.get("reason", "")
         seudo = self.request.GET.get("kword", "")
         fecha = self.request.GET.get("date_start", "")
-        lista = Guia.objects.filter(id_est = 3).filter(
+        lista = Guia.objects.filter(id_est = 3, 
+            producto__producto__contains = producto,
+            mot__motivo__icontains = reason,
             fecha_recepcion__icontains = fecha
         ).filter(
             Q(seudo__seudo_bd__icontains=seudo)|
             Q(id_ciu__ciudad__icontains = seudo)|
             Q(d_i__icontains =seudo)|
             Q(id_guia__icontains = seudo)
-            ).filter(mot__motivo__icontains = reason).order_by("-motivo_call"
-            ).exclude(mot = 1).exclude(mot = 22).exclude(mot = 21).exclude(mot = 20).exclude(mot=19)
+        ).order_by("-motivo_call"
+        ).exclude(mot = 1).exclude(mot = 22).exclude(mot = 21).exclude(mot = 20).exclude(mot=19)
+        # .filter(
+        #     Q(seudo__seudo_bd__icontains=seudo)|
+        #     Q(id_ciu__ciudad__icontains = seudo)|
+        #     Q(d_i__icontains =seudo)|
+        #     Q(id_guia__icontains = seudo)
+        #     ).filter(mot__motivo__icontains = reason).order_by("-motivo_call"
+        #     ).exclude(mot = 1).exclude(mot = 22).exclude(mot = 21).exclude(mot = 20).exclude(mot=19)
         
         return lista
 
@@ -64,10 +74,12 @@ class AuditoriaListView(ListView):
 
     def get_queryset(self, **kwargs):
         
+        ciudad = self.request.GET.get("ciudad", "")
         kword = self.request.GET.get("kword", "")
         fecha = self.request.GET.get("date_start", "")
         lista = Guia.objects.filter(mot = 21, estado=1).filter(
-            fecha_recepcion__icontains = fecha
+            fecha_recepcion__icontains = fecha,
+            id_ciu__ciudad__icontains = ciudad
         ).filter(
             Q(mensajero__courrier__icontains =kword)|
             Q(seudo__seudo_bd__icontains=kword)

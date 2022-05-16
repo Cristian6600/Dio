@@ -42,11 +42,12 @@ urlpatterns = [
         name='destino-descargue'
     ),
     
-    path(
-        'generar/historial/', 
-        views.HistorialListview.as_view(),
-        name='historial'
-    ),
+    # path(
+    #     'generar/historial/', 
+    #     views.HistorialListview.as_view(),
+    #     name='historial'
+    # ),
+    path('<int:rr>/results/', views.detail, name='results'),
     
     path(
         'inf/destino/ciudad/', 

@@ -40,9 +40,23 @@ class ListGuiaPdf(CustodiaPermisoMixin, ListView):
 
 class OrdenAgendaListView(CustodiaPermisoMixin, ListView):
     template_name = "datos_g/orden_guia_agendamiento.html"
-    queryset = Orden.objects.order_by("orden")
+    # queryset = Orden.objects.order_by("orden")
     context_object_name = 'orden'
     paginate_by = 7
+
+    def get_queryset(self):
+        queryset = Orden.objects.filter(orden_dat_g__mot = 19)
+        return queryset
+
+    def get_queryset_cont(self):
+        queryset = Orden.objects.filter(orden_dat_g__mot = 19)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        contexto = {}
+        contexto ['orden'] = self.get_queryset()
+        contexto ['contar'] = self.get_queryset_cont().count
+        return contexto  
 
 class Lista_gendamientosListView(CustodiaPermisoMixin, TodayArchiveView, ListView):
     date_field = "pub_date"

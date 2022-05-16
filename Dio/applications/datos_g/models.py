@@ -143,7 +143,9 @@ class datos_g (models.Model):
         Orden, on_delete= models.CASCADE,
         blank=True,
         null=True,
-        verbose_name = 'Orden impre'
+        related_name = 'orden_datos_g',
+        verbose_name = 'Orden impresion',
+        related_query_name="orden_dat_g"
         )
 
     zona = models.CharField(max_length=30, blank=True, null=True)

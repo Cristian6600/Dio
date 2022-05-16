@@ -15,14 +15,13 @@
             </div>
        
         <div class="cell medium-6">
-            <label>Preguntas:</label>
+            <span class="label secondary">Preguntas</span>
             <div class="input-group">
-                
                 {{form.pregunta_1}}
             </div>
         </div>
         <div class="cell medium-6">
-            <label>Calificaciones:</label>
+            <span class="label secondary">Calificaciones</span>
             <div class="input-group">
                 {{form.calificacion_1}}
             </div>
@@ -63,14 +62,12 @@
                 {{form.calificacion_4}}
             </div>
         </div>
-        <div class="cell medium-6">
-           
+        <div class="cell medium-6">  
             <div class="input-group">
                 {{form.pregunta_5}}
             </div>
         </div>
-        <div class="cell medium-6">
-            
+        <div class="cell medium-6">    
             <div class="input-group">
                 {{form.calificacion_5}}
             </div>
@@ -78,10 +75,21 @@
         <div class="input-group">
             {{form.observacion}}
         </div>
+        <div class="cell medium-6">  
+            <div class="input-group">
+                <label>Motivo
+                    {{form.motivo_call}}
+                </label>
+            </div>
+        </div>
 
-        <div class="cell medium-6"></div>
-                <button type="submit" class="cell primary button" style="width: 200px;">Guardar</button>
-    </div>
+        <div class="cell medium-6">
+            <div class="input-group">
+                <label>Guardar
+                    <button class="cell medium-4 button success">Guardar</button>
+                </label>
+            </div>
+        </div>
     </form>   
 </div>   
 {% endblock panel-content %}

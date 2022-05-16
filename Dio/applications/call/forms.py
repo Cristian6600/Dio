@@ -5,6 +5,7 @@ from applications.guia.models import Guia
 from applications.argumento.models import Motivo, Cod_vis
 from applications.cliente.models import Ciudad
 from django.db.models import Q
+
 class CallfisicoForm(forms.ModelForm):
     
     class Meta:
@@ -24,9 +25,8 @@ class CallfisicoForm(forms.ModelForm):
 
             'pregunta_1': forms.Select(
                 attrs = {
-                    'class': 'input-group-field',
-                    
-                    
+                    'class': 'input-group-field', 
+                    # 'disabled' : 'disabled'
                 }
             ),
             'calificacion_1': forms.Select(
@@ -38,6 +38,7 @@ class CallfisicoForm(forms.ModelForm):
             'pregunta_2': forms.Select(
                 attrs = {
                     'class': 'input-group-field',
+                    
                     
                 }
             ),
@@ -68,7 +69,6 @@ class CallfisicoForm(forms.ModelForm):
             'calificacion_4': forms.Select(
                 attrs = {
                     'class': 'input-group-field',
-                    
                 }
             ),
             'pregunta_5': forms.Select(
@@ -86,7 +86,7 @@ class CallfisicoForm(forms.ModelForm):
             'observacion': forms.TextInput(
                 attrs = {
                     'class': 'input-group-field',
-                    
+                    'placeholder': 'Observación'
                 }
             ),
             
@@ -133,7 +133,7 @@ class CallUpdateForm(forms.ModelForm):
             'direccion': forms.TextInput(
                 attrs = {
                     'placeholder': 'Codigo de barras Bolsa', 'autofocus': 'autofocus',
-                    
+                    'autocomplete': "off"
                 }
             ),
             'postal': forms.TextInput(

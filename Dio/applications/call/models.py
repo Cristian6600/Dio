@@ -5,6 +5,7 @@ from simple_history.models import HistoricalRecords
 from applications.guia.models import Guia
 from applications.users.models import User
 from applications.datos_g.models import datos_g
+from applications.argumento.models import Motivo_call
 from django.conf import settings 
 
 
@@ -99,21 +100,25 @@ class Auditoria(models.Model):
     )
     entregas = models.ForeignKey(Guia, on_delete=models.CASCADE)
     pregunta_1= models.ForeignKey(Pregunta, on_delete=models.CASCADE, default = 1, blank = True, null = True)
-    calificacion_1 = models.ForeignKey(calificacion, on_delete=models.CASCADE, related_name = 'calificacion_1')
+    calificacion_1 = models.ForeignKey(calificacion, on_delete=models.CASCADE, related_name = 'calificacion_1', blank = True, null = True)
     pregunta_2= models.ForeignKey(Pregunta, on_delete=models.CASCADE, related_name="Pregunta_2", default= 2, blank = True, null = True)
-    calificacion_2 = models.ForeignKey(calificacion, on_delete=models.CASCADE, related_name = 'calificacion_2')
+    calificacion_2 = models.ForeignKey(calificacion, on_delete=models.CASCADE, related_name = 'calificacion_2', blank = True, null = True)
     pregunta_3= models.ForeignKey(Pregunta, on_delete=models.CASCADE, related_name="Pregunta_3", default = 3)
-    calificacion_3 = models.ForeignKey(calificacion, on_delete=models.CASCADE, related_name = 'calificacion_3')
+    calificacion_3 = models.ForeignKey(calificacion, on_delete=models.CASCADE, related_name = 'calificacion_3', blank = True, null = True)
     pregunta_4= models.ForeignKey(Pregunta, on_delete=models.CASCADE, related_name="Pregunta_4", default = 4)
-    calificacion_4 = models.ForeignKey(calificacion, on_delete=models.CASCADE, related_name = 'calificacion_4')
+    calificacion_4 = models.ForeignKey(calificacion, on_delete=models.CASCADE, related_name = 'calificacion_4', blank = True, null = True)
     
     pregunta_5= models.ForeignKey(Pregunta, on_delete=models.CASCADE, related_name="Pregunta_5", default = 5)
     
     calificacion_5 = models.CharField(
         max_length=2,
         choices=calificacionn_5,
+        blank = True, null = True
     )
-    observacion = models.CharField(max_length = 30)
+    observacion = models.CharField(
+        max_length = 30,
+        blank = True, null = True
+        )
     fecha = models.DateTimeField(auto_now=True, blank= True, null=True)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -123,11 +128,14 @@ class Auditoria(models.Model):
         verbose_name= 'Usuario'
     )
 
+    motivo_call = models.ForeignKey(Motivo_call, on_delete=models.CASCADE) 
+
     def __str__(self):
         return str(self.entregas)
 
     def save(self, *args, **kwargs):
         self.entregas.estado = self.entregas.estado = 0
+
 
         self.entregas.save()       
         super(Auditoria, self).save(*args, **kwargs)

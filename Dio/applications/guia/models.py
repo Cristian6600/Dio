@@ -167,6 +167,8 @@ class Guia(Fisico, TimeStampedModel):
         null=True,
         )
     
+    observacion = models.TextField(max_length=200)
+    
     history = HistoricalRecords()    
 
     class Meta:
@@ -231,8 +233,7 @@ class Guia(Fisico, TimeStampedModel):
             
 
         self.seudo.save()       
-        super(Guia, self).save(*args, **kwargs)
-        
+        super(Guia, self).save(*args, **kwargs)        
     
 class img(models.Model):
     

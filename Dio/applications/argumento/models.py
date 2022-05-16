@@ -138,7 +138,7 @@ class Producto (models.Model):
         unique_together = ('id_pro', 'id_clie')
 
     def __str__(self):
-        return str(self.id_pro)+ '-' + self.producto
+        return self.producto
 
 class Est_clie (models.Model):
     

@@ -10,6 +10,8 @@ from applications.courrier.models import courrier
 from django.views.generic.dates import DayArchiveView
 from django.db.models import Q
 
+from django.shortcuts import get_object_or_404, render
+
 from applications.guia.models import Guia
 
 from django.contrib import messages
@@ -175,15 +177,19 @@ class DescargueCreateView(CreateView, ListView):
         self.object.save()
         return super(DescargueCreateView, self).form_valid(form)
 
-class HistorialListview(ListView):
-    context_object_name = "historial" 
-    template_name = "ruta/historial.html"
-    paginate_by = 5
+# class HistorialListview(ListView):
+#     context_object_name = "historial" 
+#     template_name = "ruta/historial.html"
+#     paginate_by = 5
 
-    def get_queryset(self):
-        kword = self.request.GET.get("kword", "")
-        queryset = Recepcion.objects.filter(guia__id_guia__icontains= kword,)
-        return queryset
+#     def get_queryset(self):
+#         kword = self.request.GET.get("kword", "")
+#         queryset = Recepcion.objects.filter(guia__id_guia__icontains= kword,)
+#         return queryset
+
+def detail(request, rr):
+    guia = get_object_or_404(Recepcion, pk=guia)
+    return render(request, 'ruta/historial.html', {'question': guia})
 
 class InformeRutaCiudadListView(ListView):
     template_name = "ruta/informe_ruta_ciudad.html"
