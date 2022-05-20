@@ -56,6 +56,9 @@ class ImgForm(forms.ModelForm):
         fields = (
             'image',
             'id_guia',
+            'user',
+            
+            'mod_date'
         )
 
     

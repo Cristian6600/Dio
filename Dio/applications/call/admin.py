@@ -15,14 +15,26 @@ class DatossResource(resources.ModelResource):
 class AuditoriaResource(resources.ModelResource):
     class Meta:
         model = Auditoria
-        fields = (('pregunta_1__pregunta', 'calificacion_1__calficacion', 
-                   'pregunta_2__pregunta', 'calificacion_2__calficacion',
-                   'pregunta_3__pregunta', 'calificacion_3__calficacion',
-                   'pregunta_4__pregunta', 'calificacion_4__calficacion',
+        fields = (('pregunta_1', 'calificacion_1__calficacion', 
+                   'pregunta_2', 'calificacion_2__calficacion',
+                   'pregunta_3', 'calificacion_3__calficacion',
+                   'pregunta_4', 'calificacion_4__calficacion',
                 #    'pregunta_5__pregunta', 'calificacion_5__calficacion',
 
                    ))
-                
+
+class TelefonoResource(resources.ModelResource):
+    class Meta:
+        model = Telefono
+        
+        fields = (
+            'id', 'id__seudo__tarjeta', 'id__guia_d_g__marca',
+            'id__d_i', 'id__destinatario', 'id__user__ciudad__ciudad',
+            'id__id_ciu__ciudad', 'id__direccion', 'obervacion', 'id__fecha_recepcion',
+            'tel',
+        )
+        export_order = ('id', 'id__seudo__tarjeta')
+
 class datos_tAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
     
     fields = (('d_i', 'telefono',))
@@ -49,6 +61,7 @@ class IndicativoAdmin(admin.ModelAdmin):
 class TelefonoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('id', )
     search_fields = ('id',)
+    resource_class = TelefonoResource
 
 class AuditoriaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     

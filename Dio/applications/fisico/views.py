@@ -8,6 +8,7 @@ from django.views.generic import CreateView, ListView, UpdateView
 from django.views.generic.detail import SingleObjectMixin
 from .forms import ProductForm, CoberturaForm
 from applications.users.mixins import CustodiaPermisoMixin
+from applications.guia.models import Guia
 from applications.courrier.models import courrier
 from django.contrib import messages
 from simple_history.models import HistoricalRecords
@@ -54,11 +55,12 @@ class EstadoRutaListView(LoginRequiredMixin, ListView):
 class CoberturaCreateView(CreateView, ListView):
     template_name = "fisico/cobertura_bolsa.html"
     form_class = CoberturaForm
-    # context_object_name = 'cobertura'
     success_url = '.'
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
         if form.is_valid():
             form.save()
             messages.success(request, 'Planilla Data Added')
@@ -67,20 +69,21 @@ class CoberturaCreateView(CreateView, ListView):
 
     def get_queryset(self):
         return Cobertura.objects.order_by('bolsa')
-
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
-        return super(CoberturaCreateView, self).form_valid(form)
+    
+    def get_queryset_oficinas_count(self):
+        return Guia.objects.filter(id_est = 2, mot = 3, producto = 3)
+    
+    def get_queryset_direccion_count(self):
+        return Guia.objects.filter(id_est = 2, mot = 3).exclude(producto = 3)
 
     def get_context_data(self, **kwargs):
         contexto = {}
         contexto ['lista_cobertura'] = self.get_queryset()
         contexto ['form'] = self.form_class
+        contexto ['oficinas_cantidad'] = self.get_queryset_oficinas_count().count
+        contexto ['direccion_cantidad'] = self.get_queryset_direccion_count().count
         
         return contexto
-
 
 class Bolsa_add_CreateView(CreateView, ListView):
     model = Bolsa

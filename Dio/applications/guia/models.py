@@ -154,11 +154,7 @@ class Guia(Fisico, TimeStampedModel):
         null=True, 
         blank = True
     )
-    motivo_call = models.ForeignKey(
-        Motivo_call, 
-        on_delete=models.CASCADE,
-        blank=True,
-        null=True)
+    
 
     oficina= models.ForeignKey(
         Oficinas, 
@@ -167,7 +163,7 @@ class Guia(Fisico, TimeStampedModel):
         null=True,
         )
     
-    observacion = models.TextField(max_length=200)
+    
     
     history = HistoricalRecords()    
 
@@ -179,10 +175,14 @@ class Guia(Fisico, TimeStampedModel):
             return str(self.seudo) + self.destinatario
 
     objects = ProductManagers()
+    @property
+    def motivo_calls(self):
+        return self.motivo_call.id
+
     # objects = LogEntryManager()
 
     var_g = ("guia")    
-        
+    varmot = 20 
 #-------------------------------------------------------
     @property
     def can_vi(self):
@@ -208,7 +208,6 @@ class Guia(Fisico, TimeStampedModel):
     def ofi(self):
         return self.oficina
     
-
     @property
     def concatenar(self):
         return  str(self.can_vi) + (self.motis) + str(self.estados) + str(self.cod_vis.id) 
@@ -219,11 +218,12 @@ class Guia(Fisico, TimeStampedModel):
       return str(self.user)
 
     def save(self, *args, **kwargs):
-        print(self.ofi)
+    
         self.seudo.sucursal = self.userbd
         self.codigo = self.concatenar   
         self.seudo.fisicos = self.seudo.fisicos = 1
-        
+        self.mot.id = 20
+        print(self.mot.id)
         # self.ofi = str(self.ofi)
         if self.ofi == None:
             self.direccion = self.direccion

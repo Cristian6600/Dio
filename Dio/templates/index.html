@@ -4,19 +4,14 @@
 
 {% block panel-content %}
 
-
-
 <div class="grid-x grid-margin-x align-center">
   <h3 class="cell" style="margin-bottom: 2em; text-align: center;">Cargue de imagenes</h3>  
- 
-  <div class="cell medium-6">
-    <div class="input-group">
-      <form method="POST" enctype="multipart/form-data">
-      {% csrf_token %} 
-      
-      <input type="file" class="hidden-input" name="images" multiple>
+  <form method="POST" enctype="multipart/form-data">{% csrf_token %} 
+        
+      <label for="exampleFileUpload" class="button">Buscar</label>
+      <input id="exampleFileUpload" type="file" class="show-for-sr" name="images" multiple>
   
-    <button type="submit" class="button" style="width: 200px;">Guardar</button>
+    <button type="submit" class="button secondary" style="width: 200px;">Guardar</button>
   
   </form>
 

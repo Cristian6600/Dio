@@ -5,13 +5,13 @@ app_name = "call_app"
 
 urlpatterns = [
     path(
-        'call-consultar/',
-         views.CallListView.as_view(),
+        'cac-consultar/',
+         views.CacListView.as_view(),
          name='lista-call',
     ),
     path(
-        'call-update/<int:pk>/',
-         views.CallUpdateView.as_view(),
+        'cac-update/<int:pk>/',
+         views.CacUpdateView.as_view(),
          name='lista-call-update',
     ),
     
@@ -32,6 +32,17 @@ urlpatterns = [
          views.AuditoriaCreateView.as_view(),
          name='create-call-auditoria',
     ),
-    
+
+    #######CAC
+    path(
+        'call-consultar/',
+         views.CallListView.as_view(),
+         name='call-consultar',
+    ),
+    path(
+        'call-update/<pk>/',
+         views.CallUpdateView.as_view(),
+         name='call-update',
+    ),
 
      ]

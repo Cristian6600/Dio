@@ -35,7 +35,16 @@ class Telefono(models.Model):
         Indicativo, 
         on_delete=models.CASCADE,
     )
-
+    fecha_call = models.DateTimeField(
+        auto_now_add=True
+    )
+    motivo_call = models.ForeignKey(
+        Motivo_call, 
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True)
+    observacion = models.TextField(max_length=200)
+    
     def __str__(self):
         return str(self.tel)
 
@@ -99,16 +108,16 @@ class Auditoria(models.Model):
         ('5', '5'),
     )
     entregas = models.ForeignKey(Guia, on_delete=models.CASCADE)
-    pregunta_1= models.ForeignKey(Pregunta, on_delete=models.CASCADE, default = 1, blank = True, null = True)
+    pregunta_1= models.CharField(max_length=70, default = 'CUENTA USTED YA CON LA TC', blank = True, null = True)
     calificacion_1 = models.ForeignKey(calificacion, on_delete=models.CASCADE, related_name = 'calificacion_1', blank = True, null = True)
-    pregunta_2= models.ForeignKey(Pregunta, on_delete=models.CASCADE, related_name="Pregunta_2", default= 2, blank = True, null = True)
+    pregunta_2= models.CharField(max_length=70, default = 'BOLSA DEBIDAMENTE SELLADA', blank = True, null = True)
     calificacion_2 = models.ForeignKey(calificacion, on_delete=models.CASCADE, related_name = 'calificacion_2', blank = True, null = True)
-    pregunta_3= models.ForeignKey(Pregunta, on_delete=models.CASCADE, related_name="Pregunta_3", default = 3)
+    pregunta_3= models.CharField(max_length=70, default = 'SOLICITO SU DOCUMENTO DE IDENTIDAD', blank = True, null = True)
     calificacion_3 = models.ForeignKey(calificacion, on_delete=models.CASCADE, related_name = 'calificacion_3', blank = True, null = True)
-    pregunta_4= models.ForeignKey(Pregunta, on_delete=models.CASCADE, related_name="Pregunta_4", default = 4)
+    pregunta_4= models.CharField(max_length=70, default = 'FIRMO USTED EL ACUSE DE RECIBIDO', blank = True, null = True)
     calificacion_4 = models.ForeignKey(calificacion, on_delete=models.CASCADE, related_name = 'calificacion_4', blank = True, null = True)
     
-    pregunta_5= models.ForeignKey(Pregunta, on_delete=models.CASCADE, related_name="Pregunta_5", default = 5)
+    pregunta_5= models.CharField(max_length=70, default = 'CALIFIQUE DE 1 A 5 EL SERVICIO', blank = True, null = True)
     
     calificacion_5 = models.CharField(
         max_length=2,
@@ -133,9 +142,17 @@ class Auditoria(models.Model):
     def __str__(self):
         return str(self.entregas)
 
-    def save(self, *args, **kwargs):
-        self.entregas.estado = self.entregas.estado = 0
+    @property
+    def motivo(self):
+        return int(self.motivo_call.id)    
 
+    def save(self, *args, **kwargs):
+        
+        if  2 <= self.motivo <= 3: 
+            self.entregas.estado = self.entregas.estado = 1
+            
+        else:
+            self.entregas.estado = 0
 
         self.entregas.save()       
         super(Auditoria, self).save(*args, **kwargs)

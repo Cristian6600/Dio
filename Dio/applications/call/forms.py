@@ -2,9 +2,10 @@ from email.policy import default
 from django import forms
 from .models import Auditoria
 from applications.guia.models import Guia
-from applications.argumento.models import Motivo, Cod_vis
+from applications.argumento.models import Motivo, Cod_vis, Motivo_call
 from applications.cliente.models import Ciudad
 from django.db.models import Q
+from .models import Telefono
 
 class CallfisicoForm(forms.ModelForm):
     
@@ -104,10 +105,10 @@ class guiafisicoForm(forms.ModelForm):
             'user',   
         )
 
-class CallUpdateForm(forms.ModelForm):
+class CacUpdateForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
-        super(CallUpdateForm, self).__init__(*args, **kwargs)
+        super(CacUpdateForm, self).__init__(*args, **kwargs)
         self.fields['id_ciu'].queryset = Ciudad.objects.filter(cubrimiento = "COBERTURA")
         self.fields['mot'].queryset = Motivo.objects.filter(Q (id = 19)|Q(id = 20))
         self.fields['cod_vis'].queryset = Cod_vis.objects.filter(
@@ -185,6 +186,56 @@ class CallUpdateForm(forms.ModelForm):
                 }
             ),
             
-
 }
+
+class CallUpdateForm(forms.ModelForm):
+    
+    def __init__(self, *args, **kwargs):
+        super(CallUpdateForm, self).__init__(*args, **kwargs)
+        self.fields['motivo_call'].queryset = Motivo_call.objects.filter(Q (id = 11)|Q(id = 12))
+    
+    class Meta:
+        model = Telefono
+        fields = (
+            # 'direccion',
+            # 'id_ciu',
+            'id',
+            'motivo_call',
+            'observacion',
+               
+        )
+
+        widgets = {
+            
+            'motivo_call': forms.Select(
+                attrs = {
+                    'placeholder': 'Codigo de barras Bolsa', 'autofocus': 'autofocus',
+                    'class': 'input-group-field',
+                }
+
+            ),
+            
+            'observacion': forms.Textarea(
+                attrs = {
+                    'placeholder': 'Codigo de barras Bolsa', 'autofocus': 'autofocus',
+                    
+                }
+
+            ),
+                    
+}   
+
+class CallGuiaUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Guia
+        fields = (
+            'seudo',
+            'direccion',
+            'id_ciu',
+            
+               
+        )
+
+        
+
 

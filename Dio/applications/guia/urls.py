@@ -40,7 +40,7 @@ urlpatterns = [
     
     # path(
     #     'prueba/',
-    #     views.MesaImagenView.as_view(),
+    #     views.pruebaView.as_view(),
     #     name = 'prueba',
     # ),
 

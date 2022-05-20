@@ -1,3 +1,4 @@
+from re import template
 from django.db.models import fields
 from django.shortcuts import render
 from django.http import JsonResponse
@@ -8,7 +9,7 @@ import csv
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView, DetailView, UpdateView
+from django.views.generic import CreateView, ListView, DetailView, UpdateView, View
 from django.views.generic.detail import SingleObjectMixin
 from .forms import guiafisicoForm, ImgForm
 from . models import Guia, img
@@ -76,24 +77,20 @@ class ImgCreateView(CreateView):
     success_url = '.'
 
 
+
 @login_required
 def handleMultipleImagesUpload(request):
         if request.method == "POST":
             images = request.FILES.getlist('images')
 
             for image in images:
-                img.objects.create(image = image)
+                img.objects.create(image = image, user = request.user)
 
             uploaded_images = img.objects.all()
             return JsonResponse({"imagenes": [{"url": image.image.url} for image in uploaded_images]})
         return render(request, "index.html")  
 
-        # def form_valid(self, form):
-        #     self.object = form.save(commit=False)
-        # self.object.user = self.request.user
-        # self.object.save()
-        # return super(FisicoCreateView, self).form_valid(form)
-          
+   
 #--------Impresion por guia--------------
 class GuiaListView(CustodiaPermisoMixin, ListView):
     template_name = "guia/imprimir_guia.html"
@@ -173,6 +170,8 @@ def export_address(request):
         writer.writerow(guia)
         
     return response
+
+    
 
 # class GuiaListView(ListView):
 #     template_name = "guia/update_list_guia.html"

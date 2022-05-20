@@ -52,9 +52,9 @@ class MoniterLog(admin.ModelAdmin):
 @admin.register(img)
 class ImgAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     
-    list_display = ('id_guia', 'image', 'fecha')
+    list_display = ('id_guia', 'image', 'fecha', 'user')
     LogEntry.objects.filter(action_flag=ADDITION)
-    list_filter = ('fecha',)
+    list_filter = ('fecha', 'user')
     date_hierarchy = ('fecha')
 
     def save_model(self, request, obj, form, change):

@@ -3,7 +3,7 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 from applications.base_cliente.models import Bd_clie, Producto
 from applications.cliente.models import Ciudad, Cliente, Oficinas
-from applications.argumento.models import Estado, Motivo, Cod_vis, Proceso
+from applications.argumento.models import Estado, Motivo, Cod_vis, Proceso, Motivo_call
 # from applications.fisico.models import Fisico
 from applications.guia.models import Guia
 from django.conf import settings 
@@ -158,6 +158,8 @@ class datos_g (models.Model):
         )
 
     cantidad = models.IntegerField()
+
+    
 
     def save(self, *args, **kwargs):
         EAN = barcode.get_barcode_class('ean13')

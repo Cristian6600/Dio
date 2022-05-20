@@ -5,17 +5,14 @@ class Tipo(models.Model):
     id_tip = models.IntegerField(
         primary_key=True
     )
-
-    Tipo = models.CharField(
-        max_length=20
-    )
+    tipo = models.CharField(max_length=50)
 
     class Meta:
         verbose_name = "Tipo"
         verbose_name_plural = "Tipo"
 
     def __str__(self):
-        return str(self.Tipo)
+        return str(self.tipo)
 
 class Estado (models.Model):
     id = models.IntegerField(
@@ -46,6 +43,7 @@ class Motivo(models.Model):
         blank=True, 
         null=True
     )
+    
     def __str__(self):
         return str(self.motivo) #+ "-" + self.motivo
     
@@ -160,6 +158,7 @@ class Est_clie (models.Model):
 
 class Motivo_call(models.Model):
     motivo = models.CharField(max_length=35)
+    tipificacion = models.CharField(max_length=18)
 
     def __str__(self):
         return self.motivo
