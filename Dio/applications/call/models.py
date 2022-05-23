@@ -29,14 +29,21 @@ class Indicativo(models.Model):
         return str(self.ind)
 
 class Telefono(models.Model):
-    id = models.OneToOneField(Guia,on_delete=models.CASCADE, primary_key=True, max_length=12)
+    id = models.OneToOneField(
+        Guia,
+        on_delete=models.CASCADE, 
+        primary_key=True, 
+        max_length=12, 
+        related_query_name='telefono_guia')
     tel = models.CharField(max_length=80)
     indicativo = models.ForeignKey(
         Indicativo, 
         on_delete=models.CASCADE,
+        blank= True,
+        null=True
     )
     fecha_call = models.DateTimeField(
-        auto_now_add=True
+        auto_now=True
     )
     motivo_call = models.ForeignKey(
         Motivo_call, 
@@ -44,9 +51,16 @@ class Telefono(models.Model):
         blank=True,
         null=True)
     observacion = models.TextField(max_length=200)
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE, 
+        blank=True, null=True, 
+        verbose_name= 'Usuario call'
+    )
     
     def __str__(self):
-        return str(self.tel)
+        return str(self.id)
 
     @property
     def telefono(self):

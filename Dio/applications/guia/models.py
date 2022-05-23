@@ -1,5 +1,6 @@
 # from asyncio.windows_events import NULL
 from contextlib import nullcontext
+from msilib.schema import Class
 from django.db import models
 from django.dispatch import receiver
 from django.db.models.signals import post_save
@@ -290,9 +291,21 @@ def optimize_image(sender, instance, **kwargs):
 post_save.connect(optimize_image, sender = img)
  
 
- 
-    
+###Esto es una prueba para second form eliminar 
 
+class Guiap(models.Model):#Guia
+    seudof = models.IntegerField(primary_key=True)
+    nombre = models.CharField(max_length=50)
+    apellidos = models.CharField(max_length=70)
+    edad = models.IntegerField()
+    telefono = models.CharField(max_length=12)
+    email = models.EmailField()
+    domicilio = models.TextField()
+    
+class TelefonoP(models.Model):
+    personap = models.ForeignKey(Guiap, on_delete=models.CASCADE)
+    numero_mascotas = models.IntegerField()
+    razones = models.TextField()
     
     
 
