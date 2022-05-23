@@ -162,3 +162,9 @@ class Motivo_call(models.Model):
 
     def __str__(self):
         return self.motivo
+
+class Franquicia(models.Model):
+    franqucia = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.franqucia

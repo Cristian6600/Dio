@@ -114,7 +114,7 @@ class CallListView(CallPermisoMixin, ListView):
     paginate_by = 5
 
     def get_queryset(self, **kwargs):
-        
+        franquicia = self.request.GET.get("franquicia")
         producto = self.request.GET.get("producto", "")
         reason = self.request.GET.get("reason", "")
         seudo = self.request.GET.get("kword", "")
@@ -129,7 +129,8 @@ class CallListView(CallPermisoMixin, ListView):
             Q(d_i__icontains =seudo)|
             Q(id_guia__icontains = seudo)
         #).order_by("-motivo_call"
-        ).exclude(mot = 1).exclude(mot = 22).exclude(mot = 21).exclude(mot = 20).exclude(mot=19).exclude(telefono_guia__motivo_call= 11).exclude(telefono_guia__motivo_call= 12)
+        ).exclude(mot = 1).exclude(mot = 22).exclude(mot = 21).exclude(mot = 20).exclude(mot=19).exclude(telefono_guia__motivo_call= 11).exclude(
+            telefono_guia__motivo_call= 12).filter(seudo__franquicia = franquicia)
         # .filter(
         #     Q(seudo__seudo_bd__icontains=seudo)|
         #     Q(id_ciu__ciudad__icontains = seudo)|

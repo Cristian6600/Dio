@@ -4,7 +4,7 @@ from import_export import resources
 from . models import (
     Estado, Motivo, Cod_vis,
     Nom_producto, Emision, Est_clie, 
-    Proceso, Producto, Motivo_call, Tipo
+    Proceso, Producto, Motivo_call, Tipo, Franquicia
     )
 
 #---------------------------------------------------------------------
@@ -65,3 +65,7 @@ class productoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 @admin.register(Tipo)
 class productoAdmin(admin.ModelAdmin):
     list_display = ('tipo',)
+
+@admin.register(Franquicia)
+class productoAdmin(admin.ModelAdmin):
+    list_display = ('id','franqucia',)

@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings 
 from applications.cliente.models import Cliente, Oficinas
-from applications.argumento.models import Nom_producto, Proceso, Emision, Producto, Est_clie
+from applications.argumento.models import Nom_producto, Proceso, Emision, Producto, Est_clie, Franquicia
 from django.contrib.auth.models import User    
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -113,6 +113,8 @@ class Bd_clie (models.Model):
         choices=TIPOS,)
 
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE, blank = True, null=True)
+
+    franquicia= models.ForeignKey(Franquicia, on_delete=models.CASCADE, blank = True, null=True)
 
     objects = BdManager()
 
