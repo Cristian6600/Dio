@@ -24,10 +24,10 @@ class CallfisicoForm(forms.ModelForm):
                 }
             ),
 
-            'pregunta_1': forms.Select(
+            'pregunta_1': forms.TextInput(
                 attrs = {
                     'class': 'input-group-field', 
-                    # 'disabled' : 'disabled'
+                    'disabled' : 'disabled'
                 }
             ),
             'calificacion_1': forms.Select(
@@ -36,10 +36,10 @@ class CallfisicoForm(forms.ModelForm):
                     'width': 1100
                 }
             ),
-            'pregunta_2': forms.Select(
+            'pregunta_2': forms.TextInput(
                 attrs = {
                     'class': 'input-group-field',
-                    
+                    'disabled' : 'disabled'
                     
                 }
             ),
@@ -49,10 +49,10 @@ class CallfisicoForm(forms.ModelForm):
                     
                 }
             ),
-            'pregunta_3': forms.Select(
+            'pregunta_3': forms.TextInput(
                 attrs = {
                     'class': 'input-group-field',
-                    
+                    'disabled' : 'disabled'
                 }
             ),
             'calificacion_3': forms.Select(
@@ -61,10 +61,10 @@ class CallfisicoForm(forms.ModelForm):
                     
                 }
             ),
-            'pregunta_4': forms.Select(
+            'pregunta_4': forms.TextInput(
                 attrs = {
                     'class': 'input-group-field',
-                    
+                    'disabled' : 'disabled'
                 }
             ),
             'calificacion_4': forms.Select(
@@ -72,10 +72,10 @@ class CallfisicoForm(forms.ModelForm):
                     'class': 'input-group-field',
                 }
             ),
-            'pregunta_5': forms.Select(
+            'pregunta_5': forms.TextInput(
                 attrs = {
                     'class': 'input-group-field',
-                    
+                    'disabled' : 'disabled'
                 }
             ),
             'calificacion_5': forms.Select(
@@ -244,7 +244,7 @@ class CallGuiaUpdateForm(forms.ModelForm):
                     'autocomplete': "off"
                 }
             ),
-            
+
             'id_ciu': forms.Select(
                 attrs = {
                     'class': 'input-group-field',
