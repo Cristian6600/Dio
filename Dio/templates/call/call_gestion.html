@@ -61,8 +61,8 @@
 
 
     <h5 class="cell" style="text-align: center;">Gestion</h5>
-    
-      <table class="table-scroll">
+    <div class="table-scroll">
+        <table>
         <thead>
             
             <th>Seudo</th>
@@ -105,7 +105,8 @@
             
             {% endfor %}
         </tbody>
-    </table>
+        </table>
+    </div>
     
     <div class="cell">
         {% if is_paginated %}
