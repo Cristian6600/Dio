@@ -77,7 +77,7 @@ class CacListView(CallPermisoMixin, ListView):
     context_object_name = 'call'
     # queryset = Guia.objects.filter(Q(id_est = 3), Q(mot=5) | Q(mot=6)| Q(mot=7)| Q(mot=8)). order_by('-fecha')
     # context_object_name = 'call'
-    paginate_by = 5
+    paginate_by = 3
 
     def get_queryset(self, **kwargs):
         
