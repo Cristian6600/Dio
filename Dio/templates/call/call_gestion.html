@@ -4,17 +4,16 @@
 
 {% block panel-content %}
 
-<h1>Call</h1>
 
-<form class="cell grid-x grid-margin-x" method="GET">{% csrf_token %}
+<form  method="GET">{% csrf_token %}
     <div class="grid-container">
-        <div class="grid-x grid-padding-x">
-            <div class="medium-6 cell">
+        <div class="grid-x grid-margin-x">
+            <div class="cell small-4">
                 <label>Seudo, Ciudad
                     <input class="input-group-field" type="text" id="kword" name="kword" placeholder="Seudocodigo o Ciudad ...">
                 </label>
             </div>
-              <div class="medium-6 cell">
+            <div class="cell small-4">
                 <label>Producto
                     <select name="producto" id="producto" class="cell medium-4">
                         <option value="" selected></option>
@@ -30,33 +29,40 @@
                 </label>
               </div>
              
+            <div class="cell small-4">
+                <label>Por fecha
+                    <input type="date" name="date_start" id="date_start" class="cell medium-4">
+                </label>
+            </div>
+        </div>
 
-      <div class="cell grid-x grid-margin-x">
-          <p class="cell">Por Fecha:</p>
-          <input type="date" name="date_start" id="date_start" class="cell medium-4">
-          <select name="reason" id="reason " class="cell medium-4">
-            <option value="" selected></option>
-            <option value="Destinatario Desconocido">Destinatario Desconocido</option>
-            <option value="Direccion Incompleta">Direccion Incompleta</option>
-            <option value="Direccion no existe">Direccion no existe</option>
-            <option value="Cambio de domicilio">Cambio de domicilio</option>
-          </select>
-          {% for e in prueba %}
-                
-                    <p>{{e.mensajero}}</p>
-
-                {% endfor %}
-            
-          <button class="cell medium-4 button success">Filtrar</button>
-      </div>
+        <div class="grid-x grid-margin-x">
+            <div class="cell small-4">
+                <label>Motivo
+                    <select name="reason" id="reason " class="cell medium-4">
+                        <option value="" selected></option>
+                        <option value="Destinatario Desconocido">Destinatario Desconocido</option>
+                        <option value="Direccion Incompleta">Direccion Incompleta</option>
+                        <option value="Direccion no existe">Direccion no existe</option>
+                        <option value="Cambio de domicilio">Cambio de domicilio</option>
+                    </select>
+                </label>
+            </div>
+            <div class="cell small-4">
+                <label>Guardar
+                    <button class="cell medium-4 button success">Filtrar</button>
+                </label>
+            </div>
+        </div>
+      
     </div>
-</div>
-    </form>
+    
+    
 
-<div class="cell grid-x grid-margin-x">
-    <h5 class="cell" style="text-align: center;">Gestions</h5>
-    <div class="stack">
-      <table>
+
+    <h5 class="cell" style="text-align: center;">Gestion</h5>
+    
+      <table class="table-scroll">
         <thead>
             
             <th>Seudo</th>
@@ -111,7 +117,6 @@
                 </li>
                 {% endif %}
                 
-    
                 <li class="current"><span class="show-for-sr">You're on page</span> Pagina {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.</li>
                 
                 <li class=""><a href="?page={{pagina}}">{{ pagina }}</a></li>
@@ -124,8 +129,6 @@
             </ul>
         </nav>
         {% endif %}
-</div>
-
-
+    </form>
 
 {% endblock panel-content %}
