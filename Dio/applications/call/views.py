@@ -96,13 +96,6 @@ class CacListView(CallPermisoMixin, ListView):
             Q(id_guia__icontains = seudo)
         ).order_by("-motivo_call"
         ).exclude(mot = 1).exclude(mot = 22).exclude(mot = 21).exclude(mot = 20).exclude(mot=19)
-        # .filter(
-        #     Q(seudo__seudo_bd__icontains=seudo)|
-        #     Q(id_ciu__ciudad__icontains = seudo)|
-        #     Q(d_i__icontains =seudo)|
-        #     Q(id_guia__icontains = seudo)
-        #     ).filter(mot__motivo__icontains = reason).order_by("-motivo_call"
-        #     ).exclude(mot = 1).exclude(mot = 22).exclude(mot = 21).exclude(mot = 20).exclude(mot=19)
         
         return lista
 
@@ -111,7 +104,7 @@ class CallListView(CallPermisoMixin, ListView):
     context_object_name = 'call'
     # queryset = Guia.objects.filter(Q(id_est = 3), Q(mot=5) | Q(mot=6)| Q(mot=7)| Q(mot=8)). order_by('-fecha')
     # context_object_name = 'call'
-    paginate_by = 5
+    paginate_by = 3
 
     def get_queryset(self, **kwargs):
         
