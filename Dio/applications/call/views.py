@@ -3,10 +3,10 @@ from re import template
 from django.shortcuts import render
 from django.views.generic.edit import UpdateView
 from django.views.generic import ListView, CreateView
-from applications.guia.models import Guia, Guiap, TelefonoP
+from applications.guia.models import Guia
 from applications.call.models import Auditoria
 from django.urls import reverse_lazy
-from .forms import CallfisicoForm, CallUpdateForm, CacUpdateForm, CallGuiaUpdateForm, SolicitudForm, PersonaForm
+from .forms import CallfisicoForm, CallUpdateForm, CacUpdateForm, CallGuiaUpdateForm, TelefonoMotivoForm
 from django.db.models import Q
 from applications.users.mixins import CallPermisoMixin
 from . models import Telefono
@@ -62,13 +62,11 @@ class CallUpdateView(CallPermisoMixin, UpdateView):
         else:
             return HttpResponseRedirect(self.get_success_url())
 
-            
 
-    
 class CallEstadoUpdateView(UpdateView):
     template_name = "call/update-estado-call.html"
-    model = Telefono
-    fields = ['motivo_call', 'observacion']
+    form_class = TelefonoMotivoForm
+    model= Telefono
     success_url = reverse_lazy('call_app:call-consultar')
 
     
@@ -136,8 +134,6 @@ class CallListView(CallPermisoMixin, ListView):
         
         return lista
 
-
-
 class AuditoriaListView(ListView):
     template_name = "call/auditoria.html"
     context_object_name = 'auditoria'
@@ -170,43 +166,5 @@ class AuditoriaCreateView(CreateView):
         self.object.save()
         return super(AuditoriaCreateView, self).form_valid(form)
 
-
-     
-#Vista eliminarfd-----------------------------------------
-class SolicitudUpdate(UpdateView):
-    model = TelefonoP
-    second_model = Guiap
-    template_name = 'call/solicitud_form.html'
-    form_class = SolicitudForm
-    second_form_class = PersonaForm
-    success_url = reverse_lazy('adopcion:solicitud_listar')
-
-
-    def get_context_data(self, **kwargs):
-        context = super(SolicitudUpdate, self).get_context_data(**kwargs)
-        pk = self.kwargs.get('pk', 0)
-        telefono = self.model.objects.get(id=pk)
-        guia = self.second_model.objects.get(seudof=telefono.id)
-        if 'form' not in context:
-           context['form'] = self.form_class()
-        if 'form2' not in context:
-            context['form2'] = self.second_form_class(instance=guia)
-        context['id'] = pk
-        return context
-
-    def post(self, request, *args, **kwargs):
-        self.object = self.get_object
-        id_solicitud = kwargs['pk']
-        telefono = self.model.objects.get(id=id_solicitud)
-        guia = self.second_model.objects.get(seudof=telefono.id)
-        form = self.form_class(request.POST, instance=telefono)
-        form2 = self.second_form_class(request.POST, instance=guia)
-        if form.is_valid() and form2.is_valid():
-            form.save()
-            form2.save()
-            return HttpResponseRedirect(self.get_success_url())
-        else:
-            return HttpResponseRedirect(self.get_success_url())
-        print("HOola")
 
 

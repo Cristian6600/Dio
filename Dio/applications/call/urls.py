@@ -1,6 +1,5 @@
 from django.urls import path
 from . import views
-from applications.call.views import  SolicitudUpdate
 from django.contrib.auth.views import login_required
 from django.conf.urls import url
 	
@@ -49,13 +48,7 @@ urlpatterns = [
          views.CallUpdateView.as_view(),
          name='call-update',
     ),
-    # url(r'^solicitud/editar/(?P<pk>\d+)$', login_required(SolicitudUpdate.as_view()), name='solicitud_editar'),
-    # 
-    path(
-        'solicitud/editar/<int:pk>/',
-         views.SolicitudUpdate.as_view(),
-         name='call-updatesss',
-    ),
+    
     ]
 
      

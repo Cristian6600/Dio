@@ -2,7 +2,7 @@ from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
 from related_admin import RelatedFieldAdmin
 from django.contrib.admin.models import ADDITION, LogEntry, CHANGE
-from . models import Servicio, Guia, img, Guiap, TelefonoP
+from . models import Servicio, Guia, img
 from simple_history.admin import SimpleHistoryAdmin
 from import_export import resources
 
@@ -62,20 +62,8 @@ class ImgAdmin(ImportExportModelAdmin, admin.ModelAdmin):
             obj.user = request.user 
         obj.save()
 
-
 #Elimnar son de una prueba
 
-@admin.register(Guiap)
-class ImgAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    
-    list_display = ('nombre', 'apellidos')
-    
-
-@admin.register(TelefonoP)
-class ImgAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    
-    list_display = ('razones', 'numero_mascotas')
-    
 admin.site.register(Servicio)
 admin.site.register(LogEntry, MoniterLog)
 

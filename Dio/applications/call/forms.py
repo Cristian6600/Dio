@@ -1,7 +1,7 @@
 from email.policy import default
 from django import forms
 from .models import Auditoria
-from applications.guia.models import Guia, Guiap, TelefonoP
+from applications.guia.models import Guia
 from applications.argumento.models import Motivo, Cod_vis, Motivo_call
 from applications.cliente.models import Ciudad
 from django.db.models import Q
@@ -190,20 +190,13 @@ class CacUpdateForm(forms.ModelForm):
 
 class CallUpdateForm(forms.ModelForm):
     
-    # def __init__(self, *args, **kwargs):
-    #     super(CallUpdateForm, self).__init__(*args, **kwargs)
-    #     self.fields['motivo_call'].queryset = Motivo_call.objects.filter(Q (id = 11)|Q(id = 12))
+    def __init__(self, *args, **kwargs):
+        super(CallUpdateForm, self).__init__(*args, **kwargs)
+        self.fields['motivo_call'].queryset = Motivo_call.objects.filter(Q (id = 11)|Q(id = 12))
     
-    class Meta:
+    class Meta:     
         model = Telefono
         exclude = ('user', 'tel', 'indicativo', 'id')
-            # 'direccion',
-            # 'id_ciu',
-            # 'id',
-            # 'motivo_call',
-            # 'observacion',
-               
-        # )
 
         widgets = {
             
@@ -251,54 +244,14 @@ class CallGuiaUpdateForm(forms.ModelForm):
                 }
             )
     }
+
+class TelefonoMotivoForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(TelefonoMotivoForm, self).__init__(*args, **kwargs)
+        self.fields['motivo_call'].queryset = Motivo_call.objects.exclude(Q (id = 11)|Q(id = 12))
+
+    class Meta:
+        model = Telefono
+        fields = ('observacion', 'motivo_call')
+
         
-####forms prueba doble formulario eliminar 
-
-class PersonaForm(forms.ModelForm):
-    
-	class Meta:
-		model = Guiap
-		fields = [
-			'nombre',
-			'apellidos',
-			'edad',
-			'telefono',
-			'email',
-			'domicilio',
-		]
-		labels = {
-			'nombre': 'Nombre',
-			'apellidos': 'Apellidos',
-			'edad': 'Edad',
-			'telefono': 'Teléfono',
-			'email': 'Correo electrónico',
-			'domicilio': 'Domicilio',
-		}
-		widgets = {
-			'nombre':forms.TextInput(attrs={'class':'form-control'}),
-			'apellidos':forms.TextInput(attrs={'class':'form-control'}),
-			'edad':forms.TextInput(attrs={'class':'form-control'}),
-			'telefono':forms.TextInput(attrs={'class':'form-control'}),
-			'email':forms.TextInput(attrs={'class':'form-control'}),
-			'domicilio':forms.Textarea(attrs={'class':'form-control'}),
-		}
-
-
-class SolicitudForm(forms.ModelForm):
-
-	class Meta:
-		model = TelefonoP
-		fields = [
-			'numero_mascotas',
-			'razones',	
-		]
-		labels = {
-			'numero_mascotas': 'Numero de mascotas',
-			'razones': 'Razones para adoptar',
-			
-		}
-		widgets = {
-			'numero_mascotas':forms.TextInput(attrs={'class':'form-control'}),
-			'razones':forms.Textarea(attrs={'class':'form-control'}),
-		}
-

@@ -289,7 +289,6 @@ def optimize_image(sender, instance, **kwargs):
         
 post_save.connect(optimize_image, sender = img)
  
-
 ###Esto es una prueba para second form eliminar 
 
 class Guiap(models.Model):#Guia
@@ -301,10 +300,7 @@ class Guiap(models.Model):#Guia
     email = models.EmailField()
     domicilio = models.TextField()
     
-class TelefonoP(models.Model):
-    personap = models.ForeignKey(Guiap, on_delete=models.CASCADE)
-    numero_mascotas = models.IntegerField()
-    razones = models.TextField()
+
     
     
 
