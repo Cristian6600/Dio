@@ -143,7 +143,7 @@ class CallListView(CallPermisoMixin, ListView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(CallListView, self).get_context_data(*args, **kwargs)
-        context['call'] = self.get_queryset()
+        context['call'] = self.get_queryset()[:3]
         context['count'] = Telefono.objects.filter(user=self.request.user).count
 
         return context
