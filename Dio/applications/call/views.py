@@ -37,6 +37,7 @@ class CallUpdateView(CallPermisoMixin, UpdateView):
     
     def get_context_data(self, **kwargs):
         context = super(CallUpdateView, self).get_context_data(**kwargs)
+        
         pk = self.kwargs.get('pk', 0)
         telefono = self.model.objects.get(id=pk)
         guia = self.second_model.objects.get(seudo_id=telefono.id)
@@ -56,11 +57,19 @@ class CallUpdateView(CallPermisoMixin, UpdateView):
         form = self.form_class(request.POST, instance=telefono)
         form2 = self.second_form_class(request.POST, instance=guia)
         if form.is_valid() and form2.is_valid():
+            self.object = form.save(commit=False)
+            self.object.user = self.request.user
             form.save()
             form2.save()
             return HttpResponseRedirect(self.get_success_url())
         else:
             return HttpResponseRedirect(self.get_success_url())
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return super(CallUpdateView, self).form_valid(form)
 
 
 class CallEstadoUpdateView(UpdateView):
@@ -69,6 +78,11 @@ class CallEstadoUpdateView(UpdateView):
     model= Telefono
     success_url = reverse_lazy('call_app:call-consultar')
 
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return super(CallEstadoUpdateView, self).form_valid(form)
     
 class CacListView(CallPermisoMixin, ListView):
     template_name = "call/cac_gestion.html"
@@ -124,15 +138,15 @@ class CallListView(CallPermisoMixin, ListView):
             mot = 21).exclude(mot = 20).exclude(mot=19).exclude(
             telefono_guia__motivo_call= 11).exclude(
             telefono_guia__motivo_call= 12)
-        # .filter(
-        #     Q(seudo__seudo_bd__icontains=seudo)|
-        #     Q(id_ciu__ciudad__icontains = seudo)|
-        #     Q(d_i__icontains =seudo)|
-        #     Q(id_guia__icontains = seudo)
-        #     ).filter(mot__motivo__icontains = reason).order_by("-motivo_call"
-        #     ).exclude(mot = 1).exclude(mot = 22).exclude(mot = 21).exclude(mot = 20).exclude(mot=19)
-        
+    
         return lista
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(CallListView, self).get_context_data(*args, **kwargs)
+        context['call'] = self.get_queryset()
+        context['count'] = Telefono.objects.filter(user=self.request.user).count
+
+        return context
 
 class AuditoriaListView(ListView):
     template_name = "call/auditoria.html"
