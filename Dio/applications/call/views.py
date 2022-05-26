@@ -147,6 +147,7 @@ class CallListView(CallPermisoMixin, ListView):
         context['count'] = Telefono.objects.filter(user=self.request.user).count
 
         return context
+        #p
 
 class AuditoriaListView(ListView):
     template_name = "call/auditoria.html"
