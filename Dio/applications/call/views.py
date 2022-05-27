@@ -11,6 +11,7 @@ from django.db.models import Q
 from applications.users.mixins import CallPermisoMixin
 from . models import Telefono
 from django.http import HttpResponse, HttpResponseRedirect
+from applications.courrier.models import courrier
 
 
 class CacUpdateView(CallPermisoMixin, UpdateView):
@@ -120,6 +121,7 @@ class CallListView(CallPermisoMixin, ListView):
 
     def get_queryset(self, **kwargs):
         
+        mensajero = self.request.GET.get("id")
         producto = self.request.GET.get("producto", "")
         reason = self.request.GET.get("reason", "")
         seudo = self.request.GET.get("kword", "")
@@ -127,7 +129,8 @@ class CallListView(CallPermisoMixin, ListView):
         lista = Guia.objects.filter(id_est = 3, 
             producto__producto__contains = producto,
             mot__motivo__icontains = reason,
-            fecha_recepcion__icontains = fecha
+            fecha_recepcion__icontains = fecha).filter(mensajero__courrier__icontains = mensajero
+            
         ).filter(
             Q(seudo__seudo_bd__icontains=seudo)|
             Q(id_ciu__ciudad__icontains = seudo)|
@@ -141,10 +144,15 @@ class CallListView(CallPermisoMixin, ListView):
     
         return lista
 
+    def get_mensajero(self,):
+        queryset = courrier.objects.all()
+        return queryset
+
     def get_context_data(self, *args, **kwargs):
         context = super(CallListView, self).get_context_data(*args, **kwargs)
         context['call'] = self.get_queryset()[:3]
         context['count'] = Telefono.objects.filter(user=self.request.user).count
+        context['mensajero'] = self.get_mensajero()
 
         return context
         #p

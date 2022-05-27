@@ -7,6 +7,7 @@ from applications.cliente.models import Ciudad
 from django.db.models import Q
 from .models import Telefono
 
+
 class CallfisicoForm(forms.ModelForm):
     
     class Meta:
@@ -254,4 +255,3 @@ class TelefonoMotivoForm(forms.ModelForm):
         model = Telefono
         fields = ('observacion', 'motivo_call')
 
-        
