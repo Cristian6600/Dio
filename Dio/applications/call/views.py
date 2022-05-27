@@ -129,7 +129,7 @@ class CallListView(CallPermisoMixin, ListView):
         lista = Guia.objects.filter(id_est = 3, 
             producto__producto__contains = producto,
             mot__motivo__icontains = reason,
-            fecha_recepcion__icontains = fecha).filter(mensajero__courrier__icontains = mensajero
+            fecha_recepcion__icontains = fecha
             
         ).filter(
             Q(seudo__seudo_bd__icontains=seudo)|
