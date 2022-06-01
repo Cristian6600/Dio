@@ -38,7 +38,7 @@ class AsignarForm(forms.ModelForm):
         self.request = kwargs.pop("request")
         super(AsignarForm, self).__init__(*args, **kwargs)
 
-        self.fields["full_name"].queryset = courrier.objects.filter(id_ciu__departamento=self.request.user.ciudad.departamento)
+        self.fields["full_name"].queryset = courrier.objects.filter(id_ciu__departamento=self.request.user.ciudad.departamento, est_courrier= True)
 
     
 
