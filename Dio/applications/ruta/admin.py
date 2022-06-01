@@ -9,6 +9,13 @@ from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.utils.text import format_lazy
 from applications.fisico.models import Fisico
 from simple_history.admin import SimpleHistoryAdmin
+from import_export import resources
+
+class PlanillaResource(resources.ModelResource):
+    class Meta:
+        model = Planilla
+
+        fields = ('guia', 'guia__direccion', 'guia__destinatario', 'guia__id_ciu', 'guia__bolsa', 'full_name__courrier')
 
 class Recepinline (admin.StackedInline):
     model = Fisico
@@ -37,11 +44,12 @@ class CargueAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 
 @admin.register(Planilla)
 class PlanillaAdmin(ImportExportModelAdmin, SimpleHistoryAdmin, admin.ModelAdmin):
-    # resource_class = PlanillaResource
     list_display = ('id','guia', 'full_name',  'fecha', 'user')
     search_fields = ('id', 'guia__id_guia')
-    list_filter = ('full_name',)
+    list_filter = ('full_name', 'fecha')
     list_per_page = 10
+    date_hierarchy = ('fecha')
+    resource_class = PlanillaResource
 
 @admin.register(Recepcion)
 class RecepcionAdmin(ImportExportModelAdmin, RelatedFieldAdmin):
