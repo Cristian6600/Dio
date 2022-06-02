@@ -17,6 +17,11 @@ class PlanillaResource(resources.ModelResource):
 
         fields = ('guia', 'guia__direccion', 'guia__destinatario', 'guia__id_ciu', 'guia__bolsa', 'full_name__courrier')
 
+        # def export(self, queryset=None, *args, **kwargs):
+        #     # For example only export objects with ids in 1, 2, 3 and 4
+        #     queryset = queryset and queryset.latest('fecha')
+        #     return super(PlanillaResource, self).export(queryset, *args, **kwargs)
+
 class Recepinline (admin.StackedInline):
     model = Fisico
     fields = ('recepcion',)
@@ -50,6 +55,7 @@ class PlanillaAdmin(ImportExportModelAdmin, SimpleHistoryAdmin, admin.ModelAdmin
     list_per_page = 10
     date_hierarchy = ('fecha')
     resource_class = PlanillaResource
+
 
 @admin.register(Recepcion)
 class RecepcionAdmin(ImportExportModelAdmin, RelatedFieldAdmin):

@@ -34,14 +34,15 @@ class CargueForm(forms.ModelForm):
         
 
 class AsignarForm(forms.ModelForm):   
+   
+
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop("request")
         super(AsignarForm, self).__init__(*args, **kwargs)
-
-        self.fields["full_name"].queryset = courrier.objects.filter(id_ciu__departamento=self.request.user.ciudad.departamento, est_courrier= True)
-
+        self.fields['full_name'].queryset = courrier.objects.filter(est_courrier= True)
+        # self.fields["full_name"].queryset = courrier.objects.filter(id_ciu__departamento=self.request.user.ciudad.departamento, est_courrier= True)
     
-
+    
     class Meta:
         model = Planilla
         fields = ['full_name', 'guia', 'user']
