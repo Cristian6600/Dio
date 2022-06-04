@@ -76,36 +76,6 @@ class Guia(Fisico, TimeStampedModel):
         blank=True,
     )  
 
-    m = models.IntegerField(
-        default=1, 
-        null=True, 
-        blank = True
-    )
-    ancho = models.IntegerField(
-        default=1,
-        null=True, 
-        blank = True
-    )
-    alto = models.IntegerField(
-        default=1,
-        null=True, 
-        blank = True
-    )
-    largo = models.IntegerField(
-        default=1,
-        null=True, 
-        blank = True
-    )
-    copia = models.IntegerField(
-        default=1,
-        null=True, 
-        blank = True
-    )
-    unidad = models.IntegerField(
-        default=1, 
-        null=True, 
-        blank = True
-    )
     contiene = models.CharField(
         max_length = 50, 
         null=True, 
@@ -120,16 +90,8 @@ class Guia(Fisico, TimeStampedModel):
         null=True, 
         blank = True
     )
-    acarreo = models.IntegerField(
-        default=0,
-        null=True, 
-        blank = True
-    )
-    flete = models.IntegerField(
-        default=0,
-        null=True, 
-        blank = True
-    )
+    
+    
     declarado = models.IntegerField(
         default=0,
         null=True, 
