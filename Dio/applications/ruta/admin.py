@@ -12,15 +12,22 @@ from simple_history.admin import SimpleHistoryAdmin
 from import_export import resources
 
 class PlanillaResource(resources.ModelResource):
+    guia = Field(attribute='guia', column_name='GUIA')
+    guia__direccion = Field(attribute='guia__direccion', column_name='DIRECCION')
+    guia__destinatario = Field(attribute='guia__destinatario', column_name='DESTINATARIO')
+    guia__id_ciu = Field(attribute='guia__id_ciu', column_name='CIUDAD')
+    guia__bolsa = Field(attribute='guia__bolsa', column_name='BOLSA')
+    full_name__courrier = Field(attribute='full_name__courrier', column_name='COURRIER')
+    guia__fecha_recepcion = Field(attribute='guia__fecha_recepcion', column_name='FECHA RECEPCION')
+
     class Meta:
         model = Planilla
 
-        fields = ('guia', 'guia__direccion', 'guia__destinatario', 'guia__id_ciu', 'guia__bolsa', 'full_name__courrier')
-
-        # def export(self, queryset=None, *args, **kwargs):
-        #     # For example only export objects with ids in 1, 2, 3 and 4
-        #     queryset = queryset and queryset.latest('fecha')
-        #     return super(PlanillaResource, self).export(queryset, *args, **kwargs)
+        fields = (
+            'guia', 'guia__direccion', 
+            'guia__destinatario', 'guia__id_ciu', 
+            'guia__bolsa', 'full_name__courrier',
+            'guia__fecha_recepcion')
 
 class Recepinline (admin.StackedInline):
     model = Fisico

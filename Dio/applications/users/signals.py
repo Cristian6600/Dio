@@ -7,4 +7,6 @@ from applications.users.models import User, Profile
 def create_user_profile(sender, instance, created, **kwargs):
     
     if created:
-        Profile.objects.create(id=instance)
+        Profile.objects.create(
+            id=instance,
+            )

@@ -6,7 +6,6 @@ from . models import Servicio, Guia, img
 from simple_history.admin import SimpleHistoryAdmin
 from import_export import resources
 
-
 class GuiaResource(resources.ModelResource):
     
     class Meta:
@@ -15,7 +14,7 @@ class GuiaResource(resources.ModelResource):
 #---------------------------------------------------------
 @admin.register(Guia)
 class guiaAdmin(ImportExportModelAdmin, SimpleHistoryAdmin, RelatedFieldAdmin):
-    history_list_display = ["mot", "fecha_recepcion"]
+    history_list_display = ["mot", "fecha_recepcion", "direccion", "courrier"]
     resource_class = GuiaResource
     date_hierarchy = ('fecha')
     list_per_page = 5
@@ -29,11 +28,17 @@ class guiaAdmin(ImportExportModelAdmin, SimpleHistoryAdmin, RelatedFieldAdmin):
         ('Estados', {'fields':[
                 
             ('id_est', 'mot', 'id_ser',), 
-            ('cod_vis', 'id_clie', 'proceso'),
+            ('cod_vis', 'proceso'),
             ('cantidad_vi', 'cantidad', 'codigo', ), ]}) 
     ]
     search_fields = ('id_guia', 'seudo__seudo_bd', 'mot__motivo', 'd_i')
-    list_display = ('id_guia', 'image_mesa__image', 'mot__motivo', 'd_i', 'fecha_recepcion', 'seudo', 'direccion', 'id_ciu', 'fecha', 'user', 'destinatario', 'mensajero', 'estado')
+    list_display = (
+        'id_guia', 'image_mesa__image', 
+        'mot__motivo', 'd_i', 'tel', 
+        'fecha_recepcion', 'seudo', 
+        'direccion', 'id_ciu', 'fecha', 
+        'user', 'destinatario', 
+        'mensajero', 'estado')
     ordering = ('id_guia',)
     list_filter = ('user', 'id_ciu__departamento','fecha_recepcion', 'mot__motivo','id_est')
     
@@ -45,7 +50,11 @@ class guiaAdmin(ImportExportModelAdmin, SimpleHistoryAdmin, RelatedFieldAdmin):
     
 class MoniterLog(admin.ModelAdmin):
     
-    list_display = ('action_time','user','content_type','object_repr','change_message','action_flag')
+    list_display = (
+        'action_time','user',
+        'content_type','object_repr',
+        'change_message','action_flag'
+        )
     list_filter = ['action_time','user','content_type']
     ordering = ('-action_time',)
 

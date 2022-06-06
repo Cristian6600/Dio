@@ -137,6 +137,7 @@ class Fisico(Fisi_pa, Bolsa):
     destino = models.CharField(
         max_length=60, 
         blank=True, null=True)
+        
 
     estado_destino = models.BooleanField(default=False)
 

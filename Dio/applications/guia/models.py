@@ -63,12 +63,6 @@ class Guia(Fisico, TimeStampedModel):
         blank=True, 
         null=True,
     )
-
-    id_clie = models.ForeignKey(
-        Cliente,
-        on_delete = models.CASCADE,
-        blank=True, null=True)
-
         
     barrio = models.CharField(
         max_length = 70,
@@ -90,8 +84,7 @@ class Guia(Fisico, TimeStampedModel):
         null=True, 
         blank = True
     )
-    
-    
+     
     declarado = models.IntegerField(
         default=0,
         null=True, 
@@ -117,15 +110,12 @@ class Guia(Fisico, TimeStampedModel):
         blank = True
     )
     
-
     oficina= models.ForeignKey(
         Oficinas, 
         on_delete= models.CASCADE,
         blank=True,
         null=True,
         )
-    
-    
     
     history = HistoricalRecords()    
 
