@@ -18,7 +18,8 @@ class PlanillaResource(resources.ModelResource):
     guia__id_ciu = Field(attribute='guia__id_ciu', column_name='CIUDAD')
     guia__bolsa = Field(attribute='guia__bolsa', column_name='BOLSA')
     full_name__courrier = Field(attribute='full_name__courrier', column_name='COURRIER')
-    guia__fecha_recepcion = Field(attribute='guia__fecha_recepcion', column_name='FECHA RECEPCION')
+    guia__fecha_recepcion = Field(attribute='guia__fecha_recepcion', column_name='FECHA GESTION')
+    guia__mot = Field(attribute='guia__mot', column_name='CALIFICACION')
 
     class Meta:
         model = Planilla
@@ -27,7 +28,7 @@ class PlanillaResource(resources.ModelResource):
             'guia', 'guia__direccion', 
             'guia__destinatario', 'guia__id_ciu', 
             'guia__bolsa', 'full_name__courrier',
-            'guia__fecha_recepcion')
+            'guia__fecha_recepcion', 'guia__mot')
 
 class Recepinline (admin.StackedInline):
     model = Fisico

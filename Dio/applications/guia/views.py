@@ -55,7 +55,7 @@ class FisicoCreateView(CustodiaPermisoMixin, LoginRequiredMixin, CreateView, Lis
         return Guia.objects.filter(user=self.request.user).order_by('-fecha')[:5]
 
     def get_cantidad(self):
-        return Guia.objects.filter(user=self.request.user)
+        return Guia.objects.filter(user=self.request.user).filter('fecha__day')
         # return Guia.objects.filter(user=self.request.user, fecha=date.today()).count()
 
     def form_valid(self, form):

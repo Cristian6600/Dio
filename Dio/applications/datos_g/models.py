@@ -280,6 +280,14 @@ class Cubrimiento(models.Model):
       direccion_cita = models.CharField(max_length=180)
       postal = models.IntegerField()
 
+class Agenda(models.Model):
+    id_agenda = models.OneToOneField(
+        Guia,
+        on_delete=models.CASCADE,
+        primary_key=True,
+        related_name= 'agenda'
+        
+    )
 
 
 
