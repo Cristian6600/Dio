@@ -18,6 +18,7 @@ from django.shortcuts import render
 from .utils import render_to_pdf
 from django.db.models import Count
 from django.template.defaulttags import register
+from django.contrib.auth.decorators import permission_required
 
 @register.filter
 def cuts(value):
@@ -78,7 +79,7 @@ class ImgCreateView(CreateView):
 
 
 
-@login_required
+@permission_required('fisico.add_mesa')
 def handleMultipleImagesUpload(request):
         if request.method == "POST":
             images = request.FILES.getlist('images')
