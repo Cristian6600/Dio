@@ -18,7 +18,6 @@ from django.shortcuts import render
 from .utils import render_to_pdf
 from django.db.models import Count
 from django.template.defaulttags import register
-from django.contrib.auth.decorators import permission_required
 
 @register.filter
 def cuts(value):
@@ -76,7 +75,6 @@ class ImgCreateView(CreateView):
     template_name = "guia/img_prueba.html"  
     form_class = ImgForm
     success_url = '.'
-
 
 
 @permission_required('fisico.add_mesa')

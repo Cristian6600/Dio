@@ -57,6 +57,7 @@ class CubrimientoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 @admin.register(Agenda)
 class CubrimientoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ("id_agenda",)
+    raw_id_fields = ['id_agenda',]
     resource_class = AgendaResource
     
 
