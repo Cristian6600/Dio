@@ -85,6 +85,7 @@ def handleMultipleImagesUpload(request):
             for image in images:
                 img.objects.create(image = image, user = request.user)
 
+           
             uploaded_images = img.objects.all()
             return JsonResponse({"imagenes": [{"url": image.image.url} for image in uploaded_images]})
         return render(request, "index.html")  

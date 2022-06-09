@@ -51,6 +51,10 @@ class Bolsa(models.Model):
         return str(self.bolsa)
 
 class Fisico(Fisi_pa, Bolsa):
+    ESTADO_DIGITALIZACION = (
+        ('ENTREGA', 'ENTREGA'),
+        ('ENTREGA_DIGITALIZADA', 'ENTREGA DIGITALIZADA'),
+    )
 
     id_guia = models.AutoField(primary_key=True)
 
@@ -140,6 +144,13 @@ class Fisico(Fisi_pa, Bolsa):
         
 
     estado_destino = models.BooleanField(default=False)
+
+    estado_img = models.CharField(
+        max_length=22,
+        choices=ESTADO_DIGITALIZACION, 
+        blank=True,
+        null=True
+    )
 
     history = HistoricalRecords()    
     

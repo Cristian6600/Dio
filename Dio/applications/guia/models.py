@@ -214,11 +214,12 @@ class img(models.Model):
     )
     mod_date = models.DateField(default=date.today, blank=True, null=True)
     
-    numero = models.CharField(max_length=30, blank=True, null=True)
     
     class Meta:
         verbose_name = "Imagenes Guia"
         verbose_name_plural = "Imagenes Guia"
+
+        
     
     @property
     def fe(self):
@@ -228,7 +229,7 @@ class img(models.Model):
     def save(self, *args, **kwargs, ):
         
         self.id_guia_id = (self.fe[-14:-4])
-        
+        self.id_guia.estado_img = "ENTREGA_DIGITALIZADA"
         self.id_guia.save()     
         super (img, self).save(*args, **kwargs)
 

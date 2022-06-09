@@ -1,3 +1,4 @@
+from dataclasses import field
 from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
 from related_admin import RelatedFieldAdmin
@@ -11,6 +12,12 @@ class GuiaResource(resources.ModelResource):
     class Meta:
         model = Guia
         import_id_fields = ('seudo',) 
+
+class ImagenGuiaResource(resources.ModelResource):
+    
+    class Meta:
+        model = img
+        field = ('id_guia', 'id_guia__destinatario', 'id_guia__destinatario__d_i') 
 #---------------------------------------------------------
 @admin.register(Guia)
 class guiaAdmin(ImportExportModelAdmin, SimpleHistoryAdmin, RelatedFieldAdmin):
@@ -31,7 +38,7 @@ class guiaAdmin(ImportExportModelAdmin, SimpleHistoryAdmin, RelatedFieldAdmin):
             ('cod_vis', 'proceso'),
             ('cantidad_vi', 'cantidad', 'codigo', ), ]}) 
     ]
-    search_fields = ('id_guia', 'seudo__seudo_bd', 'mot__motivo', 'd_i')
+    search_fields = ('id_guia', 'seudo__seudo_bd', 'mot__motivo', 'd_i', 'bolsa_p__seudo__seudo_bd', 'bolsa', 'bolsa_p__seudo__cc')
     list_display = (
         'id_guia', 'image_mesa__image', 
         'mot__motivo', 'd_i', 'tel', 
@@ -65,6 +72,8 @@ class ImgAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     LogEntry.objects.filter(action_flag=ADDITION)
     list_filter = ('fecha', 'user')
     date_hierarchy = ('fecha')
+    search_fields = ('id_guia__id_guia',)
+    resource_class = ImagenGuiaResource
 
     def save_model(self, request, obj, form, change):
         if getattr(obj, 'author', None) is None:

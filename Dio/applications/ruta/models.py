@@ -178,6 +178,10 @@ class Recepcion(models.Model):
       return self.motivo.id
 
     @property
+    def motivo_img(self):
+      return self.motivo.id
+
+    @property
     def varu(self):
       return self.motivo.id
 
@@ -200,7 +204,7 @@ class Recepcion(models.Model):
         self.guia.id_est_id = self.guia.id_est_id = 3
 
         
-        ###########################################
+        ####################Para contador#######################
         self.cantidad_vi = int(self.varu)
         if int(self.cantidad_vi) >= 16 and int(self.cantidad_vi) > 18:
                 self.guia.cantidad_vi = self.contador
@@ -213,6 +217,10 @@ class Recepcion(models.Model):
         
         elif self.guia.cantidad_vi <=2:
             self.guia.cantidad_vi +=1
+        ##################verificar si es igual a entregado guardar estado_img############
+        
+        if self.motivo_img == 21:
+            self.guia.estado_img = "ENTREGA_DIGITALIZADA"
         self.guia.save()
 
         super(Recepcion, self).save(*args, **kwargs)

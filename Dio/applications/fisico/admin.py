@@ -10,6 +10,7 @@ class FisicoResource(resources.ModelResource):
     class Meta:
         model = Fisico
         import_id_fields = ('id_guia',) 
+        fields = ("id_guia", "destinatario", "d_i", "proceso__proceso", "estado_img", "image_mesa__fecha")
         
 class BolsaResource(resources.ModelResource):
     class Meta:
