@@ -31,7 +31,7 @@ class AgendaResource(resources.ModelResource):
             'id_agenda', 'id_agenda__fecha', 
             'id_agenda__fecha_recepcion','id_agenda__mot', 
             'id_agenda__id_est', 'id_agenda__bolsa',
-            'id_agenda__id_guia'
+            'id_agenda__id_guia', 'id_agenda__cod_vis'
             )
 #####################################################################
 @admin.register(datos_g)
