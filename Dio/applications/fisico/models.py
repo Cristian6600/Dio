@@ -149,7 +149,8 @@ class Fisico(Fisi_pa, Bolsa):
         max_length=22,
         choices=ESTADO_DIGITALIZACION, 
         blank=True,
-        null=True
+        null=True,
+        verbose_name= "gestion"
     )
 
     history = HistoricalRecords()    

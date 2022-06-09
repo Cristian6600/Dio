@@ -38,7 +38,7 @@ class FisicoAdmin(SimpleHistoryAdmin, ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = FisicoResource
     list_display = ('id_guia', 'bolsa', 'fecha', 'estado', 'mensajero', 'fecha_planilla')
     date_hierarchy = ('fecha_planilla')
-    list_filter = ('est_planilla', 'mensajero',)
+    list_filter = ('est_planilla', 'mensajero', 'estado_img')
     search_fields = ('bolsa', )
     list_per_page = 5
     raw_id_fields = ['id_ciu',]
