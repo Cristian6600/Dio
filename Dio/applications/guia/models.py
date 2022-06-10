@@ -244,6 +244,15 @@ post_save.connect(optimize_image, sender = img)
  
 ###Esto es una prueba para second form eliminar 
 
+class CoberturaPdf(models.Model):
+    pdf = models.FileField(
+        upload_to = 'pdf_cobertura',
+        null=True, 
+        blank = True,   
+    )
+    fecha = models.DateTimeField(
+        auto_now=True, blank = True, null= True, verbose_name='fecha cobertura')
+
 class Guiap(models.Model):#Guia
     seudof = models.IntegerField(primary_key=True)
     nombre = models.CharField(max_length=50)

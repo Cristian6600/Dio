@@ -3,7 +3,7 @@ from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
 from related_admin import RelatedFieldAdmin
 from django.contrib.admin.models import ADDITION, LogEntry, CHANGE
-from . models import Servicio, Guia, img
+from . models import Servicio, Guia, img, CoberturaPdf
 from simple_history.admin import SimpleHistoryAdmin
 from import_export import resources
 
@@ -45,7 +45,8 @@ class guiaAdmin(ImportExportModelAdmin, SimpleHistoryAdmin, RelatedFieldAdmin):
         'fecha_recepcion', 'seudo', 
         'direccion', 'id_ciu', 'fecha', 
         'user', 'destinatario', 
-        'mensajero', 'estado')
+        'mensajero', 'estado',
+        'cobertura_bolsa__pdf_cobertura')
     ordering = ('id_guia',)
     list_filter = ('user', 'id_ciu__departamento','fecha_recepcion', 'mot__motivo','id_est')
     
@@ -79,6 +80,10 @@ class ImgAdmin(ImportExportModelAdmin, admin.ModelAdmin):
         if getattr(obj, 'author', None) is None:
             obj.user = request.user 
         obj.save()
+
+@admin.register(CoberturaPdf)
+class PdfCobertura(admin.ModelAdmin):
+    list_display = ('id', 'pdf')
 
 #Elimnar son de una prueba
 

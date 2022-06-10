@@ -19,9 +19,8 @@ class BolsaResource(resources.ModelResource):
 class CoberturaResource(resources.ModelResource):
     class Meta:
         model = Cobertura
-        import_id_fields = ('bolsa',) 
-        fields = ('bolsa__direccion')
-        list_per_page = 5
+        import_id_fields = ('bolsa',)
+        exclude = ('user',)
 #--------------------------------------------------------------------
 @admin.register(Paquete)    
 class PaqueteAdmin(ImportExportModelAdmin, admin.ModelAdmin):
@@ -61,6 +60,7 @@ class MesaAdmin(admin.ModelAdmin):
 @admin.register(Cobertura)
 class CoberturaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = CoberturaResource
+    date_hierarchy = ('fecha')
     list_display = ('bolsa', 'fecha')
     list_per_page = 5
     search_fields = ('bolsa__bolsa',)

@@ -258,7 +258,7 @@ class Mesa(models.Model):
         return str(self.guia)
 
 class Cobertura(models.Model):
-    bolsa = models.OneToOneField(Bolsa, on_delete=models.CASCADE, primary_key=True)
+    bolsa = models.OneToOneField(Bolsa, on_delete=models.CASCADE, primary_key=True, related_name='cobertura_bolsa')
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE, 
@@ -274,6 +274,11 @@ class Cobertura(models.Model):
     )
     estado = models.ForeignKey(
         Estado, on_delete=models.CASCADE
+    )
+    pdf_cobertura = models.pdf = models.FileField(
+        upload_to = 'pdf_cobertura',
+        null=True, 
+        blank = True,   
     )
 
     @property
