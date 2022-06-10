@@ -266,7 +266,7 @@ class Cobertura(models.Model):
         editable=True,
         verbose_name= 'Usuario'
     )
-    fecha = models.DateTimeField(
+    fecha = models.DateField(
         auto_now_add=True,
         blank=True,
         null=True,
@@ -279,7 +279,11 @@ class Cobertura(models.Model):
         upload_to = 'pdf_cobertura',
         null=True, 
         blank = True,   
+        
     )
+    @property
+    def pdf(self):
+        return str("pdf_cobertura") + '/' + str(self.fecha)
 
     @property
     def estados(self):
@@ -291,6 +295,8 @@ class Cobertura(models.Model):
     def save(self, *args, **kwargs):
         self.bolsa.id_est_id  = self.estados
         self.bolsa.mot_id = self.bolsa.mot_id = 3
+        self.pdf_cobertura = self.pdf
+        print(self.pdf)
         
         self.bolsa.save()
 
