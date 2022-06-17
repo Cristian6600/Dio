@@ -33,13 +33,13 @@ class CargueForm(forms.ModelForm):
             }
         
 
-class AsignarForm(forms.ModelForm):   
+class AsignarForms(forms.ModelForm):   
    
-
-    def __init__(self, *args, **kwargs):
-        self.request = kwargs.pop("request")
-        super(AsignarForm, self).__init__(*args, **kwargs)
-        self.fields['full_name'].queryset = courrier.objects.filter(est_courrier= True)
+    # def __init__(self, user, *args, **kwargs):
+    #     # self.request = kwargs.pop('request', None)
+    #     # self.user = kwargs.pop('user', None)
+    #     super(AsignarForms, self).__init__(*args, **kwargs)
+    #     self.fields['full_name'].queryset = courrier.objects.filter(est_courrier= True)
         # self.fields["full_name"].queryset = courrier.objects.filter(id_ciu__departamento=self.request.user.ciudad.departamento, est_courrier= True)
     
     
@@ -56,11 +56,7 @@ class AsignarForm(forms.ModelForm):
             ),
             }
 
-    def form_valid(self, form):
-        self.object = form.commisave(t=False)
-        self.object.user = self.request.user
-        self.object.save()
-        return super(AsignarForm, self).form_valid(form)   
+    
 
     
 

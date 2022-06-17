@@ -6,6 +6,8 @@ from applications.cliente.models import Ciudad
 from applications.courrier.models import courrier
 from applications.argumento.models import Estado, Motivo, Cod_vis, Proceso, Est_clie
 from simple_history.models import HistoricalRecords
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 
 class Fisi_pa(models.Model):
 
@@ -281,9 +283,10 @@ class Cobertura(models.Model):
         blank = True,   
         
     )
+    estado_mesa = models.BooleanField(default=False)
     @property
     def pdf(self):
-        return str("pdf_cobertura") + '/' + str(self.fecha)
+        return str("pdf_cobertura") + '/' + str(self.fecha) + ".pdf"
 
     @property
     def estados(self):
@@ -295,7 +298,7 @@ class Cobertura(models.Model):
     def save(self, *args, **kwargs):
         self.bolsa.id_est_id  = self.estados
         self.bolsa.mot_id = self.bolsa.mot_id = 3
-        self.pdf_cobertura = self.pdf
+        self.pdf_cobertura = self.pdf 
         print(self.pdf)
         
         self.bolsa.save()

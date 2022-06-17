@@ -21,6 +21,10 @@ class CoberturaResource(resources.ModelResource):
         model = Cobertura
         import_id_fields = ('bolsa',)
         exclude = ('user',)
+
+@admin.action(description='Mark selected stories as published')
+def make_published(modeladmin, request, queryset):
+    queryset.update(estado_mesa= True)
 #--------------------------------------------------------------------
 @admin.register(Paquete)    
 class PaqueteAdmin(ImportExportModelAdmin, admin.ModelAdmin):
@@ -59,14 +63,14 @@ class MesaAdmin(admin.ModelAdmin):
 
 @admin.register(Cobertura)
 class CoberturaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    actions = [make_published]
     resource_class = CoberturaResource
     date_hierarchy = ('fecha')
-    list_display = ('bolsa', 'fecha')
+    list_display = ('bolsa', 'fecha', 'estado_mesa')
     list_per_page = 5
     search_fields = ('bolsa__bolsa',)
     raw_id_fields = ['bolsa',]
     
-
 admin.site.register(Motivo_mesa)
 
 

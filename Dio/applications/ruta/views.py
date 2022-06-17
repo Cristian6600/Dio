@@ -1,4 +1,5 @@
 
+from multiprocessing import context
 from re import template
 from typing import ContextManager
 from django.db.models import fields
@@ -35,7 +36,7 @@ from .utils import render_to_pdf
 
 from django.contrib.admin.models import LogEntry, ADDITION, CHANGE, DELETION
 
-from .forms import CargueForm, RecepcionForm, AsignarForm, DestinoForm, DescargueForm
+from .forms import CargueForm, RecepcionForm, AsignarForms, DestinoForm, DescargueForm
 
 #----------------Recepcion------------------------
 class RecepcioCreateView(CustodiaPermisoMixin, CreateView, ListView ):
@@ -82,39 +83,48 @@ class ListEmpleadosPdf(CustodiaPermisoMixin, ListView):
         }
         pdf = render_to_pdf('ruta/pdf_planillas.html', data)
         return HttpResponse(pdf, content_type='application/pdf')
+
+
     
     #------------------Asignar guia a mensajero--------------------
 
-class PassRequestToFormViewMixin:
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs['request'] = self.request
-        return kwargs
+# class PassRequestToFormViewMixin:
+#     def get_form_kwargs(self):
+#         kwargs = super().get_form_kwargs()
+#         kwargs['request'] = self.request
+#         return kwargs
 
-class AsignarCreateView(PassRequestToFormViewMixin,CreateView, ListView):
+class AsignarCreateView(View):
     template_name = "ruta/asignar.html"
-    form_class = AsignarForm
-    queryset = Planilla.objects.order_by('-fecha')
-    initial = {'key':'value'}
-    paginate_by = '5'
+    form_class = AsignarForms
+    # queryset = Planilla.objects.order_by('-fecha')
+    initial = {'key':'template_name'}
+    # paginate_by = '5'
     
-    # def get(self, request, *args, **kwargs):
-    #     form = self.form_class(initial=self.initial)
-    #     return render(request, self.template_name,{'form':form})
+    def get(self, request, *args, **kwargs):
+        form = self.form_class(initial=self.initial)
+        data = {
+            'lista': Planilla.objects.order_by('-fecha')[:5],
+            'form': form
+        }
+        return render(request, self.template_name, data)
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
+            self.object = form.save(commit=False)
+            self.object.user = self.request.user
             form.save()
             messages.success(request, 'Planilla Data Added')
 
         return render(request, self.template_name, {'form': form})
 
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
-        return super(AsignarCreateView, self).form_valid(form)
+    
+    # def form_valid(self, form):
+    #     self.object = form.save(commit=False)
+    #     self.object.user = self.request.user
+    #     self.object.save()
+    #     return super(AsignarCreateView, self).form_valid(form)
 
 #----------Lista mensajeros Ruta a imprimir -------------
 class AsignarListview(CustodiaPermisoMixin, ListView):
@@ -210,6 +220,8 @@ class InformeRutaCiudadListView(ListView):
         contexto ['lista'] = self.get_queryset()[:8]
         contexto ['count'] = self.get_queryset().count
         return contexto  
+
+
 
         
 #---------------appi----------------------------

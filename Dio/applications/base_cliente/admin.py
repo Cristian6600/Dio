@@ -5,7 +5,7 @@ from . models import Bd_clie
 
 #####funcion eliminar toda la data 
 def Actualizar(modeladmin, request, queryset):
-    queryset.update(jornada='AM')
+    queryset.update.all()
 
 class BdResource(resources.ModelResource):
     class Meta:

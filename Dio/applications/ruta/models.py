@@ -69,7 +69,7 @@ class Planilla(TimeStampedModel) :
         courrier, 
         on_delete=models.CASCADE, 
         verbose_name= 'Mensajero',
-        blank = True, null= True
+        blank = True
         )
 
     user = models.ForeignKey(

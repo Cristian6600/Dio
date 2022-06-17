@@ -10,6 +10,10 @@ from django.utils.text import format_lazy
 from applications.fisico.models import Fisico
 from simple_history.admin import SimpleHistoryAdmin
 from import_export import resources
+from django.http import HttpResponse
+import datetime
+
+
 
 class PlanillaResource(resources.ModelResource):
     guia = Field(attribute='guia', column_name='GUIA')
@@ -40,6 +44,13 @@ class Planillainline (admin.TabularInline):
     extra = 5
     raw_id_fields = ["guia"]
 
+@admin.action(description='actualizar fecha')
+def make_published3(modeladmin, request, queryset):
+    now = datetime.datetime.now()
+    queryset.update(fecha = now)
+
+##################################################
+
 @admin.register(Cargue)
 class CargueAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     
@@ -63,6 +74,7 @@ class PlanillaAdmin(ImportExportModelAdmin, SimpleHistoryAdmin, admin.ModelAdmin
     list_per_page = 10
     date_hierarchy = ('fecha')
     resource_class = PlanillaResource
+    actions = [make_published3]
 
 
 @admin.register(Recepcion)

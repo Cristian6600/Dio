@@ -112,6 +112,9 @@ class No_fisicoCreateView(CreateView, ListView):
     def get_queryset(self):
         return No_fisico.objects.all()
 
+from django.http import HttpResponse
+import datetime
+
 
 
 
