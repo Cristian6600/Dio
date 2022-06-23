@@ -118,7 +118,6 @@ class AsignarCreateView(View):
             messages.success(request, 'Planilla Data Added')
 
         return render(request, self.template_name, {'form': form})
-
     
     # def form_valid(self, form):
     #     self.object = form.save(commit=False)
@@ -221,7 +220,14 @@ class InformeRutaCiudadListView(ListView):
         contexto ['count'] = self.get_queryset().count
         return contexto  
 
+from django.http import HttpResponse, HttpResponseNotFound
 
+def my_view(request):
+    foo = False
+    if foo:
+        return HttpResponseNotFound('https://express.firstsource.net.co/')
+    else:
+        return HttpResponse('https://express.firstsource.net.co/')
 
         
 #---------------appi----------------------------

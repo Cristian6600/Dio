@@ -186,8 +186,14 @@
                     <h4 style="color: white;">Sesion de: {{ user.username }}</h4>
                 </div>
                 <div class="top-bar-right">
+                  <a href="{% url 'admin:index' %}">
+                      <span class="label primary">Administrador operativo</span>
+                  </a> &nbsp; &nbsp;
+                
+              </div>
+                <div class="top-bar-right">
                     <a href="{% url 'users_app:user-logout' %}">
-                        <span class="label secondary">Salir</span>
+                        <span class="label alert">Salir</span>
                     </a>
                 </div>
             </div>

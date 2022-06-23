@@ -4,38 +4,41 @@
 
 {% block content %}
 
-<div >
+<div class="grid-x">
+  <div class="cell"><img  data-interchange= "[{% static 'img/blank.png' %}, small], [{% static 'img/moto.jpg' %}, medium], [{% static 'img/wallpaperbetter.jpg' %}, large]">
+    <div class="centrado">
+      <div class="grid-y medium-grid-frame align-center">
+        <div class="grid-x grid-padding-x align-center">  
+        <form class="cell medium-4 grid-x grid-margin-x" 
+          method="POST" 
+          style="border: 0px solid #424242; padding: 1.7em; border-radius: 23px;">
+        {% csrf_token %}
+        <img src="{% static 'img/DIO-removebg-preview.png' %}" >
   
-  <div class="grid-container">  
-    <div class="grid-y medium-grid-frame align-center">
-      <div class="grid-x grid-padding-x align-center">  
-      <form class="cell medium-4 grid-x grid-margin-x" 
-        method="POST" 
-        style="border: 1px solid #424242; padding: 1.7em; border-radius: 23px;">
-      {% csrf_token %}
-      <img src="{% static 'img/letran1.png' %}" alt="150" width="450">
-
-        <h4  class="cell" style="text-align: center;">Bienvenido</h4>
-        <div class="cell medium-12">
-          
-          <div class="input-group">
-            <span class="input-group-label"><i class="fi-mail"></i></span>
-            {{form.username}}
+          <h4  class="cell" style="text-align: center;">Bienvenido</h4>
+          <div class="cell medium-12">
+            
+            <div class="input-group">
+              <span class="input-group-label"><i class="fi-mail"></i></span>
+              {{form.username}}
+            </div>
           </div>
-        </div>
-        <div class="cell medium-12">
-          
-          <div class="input-group">
-            <span class="input-group-label"><i class="fi-lock"></i></span>
-            {{form.password}}
+          <div class="cell medium-12">
+            
+            <div class="input-group">
+              <span class="input-group-label"><i class="fi-lock"></i></span>
+              {{form.password}}
+            </div>
+    
           </div>
-  
-        </div>
-        <button type="submit" class="sign-in-form-button">Ingresar</button>
-      </form>
-      </div> 
+          <button type="submit" class="sign-in-form-button">Ingresar</button>
+        </form>
+        </div> 
+      </div>
     </div>
   </div>
-</div>
+    </div>
+  </div>
+    
 
 {% endblock content %}
