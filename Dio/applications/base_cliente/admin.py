@@ -17,7 +17,7 @@ class AgendaResource(resources.ModelResource):
         model = Agenda_bd
         import_id_fields = ('id_agenda',)   
         fields = (
-            'id_agenda', 'id_agenda__fisicos', 'id_agenda__fecha', 
+            'id_agenda', 'id_agenda__fisicos', 'id_agenda__guias__fecha', 
             'id_agenda__guias__fecha_recepcion', 'id_agenda__guias__mot', 
             'id_agenda__guias__id_est', 'id_agenda__guias__bolsa',
             'id_agenda__guias__id_guia', 'id_agenda__guias__cod_vis',
