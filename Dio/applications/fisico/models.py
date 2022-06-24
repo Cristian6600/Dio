@@ -224,6 +224,7 @@ class Paquete(Fisi_pa):
         editable=True,
         verbose_name= 'Usuario'
     )
+    
     class Meta:
         unique_together = ('bolsa', 'seudo')
 
