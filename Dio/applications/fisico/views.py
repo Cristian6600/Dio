@@ -94,8 +94,3 @@ class Bolsa_add_CreateView(CreateView, ListView):
     def get_queryset(self):
         return Bolsa.objects.order_by('-fecha_bolsa')[:5]
 
-
-
-        
-
-        

@@ -37,7 +37,10 @@ urlpatterns = [
     ),
 
     path('upload', views.handleMultipleImagesUpload, name='index'),
+
     
+    
+
     # path(
     #     'prueba/',
     #     views.pruebaView.as_view(),

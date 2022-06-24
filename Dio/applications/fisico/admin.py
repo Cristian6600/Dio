@@ -5,6 +5,8 @@ from import_export.admin import ImportExportModelAdmin
 from import_export import resources
 from . models import Paquete, Fisico, Bolsa, Mesa, Motivo_mesa, Cobertura
 from simple_history.admin import SimpleHistoryAdmin
+from related_admin import RelatedFieldAdmin
+from related_admin import getter_for_related_field
 
 class FisicoResource(resources.ModelResource):
     class Meta:
@@ -14,7 +16,9 @@ class FisicoResource(resources.ModelResource):
         
 class BolsaResource(resources.ModelResource):
     class Meta:
+        import_id_fields = ('bolsa',)
         model = Bolsa
+        fields = ("bolsa", "mot")
         
 class CoberturaResource(resources.ModelResource):
     class Meta:
@@ -27,7 +31,7 @@ def make_published(modeladmin, request, queryset):
     queryset.update(estado_mesa= True)
 #--------------------------------------------------------------------
 @admin.register(Paquete)    
-class PaqueteAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+class PaqueteAdmin(RelatedFieldAdmin,ImportExportModelAdmin, admin.ModelAdmin):
     list_filter = ('fecha',)
     raw_id_fields = ("seudo",)
     list_display = ('seudo', 'bolsa', 'fecha', 'estado')
@@ -47,11 +51,12 @@ class FisicoAdmin(SimpleHistoryAdmin, ImportExportModelAdmin, admin.ModelAdmin):
     raw_id_fields = ['id_ciu',]
 
 @admin.register(Bolsa)    
-class BolsaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+class BolsaAdmin(RelatedFieldAdmin,ImportExportModelAdmin, admin.ModelAdmin):
     
     search_fields = ('bolsa',)
     resource_class = BolsaResource
     list_per_page = 5
+    list_display = ('bolsa', 'mot')
 
 @admin.register(Mesa)
 class MesaAdmin(admin.ModelAdmin):
@@ -70,8 +75,11 @@ class CoberturaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_per_page = 5
     search_fields = ('bolsa__bolsa',)
     raw_id_fields = ['bolsa',]
+
+
     
 admin.site.register(Motivo_mesa)
+
 
 
 

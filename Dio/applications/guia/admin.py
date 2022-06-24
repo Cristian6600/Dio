@@ -38,7 +38,7 @@ class guiaAdmin(ImportExportModelAdmin, SimpleHistoryAdmin, RelatedFieldAdmin):
             ('cod_vis', 'proceso'),
             ('cantidad_vi', 'cantidad', 'codigo', ), ]}) 
     ]
-    search_fields = ('id_guia', 'seudo__seudo_bd', 'mot__motivo', 'd_i', 'bolsa_p__seudo__seudo_bd', 'bolsa', 'bolsa_p__seudo__cc')
+    search_fields = ('id_guia', 'seudo__seudo_bd', 'mot__motivo', 'd_i', 'bolsa')
     list_display = (
         'id_guia', 'image_mesa__image', 
         'mot__motivo', 'd_i', 'tel', 

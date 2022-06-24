@@ -56,7 +56,7 @@ class FisicoCreateView(CustodiaPermisoMixin, LoginRequiredMixin, CreateView, Lis
 
     def get_cantidad(self):
         # return Guia.objects.filter(user=self.request.user).filter('fecha__day')
-        return Guia.objects.filter(user=self.request.user, fecha=date.today())
+        return Guia.objects.filter(user=self.request.user)
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -171,9 +171,6 @@ def export_address(request):
         
     return response
 
-
-
-    
 
 # class GuiaListView(ListView):
 #     template_name = "guia/update_list_guia.html"

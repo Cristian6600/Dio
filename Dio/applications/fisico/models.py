@@ -208,7 +208,7 @@ class Paquete(Fisi_pa):
     bolsa = models.ForeignKey(
         Bolsa, 
         on_delete=models.CASCADE, 
-        related_name = 'bolsa_p')
+        related_name = 'bolsapaquete')
 
     seudo = models.OneToOneField(
         Bd_clie,
@@ -232,7 +232,7 @@ class Paquete(Fisi_pa):
       return (self.bolsa)
 
     def save(self, *args, **kwargs):
-        self.seudo.fisicos  = self.seudo.fisicos = 1
+        self.seudo.fisicos  = self.seudo.fisicos = 3
         
         self.seudo.save()
 

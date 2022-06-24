@@ -14,6 +14,7 @@ class Bd_clie (models.Model):
        
         ('1', 'Fisico'),
         ('2', 'No llego fisico'),
+        ('3', 'Fisico paquete')
         
     )
 
@@ -133,6 +134,15 @@ class No_fisico(models.Model):
         Bd_clie,
         on_delete=models.CASCADE, 
         primary_key = True
+    )
+
+class Agenda_bd(models.Model):
+    id_agenda = models.OneToOneField(
+        Bd_clie,
+        on_delete=models.CASCADE,
+        primary_key=True,
+        related_name= 'agenda'
+        
     )
 
     # def save(self, *args, **kwargs):
