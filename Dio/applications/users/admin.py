@@ -8,6 +8,7 @@ class UserAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('id', 'username', 'email', 'nombres', 'apellidos', 'genero', 'ciudad', 'ocupation')
     search_fields = ('username', 'nombres')
     raw_id_fields = ['ciudad']
+    list_filter = ('ocupation',)
 
 @admin.register(Profile)
 class ProfileAdmin(ImportExportModelAdmin, admin.ModelAdmin):

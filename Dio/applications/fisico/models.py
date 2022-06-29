@@ -40,7 +40,7 @@ class Bolsa(models.Model):
         null=True, 
         blank = True,
         verbose_name = 'Estado',
-        default= 2
+        default= 0
     )
 
     fecha_bolsa = models.DateTimeField(
