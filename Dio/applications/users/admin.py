@@ -5,7 +5,7 @@ from . models import User, Profile
 
 @admin.register(User)
 class UserAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ('id', 'username', 'email', 'nombres', 'apellidos', 'genero', 'ciudad')
+    list_display = ('id', 'username', 'email', 'nombres', 'apellidos', 'genero', 'ciudad', 'ocupation')
     search_fields = ('username', 'nombres')
     raw_id_fields = ['ciudad']
 
