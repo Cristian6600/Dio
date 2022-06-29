@@ -43,6 +43,8 @@ class Bd_agenda(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ("id_agenda",)
     raw_id_fields = ['id_agenda',]
     resource_class = AgendaResource
+    
+
 
 
 

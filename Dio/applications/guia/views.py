@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from datetime import date
 from django.utils.timezone import datetime #important if using timezones
 import csv
+from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.urls import reverse_lazy
@@ -52,8 +53,9 @@ class FisicoCreateView(CustodiaPermisoMixin, LoginRequiredMixin, CreateView, Lis
     success_url = '.'   
     
     def get_queryset(self):
-        return Guia.objects.filter(user=self.request.user).order_by('-fecha')[:5]
-
+        palabra_clave = self.request.GET.get("barcode")
+        return Guia.objects.filter(user=self.request.user).order_by('-fecha')[:5]#seudo=palabra_clave
+    
     def get_cantidad(self):
         # return Guia.objects.filter(user=self.request.user).filter('fecha__day')
         return Guia.objects.filter(user=self.request.user)

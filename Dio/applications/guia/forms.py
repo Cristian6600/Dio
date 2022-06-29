@@ -18,7 +18,7 @@ class guiafisicoForm(forms.ModelForm):
                 attrs = {
                     'placeholder': 'Codigo de barras Bolsa', 'autofocus': 'autofocus',
                     'class': 'input-group-field',
-                    'maxlength' : 7
+                    'maxlength' : 10
 
                 }
             ),
