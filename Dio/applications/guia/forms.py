@@ -19,6 +19,7 @@ class guiafisicoForm(forms.ModelForm):
                     'placeholder': 'Codigo de barras Bolsa', 'autofocus': 'autofocus',
                     'class': 'input-group-field',
                     'maxlength' : 10
+                    'minlength' : 7
 
                 }
             ),
