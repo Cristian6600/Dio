@@ -81,6 +81,7 @@ class ImgCreateView(CreateView):
 
 @permission_required('fisico.add_mesa')
 def handleMultipleImagesUpload(request):
+        
         if request.method == "POST":
             images = request.FILES.getlist('images')
 
@@ -89,7 +90,9 @@ def handleMultipleImagesUpload(request):
 
            
             uploaded_images = img.objects.all()
-            return JsonResponse({"imagenes": [{"url": image.image.url} for image in uploaded_images]})
+            count = uploaded_images
+            # return JsonResponse({"imagenes": [{"url": image.image.url} for image in uploaded_images]})
+            return HttpResponse("Total guias digitalizadas" + " " + str(len(images)))
         return render(request, "index.html")  
 
    

@@ -48,7 +48,7 @@ class EstadoRutaListView(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = {}
-        context['estado_planilla'] = self.get_queryset()[:5 ]
+        context['estado_planilla'] = self.get_queryset()[:8 ]
         context['count'] = self.get_queryset().count
         return context
 
@@ -93,4 +93,3 @@ class Bolsa_add_CreateView(CreateView, ListView):
 
     def get_queryset(self):
         return Bolsa.objects.order_by('-fecha_bolsa')[:5]
-

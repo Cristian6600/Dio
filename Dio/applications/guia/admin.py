@@ -41,7 +41,7 @@ class guiaAdmin(ImportExportModelAdmin, SimpleHistoryAdmin, RelatedFieldAdmin):
     search_fields = ('id_guia', 'seudo__seudo_bd', 'mot__motivo', 'd_i', 'bolsa')
     list_display = (
         'id_guia', 'image_mesa__image', 
-        'mot__motivo', 'd_i', 'tel', 
+        'mot__motivo', 'd_i', 'seudo__telefono', 
         'fecha_recepcion', 'seudo', 
         'direccion', 'id_ciu', 'fecha', 
         'user', 'destinatario', 

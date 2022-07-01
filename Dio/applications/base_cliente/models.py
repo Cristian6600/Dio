@@ -8,6 +8,8 @@ from django.dispatch import receiver
 from django.utils import timezone
 from .managers import BdManager
 
+
+
 class Bd_clie (models.Model):
 
     TIPOS = (
@@ -112,6 +114,12 @@ class Bd_clie (models.Model):
     fisicos = models.CharField(
         max_length=8,
         choices=TIPOS,)
+
+    telefono = models.CharField(
+        max_length=80,
+        null=True, 
+        blank = True
+    )
 
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE, blank = True, null=True)
 
