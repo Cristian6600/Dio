@@ -68,8 +68,8 @@ class Telefono(models.Model):
 
     def save(self, *args, **kwargs, ):
         
-        self.id.tel = self.telefono
-        
+        self.id.tel = self.telefono 
+        self.id.mot.id = self.id.mot.id = 20
         self.id.save()     
         super (Telefono, self).save(*args, **kwargs)
 
