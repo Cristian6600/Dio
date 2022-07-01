@@ -174,8 +174,8 @@ class Guia(Fisico, TimeStampedModel):
         self.seudo.sucursal = self.userbd
         self.codigo = self.concatenar   
         self.seudo.fisicos = self.seudo.fisicos = 1
-        self.mot.id = 20
-        print(self.mot.id)
+        # self.mot.id = 20
+        # print(self.mot.id)
         # self.ofi = str(self.ofi)
         if self.ofi == None:
             self.direccion = self.direccion
