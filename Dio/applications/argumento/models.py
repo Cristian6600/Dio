@@ -53,8 +53,9 @@ class Motivo(models.Model):
 
 class Cod_vis(models.Model):    
 
-    id = models.IntegerField(
+    id = models.CharField(
         primary_key= True,
+        max_length=8,
         verbose_name='Codigo de visita',
     )
     visita = models.CharField(
