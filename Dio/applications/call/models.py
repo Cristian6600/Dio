@@ -66,10 +66,16 @@ class Telefono(models.Model):
     def telefono(self):
         return str(self.tel)
 
+    reagenda_domi = 33
+
     def save(self, *args, **kwargs, ):
-        
+        # elif int(self.cantidad_vi) > 18:
+        #     self.guia.cantidad_vi = self.contador
         self.id.tel = self.telefono 
         self.id.mot.id = self.id.mot.id = 20
+        if self.id.cod_vis == 13:
+            self.id.cod_vis= self.reagenda_domi
+
         self.id.save()     
         super (Telefono, self).save(*args, **kwargs)
 
