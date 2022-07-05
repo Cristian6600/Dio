@@ -222,7 +222,7 @@ class CallUpdateForm(forms.ModelForm):
 class CallGuiaUpdateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(CallGuiaUpdateForm, self).__init__(*args, **kwargs)
-        self.fields['cod_vis'].queryset = Cod_vis.objects.filter(Q (id = 11)|Q(id = 12)|Q(id = 13)|Q(id=14)|Q(id=15))
+        self.fields['cod_vis'].queryset = Cod_vis.objects.filter(Q (id = 31)|Q(id = 32)|Q(id = 33)|Q(id=34)|Q(id=35))
     
     class Meta:
         model = Guia
