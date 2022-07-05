@@ -15,11 +15,32 @@
   
   </form>
 
-{% for img in all_images %}
-<img src = "{{img.images.url}}">
-
-{% endfor %}
-
 </div>
+<br>
+<table class="hover">
+  <caption>Fisicos digitalizados</caption>
+  <thead>
+    <tr>
+      <th>guia</th>
+      <th>fecha</th>
+      <th>Usuario</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for e in lista %}
+    <tr>
+      <td>{{e.id_guia }}</td>
+      <td>{{e.mod_date}}</td>
+      <td>{{e.user}}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+  <tfoot>
+    <tr>
+      <th>Cantidad</th>
+      <th>{{count}}</th>
+    </tr>
+  </tfoot>
 
+</table>
 {% endblock panel-content %}

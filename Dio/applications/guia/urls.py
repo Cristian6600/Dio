@@ -36,7 +36,11 @@ urlpatterns = [
         name = 'busca-guia',
     ),
 
-    path('upload', views.handleMultipleImagesUpload, name='index'),
+    path(
+        'upload/', 
+        views.ima_cargar.as_view(), 
+        name='index'
+    ),
 
     
     

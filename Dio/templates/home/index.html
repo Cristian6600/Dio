@@ -3,24 +3,28 @@
 {% block panel-content %}
 
 
-<div class="grid-container">
-   <center><img src="{% static 'img/ROBOT.png' %}" alt="100" width="100"></center>
+<!-- <div class="grid-container">
+   <center><img src="{% static 'img/pngwing.com.png' %}" ></center>
    <div class="callout success" data-closable="slide-out-right">
-   <h5 class="cell" style="text-align: center;">Bienvenido: {{user}}</h5>
-   <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-    <div class="grid-y medium-grid-frame align-center">
-        <div class="grid-x grid-padding-x align-center">
-            
-                <img src="{% static 'img/letran1.png' %}" alt="150" width="450">
-                
-            </div>
-            
-        </div>
+        <h5 class="cell" style="text-align: center;">Bienvenido: {{user}}</h5>
+        <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
-</div>
+    
+</div> -->
+<div class="grid-x grid-margin-x">
+    <div class="cell small-4">
+        <div class="callout secondary">
+            <h5>Hola  Bienvenido: {{user.nombres}}  </h5>
+            <p>Soy Dio <br> Estoy trabajando para ayudarte de la mejor manera posible</p>
+            
+          </div>
+    </div>
+    <div class="cell auto">
+        <img src="{% static 'img/pngwing.com.png' %}" width="400" height="400">
+    </div>
+  </div>
 
 
 {% endblock panel-content %}

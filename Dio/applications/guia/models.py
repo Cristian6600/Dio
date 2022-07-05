@@ -120,7 +120,7 @@ class Guia(Fisico, TimeStampedModel):
     history = HistoricalRecords()    
 
     class Meta:
-        verbose_name = "Guia"
+        verbose_name = "Buscar"
         verbose_name_plural = "Guia"
 
         def __str__(self):

@@ -1,9 +1,6 @@
 from django.db import models
 from django.core.signals import request_finished
 from django.conf import settings
-from django.dispatch import receiver
-from django.conf import settings
-
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
@@ -12,8 +9,6 @@ from applications.cliente.models import Ciudad
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 #
 from .managers import UserManager
-
-from django.db.models.signals import post_save
 
 class Areas(models.Model):
     Areas = models.CharField(max_length=30, primary_key=True)

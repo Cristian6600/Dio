@@ -7,6 +7,7 @@ from applications.users.models import User
 from applications.datos_g.models import datos_g
 from applications.argumento.models import Motivo_call
 from django.conf import settings 
+from django.db.models.signals import post_save
 
 
 class Tel(models.Model):
@@ -73,8 +74,7 @@ class Telefono(models.Model):
         #     self.guia.cantidad_vi = self.contador
         self.id.tel = self.telefono 
         self.id.mot.id = self.id.mot.id = 20
-        if self.id.cod_vis == 13:
-            self.id.cod_vis= self.reagenda_domi
+        
 
         self.id.save()     
         super (Telefono, self).save(*args, **kwargs)
@@ -177,3 +177,24 @@ class Auditoria(models.Model):
         self.entregas.save()       
         super(Auditoria, self).save(*args, **kwargs)
 
+from django.conf import settings
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+class Informe_call(models.Model):
+    id = models.OneToOneField(
+        Telefono, primary_key=True, 
+        on_delete=models.CASCADE,
+        )
+    fecha = models.DateTimeField(
+        auto_now_add=True,
+        blank=True,
+        null=True,
+    )
+
+    def __str__(self):
+        return str(self.id)
+
+@receiver(post_save, sender=Telefono)
+def create_user_profiled(sender, instance, created, **kwargs):
+    if created:
+        Informe_call.objects.create(id=instance)

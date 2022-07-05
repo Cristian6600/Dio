@@ -79,23 +79,54 @@ class ImgCreateView(CreateView):
     success_url = '.'
 
 
-@permission_required('fisico.add_mesa')
-def handleMultipleImagesUpload(request):
+# @permission_required('fisico.add_mesa')
+# def handleMultipleImagesUpload(request):
         
-        if request.method == "POST":
-            images = request.FILES.getlist('images')
+#         if request.method == "POST":
+#             images = request.FILES.getlist('images')
 
-            for image in images:
-                img.objects.create(image = image, user = request.user)
+#             for image in images:
+#                 img.objects.create(image = image, user = request.user)
 
            
-            uploaded_images = img.objects.all()
-            count = uploaded_images
-            # return JsonResponse({"imagenes": [{"url": image.image.url} for image in uploaded_images]})
-            return HttpResponse("Total guias digitalizadas" + " " + str(len(images)))
-        return render(request, "index.html")  
+#             uploaded_images = img.objects.all()
+#             count = uploaded_images
+#             # return JsonResponse({"imagenes": [{"url": image.image.url} for image in uploaded_images]})
+#             return HttpResponse("Total guias digitalizadas" + " " + str(len(images)))
+#         return render(request, "index.html")  
+from django.contrib import messages
+class ima_cargar(View):
+    form_class = ImgForm
+    template_name = "index.html"
+    success_url = '.'
+    initial = {'key': 'value'}
+    model = img
 
-   
+    def get(self, request, *args, **kwargs):
+        imagen = img.objects.filter(user = request.user)
+        data = {
+            'lista': imagen,
+            'count': img.objects.all().count
+        }
+        return render(request, self.template_name, data)
+
+    def post(self, request, *args, **kwargs):
+        if request.method == "POST":
+                images = request.FILES.getlist('images')
+            
+                for image in images:
+                    img.objects.create(image = image, user = request.user)
+    
+                
+                uploaded_images = img.objects.all()
+                count = uploaded_images
+            # return JsonResponse({"imagenes": [{"url": image.image.url} for image in uploaded_images]})
+                # return HttpResponse("Total guias digitalizadas" + " " + str(len(images)))
+                
+                return render(request, 'guia/post_imagen.html', {'contar':str(len(images))})
+
+        return render(request, self.template_name)
+
 #--------Impresion por guia--------------
 class GuiaListView(CustodiaPermisoMixin, ListView):
     template_name = "guia/imprimir_guia.html"

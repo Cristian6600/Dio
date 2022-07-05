@@ -2,9 +2,9 @@ from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
 from import_export import resources
 from import_export.fields import Field
-from . models import Datos_t, Indicativo, Telefono, Pregunta, Auditoria, calificacion, Tel
-from simple_history.admin import SimpleHistoryAdmin
+from . models import Datos_t, Indicativo, Telefono, Pregunta, Auditoria, calificacion, Tel, Informe_call
 from django.db import transaction
+from simple_history.admin import SimpleHistoryAdmin
 
 
 class DatossResource(resources.ModelResource):
@@ -23,8 +23,9 @@ class AuditoriaResource(resources.ModelResource):
 
                    ))
 
-# class TelefonoResource(resources.ModelResource):
+class TelefonoResource(resources.ModelResource):
     
+ #   
     # id = Field (attribute='id', column_name='PSEUDO')
     # id__seudo__tarjeta = Field (attribute='id__seudo__tarjeta', column_name='TARJETA')
     # id__guia_d_g__marca = Field (attribute='id__guia_d_g__marca', column_name='MARCA')
@@ -51,32 +52,31 @@ class AuditoriaResource(resources.ModelResource):
     # id__id_est__motivo = Field (attribute='id__id_est__motivo', column_name='ESTADO CUSTODIA')
     
 
-    # class Meta:
-    #     model = Telefono
-        
-    #     fields = (
-    #         'id', 'id__seudo__tarjeta', 
-    #         'id__guia_d_g__marca', 'id__d_i', 
-    #         'id__destinatario', 'id__user__ciudad__ciudad', 
-    #         'id__id_ciu__ciudad', 'id__direccion', 
-    #         'id__mot__motivo', 'id__fecha_recepcion',
-    #         'tel', 'motivo_call', 'fecha_call', 
-    #         'observacion', 'user', 
-    #         'id__direccion', 'id__id_ciu__ciudad', 
-    #         'id__id_ciu__departamento__departamento', 'id__proceso__tipo_e', 
-    #         'motivo_call__motivo', 'id__id_est__motivo'
-    #     )
-    #     export_order = (
-    #         'id', 'id__seudo__tarjeta', 'id__guia_d_g__marca',
-    #         'id__d_i', 'id__destinatario', 'id__user__ciudad__ciudad',
-    #         'id__id_ciu__ciudad', 'id__direccion', 'id__mot__motivo', 'id__fecha_recepcion',
-    #         'tel', 'motivo_call', 'fecha_call', 'observacion',
-    #         'user', 'id__direccion', 'id__id_ciu__ciudad', 
-    #         'id__id_ciu__departamento__departamento', 
-    #         'id__proceso__tipo_e', 'OFICINA_CITA', 
-    #         'AUTORIZADO', 'FECHA_AGENDAMIENTO',
-    #         'motivo_call__motivo',
-    #     )
+    class Meta:
+        model = Informe_call
+        fields = (
+            'id', 'id__id__seudo__tarjeta', 
+            'id__id__guia_d_g__marca', 'id__id__d_i', 
+            'id__id__destinatario', 'id__id__user__ciudad__ciudad', 
+            'id__id__id_ciu__ciudad', 'id__id__direccion', 
+            'id__id__mot__motivo', 'id__id__fecha_recepcion',
+            'id__tel', 'id__motivo_call', 'id__fecha_call', 
+            'id__observacion', 'id__user', 
+            'id__id__direccion', 'id__id__id_ciu__ciudad', 
+            'id__id__id_ciu__departamento__departamento', 'id__id__proceso__tipo_e', 
+            'id__motivo_call__motivo', #'id__id_est__motivo',
+        )
+        export_order = (
+            'id', 'id__id__seudo__tarjeta', 'id__id__guia_d_g__marca',
+            'id__id__d_i', 'id__id__destinatario', 'id__id__user__ciudad__ciudad',
+            'id__id__id_ciu__ciudad', 'id__id__direccion', 'id__id__mot__motivo', 'id__id__fecha_recepcion',
+            'id__tel', 'id__motivo_call', 'id__fecha_call', 'id__observacion',
+            'id__user', 'id__id__direccion', 'id__id__id_ciu__ciudad', 
+            'id__id__id_ciu__departamento__departamento', 
+            'id__id__proceso__tipo_e', 'id__OFICINA_CITA', 
+            'id__AUTORIZADO', 'id__FECHA_AGENDAMIENTO',
+            'id__motivo_call__motivo',
+        )
 
 class datos_tAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
     
@@ -132,6 +132,12 @@ class AuditoriaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 class PregutasAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('pregunta', )
 
+class InformeCallAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    list_display = ('id',)
+    resource_class = TelefonoResource
+    date_hierarchy = ('fecha')
+    list_filter  = ('id__user',)
+
 admin.site.register(Datos_t, datos_tAdmin)
 
 admin.site.register(Indicativo, IndicativoAdmin)
@@ -145,6 +151,8 @@ admin.site.register(Auditoria, AuditoriaAdmin)
 admin.site.register(calificacion)
 
 admin.site.register(Tel)
+
+admin.site.register(Informe_call, InformeCallAdmin)
 
 
 
