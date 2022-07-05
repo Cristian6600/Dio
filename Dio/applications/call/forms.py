@@ -220,13 +220,17 @@ class CallUpdateForm(forms.ModelForm):
 }   
 
 class CallGuiaUpdateForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(CallGuiaUpdateForm, self).__init__(*args, **kwargs)
+        self.fields['cod_vis'].queryset = Cod_vis.objects.filter(Q (id = 11)|Q(id = 12)|Q(id = 13)|Q(id=14)|Q(id=15))
+    
     class Meta:
         model = Guia
         
         exclude = ('m', 'ancho', 'alto',
          'largo', 'copia', 'unidad', 'contiene', 'orden', 'domicilio', 'acarreo', 'flete',
          'origen', 'destino', 'codigo', 'barrio', 'declarado', 'cantidad_vi', 'd_i', 'producto',
-         'id_clie', 'proceso', 'destinatario', 'postal', 'id_ser', 'cod_vis', 
+         'id_clie', 'proceso', 'destinatario', 'postal', 'id_ser', 
          'mensajero', 'tel', 'oficina', 'fecha_descargue', 'users', 'user',
          'cantidad', 'est_planilla', 'id_planilla', 'cod_ins', 'estado', 'bolsa',
          'estado_destino', 'seudo', 'mot', 'id_est')
