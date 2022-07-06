@@ -58,19 +58,19 @@ class CallUpdateView(CallPermisoMixin, UpdateView):
         form = self.form_class(request.POST, instance=telefono)
         form2 = self.second_form_class(request.POST, instance=guia)
         if form.is_valid() and form2.is_valid():
+            self.h= "Reagendado"
             self.object = form.save(commit=False)
+            self.objectl = form2.save(commit=False)
+            self.objectl.mot_id = 20
             self.object.user = self.request.user
+            
+            # print (self.object.mot.id)
             form.save()
+           
             form2.save()
             return HttpResponseRedirect(self.get_success_url())
         else:
             return HttpResponseRedirect(self.get_success_url())
-
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
-        return super(CallUpdateView, self).form_valid(form)
 
 
 class CallEstadoUpdateView(UpdateView):
@@ -127,9 +127,9 @@ class CallListView(CallPermisoMixin, ListView):
         seudo = self.request.GET.get("kword", "")
         fecha = self.request.GET.get("date_start", "")
         lista = Guia.objects.filter(id_est = 3, 
-            producto__producto__contains = producto,
-            mot__motivo__icontains = reason,
-            fecha_recepcion__icontains = fecha
+            # producto__producto__contains = producto,
+            # mot__motivo__icontains = reason,
+            # fecha_recepcion__icontains = fecha
             
         ).filter(
             Q(seudo__seudo_bd__icontains=seudo)|
