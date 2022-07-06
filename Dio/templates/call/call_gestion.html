@@ -67,7 +67,7 @@
             
         </div>
     </div>
-    
+</form>
     <h5 class="cell" style="text-align: center;">Gestion: {{count}}</h5>
     <div class="table-scroll">
         <table>
@@ -85,12 +85,12 @@
                 <th>Ciudad</th>
                 <th>Telefonos</th>
                 <th>estado call</th>
-                <th>Agendar</th>
+                <!-- <th>Agendar</th> -->
             </thead>
             <tbody>
-                {% for e in call %}
+                {% for e in page_obj %}
                 <tr>
-                    <td width="20">{{e.seudo}}</td> 
+                    <td width="20"><a href="{% url 'call_app:call-update' e.seudo %}" > <span class="label primary">{{e.seudo}}</span></a></td> 
                     <td>{{e.fecha}}</td>
                     <td>{{e.fecha_recepcion}}</td>
                     <th>{{e.seudo.franquicia}}</th>
@@ -105,38 +105,54 @@
                     <td>
                         <a href="{% url 'call_app:call-update-estado-call' e.seudo %}" class="button secondary"><i class="fi-page-search"></i></a>
                     </td>   
-                    <td>
+                    <!-- <td>
                         <a href="{% url 'call_app:call-update' e.seudo %}" class="button"><i class="fi-page-search"></i></a>
-                    </td>           
+                    </td>            -->
                 </tr>    
                 {% endfor %}
             </tbody>
         </table>
     </div>
+
+    <nav aria-label="Pagination">
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+            <li class="pagination-previous"><a href="?page=1">Inicio <span class="show-for-sr">page</span></a></li>
+            <li ><a href="?page={{ page_obj.previous_page_number }}"> Atras <span class="show-for-sr">page</span></a></li>
+          {% endif %}
+          
+          
+          {% for num in page_obj.paginator.page_range %}
+          {% if page_obj.number == num %}
+            <li><a href="?page={{ num }}">{{ num }}</a></li>
+          {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+            <li><a href="?page={{ num }}">{{ num }}</a></li>
+          {% endif %}
+        {% endfor %}
+          {% if page_obj.has_next %}
+          <li class="pagination-next"><a href="?page={{ page_obj.next_page_number }}" aria-label="Next page">Siguiente <span class="show-for-sr">page</span></a></li>
+          <li class="pagination-next"><a href="?page={{ page_obj.next_page_number }}" aria-label="Next page">Ultimo <span class="show-for-sr">page</span></a></li>
+          {% endif %}   
+        </ul>
+      </nav>
     
-    <div class="cell">
-        {% if is_paginated %}
-            <nav aria-label="Pagination">
-                <ul class="pagination">
-                    {% if page_obj.has_previous %}
-                    <li class="pagination-previous">
-                        <a href="?page={{page_obj.previous_page_number}}">Atras</a>
-                    </li>
-                    {% endif %}
-                
-                    <li class="current"><span class="show-for-sr">You're on page</span> Pagina {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.</li>
-                
-                    <li class=""><a href="?page={{pagina}}">{{ pagina }}</a></li>
-                
-                    {% if page_obj.has_next %}
-                    <li class="pagination-next">
-                        <a href="?page={{page_obj.next_page_number}}">Siguiente</a>
-                    </li>
-                    {% endif %}
-                </ul>
-            </nav>
-        {% endif %}
-    </div>
-</form>
+    <!-- <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; Inicio</a>
+                <a href="?page={{ page_obj.previous_page_number }}">Volver</a>
+            {% endif %}
+    
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+    
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">Siguiente</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">Ultimo &raquo;</a>
+            {% endif %}
+        </span>
+    </div>    -->
+
 
 {% endblock panel-content %}

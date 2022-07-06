@@ -2,7 +2,7 @@ from dataclasses import field
 from re import template
 from django.shortcuts import render
 from django.views.generic.edit import UpdateView
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, View
 from applications.guia.models import Guia
 from applications.call.models import Auditoria
 from django.urls import reverse_lazy
@@ -12,6 +12,8 @@ from applications.users.mixins import CallPermisoMixin
 from . models import Telefono
 from django.http import HttpResponse, HttpResponseRedirect
 from applications.courrier.models import courrier
+from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required, permission_required
 
 
 class CacUpdateView(CallPermisoMixin, UpdateView):
@@ -27,12 +29,13 @@ class CacUpdateView(CallPermisoMixin, UpdateView):
     #     contexto ['form'] = self.form_class
     #     return contexto
 
-class CallUpdateView(CallPermisoMixin, UpdateView):
+class CallUpdateView(CallPermisoMixin, UpdateView, ListView):
     template_name = "call/call-update.html"
     form_class = CallUpdateForm
     second_form_class = CallGuiaUpdateForm
     model= Telefono
     second_model = Guia
+    queryset =  Guia.objects.all()
     # fields = ['direccion', 'id_ciu', 'postal', 'mot', 'cod_vis', 'motivo_call','oficina']
     success_url = reverse_lazy('call_app:call-consultar')
     
@@ -112,21 +115,21 @@ class CacListView(CallPermisoMixin, ListView):
         
         return lista
 
-class CallListView(CallPermisoMixin, ListView):
+class CallListView(CallPermisoMixin, View):
     template_name = "call/call_gestion.html"
     context_object_name = 'call'
+    model = Guia
     # queryset = Guia.objects.filter(Q(id_est = 3), Q(mot=5) | Q(mot=6)| Q(mot=7)| Q(mot=8)). order_by('-fecha')
     # context_object_name = 'call'
     paginate_by = 3
 
-    def get_queryset(self, **kwargs):
-        
-        mensajero = self.request.GET.get("id")
-        producto = self.request.GET.get("producto", "")
-        reason = self.request.GET.get("reason", "")
-        seudo = self.request.GET.get("kword", "")
-        fecha = self.request.GET.get("date_start", "")
-        lista = Guia.objects.filter(id_est = 3, 
+    def get(self, request, *args, **kwargs):
+        mensajero = request.GET.get("id")
+        producto = request.GET.get("producto", "")
+        reason = request.GET.get("reason", "")
+        seudo = request.GET.get("kword", "")
+        fecha = request.GET.get("date_start", "")
+        contact_list = Guia.objects.filter(id_est = 3, 
             producto__producto__contains = producto,
             mot__motivo__icontains = reason,
             fecha_recepcion__icontains = fecha
@@ -141,20 +144,11 @@ class CallListView(CallPermisoMixin, ListView):
             mot = 21).exclude(mot = 20).exclude(mot=19).exclude(
             telefono_guia__motivo_call= 11).exclude(
             telefono_guia__motivo_call= 12)
-    
-        return lista
+        paginator = Paginator(contact_list, 2) # Show 25 contacts per page.
 
-    def get_mensajero(self,):
-        queryset = courrier.objects.all()
-        return queryset
-
-    def get_context_data(self, *args, **kwargs):
-        context = super(CallListView, self).get_context_data(*args, **kwargs)
-        context['call'] = self.get_queryset()[:3]
-        context['count'] = Telefono.objects.filter(user=self.request.user).count
-        context['mensajero'] = self.get_mensajero()
-
-        return context
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        return render(request, self.template_name, {'page_obj': page_obj})
         #p
 
 class AuditoriaListView(ListView):
