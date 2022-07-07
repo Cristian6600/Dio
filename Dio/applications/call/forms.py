@@ -1,5 +1,4 @@
 from email.policy import default
-from turtle import width
 from django import forms
 from .models import Auditoria
 from applications.guia.models import Guia
