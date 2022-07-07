@@ -1,4 +1,5 @@
 from email.policy import default
+from turtle import width
 from django import forms
 from .models import Auditoria
 from applications.guia.models import Guia
@@ -203,7 +204,6 @@ class CallUpdateForm(forms.ModelForm):
             
             'motivo_call': forms.Select(
                 attrs = {
-                    'placeholder': 'Codigo de barras Bolsa', 'autofocus': 'autofocus',
                     'class': 'input-group-field',
                 }
 
@@ -211,8 +211,9 @@ class CallUpdateForm(forms.ModelForm):
             
             'observacion': forms.Textarea(
                 attrs = {
-                    'placeholder': 'Codigo de barras Bolsa', 'autofocus': 'autofocus',
-                    
+                    'class': 'myradio',
+                    'placeholder': 'Observacion', 
+                    'size': 500
                 }
 
             ),
@@ -246,6 +247,7 @@ class CallGuiaUpdateForm(forms.ModelForm):
             'id_ciu': forms.Select(
                 attrs = {
                     'class': 'input-group-field',
+                    'size': 5
                 }
             ),
             'cod_vis': forms.TextInput(
@@ -253,12 +255,13 @@ class CallGuiaUpdateForm(forms.ModelForm):
                     'class': 'input-group-field',
                 }
             ),
-            'mot': forms.TextInput(
+            'mot': forms.Select(
                 attrs = {
                     'class': 'input-group-field',
-                    'value': '20'
+                    
                 }
             )
+            
 
     }
 

@@ -46,15 +46,19 @@ class ProductDetailView(LoginRequiredMixin, DetailView):
         context = super(ProductDetailView, self).get_context_data(*args, **kwargs)
         context['recepcion_list'] = Guia.objects.all()[:1]
         return context
-    
+
+from django.core.paginator import Paginator   
 class FisicoCreateView(CustodiaPermisoMixin, LoginRequiredMixin, CreateView, ListView):
     template_name = "guia/guia-fisico.html"
     form_class = guiafisicoForm
     success_url = '.'   
     
     def get_queryset(self):
-        palabra_clave = self.request.GET.get("barcode")
-        return Guia.objects.filter(user=self.request.user).order_by('-fecha')[:5]#seudo=palabra_clave
+        vargui = Guia.objects.filter(user=self.request.user).order_by('-fecha')[:5]
+        paginator = Paginator(vargui, 25)
+        page = self.request.GET.get('page')
+        contacts = paginator.get_page(page)
+        return vargui
     
     def get_cantidad(self):
         # return Guia.objects.filter(user=self.request.user).filter('fecha__day')
@@ -68,7 +72,7 @@ class FisicoCreateView(CustodiaPermisoMixin, LoginRequiredMixin, CreateView, Lis
 
     def get_context_data(self, **kwargs):
         contexto = {}
-        contexto ['lista'] = self.get_queryset()
+        contexto ['page_obj'] = self.get_queryset()
         contexto ['form'] = self.form_class
         contexto ['count'] = self.get_cantidad().count
         return contexto
