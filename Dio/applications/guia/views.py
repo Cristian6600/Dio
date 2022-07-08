@@ -99,18 +99,30 @@ class ImgCreateView(CreateView):
 #             return HttpResponse("Total guias digitalizadas" + " " + str(len(images)))
 #         return render(request, "index.html")  
 from django.contrib import messages
-class ima_cargar(View):
+class ima_cargar(MesaPermisoMixin, View):
     form_class = ImgForm
     template_name = "index.html"
     success_url = '.'
     initial = {'key': 'value'}
     model = img
+    paginate_by = 2
 
     def get(self, request, *args, **kwargs):
-        imagen = img.objects.filter(user = request.user)
+        kword = self.request.GET.get('kword')
+        contact_list = img.objects.filter(
+            user = request.user,
+            id_guia = kword
+        )
+        paginator = Paginator(contact_list, 5) 
+
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        count_day = img.objects.filter(
+            user=self.request.user, 
+            fecha__contains=datetime.today().date()).count
         data = {
-            'lista': imagen,
-            'count': img.objects.all().count
+            'page_obj': page_obj,
+            'count': count_day
         }
         return render(request, self.template_name, data)
 

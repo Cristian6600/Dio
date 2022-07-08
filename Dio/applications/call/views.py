@@ -156,7 +156,7 @@ class CallListView(CallPermisoMixin, View):
         return render(request, self.template_name, data)
         #p
 
-class AuditoriaListView(View):
+class AuditoriaListView(CallPermisoMixin, View):
     template_name = "call/auditoria.html"
     context_object_name = 'auditoria'
     model = Guia

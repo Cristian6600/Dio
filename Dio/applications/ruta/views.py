@@ -94,7 +94,7 @@ class ListEmpleadosPdf(CustodiaPermisoMixin, ListView):
 #         kwargs['request'] = self.request
 #         return kwargs
 
-class AsignarCreateView(View):
+class AsignarCreateView(CustodiaPermisoMixin, View):
     template_name = "ruta/asignar.html"
     form_class = AsignarForms
     # queryset = Planilla.objects.order_by('-fecha')
@@ -157,7 +157,7 @@ class AsignarListview(CustodiaPermisoMixin, ListView):
         contexto ['count'] = self.get_queryset().count
         return contexto  
 
-class DestinoCreate(CreateView):
+class DestinoCreate(CustodiaPermisoMixin, CreateView):
     template_name = "ruta/destino.html"
     form_class = DestinoForm
     success_url = '.'
@@ -172,7 +172,7 @@ class DestinoCreate(CreateView):
 
         return render(request, self.template_name, {'form': form})
 
-class DescargueCreateView(CreateView, ListView):
+class DescargueCreateView(CustodiaPermisoMixin, CreateView, ListView):
    
     template_name = "ruta/descargue-destino.html"
     form_class = DescargueForm
@@ -203,7 +203,7 @@ def detail(request, rr):
     guia = get_object_or_404(Recepcion, pk=guia)
     return render(request, 'ruta/historial.html', {'question': guia})
 
-class InformeRutaCiudadListView(ListView):
+class InformeRutaCiudadListView(CustodiaPermisoMixin, ListView):
     template_name = "ruta/informe_ruta_ciudad.html"
     context_object_name = 'lista'
 

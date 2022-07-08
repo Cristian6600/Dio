@@ -13,6 +13,7 @@ from applications.users.mixins import SigPermisoMixin
 from django.views import View, generic
 from .forms import No_fisicoForm
 from . models import No_fisico
+from applications.users.mixins import CustodiaPermisoMixin
 
 @login_required
 def exportSig(request):
@@ -103,7 +104,7 @@ class Bd_clieListView(SigPermisoMixin, ListView):
         context['count_total'] = self.get_total_entregado().count
         return context
 
-class No_fisicoCreateView(CreateView, ListView):
+class No_fisicoCreateView(CustodiaPermisoMixin, CreateView, ListView):
     template_name = "bd/faltante.html"
     form_class = No_fisicoForm
     success_url = '.'

@@ -32,7 +32,7 @@ class BolsaCreateView(CustodiaPermisoMixin, CreateView, ListView):
         self.object.save()
         return super(BolsaCreateView, self).form_valid(form)
 
-class EstadoRutaListView(LoginRequiredMixin, ListView):
+class EstadoRutaListView(CustodiaPermisoMixin, ListView):
     template_name = "fisico/estado_ruta.html"
     model = Fisico
     paginate_by = 5
@@ -52,7 +52,7 @@ class EstadoRutaListView(LoginRequiredMixin, ListView):
         context['count'] = self.get_queryset().count
         return context
 
-class CoberturaCreateView(CreateView, ListView):
+class CoberturaCreateView(CustodiaPermisoMixin, CreateView, ListView):
     template_name = "fisico/cobertura_bolsa.html"
     form_class = CoberturaForm
     success_url = '.'
@@ -85,7 +85,7 @@ class CoberturaCreateView(CreateView, ListView):
         
         return contexto
 
-class Bolsa_add_CreateView(CreateView, ListView):
+class Bolsa_add_CreateView(CustodiaPermisoMixin, CreateView, ListView):
     model = Bolsa
     fields =['bolsa',]
     template_name = "fisico/create_bolsa.html"
