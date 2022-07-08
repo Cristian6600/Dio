@@ -1,8 +1,6 @@
 from django.urls import path
 from . import views
 
-from django.views.generic import TemplateView
-
 app_name = "ruta_apps"
 
 urlpatterns = [
@@ -59,9 +57,6 @@ urlpatterns = [
     # path('about/', TemplateView.as_view(template_name="ruta/    prueba.html")),
 
     
-    path(
-        'pr', 
-        views.my_view,
-    )
+   
     
     ]

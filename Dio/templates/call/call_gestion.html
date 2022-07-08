@@ -76,6 +76,7 @@
                 <th>Seudo</th>
                 <th>Fecha fisico</th>
                 <th>Fecha gestion</th>
+                <th>Telefonos</th>
                 <th>Franquicia</th>
                 <th>cod vis</th>
                 <th>Marca</th>
@@ -84,7 +85,6 @@
                 <th>Destinatario</th>
                 <th>Direccion</th>
                 <th>Ciudad</th>
-                <th>Telefonos</th>
                 <th>estado call</th>
                 <!-- <th>Agendar</th> -->
             </thead>
@@ -94,6 +94,7 @@
                     <td width="20"><a href="{% url 'call_app:call-update' e.seudo %}" > <span class="label primary">{{e.seudo}}</span></a></td> 
                     <td>{{e.fecha}}</td>
                     <td>{{e.fecha_recepcion}}</td>
+                    <td>{{e.tel}}</td> 
                     <th>{{e.seudo.franquicia}}</th>
                     <th>{{e.cod_vis}}</th>
                     <th>{{e.guia_d_g.marca}}</th>
@@ -102,7 +103,7 @@
                     <td>{{e.destinatario}}</td>  
                     <td>{{e.direccion}}</td>  
                     <td>{{e.id_ciu}}</td>  
-                    <td>{{e.seudo.telefono}}</td> 
+                    
                     <td>
                         <a href="{% url 'call_app:call-update-estado-call' e.seudo %}" class="button secondary"><i class="fi-page-search"></i></a>
                     </td>   

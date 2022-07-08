@@ -14,6 +14,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from applications.courrier.models import courrier
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required, permission_required
+from django.utils.timezone import datetime 
 
 
 class CacUpdateView(CallPermisoMixin, UpdateView):
@@ -148,7 +149,11 @@ class CallListView(CallPermisoMixin, View):
 
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
-        return render(request, self.template_name, {'page_obj': page_obj})
+        data = {
+            'page_obj': page_obj,
+            'count': Guia.objects.filter(user=self.request.user, fecha__contains=datetime.today().date()).count
+        }
+        return render(request, self.template_name, data)
         #p
 
 class AuditoriaListView(ListView):
