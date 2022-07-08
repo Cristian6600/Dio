@@ -169,13 +169,23 @@ class AuditoriaListView(ListView):
         fecha = self.request.GET.get("date_start", "")
         lista = Guia.objects.filter(mot = 21, estado=1).filter(
             fecha_recepcion__icontains = fecha,
-            id_ciu__ciudad__icontains = ciudad
+            id_ciu__ciudad__icontains = ciudad  
         ).filter(
             Q(mensajero__courrier__icontains =kword)|
             Q(seudo__seudo_bd__icontains=kword)
         )
             
         return lista
+
+    def count(self):
+        return Guia.objects.filter(estado=0, user=self.request.user, fecha_recepcion__contains=datetime.today().date())
+            
+            
+    def get_context_data(self, **kwargs):
+        contexto = {}
+        contexto ['auditoria'] = self.get_queryset()
+        contexto ['count'] = self.count().count
+        return contexto
 
 class AuditoriaCreateView(CreateView):
     template_name = "call/create_auditoria.html"

@@ -98,7 +98,8 @@ class Fisico(Fisi_pa, Bolsa):
 
     mensajero = models.ForeignKey(
         courrier, 
-        on_delete=models.CASCADE, 
+        on_delete=models.CASCADE,
+        related_name= "user_guia", 
         blank = True, null= True
         )
     

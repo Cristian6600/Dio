@@ -147,6 +147,9 @@ class AsignarListview(CustodiaPermisoMixin, ListView):
             Q(id__icontains=kword) | Q(courrier__contains=kword)
         )
         return queryset
+        
+    def cont(self):
+        return courrier.objects.order_by("-user_guia")
     
     def get_context_data(self, **kwargs):
         contexto = {}
