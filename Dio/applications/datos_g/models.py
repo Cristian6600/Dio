@@ -67,8 +67,6 @@ class datos_g (models.Model):
 
     postal = models.CharField(
         max_length = 7,
-        blank=True, 
-        null=True,
     )
     id_ciu = models.ForeignKey(
         Ciudad, 
