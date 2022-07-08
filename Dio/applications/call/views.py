@@ -145,7 +145,7 @@ class CallListView(CallPermisoMixin, View):
             mot = 21).exclude(mot = 20).exclude(mot=19).exclude(
             telefono_guia__motivo_call= 11).exclude(
             telefono_guia__motivo_call= 12)
-        paginator = Paginator(contact_list, 5) # Show 25 contacts per page.
+        paginator = Paginator(contact_list, 2) # Show 25 contacts per page.
 
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
