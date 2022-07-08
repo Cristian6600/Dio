@@ -1,4 +1,4 @@
-from dataclasses import field
+from dataclasses import dataclass, field
 from re import template
 from django.shortcuts import render
 from django.views.generic.edit import UpdateView
@@ -145,7 +145,7 @@ class CallListView(CallPermisoMixin, View):
             mot = 21).exclude(mot = 20).exclude(mot=19).exclude(
             telefono_guia__motivo_call= 11).exclude(
             telefono_guia__motivo_call= 12)
-        paginator = Paginator(contact_list, 2) # Show 25 contacts per page.
+        paginator = Paginator(contact_list, 5) # Show 25 contacts per page.
 
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
@@ -156,36 +156,38 @@ class CallListView(CallPermisoMixin, View):
         return render(request, self.template_name, data)
         #p
 
-class AuditoriaListView(ListView):
+class AuditoriaListView(View):
     template_name = "call/auditoria.html"
     context_object_name = 'auditoria'
-    # queryset = Guia.objects.filter(mot = 21, estado=1)
-    paginate_by = 5
+    model = Guia
 
-    def get_queryset(self, **kwargs):
+    def get(self, request, **kwargs):
         
-        ciudad = self.request.GET.get("ciudad", "")
-        kword = self.request.GET.get("kword", "")
-        fecha = self.request.GET.get("date_start", "")
-        lista = Guia.objects.filter(mot = 21, estado=1).filter(
+        ciudad = request.GET.get("ciudad", "")
+        kword = request.GET.get("kword", "")
+        fecha = request.GET.get("date_start", "")
+        contact_list = Guia.objects.filter(mot = 21, estado=1).filter(
             fecha_recepcion__icontains = fecha,
             id_ciu__ciudad__icontains = ciudad  
         ).filter(
             Q(mensajero__courrier__icontains =kword)|
             Q(seudo__seudo_bd__icontains=kword)
         )
-            
-        return lista
 
-    def count(self):
-        return Guia.objects.filter(estado=0, user=self.request.user, fecha_recepcion__contains=datetime.today().date())
+        paginator = Paginator(contact_list, 2) # Show 25 contacts per page.
+
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        data = {
+            'page_obj': page_obj,
+            'count': Guia.objects.filter(estado=0, user=self.request.user, fecha_recepcion__contains=datetime.today().date()).count
+        }
             
+        return render(request, self.template_name, data)
+
+    # def count(self):
+    #     return Guia.objects.filter(estado=0, user=self.request.user, fecha_recepcion__contains=datetime.today().date())
             
-    def get_context_data(self, **kwargs):
-        contexto = {}
-        contexto ['auditoria'] = self.get_queryset()
-        contexto ['count'] = self.count().count
-        return contexto
 
 class AuditoriaCreateView(CreateView):
     template_name = "call/create_auditoria.html"
