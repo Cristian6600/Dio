@@ -17,6 +17,8 @@ from applications.guia.models import Guia
 
 from applications.fisico.models import Fisico
 
+from applications.ruta.models import Planilla
+
 from django.contrib import messages
 
 from applications.users.mixins import CustodiaPermisoMixin
@@ -74,8 +76,11 @@ class ListEmpleadosPdf(CustodiaPermisoMixin, ListView):
         nombre = self.kwargs['full_name']
                
         mostrar_nom = Guia.objects.filter(mensajero__id = nombre, est_planilla = 1).order_by('fecha_planilla')[0]
-        mostrarpub = Guia.objects.latest('fecha')
-        guia = Guia.objects.filter(mensajero__id = nombre, est_planilla = 1 ).order_by('fecha_planilla')
+        mostrarpub = Planilla.objects.latest('fecha')
+        guia = Guia.objects.filter(
+            mensajero__id = nombre, 
+            est_planilla = 1 
+            ).order_by('fecha_planilla')
         data = {
             'count': guia.count(),
             'empleados': guia,
@@ -132,7 +137,6 @@ from django.db.models import Count
 class AsignarListview(CustodiaPermisoMixin, ListView):
     context_object_name = "planillas" 
     template_name = "ruta/asignado_planillas.html"
-    paginate_by = 5
 
     def listing(request):
         contact_list = courrier.objects.all()
@@ -158,7 +162,7 @@ class AsignarListview(CustodiaPermisoMixin, ListView):
     
     def get_context_data(self, **kwargs):
         contexto = {}
-        contexto ['planillas'] = self.get_queryset()[:8]
+        contexto ['page_obj'] = self.get_queryset()[:8]
         contexto ['count'] = self.get_queryset().count
         contexto ['total'] = self.cont().count
         return contexto  
