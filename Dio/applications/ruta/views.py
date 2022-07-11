@@ -148,7 +148,7 @@ class AsignarListview(CustodiaPermisoMixin, ListView):
         queryset = courrier.objects.filter(
             id_ciu__departamento=self.request.user.ciudad.departamento).filter(
             courrier__contains=kword
-            ).annotate(num_guias = Count('user_guia')
+            ).annotate(num_guias = Count('user_guia', filter=Q(user_guia__est_planilla = 1))
             ).order_by('-num_guias')
         
         return queryset
