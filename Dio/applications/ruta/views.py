@@ -15,6 +15,8 @@ from django.shortcuts import get_object_or_404, render
 
 from applications.guia.models import Guia
 
+from applications.fisico.models import Fisico
+
 from django.contrib import messages
 
 from applications.users.mixins import CustodiaPermisoMixin
@@ -126,6 +128,7 @@ class AsignarCreateView(CustodiaPermisoMixin, View):
     #     return super(AsignarCreateView, self).form_valid(form)
 
 #----------Lista mensajeros Ruta a imprimir -------------
+from django.db.models import Count
 class AsignarListview(CustodiaPermisoMixin, ListView):
     context_object_name = "planillas" 
     template_name = "ruta/asignado_planillas.html"
@@ -144,12 +147,14 @@ class AsignarListview(CustodiaPermisoMixin, ListView):
         order = self.request.GET.get("order", '')
         queryset = courrier.objects.filter(
             id_ciu__departamento=self.request.user.ciudad.departamento).filter(
-            Q(id__icontains=kword) | Q(courrier__contains=kword)
-        )
+            courrier__contains=kword
+            ).annotate(num_guias = Count('user_guia')
+            ).order_by('-num_guias')
+        
         return queryset
         
     def cont(self):
-        return courrier.objects.order_by("-user_guia")
+        return courrier.objects.annotate(num_guias = Count('user_guia'))
     
     def get_context_data(self, **kwargs):
         contexto = {}

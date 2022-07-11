@@ -20,6 +20,7 @@
             <th>Mensajero</th>
             <th>Cedula</th>
             <th>Ciudad</th>
+            <th>Cantidad</th>
             <th>Imprimir</th>
         
         </thead>
@@ -30,6 +31,7 @@
                 <td>{{ e.courrier }}</td>
                 <td>{{ e.d_i }}</td>
                 <td>{{ e.id_ciu }}</td>
+                <td>{{e.num_guias}}</td>
                 <td>
                     <a href="{% url 'ruta_apps:impresion' e.id %}" class="button"><i class="fi-print"></i></a>
                 </td>
@@ -49,8 +51,6 @@
     </table>
     
 </div>
-
-
 
 
 {% endblock panel-content %}
