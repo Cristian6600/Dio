@@ -1,6 +1,7 @@
 
 from multiprocessing import context
 from re import template
+from turtle import update
 from typing import ContextManager
 from django.db.models import fields
 from django.db.models.query import QuerySet
@@ -32,7 +33,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.http import HttpResponse
 
-from django.views.generic import CreateView, ListView, View
+from django.views.generic import CreateView, ListView, View, UpdateView
 
 from . models import Planilla, Descargue, Recepcion, Destino
 
@@ -67,6 +68,25 @@ class RecepcioCreateView(CustodiaPermisoMixin, CreateView, ListView ):
             messages.success(request, 'Recepcion Data Added')
 
         return render(request, self.template_name, {'form': form})
+
+from django.urls import reverse_lazy
+class CorreccionRecepcion(UpdateView):
+    model = Guia
+    fields = ['mot']
+    template_name = "ruta/update-recepcion.html"
+    success_url = reverse_lazy('ruta_apps:lista-recepcion')
+
+class RecepcionListView(ListView):
+    model = Guia 
+    fields = ['mot', 'seudo', 'id_guia']
+    template_name = "ruta/lista-recepcion.html"
+    # context_object_name = 'recepcion_lista'
+
+    def get_queryset(self):
+        kword = self.request.GET.get("kword")
+        
+        queryset = Guia.objects.filter(id_guia = kword)
+        return queryset
 
 #------------------Pdf Cargue----------------------
 class ListEmpleadosPdf(CustodiaPermisoMixin, ListView):
@@ -150,9 +170,11 @@ class AsignarListview(CustodiaPermisoMixin, ListView):
         kword = self.request.GET.get("kword", '')
         order = self.request.GET.get("order", '')
         queryset = courrier.objects.filter(
-            id_ciu__departamento=self.request.user.ciudad.departamento).filter(
+            id_ciu__departamento=self.request.user.ciudad.departamento
+            ).filter(
             courrier__contains=kword
-            ).annotate(num_guias = Count('user_guia', filter=Q(user_guia__est_planilla = 1))
+            ).annotate(
+                num_guias = Count('user_guia', filter=Q(user_guia__est_planilla = 1))
             ).order_by('-num_guias').exclude(num_guias = 0)
         
         return queryset

@@ -54,6 +54,18 @@ urlpatterns = [
         views.InformeRutaCiudadListView.as_view(),
         name='informe-destino',
     ),
+    
+    path(
+        'update/recepcion/view/<int:pk>/', 
+        views.CorreccionRecepcion.as_view(),
+        name='update-recepcion',
+    ),
+    
+    path(
+        'lista/recepcion/', 
+        views.RecepcionListView.as_view(),
+        name='lista-recepcion',
+    ),
     # path('about/', TemplateView.as_view(template_name="ruta/    prueba.html")),
 
     
