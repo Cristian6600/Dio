@@ -1,7 +1,6 @@
 
 from multiprocessing import context
 from re import template
-from turtle import update
 from typing import ContextManager
 from django.db.models import fields
 from django.db.models.query import QuerySet
