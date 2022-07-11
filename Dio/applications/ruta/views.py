@@ -154,12 +154,13 @@ class AsignarListview(CustodiaPermisoMixin, ListView):
         return queryset
         
     def cont(self):
-        return courrier.objects.annotate(num_guias = Count('user_guia'))
+        return Fisico.objects.filter(est_planilla = 1)
     
     def get_context_data(self, **kwargs):
         contexto = {}
         contexto ['planillas'] = self.get_queryset()[:8]
         contexto ['count'] = self.get_queryset().count
+        contexto ['total'] = self.cont().count
         return contexto  
 
 class DestinoCreate(CustodiaPermisoMixin, CreateView):
