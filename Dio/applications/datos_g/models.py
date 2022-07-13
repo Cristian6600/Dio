@@ -20,6 +20,7 @@ class Orden (models.Model):
     orden = models.IntegerField(primary_key= True)
     fecha = models.DateTimeField(auto_now=True, blank=True, null=True)
     nombre_orden = models.CharField(max_length=25)
+    tipo = models.CharField(max_length=20)
 
     def __str__(self):
         return str(self.orden)
