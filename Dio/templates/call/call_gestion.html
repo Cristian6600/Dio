@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block panel-content %}
-
+<h4>Gestion</h4>
 <form  method="GET">{% csrf_token %}
     <div class="grid-container">
         <div class="grid-x grid-margin-x">
@@ -116,27 +116,23 @@
         </table>
     </div>
 
-    <nav aria-label="Pagination">
-        <ul class="pagination">
+    <div class="pagination">
+        <span class="step-links">
             {% if page_obj.has_previous %}
-            <li class="pagination-previous"><a href="?page=1">Inicio <span class="show-for-sr">page</span></a></li>
-            <li ><a href="?page={{ page_obj.previous_page_number }}"> Atras <span class="show-for-sr">page</span></a></li>
-          {% endif %}
-          
-          
-          {% for num in page_obj.paginator.page_range %}
-          {% if page_obj.number == num %}
-            <li><a href="?page={{ num }}">{{ num }}</a></li>
-          {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-            <li><a href="?page={{ num }}">{{ num }}</a></li>
-          {% endif %}
-        {% endfor %}
-          {% if page_obj.has_next %}
-          <li class="pagination-next"><a href="?page={{ page_obj.next_page_number }}" aria-label="Next page">Siguiente <span class="show-for-sr">page</span></a></li>
-          <li class="pagination-next"><a href="?page={{ page_obj.next_page_number }}" aria-label="Next page">Ultimo <span class="show-for-sr">page</span></a></li>
-          {% endif %}   
-        </ul>
-      </nav>
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+    
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+    
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
     
       
 {% endblock panel-content %}
