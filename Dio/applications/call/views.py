@@ -147,7 +147,7 @@ class CallListView(CallPermisoMixin, View):
         paginator = Paginator(contact_list, 2) # Show 25 contacts per page.
 
         page_number = request.GET.get('page')
-        cantidad = Guia.objects.filter(user=self.request.user ).count#, fecha__contains=datetime.today().date()).count
+        cantidad = Guia.objects.filter(user=self.request.user , fecha_recepcion__contains=datetime.today().date()).count
         page_obj = paginator.get_page(page_number)
         data = {
             'page_obj': page_obj,
