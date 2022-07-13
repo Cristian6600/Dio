@@ -42,14 +42,14 @@ class OrdenAgendaListView(CustodiaPermisoMixin, ListView):
     template_name = "datos_g/orden_guia_agendamiento.html"
     # queryset = Orden.objects.order_by("orden")
     context_object_name = 'orden'
-    paginate_by = 7
+    paginate_by = 20
 
     def get_queryset(self):
-        queryset = Orden.objects.filter(orden_dat_g__mot = 20)
+        queryset = Orden.objects.filter(orden_dat_g__mot = 19, orden_dat_g__mot = 20)
         return queryset
 
     def get_queryset_cont(self):
-        queryset = Orden.objects.filter(orden_dat_g__mot = 20)
+        queryset = Orden.objects.filter(orden_dat_g__mot = 19, orden_dat_g__mot = 20)
         return queryset
 
     def get_context_data(self, **kwargs):
