@@ -9,7 +9,6 @@ from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.utils.text import format_lazy
 from applications.fisico.models import Fisico
 from simple_history.admin import SimpleHistoryAdmin
-from import_export import resources
 from django.http import HttpResponse
 import datetime
 

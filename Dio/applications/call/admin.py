@@ -7,6 +7,7 @@ from django.db import transaction
 from simple_history.admin import SimpleHistoryAdmin
 
 
+
 class DatossResource(resources.ModelResource):
     class Meta:
         model = Datos_t
@@ -45,9 +46,9 @@ class TelefonoResource(resources.ModelResource):
     id__id__id_ciu__ciudad = Field (attribute='id__id__id_ciu__ciudad', column_name='CIUDAD CITA')
     id__id__id_ciu__departamento__departamento = Field (attribute='id__id__id_ciu__departamento__departamento', column_name='DEPARTAMENTO')
     id__id__proceso__tipo_e = Field (attribute='id__id__proceso__tipo_e', column_name='TIPO DE ENTREGA')
-    id__OFICINA_CITA = Field(column_name='OFICINA CITA')
-    id__AUTORIZADO = Field(column_name='AUTORIZADO')
-    id__FECHA_AGENDAMIENTO = Field(column_name='FECHA AGENDAMIENTO')
+    id__id__guia_d_g__oficina = Field(attribute='id__id__guia_d_g__oficina',column_name='OFICINA CITA')
+    id__id__guia_d_g__autor = Field(attribute='id__id__guia_d_g__autor',column_name='AUTORIZADO')
+    id__fecha = Field(attribute='id__fecha',column_name='FECHA AGENDAMIENTO')
     id__motivo_call__motivo = Field (attribute='id__motivo_call__motivo', column_name='TIPIFICACION')
     id__id__id_est__motivo = Field (attribute='id__id__id_est__motivo', column_name='ESTADO CUSTODIA')
     
@@ -77,8 +78,8 @@ class TelefonoResource(resources.ModelResource):
             'id__observacion', 'id__user', 
             'id__id__direccion', 'id__id__id_ciu__ciudad', 
             'id__id__id_ciu__departamento__departamento', 'id__id__proceso__tipo_e', 
-            'id__OFICINA_CITA', 'id__AUTORIZADO', 
-            'id__FECHA_AGENDAMIENTO', 'id__motivo_call__motivo',
+            'id__id__guia_d_g__oficina', 'id__id__guia_d_g__autor', 
+            'id__fecha', 'id__motivo_call__motivo',
         )
 
 class datos_tAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
