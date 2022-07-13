@@ -50,7 +50,7 @@ class OrdenAgendaListView(CustodiaPermisoMixin, ListView):
 
     def get_queryset_cont(self):
         queryset = Orden.objects.annotate(
-            contar = Count('orden_datos_g', filter=Q(orden_dat_g__mot = 20)))
+            contar = Count('orden_dat_g', filter=Q(orden_dat_g__mot = 20)))
         return queryset
 
     def get_context_data(self, **kwargs):
