@@ -34,7 +34,7 @@ class TelefonoResource(resources.ModelResource):
     id__id__destinatario = Field (attribute='id__id__destinatario', column_name='CLIENTE')
     id__id__user__ciudad__ciudad = Field (attribute='id__id__user__ciudad__ciudad', column_name='BODEGA')
     id__id__id_ciu__ciudad = Field (attribute='id__id__id_ciu__ciudad', column_name='CIUDAD BASE')
-    id__id__direccion = Field (attribute='id__id__direccion', column_name='DIRECCION')
+    id__id__guia_d_g__direccion = Field (attribute='id__id__guia_d_g__direccion', column_name='DIRECCION')
     id__id__mot__motivo = Field (attribute='id__id__mot__motivo', column_name='RESULTADO')
     id__id__fecha_recepcion = Field (attribute='id__id__fecha_recepcion', column_name='FECHA GESTIÓN')
     id__tel = Field (attribute='id__tel', column_name='TEL')
@@ -60,7 +60,7 @@ class TelefonoResource(resources.ModelResource):
             'id', 'id__id__seudo__tarjeta', 
             'id__id__guia_d_g__marca', 'id__id__d_i', 
             'id__id__destinatario', 'id__id__user__ciudad__ciudad', 
-            'id__id__id_ciu__ciudad', 'id__id__direccion', 
+            'id__id__id_ciu__ciudad', 'id__id__guia_d_g__direccion', 
             'id__id__mot__motivo', 'id__id__fecha_recepcion',
             'id__tel', 'id__motivo_call', 'id__fecha_call', 
             'id__observacion', 'id__user', 
@@ -72,7 +72,7 @@ class TelefonoResource(resources.ModelResource):
             'id', 'id__id__seudo__tarjeta', 
             'id__id__guia_d_g__marca', 'id__id__d_i', 'id__id__destinatario', 
             'id__id__user__ciudad__ciudad', 'id__id__id_ciu__ciudad', 
-            'id__id__direccion', 'id__id__mot__motivo', 
+            'id__id__guia_d_g__direccion', 'id__id__mot__motivo', 
             'id__id__fecha_recepcion', 'id__tel', 
             'id__motivo_call', 'id__fecha_call', 
             'id__observacion', 'id__user', 
