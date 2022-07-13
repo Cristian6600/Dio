@@ -105,6 +105,7 @@ class TelefonoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('id', 'fecha_call' )
     search_fields = ('id',)
     list_filter = ('fecha_call', 'user')
+    raw_id_fields = ["id",]
     # resource_class = TelefonoResource
     date_hierarchy = ('fecha_call')
 
