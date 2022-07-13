@@ -25,31 +25,31 @@ class AuditoriaResource(resources.ModelResource):
 
 class TelefonoResource(resources.ModelResource):
     
- #   
-    # id = Field (attribute='id', column_name='PSEUDO')
-    # id__seudo__tarjeta = Field (attribute='id__seudo__tarjeta', column_name='TARJETA')
-    # id__guia_d_g__marca = Field (attribute='id__guia_d_g__marca', column_name='MARCA')
-    # id__d_i = Field (attribute='id__d_i', column_name='CEDULA')
-    # id__destinatario = Field (attribute='id__destinatario', column_name='CLIENTE')
-    # id__user__ciudad__ciudad = Field (attribute='id__user__ciudad__ciudad', column_name='BODEGA')
-    # id__id_ciu__ciudad = Field (attribute='id__id_ciu__ciudad', column_name='CIUDAD BASE')
-    # id__direccion = Field (attribute='id__direccion', column_name='DIRECCION')
-    # id__mot__motivo = Field (attribute='id__mot__motivo', column_name='RESULTADO')
-    # id__fecha_recepcion = Field (attribute='id__fecha_recepcion', column_name='FECHA GESTIÓN')
-    # tel = Field (attribute='tel', column_name='TEL')
-    # motivo_call = Field (attribute='motivo_call', column_name='ESTADO CALL')
-    # fecha_call = Field (attribute='fecha_call', column_name='FECHA CALL')
-    # observacion = Field (attribute='observacion', column_name='OBSERVACIONES')
-    # user = Field (attribute='user', column_name='ASESOR')
-    # id__direccion = Field (attribute='id__direccion', column_name='DIRECCION CITA')
-    # id__id_ciu__ciudad = Field (attribute='id__id_ciu__ciudad', column_name='CIUDAD CITA')
-    # id__id_ciu__departamento__departamento = Field (attribute='id__id_ciu__departamento__departamento', column_name='DEPARTAMENTO')
-    # id__proceso__tipo_e = Field (attribute='id__proceso__tipo_e', column_name='TIPO DE ENTREGA')
-    # OFICINA_CITA = Field(column_name='OFICINA CITA')
-    # AUTORIZADO = Field(column_name='AUTORIZADO')
-    # FECHA_AGENDAMIENTO = Field(column_name='FECHA AGENDAMIENTO')
-    # motivo_call__motivo = Field (attribute='motivo_call__motivo', column_name='TIPIFICACION')
-    # id__id_est__motivo = Field (attribute='id__id_est__motivo', column_name='ESTADO CUSTODIA')
+   
+    id = Field (attribute='id', column_name='PSEUDO')
+    id__seudo__tarjeta = Field (attribute='id__seudo__tarjeta', column_name='TARJETA')
+    id__guia_d_g__marca = Field (attribute='id__guia_d_g__marca', column_name='MARCA')
+    id__d_i = Field (attribute='id__d_i', column_name='CEDULA')
+    id__destinatario = Field (attribute='id__destinatario', column_name='CLIENTE')
+    id__user__ciudad__ciudad = Field (attribute='id__user__ciudad__ciudad', column_name='BODEGA')
+    id__id_ciu__ciudad = Field (attribute='id__id_ciu__ciudad', column_name='CIUDAD BASE')
+    id__direccion = Field (attribute='id__direccion', column_name='DIRECCION')
+    id__mot__motivo = Field (attribute='id__mot__motivo', column_name='RESULTADO')
+    id__fecha_recepcion = Field (attribute='id__fecha_recepcion', column_name='FECHA GESTIÓN')
+    tel = Field (attribute='tel', column_name='TEL')
+    motivo_call = Field (attribute='motivo_call', column_name='ESTADO CALL')
+    fecha_call = Field (attribute='fecha_call', column_name='FECHA CALL')
+    observacion = Field (attribute='observacion', column_name='OBSERVACIONES')
+    user = Field (attribute='user', column_name='ASESOR')
+    id__direccion = Field (attribute='id__direccion', column_name='DIRECCION CITA')
+    id__id_ciu__ciudad = Field (attribute='id__id_ciu__ciudad', column_name='CIUDAD CITA')
+    id__id_ciu__departamento__departamento = Field (attribute='id__id_ciu__departamento__departamento', column_name='DEPARTAMENTO')
+    id__proceso__tipo_e = Field (attribute='id__proceso__tipo_e', column_name='TIPO DE ENTREGA')
+    OFICINA_CITA = Field(column_name='OFICINA CITA')
+    AUTORIZADO = Field(column_name='AUTORIZADO')
+    FECHA_AGENDAMIENTO = Field(column_name='FECHA AGENDAMIENTO')
+    motivo_call__motivo = Field (attribute='motivo_call__motivo', column_name='TIPIFICACION')
+    id__id_est__motivo = Field (attribute='id__id_est__motivo', column_name='ESTADO CUSTODIA')
     
 
     class Meta:
@@ -67,15 +67,15 @@ class TelefonoResource(resources.ModelResource):
             'id__motivo_call__motivo', #'id__id_est__motivo',
         )
         export_order = (
-            'id', 'id__id__seudo__tarjeta', 'id__id__guia_d_g__marca',
-            'id__id__d_i', 'id__id__destinatario', 'id__id__user__ciudad__ciudad',
-            'id__id__id_ciu__ciudad', 'id__id__direccion', 'id__id__mot__motivo', 'id__id__fecha_recepcion',
-            'id__tel', 'id__motivo_call', 'id__fecha_call', 'id__observacion',
-            'id__user', 'id__id__direccion', 'id__id__id_ciu__ciudad', 
-            'id__id__id_ciu__departamento__departamento', 
-            'id__id__proceso__tipo_e', 'id__id__OFICINA_CITA', 
-            'id__id__AUTORIZADO', 'id__id__FECHA_AGENDAMIENTO',
-            'id__id__motivo_call__motivo',
+            'id', 'id__seudo__tarjeta', 'id__guia_d_g__marca',
+            'id__d_i', 'id__destinatario', 'id__user__ciudad__ciudad',
+            'id__id_ciu__ciudad', 'id__direccion', 'id__mot__motivo', 'id__fecha_recepcion',
+            'tel', 'motivo_call', 'fecha_call', 'observacion',
+            'user', 'id__direccion', 'id__id_ciu__ciudad', 
+            'id__id_ciu__departamento__departamento', 
+            'id__proceso__tipo_e', 'OFICINA_CITA', 
+            'AUTORIZADO', 'FECHA_AGENDAMIENTO',
+            'motivo_call__motivo',
         )
 
 class datos_tAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
