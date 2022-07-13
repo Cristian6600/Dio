@@ -67,8 +67,7 @@ class CallUpdateView(CallPermisoMixin, UpdateView, ListView):
             self.objectl = form2.save(commit=False)
             self.object.user = self.request.user
             self.objectl.mot_id = 20
-               
-            
+            self.objectl.user = self.request.user   
             form.save()
            
             form2.save()
@@ -155,13 +154,6 @@ class CallListView(CallPermisoMixin, View):
             'count': cantidad
         }
         return render(request, self.template_name, data)
-
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
-        return super(CallListView, self).form_valid(form)    
-    
 
 class AuditoriaListView(CallPermisoMixin, View):
     template_name = "call/auditoria.html"
