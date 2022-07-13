@@ -73,9 +73,9 @@ class TelefonoResource(resources.ModelResource):
             'id__tel', 'id__motivo_call', 'id__fecha_call', 'id__observacion',
             'id__user', 'id__id__direccion', 'id__id__id_ciu__ciudad', 
             'id__id__id_ciu__departamento__departamento', 
-            'id__id__proceso__tipo_e', 'id__OFICINA_CITA', 
-            'id__AUTORIZADO', 'id__FECHA_AGENDAMIENTO',
-            'id__motivo_call__motivo',
+            'id__id__proceso__tipo_e', 'id__id__OFICINA_CITA', 
+            'id__id__AUTORIZADO', 'id__id__FECHA_AGENDAMIENTO',
+            'id__id__motivo_call__motivo',
         )
 
 class datos_tAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
