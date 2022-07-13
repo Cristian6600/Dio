@@ -21,16 +21,16 @@
 <table>
     <thead>
         <th>Orden de impresion</th>
-        <th>Fecha</th>
-        <th>Cantidad</th>
+        <th>Nombre</th>
+        <th>fecha</th>
         <th>Imprimir</th>
     </thead>
     <tbody>
         {% for e in orden  %}
         <tr>
             <td>{{ e.orden }}</td>
+            <td>{{e.nombre_orden}}</td>
             <td>{{e.fecha}}</td>
-            
             <td>
                 <a href="{% url 'gatos_g:pdg-guia-agendamiento' e.orden %}" class="button"><i class="fi-print"></i></a>
             </td>
