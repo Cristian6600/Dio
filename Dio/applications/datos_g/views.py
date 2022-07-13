@@ -45,11 +45,11 @@ class OrdenAgendaListView(CustodiaPermisoMixin, ListView):
     paginate_by = 20
 
     def get_queryset(self):
-        queryset = Orden.objects.filter(orden_dat_g__mot = 19, orden_dat_g__mot = 20)
+        queryset = Orden.objects.filter(orden_dat_g__mot = 20)
         return queryset
 
     def get_queryset_cont(self):
-        queryset = Orden.objects.filter(orden_dat_g__mot = 19, orden_dat_g__mot = 20)
+        queryset = Orden.objects.filter(orden_dat_g__mot = 20)
         return queryset
 
     def get_context_data(self, **kwargs):
