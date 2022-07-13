@@ -56,7 +56,7 @@ class OrdenAgendaListView(CustodiaPermisoMixin, ListView):
     def get_context_data(self, **kwargs):
         contexto = {}
         contexto ['orden'] = self.get_queryset()
-        contexto ['contar'] = self.get_queryset_cont().count
+        contexto ['contar'] = self.get_queryset_cont
         return contexto  
 
 class Lista_gendamientosListView(CustodiaPermisoMixin, TodayArchiveView, ListView):
