@@ -65,7 +65,7 @@ class CallUpdateView(CallPermisoMixin, UpdateView, ListView):
             self.h= 33
             self.object = form.save(commit=False)
             self.objectl = form2.save(commit=False)
-            self.object.user = self.request.userc
+            self.object.user = self.request.user
             self.objectl.mot_id = 20
             self.objectl.user = self.request.user   
             form.save()
