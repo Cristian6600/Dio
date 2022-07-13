@@ -28,23 +28,23 @@ class TelefonoResource(resources.ModelResource):
    
     id = Field (attribute='id', column_name='PSEUDO')
     id__seudo__tarjeta = Field (attribute='id__seudo__tarjeta', column_name='TARJETA')
-    id__guia_d_g__marca = Field (attribute='id__guia_d_g__marca', column_name='MARCA')
-    id__d_i = Field (attribute='id__d_i', column_name='CEDULA')
-    id__destinatario = Field (attribute='id__destinatario', column_name='CLIENTE')
-    id__user__ciudad__ciudad = Field (attribute='id__user__ciudad__ciudad', column_name='BODEGA')
-    id__id_ciu__ciudad = Field (attribute='id__id_ciu__ciudad', column_name='CIUDAD BASE')
-    id__direccion = Field (attribute='id__direccion', column_name='DIRECCION')
-    id__mot__motivo = Field (attribute='id__mot__motivo', column_name='RESULTADO')
-    id__fecha_recepcion = Field (attribute='id__fecha_recepcion', column_name='FECHA GESTIÓN')
+    id__id__guia_d_g__marca = Field (attribute='id__guia_d_g__marca', column_name='MARCA')
+    id__id__d_i = Field (attribute='id__d_i', column_name='CEDULA')
+    id__id__destinatario = Field (attribute='id__destinatario', column_name='CLIENTE')
+    id__id__user__ciudad__ciudad = Field (attribute='id__user__ciudad__ciudad', column_name='BODEGA')
+    id__id__id_ciu__ciudad = Field (attribute='id__id_ciu__ciudad', column_name='CIUDAD BASE')
+    id__id__direccion = Field (attribute='id__direccion', column_name='DIRECCION')
+    id__id__mot__motivo = Field (attribute='id__mot__motivo', column_name='RESULTADO')
+    id__id__fecha_recepcion = Field (attribute='id__fecha_recepcion', column_name='FECHA GESTIÓN')
     tel = Field (attribute='tel', column_name='TEL')
     motivo_call = Field (attribute='motivo_call', column_name='ESTADO CALL')
     fecha_call = Field (attribute='fecha_call', column_name='FECHA CALL')
     observacion = Field (attribute='observacion', column_name='OBSERVACIONES')
     user = Field (attribute='user', column_name='ASESOR')
-    id__direccion = Field (attribute='id__direccion', column_name='DIRECCION CITA')
-    id__id_ciu__ciudad = Field (attribute='id__id_ciu__ciudad', column_name='CIUDAD CITA')
-    id__id_ciu__departamento__departamento = Field (attribute='id__id_ciu__departamento__departamento', column_name='DEPARTAMENTO')
-    id__proceso__tipo_e = Field (attribute='id__proceso__tipo_e', column_name='TIPO DE ENTREGA')
+    id__id__direccion = Field (attribute='id__direccion', column_name='DIRECCION CITA')
+    id__id__id_ciu__ciudad = Field (attribute='id__id_ciu__ciudad', column_name='CIUDAD CITA')
+    id__id__id_ciu__departamento__departamento = Field (attribute='id__id_ciu__departamento__departamento', column_name='DEPARTAMENTO')
+    id__id__proceso__tipo_e = Field (attribute='id__proceso__tipo_e', column_name='TIPO DE ENTREGA')
     OFICINA_CITA = Field(column_name='OFICINA CITA')
     AUTORIZADO = Field(column_name='AUTORIZADO')
     FECHA_AGENDAMIENTO = Field(column_name='FECHA AGENDAMIENTO')
@@ -106,7 +106,6 @@ class TelefonoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     search_fields = ('id',)
     list_filter = ('fecha_call', 'user')
     raw_id_fields = ["id",]
-    # resource_class = TelefonoResource
     date_hierarchy = ('fecha_call')
 
 class AuditoriaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
@@ -138,6 +137,7 @@ class InformeCallAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = TelefonoResource
     date_hierarchy = ('fecha')
     list_filter  = ('id__user',)
+    list_per_page = 5
 
 admin.site.register(Datos_t, datos_tAdmin)
 
