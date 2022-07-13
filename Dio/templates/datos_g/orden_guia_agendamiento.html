@@ -22,7 +22,6 @@
     <thead>
         <th>Orden de impresion</th>
         <th>Nombre</th>
-        <th>Cantidad</th>
         <th>Imprimir</th>
     </thead>
     <tbody>
@@ -30,7 +29,25 @@
         <tr>
             <td>{{ e.orden }}</td>
             <td>{{e.nombre_orden}}</td>
-            <td>{{e.contar}}</td>
+            <td>
+                <a href="{% url 'gatos_g:pdg-guia-agendamiento' e.orden %}" class="button"><i class="fi-print"></i></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<table>
+    <thead>
+        <th>Orden de impresion</th>
+        <th>Nombre</th>
+        <th>Imprimir</th>
+    </thead>
+    <tbody>
+        {% for e in ordentwo  %}
+        <tr>
+            <td>{{ e.orden }}</td>
+            <td>{{e.nombre_orden}}</td>
             <td>
                 <a href="{% url 'gatos_g:pdg-guia-agendamiento' e.orden %}" class="button"><i class="fi-print"></i></a>
             </td>
