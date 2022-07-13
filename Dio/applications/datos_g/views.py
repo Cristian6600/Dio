@@ -48,14 +48,14 @@ class OrdenAgendaListView(CustodiaPermisoMixin, ListView):
         queryset = Orden.objects.filter(orden_dat_g__mot = 20)
         return queryset
 
-    def get_queryset_cont(self):
-        queryset = Orden.objects.filter(orden_dat_g__mot = 20)
-        return queryset
+    # def get_queryset_cont(self):
+    #     queryset = Orden.objects.filter(orden_dat_g__mot = 20)
+    #     return queryset
 
     def get_context_data(self, **kwargs):
         contexto = {}
         contexto ['orden'] = self.get_queryset()
-        contexto ['contar'] = self.get_queryset_cont().count
+        # contexto ['contar'] = self.get_queryset_cont().count
         return contexto  
 
 class Lista_gendamientosListView(CustodiaPermisoMixin, TodayArchiveView, ListView):
