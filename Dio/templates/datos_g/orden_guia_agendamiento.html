@@ -18,7 +18,8 @@
 <form method="post">{% csrf_token %}
 </div>
 
-<table>
+<table class="hover">
+    <caption>REAGENDAMIENTOS</caption>
     <thead>
         <th>Orden de impresion</th>
         <th>Nombre</th>
@@ -37,8 +38,13 @@
     </tbody>
 </table>
 
-<table>
-    
+<table class="hover">
+    <caption>AGENDAMIENTOS</caption>
+    <thead>
+        <th>Orden de impresion</th>
+        <th>Nombre</th>
+        <th>Imprimir</th>
+    </thead>
     <tbody>
         {% for e in ordentwo  %}
         <tr>
