@@ -49,7 +49,7 @@ class TelefonoResource(resources.ModelResource):
     id__id__guia_d_g__oficina = Field(attribute='id__id__guia_d_g__oficina',column_name='OFICINA CITA')
     id__id__guia_d_g__autor = Field(attribute='id__id__guia_d_g__autor',column_name='AUTORIZADO')
     id__fecha = Field(attribute='id__fecha',column_name='FECHA AGENDAMIENTO')
-    id__motivo_call__motivo = Field (attribute='id__motivo_call__motivo', column_name='TIPIFICACION')
+    id__motivo_call__tipificacion = Field (attribute='id__motivo_call__tipificacion', column_name='TIPIFICACION')
     id__id__id_est__motivo = Field (attribute='id__id__id_est__motivo', column_name='ESTADO CUSTODIA')
     
 
@@ -66,7 +66,7 @@ class TelefonoResource(resources.ModelResource):
             'id__observacion', 'id__user', 
             'id__id__direccion', 'id__id__id_ciu__ciudad', 
             'id__id__id_ciu__departamento__departamento', 'id__id__proceso__tipo_e', 
-            'id__motivo_call__motivo', 'id__id__id_est__motivo'
+            'id__motivo_call__tipificacion', 'id__id__id_est__motivo'
         )
         export_order = (
             'id', 'id__id__seudo__tarjeta', 
@@ -79,7 +79,7 @@ class TelefonoResource(resources.ModelResource):
             'id__id__direccion', 'id__id__id_ciu__ciudad', 
             'id__id__id_ciu__departamento__departamento', 'id__id__proceso__tipo_e', 
             'id__id__guia_d_g__oficina', 'id__id__guia_d_g__autor', 
-            'id__fecha', 'id__motivo_call__motivo',
+            'id__fecha', 'id__motivo_call__tipificacion',
         )
 
 class datos_tAdmin(ImportExportModelAdmin, SimpleHistoryAdmin):
