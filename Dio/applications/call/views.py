@@ -12,6 +12,7 @@ from applications.users.mixins import CallPermisoMixin
 from . models import Telefono
 from django.http import HttpResponse, HttpResponseRedirect
 from applications.courrier.models import courrier
+from applications.call.models import Telefono
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required, permission_required
 from django.utils.timezone import datetime 
@@ -146,11 +147,20 @@ class CallListView(CallPermisoMixin, View):
         paginator = Paginator(contact_list, 2) # Show 25 contacts per page.
 
         page_number = request.GET.get('page')
-        cantidad = Guia.objects.filter(user=self.request.user , fecha_recepcion__contains=datetime.today().date()).count
+        cantidad = Guia.objects.filter(
+            user=self.request.user, 
+            fecha_recepcion__contains=datetime.today().date()).count
+
+        count_tel = Telefono.objects.filter(
+            estado=True, 
+            user=self.request.user, 
+            fecha_call__contains=datetime.today().date()).count
+        
         page_obj = paginator.get_page(page_number)
         data = {
             'page_obj': page_obj,
-            'count': cantidad
+            'count': cantidad,
+            'counts': count_tel
         }
         return render(request, self.template_name, data)
 
@@ -178,7 +188,7 @@ class AuditoriaListView(CallPermisoMixin, View):
         page_obj = paginator.get_page(page_number)
         data = {
             'page_obj': page_obj,
-            'count': Guia.objects.filter(estado=0, user=self.request.user, fecha_recepcion__contains=datetime.today().date()).count
+            'count': Guia.objects.filter(estado=0, user=self.request.user, fecha_recepcion__contains=datetime.today().date()).count,
         }
             
         return render(request, self.template_name, data)
