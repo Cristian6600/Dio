@@ -15,7 +15,7 @@ class DatossResource(resources.ModelResource):
 
 class AuditoriaResource(resources.ModelResource):
 
-    entregas = Field (attribute='entregas', column_name='FECHA BASE')
+    entregas__seudo__fecha = Field (attribute='entregas__seudo__fecha', column_name='FECHA BASE')
     entregas__bolsa = Field (attribute='entregas__bolsa', column_name='BOLSA')
     entregas__id_est = Field (attribute='entregas__id_est', column_name='ESTADO')
     entregas__d_i = Field (attribute='entregas__d_i', column_name='ID CLIENTE')
@@ -28,7 +28,6 @@ class AuditoriaResource(resources.ModelResource):
     entregas__tel = Field (attribute='entregas__tel', column_name='TELEFONO')
     fecha = Field (attribute='fecha', column_name='FECHA CALL')
     
-
     class Meta:
         model = Auditoria
         fields = (( 'entregas__seudo__fecha', 'entregas__bolsa',

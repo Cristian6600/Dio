@@ -85,6 +85,7 @@ class CallEstadoUpdateView(UpdateView):
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
+        self.object.estado = True
         self.object.save()
         return super(CallEstadoUpdateView, self).form_valid(form)
     
@@ -127,7 +128,7 @@ class CallListView(CallPermisoMixin, View):
         reason = request.GET.get("reason", "")
         seudo = request.GET.get("kword", "")
         fecha = request.GET.get("date_start", "")
-        contact_list = Guia.objects.filter(id_est = 3, 
+        contact_list = Guia.objects.filter(id_est = 3, telefono_guia__estado = False,
             producto__producto__contains = producto,
             mot__motivo__icontains = reason,
             fecha_recepcion__icontains = fecha

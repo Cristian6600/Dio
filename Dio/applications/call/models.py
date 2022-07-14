@@ -59,6 +59,7 @@ class Telefono(models.Model):
         blank=True, null=True, 
         verbose_name= 'Usuario call'
     )
+    estado = models.BooleanField(default = False)
     
     def __str__(self):
         return str(self.id)
