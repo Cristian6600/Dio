@@ -14,19 +14,52 @@ class DatossResource(resources.ModelResource):
         fields = (('id', 'd_i', 'telefono', 'indicativo', 'activo' ))
 
 class AuditoriaResource(resources.ModelResource):
+
+    entregas = Field (attribute='entregas', column_name='FECHA BASE')
+    entregas__bolsa = Field (attribute='entregas__bolsa', column_name='BOLSA')
+    entregas__id_est = Field (attribute='entregas__id_est', column_name='ESTADO')
+    entregas__d_i = Field (attribute='entregas__d_i', column_name='ID CLIENTE')
+    entregas__destinatario = Field (attribute='entregas__destinatario', column_name='CLIENTE')
+    entregas__mensajero = Field (attribute='entregas__mensajero', column_name='MENSAJERO')
+    entregas__direccion = Field (attribute='entregas__direccion', column_name='DIRECCION CITA')
+    entregas__id_ciu__ciudad = Field (attribute='entregas__id_ciu__ciudad', column_name='CIUDAD')
+    entregas__guia_descargue__fecha = Field (attribute='entregas__guia_descargue__fecha', column_name='FECHA VISITA')
+    motivo_call = Field (attribute='motivo_call', column_name='RESULTADO')
+    entregas__tel = Field (attribute='entregas__tel', column_name='TELEFONO')
+    fecha = Field (attribute='fecha', column_name='FECHA CALL')
+    
+
     class Meta:
         model = Auditoria
-        fields = (('pregunta_1', 'calificacion_1__calficacion', 
-                   'pregunta_2', 'calificacion_2__calficacion',
-                   'pregunta_3', 'calificacion_3__calficacion',
-                   'pregunta_4', 'calificacion_4__calficacion',
-                #    'pregunta_5__pregunta', 'calificacion_5__calficacion',
+        fields = (( 'entregas__seudo__fecha', 'entregas__bolsa',
+                    'entregas__id_est', 'entregas__d_i',
+                    'entregas__destinatario', 'entregas__mensajero',
+                    'entregas__direccion', 'entregas__id_ciu__ciudad',
+                    'entregas__guia_descargue__fecha', 'motivo_call',
+                    'entregas__tel', 'fecha',
+                    'pregunta_1', 'calificacion_1__calficacion', 
+                    'pregunta_2', 'calificacion_2__calficacion',
+                    'pregunta_3', 'calificacion_3__calficacion',
+                    'pregunta_4', 'calificacion_4__calficacion',
+                    'observacion',
 
                    ))
+        export_order = (
+                    'entregas__seudo__fecha', 'entregas__bolsa',
+                    'entregas__id_est', 'entregas__d_i',
+                    'entregas__destinatario', 'entregas__mensajero',
+                    'entregas__direccion', 'entregas__id_ciu__ciudad',
+                    'entregas__guia_descargue__fecha', 'motivo_call',
+                    'entregas__tel', 'fecha',
+                    'pregunta_1', 'calificacion_1__calficacion', 
+                    'pregunta_2', 'calificacion_2__calficacion',
+                    'pregunta_3', 'calificacion_3__calficacion',
+                    'pregunta_4', 'calificacion_4__calficacion',
+                    'observacion',
+        )
 
 class TelefonoResource(resources.ModelResource):
     
-   
     id = Field (attribute='id', column_name='PSEUDO')
     id__id__seudo__tarjeta = Field (attribute='id__id__seudo__tarjeta', column_name='TARJETA')
     id__id__guia_d_g__marca = Field (attribute='id__id__guia_d_g__marca', column_name='MARCA')
@@ -125,7 +158,7 @@ class AuditoriaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
              ('pregunta_3', 'calificacion_3', 'pregunta_4', 'calificacion_4'),
              
              ('pregunta_5', 'calificacion_5'),
-             'observacion'
+             ('observacion', 'motivo_call'),
              ) 
 
     def save_model(self, request, obj, form, change):

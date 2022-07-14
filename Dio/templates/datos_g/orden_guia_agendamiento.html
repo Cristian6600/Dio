@@ -2,17 +2,7 @@
 % load static %}
 
 {% block panel-content %}
-<h4>Imprimir agendamientos </h4>
-
-<div class="grid-x grid-margin-x">
-    <form class="cell grid-x grid-margin-x" method="GET">
-      <div class="cell input-group">
-        <span class="input-group-label">Buscar</span>
-        <input class="input-group-field" type="text" id="courrier" name="courrier" 
-          value="{{request.GET.kword}}"
-          placeholder="Buscar ..."
-          >
-      </div>
+<h4>Imprimir</h4>
 
 <div class="grid-x grid-margin-x">
 <form method="post">{% csrf_token %}

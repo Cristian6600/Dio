@@ -119,8 +119,6 @@ class CallListView(CallPermisoMixin, View):
     template_name = "call/call_gestion.html"
     context_object_name = 'call'
     model = Guia
-    # queryset = Guia.objects.filter(Q(id_est = 3), Q(mot=5) | Q(mot=6)| Q(mot=7)| Q(mot=8)). order_by('-fecha')
-    # context_object_name = 'call'
     paginate_by = 3
 
     def get(self, request, *args, **kwargs):
