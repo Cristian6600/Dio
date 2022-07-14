@@ -6,7 +6,6 @@ from import_export import resources
 from . models import Paquete, Fisico, Bolsa, Mesa, Motivo_mesa, Cobertura
 from simple_history.admin import SimpleHistoryAdmin
 from related_admin import RelatedFieldAdmin
-from related_admin import getter_for_related_field
 
 class FisicoResource(resources.ModelResource):
     class Meta:
@@ -40,7 +39,7 @@ class PaqueteAdmin(RelatedFieldAdmin,ImportExportModelAdmin, admin.ModelAdmin):
     list_per_page = 5
 
 @admin.register(Fisico)
-class FisicoAdmin(SimpleHistoryAdmin, ImportExportModelAdmin, admin.ModelAdmin):
+class FisicoAdmin(RelatedFieldAdmin, SimpleHistoryAdmin, ImportExportModelAdmin, admin.ModelAdmin):
     history_list_display = ["mot", "mensajero"]
     resource_class = FisicoResource
     list_display = ('id_guia', 'bolsa', 'fecha', 'estado', 'mensajero', 'fecha_planilla')
