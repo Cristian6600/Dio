@@ -73,15 +73,15 @@ class Telefono(models.Model):
 
     reagenda_domi = 33
 
-    # def save(self, *args, **kwargs, ):
-    #     # elif int(self.cantidad_vi) > 18:
-    #     #     self.guia.cantidad_vi = self.contador
-    #     self.id.tel = self.telefono 
-    #     # self.id.mot.id = self.id.mot.id = 20
+    def save(self, *args, **kwargs, ):
+        # elif int(self.cantidad_vi) > 18:
+        #     self.guia.cantidad_vi = self.contador
+        self.id.tel = self.telefono 
+        # self.id.mot.id = self.id.mot.id = 20
         
 
-    #     self.id.save()     
-    #     super (Telefono, self).save(*args, **kwargs)
+        self.id.save()     
+        super (Telefono, self).save(*args, **kwargs)
 
 class Datos_t(models.Model):
     
