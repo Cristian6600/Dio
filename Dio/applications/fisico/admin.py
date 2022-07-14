@@ -42,7 +42,7 @@ class PaqueteAdmin(RelatedFieldAdmin,ImportExportModelAdmin, admin.ModelAdmin):
 class FisicoAdmin(RelatedFieldAdmin, SimpleHistoryAdmin, ImportExportModelAdmin, admin.ModelAdmin):
     history_list_display = ["mot", "mensajero"]
     resource_class = FisicoResource
-    list_display = ('id_guia', 'bolsa', 'fecha', 'estado', 'mensajero', 'fecha_planilla')
+    list_display = ('id_guia', 'bolsa', 'fecha', 'estado', 'mensajero', 'fecha_planilla', 'recepcion_guia__fecha')
     date_hierarchy = ('recepcion_guia__fecha')
     list_filter = ('est_planilla', 'mensajero', 'estado_img')
     search_fields = ('bolsa', )
