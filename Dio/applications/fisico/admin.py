@@ -6,12 +6,13 @@ from import_export import resources
 from . models import Paquete, Fisico, Bolsa, Mesa, Motivo_mesa, Cobertura
 from simple_history.admin import SimpleHistoryAdmin
 from related_admin import RelatedFieldAdmin
+from applications.ruta.models import Recepcion
 
 class FisicoResource(resources.ModelResource):
     class Meta:
         model = Fisico
         import_id_fields = ('id_guia',) 
-        fields = ("id_guia", "destinatario", "d_i", "proceso__proceso", "estado_img", "image_mesa__fecha", "recepcion_guia__fecha")
+        fields = ("id_guia", "destinatario", "d_i", "proceso__proceso", "image_mesa__estado_img", "image_mesa__fecha", 'fecha_recepcion')
         
 class BolsaResource(resources.ModelResource):
     class Meta:
@@ -39,12 +40,12 @@ class PaqueteAdmin(RelatedFieldAdmin,ImportExportModelAdmin, admin.ModelAdmin):
     list_per_page = 5
 
 @admin.register(Fisico)
-class FisicoAdmin(RelatedFieldAdmin, SimpleHistoryAdmin, ImportExportModelAdmin, admin.ModelAdmin):
+class FisicoAdmin(RelatedFieldAdmin,SimpleHistoryAdmin, ImportExportModelAdmin, admin.ModelAdmin):
     history_list_display = ["mot", "mensajero"]
     resource_class = FisicoResource
-    list_display = ('id_guia', 'bolsa', 'fecha', 'estado', 'mensajero', 'fecha_planilla', 'recepcion_guia__fecha')
-    date_hierarchy = ('recepcion_guia__fecha')
-    list_filter = ('est_planilla', 'mensajero', 'estado_img')
+    list_display = ['id_guia', 'bolsa', 'fecha', 'estado', 'mensajero', 'fecha_planilla', 'fecha_recepcion']
+    date_hierarchy = ('fecha_recepcion')
+    list_filter = ('est_planilla', 'mensajero', 'image_mesa__estado_img', 'mot')
     search_fields = ('bolsa', )
     list_per_page = 5
     raw_id_fields = ['id_ciu',]

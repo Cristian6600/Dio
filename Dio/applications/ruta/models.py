@@ -137,8 +137,8 @@ class Recepcion(models.Model):
     guia = models.ForeignKey(
         Fisico, 
         on_delete=models.CASCADE,
-        related_name = 'recepcion_guia'
-        
+        related_name = 'recepcion_guia',
+        related_query_name="recepcion",
     )
 
     fecha = models.DateTimeField(

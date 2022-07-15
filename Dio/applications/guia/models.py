@@ -182,12 +182,13 @@ class Guia(Fisico, TimeStampedModel):
         
         else:
             self.direccion = str(self.ofi)
-            
-
         self.seudo.save()       
         super(Guia, self).save(*args, **kwargs)        
     
 class img(models.Model):
+    ESTADO_DIGITALIZACION = (
+        ('ENTREGA_DIGITALIZADA', 'ENTREGA DIGITALIZADA'),
+    )
     
     id_guia = models.OneToOneField(
         Fisico, 
@@ -213,24 +214,29 @@ class img(models.Model):
         
     )
     mod_date = models.DateField(default=date.today, blank=True, null=True)
-    
+
+    estado_img = models.CharField(
+        max_length=22,
+        choices=ESTADO_DIGITALIZACION, 
+        blank=True,
+        null=True,
+        verbose_name= "gestion",
+        default = "ENTREGA_DIGITALIZADA"
+    )
     
     class Meta:
         verbose_name = "Imagenes Guia"
         verbose_name_plural = "Imagenes Guia"
 
-        
-    
     @property
     def fe(self):
         return str(self.image)
 
-    # @receiver(post_save, sender=User)
     def save(self, *args, **kwargs, ):
-        
-        self.id_guia_id = (self.fe[-14:-4])
-        self.id_guia.estado_img = "ENTREGA_DIGITALIZADA"
-        self.id_guia.save()     
+        self.estado_img = "ENTREGA_DIGITALIZADA"
+        # self.id_guia_id = (self.fe[-14:-4])
+        # self.id_guia.estado_img = "ENTREGA_DIGITALIZADA"
+        # self.id_guia.save()     
         super (img, self).save(*args, **kwargs)
 
 def optimize_image(sender, instance, **kwargs):

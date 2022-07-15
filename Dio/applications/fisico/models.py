@@ -4,6 +4,7 @@ from django.forms import BooleanField
 from applications.base_cliente.models import Bd_clie
 from applications.cliente.models import Ciudad
 from applications.courrier.models import courrier
+
 from applications.argumento.models import Estado, Motivo, Cod_vis, Proceso, Est_clie
 from simple_history.models import HistoricalRecords
 from django.dispatch import receiver
@@ -53,10 +54,10 @@ class Bolsa(models.Model):
         return str(self.bolsa)
 
 class Fisico(Fisi_pa, Bolsa):
-    ESTADO_DIGITALIZACION = (
-        ('ENTREGA', 'ENTREGA'),
-        ('ENTREGA_DIGITALIZADA', 'ENTREGA DIGITALIZADA'),
-    )
+    # ESTADO_DIGITALIZACION = (
+    #     ('ENTREGA', 'ENTREGA'),
+    #     ('ENTREGA_DIGITALIZADA', 'ENTREGA DIGITALIZADA'),
+    # )
 
     id_guia = models.AutoField(primary_key=True)
 
@@ -148,13 +149,13 @@ class Fisico(Fisi_pa, Bolsa):
 
     estado_destino = models.BooleanField(default=False)
 
-    estado_img = models.CharField(
-        max_length=22,
-        choices=ESTADO_DIGITALIZACION, 
-        blank=True,
-        null=True,
-        verbose_name= "gestion"
-    )
+    # estado_img = models.CharField(
+    #     max_length=22,
+    #     choices=ESTADO_DIGITALIZACION, 
+    #     blank=True,
+    #     null=True,
+    #     verbose_name= "gestion"
+    # )
 
     history = HistoricalRecords()    
     
