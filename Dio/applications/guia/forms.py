@@ -1,6 +1,7 @@
 from django import forms
 from .models import Guia
 from .models import img
+from applications.fisico.models import Fisico
 
 class guiafisicoForm(forms.ModelForm):
 
@@ -62,6 +63,14 @@ class ImgForm(forms.ModelForm):
             'mod_date'
         )
 
+class UpdateCourrierForm(forms.ModelForm):
+    
+    class Meta:
+        model = Fisico
+        fields = (
+            'mot',
+            
+        )
     
 
     

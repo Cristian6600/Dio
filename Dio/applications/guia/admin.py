@@ -85,10 +85,11 @@ class ImgAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 class PdfCobertura(admin.ModelAdmin):
     list_display = ('id', 'pdf')
 
-#Elimnar son de una prueba
 
+    
 admin.site.register(Servicio)
 admin.site.register(LogEntry, MoniterLog)
+
 
 
 

@@ -11,9 +11,15 @@ urlpatterns = [
          views.ProductListView.as_view(),
          name='lista-cliente',
     ),
+    
+    path(
+        'tracking-cliente/<pk>/',
+         views.TrackingView.as_view(),
+         name='tracking-cliente',
+    ),
 
     path(
-        'producto/detalle/<pk>/', 
+        'producto/detalle/<int:pk>/', 
         views.ProductDetailView.as_view(),
         name='producto-detail',
     ),
@@ -41,6 +47,16 @@ urlpatterns = [
         views.ima_cargar.as_view(), 
         name='index'
     ),
+    path(
+        'courrier-ruta/<int:pk>/', 
+        views.MensajeroListView.as_view(), 
+        name='courrier-ruta'
+    ),
+    # path(
+    #     'courrier-ruta-update/<int:pk>/', 
+    #     views.MensajeroUpdateView.as_view(), 
+    #     name='courrier-ruta-update'
+    # ),
 
     
     

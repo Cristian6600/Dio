@@ -46,7 +46,7 @@ class FisicoAdmin(RelatedFieldAdmin,SimpleHistoryAdmin, ImportExportModelAdmin, 
     list_display = ['id_guia', 'bolsa', 'fecha', 'estado', 'mensajero', 'fecha_planilla', 'fecha_recepcion']
     date_hierarchy = ('fecha_recepcion')
     list_filter = ('est_planilla', 'mensajero', 'image_mesa__estado_img', 'mot')
-    search_fields = ('bolsa', )
+    search_fields = ('bolsa', 'id_guia')
     list_per_page = 5
     raw_id_fields = ['id_ciu',]
 

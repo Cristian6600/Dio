@@ -12,13 +12,15 @@ from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, View
 from django.views.generic.detail import SingleObjectMixin
-from .forms import guiafisicoForm, ImgForm
+from .forms import guiafisicoForm, ImgForm, UpdateCourrierForm
 from . models import Guia, img
 from applications.users.mixins import CustodiaPermisoMixin, MesaPermisoMixin
 from django.shortcuts import render
 from .utils import render_to_pdf
 from django.db.models import Count
 from django.template.defaulttags import register
+from applications.fisico.models import Fisico
+from applications.tracking.models import Rastreo
 
 @register.filter
 def cuts(value):
@@ -27,6 +29,15 @@ def cuts(value):
 @register.filter
 def cadena_texto(value):
     return str(value)
+
+class TrackingView(ListView):
+    template_name = "producto/tracking.html"
+
+    def get_queryset(self):
+        
+
+        queryset = Rastreo.objects.all()
+        return queryset
 
 class ProductListView(LoginRequiredMixin, ListView):
     template_name = "producto/cliente.html"
@@ -168,6 +179,50 @@ class BuscarGuiaPdf(CustodiaPermisoMixin, ListView):
         }
         pdf = render_to_pdf('guia/gui_pdf.html', data)
         return HttpResponse(pdf, content_type='application/pdf')
+
+class MensajeroListView(CustodiaPermisoMixin, ListView ):
+    template_name = "guia/mensajero_ruta.html"
+    context_object_name = 'guia_mensajero'
+    form_class = UpdateCourrierForm
+    model = Fisico
+    # success_url = reverse_lazy('producto_app:courrier-ruta')
+
+    def get_queryset(self):
+        queryset = Fisico.objects.all(
+            # id_guia=self.request.GET.get('guia'),
+        )
+        return queryset   
+
+    def get_object(self,queryset=None):  
+        queryset = Fisico.objects.all()
+        return super(MensajeroListView,self).get_object(queryset)
+
+    
+
+    def post(self, request, *args, **kwargs):
+    
+        # From BaseUpdateView
+        self.object = self.get_object()
+
+        # From ProcessFormView
+        form = self.get_form()
+        self.form = form
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def put(self, *args, **kwargs):
+        return self.post(*args, **kwargs)
+
+# class MensajeroUpdateView(UpdateView):
+#     template_name = "guia/mensajero_ruta.html"
+#     model = Fisico
+#     fields = ['mot',]
+    # success_url = reverse_lazy('producto_app:courrier-ruta')
+
+    def get_success_url(self):
+        return reverse_lazy('producto_app:courrier-ruta')
 
 @login_required
 def export(request):

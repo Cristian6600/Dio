@@ -234,7 +234,7 @@ class img(models.Model):
 
     def save(self, *args, **kwargs, ):
         self.estado_img = "ENTREGA_DIGITALIZADA"
-        # self.id_guia_id = (self.fe[-14:-4])
+        self.id_guia_id = (self.fe[-14:-4])
         # self.id_guia.estado_img = "ENTREGA_DIGITALIZADA"
         # self.id_guia.save()     
         super (img, self).save(*args, **kwargs)
@@ -269,7 +269,10 @@ class Guiap(models.Model):#Guia
     domicilio = models.TextField()
     
 
-    
-    
 
     
+    
+# @receiver(post_save, sender=Rastreo)
+# def save_profile(sender, instance, **kwargs):
+#         instance.id_guia.save()
+

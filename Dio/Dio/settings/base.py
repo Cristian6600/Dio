@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'applications.call',
     'applications.ruta',
     'applications.pqr',
+    'applications.tracking',
 
 ]
 REST_FRAMEWORK = {

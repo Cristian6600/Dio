@@ -1,0 +1,44 @@
+{% extends "guia/base_fisico.html" %} 
+{% load static %}
+{% block panel-content %}
+
+<form method="GET"> {% csrf_token %}
+<div class="input-group">
+    <span class="input-group-label">$</span>
+    <input class="input-group-field" id="guia" name="guia" type="number">
+    <div class="input-group-button">
+      <input type="submit" class="button" value="Submit">
+    </div>
+  </div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Guia</th>
+            <th>Actualizar</th>
+        </tr>
+    </thead>
+    {% for e in guia_mensajero %}
+    <tbody>
+        <tr>
+            <td>{{e.id_guia}}</td>
+            <td><form method="post">{% csrf_token %}
+                {{ mot }}
+                <input type="submit" value="Actualizar">
+            </form>
+                </td>
+            <td><a href="{% url 'producto_app:courrier-ruta' e.id_guia   %}" class="button"><i class="fi-print"></i></a></td>
+        </tr>
+    </tbody>
+    {% endfor %}
+</table>
+</form>
+<form method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Actualizar">
+</form>
+{% endblock panel-content %}
+
+
+
+

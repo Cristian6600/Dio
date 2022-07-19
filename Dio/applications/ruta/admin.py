@@ -82,7 +82,7 @@ class RecepcionAdmin(ImportExportModelAdmin, RelatedFieldAdmin):
     # inlines = [Recepinline ,]
     raw_id_fields = ["motivo"]
     list_display = (
-        'guia', 'motivo', 'fecha', 'motivo__id', )
+        'guia', 'motivo', 'fecha', 'motivo__id')
     # readonly_fields = ('estado',)
     list_per_page = 10
     search_fields = ('guia__id_guia',)
